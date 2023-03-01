@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 /*
 TODOS: 
+- other experiment data pieces into form (experiment type, start date, end date, percentage) 
 - useEffect to fill form data if editing an existing experiment 
 - revision of values (which are needed & what if any presets) / what is filled in by SQL (defaults) / translation to API requests 
 - onSubmit for form submission, request to API-> is this different for "new experiment" vs "edit experiment"?
@@ -9,7 +10,6 @@ TODOS:
     - only one control 
     - weight of experiments adds to 1.0
     - variants have unique names
-    - 
 
 */
 
