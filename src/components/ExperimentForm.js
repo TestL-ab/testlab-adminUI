@@ -2,11 +2,14 @@ import { useState } from 'react';
 
 /*
 TODOS: 
-- useEffect to fill form data if editing an existing experiment
-- Form still needs an onSubmit -> is this different for "new experiment" vs "edit experiment"
+- useEffect to fill form data if editing an existing experiment 
+- revision of values (which are needed & what if any presets) / what is filled in by SQL (defaults) / translation to API requests 
+- onSubmit for form submission, request to API-> is this different for "new experiment" vs "edit experiment"?
 = still need a lot of validation: 
-   - only one control
-    - weight of experiments adds to 1
+    - only one control 
+    - weight of experiments adds to 1.0
+    - variants have unique names
+    - 
 
 */
 
@@ -48,6 +51,7 @@ const ExperimentForm = () => {
       <label>Experiment Name</label>
       <input type="text" name="name" value={experimentFormData.name} onChange={e => {handleFormChange(e)
       }}/>
+
       {variantFormData.map((variant, idx) => {
         return (
           <div key={idx}>
@@ -59,6 +63,8 @@ const ExperimentForm = () => {
 
             <label>Is Control?</label>
             <input type="checkbox" name="is_control" checked={variant.is_control} onChange={e => handleVariantChange(idx, e)} />
+            
+            <button type='button' onClick={()=> removeVariantFormFields(idx)}>Remove Variant</button>
           </div>
         )
       })}
