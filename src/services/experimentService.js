@@ -38,8 +38,8 @@ const updateVariants = async (id, variantsArr) => {
   return response.data;
 }
 
-const experimentService = { 
-  getAllExperiments, 
+const experimentService = {
+  getAllExperiments,
   createExperiment,
   deleteExperiment,
   createVariants,
