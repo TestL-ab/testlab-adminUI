@@ -16,15 +16,47 @@ const Visualizer = () => {
   const [eventData, setEventData] = useState([]); // array of obj's; sort by variant ID and event
                                         // type; so like [{variant: 21, clickCount: 300}]
                                         // or whatever
+  const [error, setError] = useState(null);
+
+  /* with SSC, based on num-dialer app from week 8; this would have real-time updates
+  const [ listening, setListening ] = useState(false);
+
+  useEffect( () => {
+    if (!listening) {
+      const sscEvents = new EventSource('http://localhost:3001/events');
+
+      sscEvents.onmessage = (event) => {
+        const parsedData = JSON.parse(event.data);
+        setEventData((eventData) => parsedData);
+      };
+
+      setListening(true);
+    }
+  }, [listening, eventData]);
+  */
+
+  //WITHOUT SSC (no real-time data updates; would need to refresh or use cronjob/polling)
   useEffect(() => {
      visualizerService
       .getAllEventData()
-      .then(response => setEventData(response));
+      .then(response => {
+        setEventData(response)
+      })
+      .catch(error => {
+        setError(error.message);
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
+      });
   }, [])
 
   return (
     <div>
-      {eventData.map((event) => <p key={event.id}>{event.id}</p>)}
+      {error
+      ? <div className="error">
+          <p>An error occurred: {error}</p>
+        </div>
+      : eventData.map((event) => <p key={event.id}>{event.id}</p>)}
     </div>
   );
 };
