@@ -8,25 +8,25 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-// {
-//   id: 23,            // variant id, not experiment id
-//   value: "ryan",
-//   is_control: false,
-//   weight: .5,
-//   total_users: 10000,
-//   click_total: 4000, // mathy stuff to get click total from events table
-//   distinct_user_click_total: 400000000000000 // more mathy stuff to get click total where USER ID is distinct from events table
-// },
+
+const parseValue = (value) => {
+  let words = value.split("_");
+  words = words.map((word) => {
+    const firstChar = word[0].toUpperCase();
+    const remainingChars = word.slice(1);
+    return firstChar + remainingChars;
+  });
+  return words.join(' ');
+}
 
 const Graph = ({ clickData }) => {
   const processedData = clickData.map((variantObj) => {
     return {
-      name: variantObj.value,
-      userClicks: variantObj.distinct_user_click_total,
-      totalClicks: variantObj.click_total,
+      name: parseValue(variantObj.value),
+      "Distinct User Clicks": variantObj.distinct_user_click_total,
+      "Total Clicks": variantObj.click_total,
     }
   });
-  console.log("graph data: ", processedData);
 
   return (
     <React.Fragment>
@@ -47,8 +47,8 @@ const Graph = ({ clickData }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="totalClicks" fill="#82ca9d" />
-        <Bar dataKey="userClicks" fill="#8884d8" />
+        <Bar dataKey="Total Clicks" fill="#82ca9d" />
+        <Bar dataKey="Distinct User Clicks" fill="#8884d8" />
       </BarChart>
     </React.Fragment>
   );

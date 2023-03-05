@@ -8,10 +8,12 @@ Need:
   work
 */
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Pie } from 'recharts';
 
-import Graph from './Graph';
 import visualizerService from '../services/visualizerService';
+import Graph from './Graph';
+import ClickPercentageChart from './ClickPercentageChart'
 
 // temporary data for display purposes until api endpoint is available
 const mockClickData = [
@@ -20,9 +22,9 @@ const mockClickData = [
     value: "ryan",
     is_control: false,
     weight: .5,
-    total_users: 100,
-    click_total: 400, // mathy stuff to get click total from events table
-    distinct_user_click_total: 400 // more mathy stuff to get click total where USER ID is distinct from events table
+    total_users: 300,
+    click_total: 375, // mathy stuff to get click total from events table
+    distinct_user_click_total: 200 // more mathy stuff to get click total where USER ID is distinct from events table
   },
   {
     id: 24,
@@ -89,7 +91,10 @@ const Visualizer = ({experimentId}) => {
           <p>An error occurred: {error}</p>
         </div>
       :
-      <Graph clickData={mockClickData} />
+      <React.Fragment>
+        <Graph clickData={mockClickData} />
+        <ClickPercentageChart clickData={mockClickData} />
+      </React.Fragment>
       // eventData.map((event) => <p key={event.id}>{event.id}</p>)
       }
     </div>
