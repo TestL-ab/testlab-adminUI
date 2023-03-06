@@ -11,9 +11,8 @@ Need:
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import visualizerService from '../services/visualizerService';
+import DataDisplayToggle from './DataDisplayToggle';
 import VisualizerNav from './VisualizerNav';
-import Graph from './Graph';
-import ClickPercentageChart from './ClickPercentageChart'
 
 // temporary data for display purposes until api endpoint is available
 const mockClickData = [
@@ -46,13 +45,13 @@ const mockClickData = [
       new_clicks: 150, // click events from this variant on this date
     }
   ]
-const Visualizer = () => {
+  const Visualizer = () => {
   const { experimentId } = useParams(); // will need this for real routes in useeffect below
   const [eventData, setEventData] = useState([]); // array of obj's; sort by variant ID and event
                                         // type; so like [{variant: 21, clickCount: 300}]
                                         // or whatever
   const [error, setError] = useState(null);
-  const DISPLAYS = ["Weighted Graph", "Raw Graph", "User Click Percentages"]
+  const DISPLAYS = ["Raw Graph", "User Click Percentages"]
   const [currentDisplay, setCurrentDisplay] = useState(DISPLAYS[0]);
 
   /* with SSC, based on num-dialer app from week 8; this would have real-time updates
@@ -95,8 +94,7 @@ const Visualizer = () => {
         </div>
       :
       <React.Fragment>
-        <Graph clickData={mockClickData} />
-        <ClickPercentageChart clickData={mockClickData} />
+        <DataDisplayToggle clickData={mockClickData} currentDisplay={currentDisplay} displays={DISPLAYS} />
         <VisualizerNav currentDisplay={currentDisplay} setCurrentDisplay={setCurrentDisplay} displays={DISPLAYS} />
       </React.Fragment>
       // eventData.map((event) => <p key={event.id}>{event.id}</p>)
