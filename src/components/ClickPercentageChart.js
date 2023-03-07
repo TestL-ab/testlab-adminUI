@@ -9,11 +9,30 @@ const parseValue = (value) => {
     return firstChar + remainingChars;
   });
   return words.join(' ');
+};
+
+const processData = (eventDataArr) => {
+  return eventDataArr.map((variantObj) => {
+    const dataObj = {
+      variantName: parseValue(variantObj.value),
+      data: [
+      {
+        name: "Users who did not click.",
+        value: Number(variantObj.total_users) - Number(variantObj.distinct_user_events_total),
+      },
+      {
+        name: "Users who clicked.",
+        value: Number(variantObj.distinct_user_events_total),
+      }
+    ]};
+    return dataObj;
+  });
 }
 
 const UserPercentageChart = ({clickData}) => {
   const RADIAN = Math.PI / 180;
   const COLORS = ["#82ca9d", "#8884d8"];
+  const processedData = processData(clickData);
 
   const renderCustomizedLabel = ({
     cx,
@@ -40,23 +59,6 @@ const UserPercentageChart = ({clickData}) => {
       </text>
     );
   };
-
-  const processedData = clickData.map((variantObj) => {
-    const dataObj = {
-      variantName: parseValue(variantObj.value),
-      data: [
-      {
-        name: "Users who did not click.",
-        value: Number(variantObj.total_users) - Number(variantObj.distinct_user_events_total),
-      },
-      {
-        name: "Users who clicked.",
-        value: Number(variantObj.distinct_user_events_total),
-      }
-    ]};
-    console.log(dataObj);
-    return dataObj;
-  });
 
   return (
     <React.Fragment>
