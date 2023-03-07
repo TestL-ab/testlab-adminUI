@@ -1,15 +1,5 @@
-/*
-Need:
-- experiment id (via url param or passed via props)
-- experiment data/things stored in experiment obj (either passed as prop, or call to API)
-- event data (presumably first collected via API call, hopefully later can implement SSC
-  to retrieve live data as clicks happen)
-- Event data stored in state so can be updated in realtime in future if we can make SSC
-  work
-*/
-
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import visualizerService from '../services/visualizerService';
 import DataDisplayToggle from './DataDisplayToggle';
 import VisualizerNav from './VisualizerNav';
@@ -26,15 +16,19 @@ const mockClickData = [
     distinct_user_click_total: 200 // more mathy stuff to get click total where USER ID is distinct from events table
   },
   {
-    id: 24,
-    value: "not_ryan",
-    is_control: true,
-    weight: .5,
-    total_users: 100,
-    click_total: 100,
-    distinct_user_click_total: 50,
+  id: 22,
+  value: "red",
+  experiment_id: 5,
+  distinct_user_events_total: "1",
+  event_total: "12",
+  experiment_id: 5,
+  id: 22,
+  is_control: false,
+  total_users: "3",
+  value: "red",
+  weight: "0.5"
   }
-  ];
+]
 
 
   const mockDataByDate = [
@@ -46,35 +40,16 @@ const mockClickData = [
     }
   ]
   const Visualizer = () => {
-  const { experimentId } = useParams(); // will need this for real routes in useeffect below
-  const [eventData, setEventData] = useState([]); // array of obj's; sort by variant ID and event
-                                        // type; so like [{variant: 21, clickCount: 300}]
-                                        // or whatever
+  const experimentId = 5; // will use code on line below when router is working and params are supplied
+  // const { experimentId } = useParams(); // will need this for real routes in useeffect below
+  const [eventData, setEventData] = useState([]);
   const [error, setError] = useState(null);
   const DISPLAYS = ["Raw Graph", "User Click Percentages"]
   const [currentDisplay, setCurrentDisplay] = useState(DISPLAYS[0]);
 
-  /* with SSC, based on num-dialer app from week 8; this would have real-time updates
-  const [ listening, setListening ] = useState(false);
-
-  useEffect( () => {
-    if (!listening) {
-      const sscEvents = new EventSource('http://localhost:3001/events');
-
-      sscEvents.onmessage = (event) => {
-        const parsedData = JSON.parse(event.data);
-        setEventData((eventData) => parsedData);
-      };
-
-      setListening(true);
-    }
-  }, [listening, eventData]);
-  */
-
-  //WITHOUT SSC (no real-time data updates; would need to refresh or use cronjob/polling)
   useEffect(() => {
      visualizerService
-      .getAllEventData()
+      .getExperimentEventData(experimentId)
       .then(response => {
         setEventData(response)
       })
@@ -90,14 +65,13 @@ const mockClickData = [
     <div>
       {error
       ? <div className="error">
-          <p>An error occurred: {error}</p>
+          <p>An error occurred: {error}</p> {/* not sure how we want to handle errors but this works for now */}
         </div>
       :
       <React.Fragment>
-        <DataDisplayToggle clickData={mockClickData} currentDisplay={currentDisplay} displays={DISPLAYS} />
+        <DataDisplayToggle clickData={eventData} currentDisplay={currentDisplay} displays={DISPLAYS} />
         <VisualizerNav currentDisplay={currentDisplay} setCurrentDisplay={setCurrentDisplay} displays={DISPLAYS} />
       </React.Fragment>
-      // eventData.map((event) => <p key={event.id}>{event.id}</p>)
       }
     </div>
   );

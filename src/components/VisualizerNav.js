@@ -1,11 +1,8 @@
-import {useState} from 'react';
-
 const VisualizerNav = ( {currentDisplay, setCurrentDisplay, displays } ) => {
   return (
     <div className="visualizer-nav">
     {
       displays.map((display, idx) => {
-        {console.log(display, currentDisplay, display === currentDisplay)}
         if (display === currentDisplay) {
           return (
             <a key={idx}
@@ -16,11 +13,11 @@ const VisualizerNav = ( {currentDisplay, setCurrentDisplay, displays } ) => {
         } else {
 
           return (
-          <a key={idx}
-            onClick={((event) => {
-              event.preventDefault();
-              setCurrentDisplay(display);
-            })}>
+            <a key={idx}
+              onClick={((event) => {
+                event.preventDefault();
+                setCurrentDisplay(display);
+              })}>
             {display}
           </a>);
         }

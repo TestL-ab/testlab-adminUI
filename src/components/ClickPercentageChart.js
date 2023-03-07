@@ -10,15 +10,6 @@ const parseValue = (value) => {
   });
   return words.join(' ');
 }
-// {
-//   id: 24,
-//   value: "not_ryan",
-//   is_control: true,
-//   weight: .5,
-//   total_users: 100,
-//   click_total: 100,
-//   distinct_user_click_total: 50,
-// }
 
 const UserPercentageChart = ({clickData}) => {
   const RADIAN = Math.PI / 180;
@@ -51,18 +42,20 @@ const UserPercentageChart = ({clickData}) => {
   };
 
   const processedData = clickData.map((variantObj) => {
-    return {
+    const dataObj = {
       variantName: parseValue(variantObj.value),
       data: [
       {
         name: "Users who did not click.",
-        value: variantObj.total_users - variantObj.distinct_user_click_total,
+        value: Number(variantObj.total_users) - Number(variantObj.distinct_user_events_total),
       },
       {
         name: "Users who clicked.",
-        value: variantObj.distinct_user_click_total,
+        value: Number(variantObj.distinct_user_events_total),
       }
-    ]}
+    ]};
+    console.log(dataObj);
+    return dataObj;
   });
 
   return (

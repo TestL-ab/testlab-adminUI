@@ -23,8 +23,8 @@ const Graph = ({ clickData }) => {
   const processedData = clickData.map((variantObj) => {
     return {
       name: parseValue(variantObj.value),
-      "Distinct User Clicks": variantObj.distinct_user_click_total,
-      "Total Clicks": variantObj.click_total,
+      "Distinct User Clicks": variantObj.distinct_user_events_total,
+      "Total Clicks": variantObj.event_total,
     }
   });
 

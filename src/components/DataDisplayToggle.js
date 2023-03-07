@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Graph from './Graph';
 import ClickPercentageChart from './ClickPercentageChart'
 
