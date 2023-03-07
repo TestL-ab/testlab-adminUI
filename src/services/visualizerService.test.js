@@ -18,7 +18,7 @@ test("returns response data when valid experiment id is passed", async () => {
       },
       {
         id: 2,
-        value: "blue",
+        value: "green",
         experiment_id: 1,
         is_control: false,
         weight: 0.5,
@@ -48,7 +48,7 @@ test("returns response data when valid experiment id is passed", async () => {
     },
     {
       id: 2,
-      value: "blue",
+      value: "green",
       experiment_id: 1,
       is_control: false,
       weight: 0.5,
@@ -59,5 +59,20 @@ test("returns response data when valid experiment id is passed", async () => {
   ];
 
   axios.get.mockResolvedValueOnce(res);
-  expect(visualizerService.getExperimentEventData()).resolves.toEqual(data);
+  expect(visualizerService.getExperimentEventData(experimentId)).resolves.toEqual(data);
+});
+
+test("returns error when invalid experiment id is passed", async () => {
+  const res = {
+    data: [],
+    status: 200,
+    statusText: "OK",
+    headers: {},
+    config: {},
+    request: XMLHttpRequest
+  };
+
+  const invalidExperimentId = 300
+  axios.get.mockResolvedValueOnce(res);
+  expect(visualizerService.getExperimentEventData(invalidExperimentId)).resolves.toEqual([]);
 });

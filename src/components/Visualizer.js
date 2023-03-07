@@ -20,11 +20,8 @@ import VisualizerNav from './VisualizerNav';
         setEventData(response)
       })
       .catch(error => {
-        setError(error.message);
-        setTimeout(() => {
-          setError(null);
-        }, 5000);
-      });
+        setError(error.statusText);
+      })
   }, [])
 
   return (
