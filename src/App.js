@@ -13,20 +13,20 @@ function App() {
     experimentService
       .getAllExperiments()
       .then(experiments => {
-        console.log(experiments);
+        // console.log(experiments);
         setExperiments(experiments);
       })
   }, [])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/newExperiment" element={<ExperimentForm/>}/>
-        <Route path="/visualizer/:experimentId" element={<Visualizer />} />
-      </Routes>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/" element={<Home/>}/>
+    //     <Route path="/newExperiment" element={<ExperimentForm/>}/>
+    //     <Route path="/visualizer/:experimentId" element={<Visualizer />} />
+    //   </Routes>
       <Visualizer />
-    </BrowserRouter>
+    // </BrowserRouter>
     // <div>
     //   <h1>Admin UI</h1>
     //   <ExperimentForm/>
