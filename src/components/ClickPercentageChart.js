@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const parseValue = (value) => {
   let words = value.split("_");
@@ -65,14 +65,14 @@ const UserPercentageChart = ({clickData}) => {
       return (
         <React.Fragment key={dataObj.variantName}>
        <h2>{dataObj.variantName}</h2>
-        <PieChart width={400} height={400}>
+        <PieChart width={250} height={250}>
           <Pie
             data={dataObj.data}
-            cx={200}
-            cy={200}
+            cx={120}
+            cy={120}
             labelLine={false}
             label={renderCustomizedLabel}
-            outerRadius={80}
+            outerRadius={100}
             fill="#8884d8"
             dataKey="value"
           >
@@ -80,6 +80,7 @@ const UserPercentageChart = ({clickData}) => {
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
+          <Tooltip />
         </PieChart>
       </React.Fragment>
       );
