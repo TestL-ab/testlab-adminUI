@@ -6,6 +6,8 @@ import Home from './components/Home'
 import experimentService from './services/experimentService';
 import Visualizer from './components/Visualizer';
 
+import SideNav from './components/SideNav';
+
 function App() {
   const [experiments, setExperiments] = useState([]);
 
@@ -25,7 +27,8 @@ function App() {
         <Route path="/newExperiment" element={<ExperimentForm/>}/>
         <Route path="/visualizer/:experimentId" element={<Visualizer />} />
       </Routes>
-      <Visualizer />
+      <SideNav />
+      {/* <Visualizer /> */}
     </BrowserRouter>
     // <div>
     //   <h1>Admin UI</h1>
