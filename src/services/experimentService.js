@@ -16,9 +16,13 @@ const getAllExperiments = async () => {
 // }
 
 const createExperiment = async(experiment) => {
-  const response = await axios.post(baseURL, experiment);
-  return response.data;
-}
+  try {
+    const response = await axios.post(baseURL, experiment);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 //update experiment functionality isn't yet defined in the api
 // const updateExperiment = async(id, newExperiment) => {
@@ -27,7 +31,7 @@ const createExperiment = async(experiment) => {
 
 const deleteExperiment = async (id) => {
   try {
-    await axios.delete(`${baseURL}/b/${id}`);
+    await axios.delete(`${baseURL}/${id}`);
   } catch (error) {
     throw error;
   }

@@ -4,6 +4,8 @@ import DescriptionText from './form/DescriptionText';
 import TypeRadio from './form/TypeRadio';
 import DateSelector from './form/DateSelector'
 import UserPercentageMenu from './form/UserPercentageMenu';
+import Buttons from './form/Buttons';
+import experimentService from '../services/experimentService';
 
 const Form = () => {
   const currentDate = new Date();
@@ -15,8 +17,34 @@ const Form = () => {
   const [percentageObj, setPercentageObj] = useState({ id: 0.05, name: "5%" });
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const featureObj = {
+      name: name,
+      description: description,
+      type_id: type,
+      start_date: startDate.toISOString(),
+      end_date: endDate.toISOString(),
+      user_percentage: percentageObj.id
+    };
+
+    try {
+      const response = await experimentService.createExperiment(featureObj);
+      console.log(response);
+      setName("");
+      setDescription("");
+      setType(1);
+      setStartDate(currentDate);
+      setEndDate(null);
+      setPercentageObj({ id: 0.05, name: "5%" });
+      setQuery("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <form className="space-y-8 divide-y divide-gray-200">
+    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -25,24 +53,10 @@ const Form = () => {
             <TypeRadio type={type} setType={setType} />
             <DateSelector startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} currentDate={currentDate} />
             <UserPercentageMenu percentageObj={percentageObj} setPercentageObj={setPercentageObj} query={query} setQuery={setQuery} />
-
           </div>
         </div>
       </div>
-      <div className="flex justify-end">
-          <button
-            type="button"
-            className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="ml-3 inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Save
-          </button>
-      </div>
+      <Buttons name={name} description={description} tppe={type} startDate={startDate} endDate={endDate} userPercentage={percentageObj.id} />
     </form>
   )
 };
