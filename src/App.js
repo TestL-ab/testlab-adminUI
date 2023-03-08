@@ -5,6 +5,7 @@ import SideNav from './components/SideNav';
 import ScheduledList from './components/SheduledList';
 import CurrentToggleRollList from './components/CurrentToggleRollList';
 import CurrentExperimentsList from './components/CurrentExperimentsList';
+import PastExperimentsList from './components/PastExperimentsList';
 // import Visualizer from './components/visualizer/Visualizer';
 
 const App = () => {
@@ -79,6 +80,7 @@ const App = () => {
       <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" />
       <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" />
       <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="Current Experiments" />
+      <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" />
     </>
   }
     {/* <Visualizer /> */}
