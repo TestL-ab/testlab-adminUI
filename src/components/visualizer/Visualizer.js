@@ -54,6 +54,7 @@ const mockClickData = [
         setEventData(response)
       })
       .catch(error => {
+        console.log(error);
         setError(error.message);
       });
   }, [])

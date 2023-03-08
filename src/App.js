@@ -3,6 +3,7 @@ import './App.css';
 import experimentService from './services/experimentService';
 import ScheduledList from './components/SheduledList';
 import SideNav from './components/SideNav';
+// import Visualizer from './components/visualizer/Visualizer';
 
 const App = () => {
   const [experiments, setExperiments] = useState([]);
@@ -60,14 +61,12 @@ const App = () => {
       });
   }, [])
 
-  // console.log("currentToggles: ", currentToggles);
-  // console.log("currentRollouts: ", currentRollOuts);
-  // console.log("currentExperiments: ", currentExperiments);
-  // console.log("scheduledFeatures: ", scheduledFeatures);
-  // console.log("pastExperiments: ", pastExperiments);
   return (
-    // <SideNav />
-    <ScheduledList scheduledFeatures={scheduledFeatures} />
+    <>
+    <SideNav />
+    <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} />
+    {/* <Visualizer /> */}
+    </>
   );
 }
 

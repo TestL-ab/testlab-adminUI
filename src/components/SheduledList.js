@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import experimentService from "../services/experimentService";
+
 const processFeatureObjs = (featureArr) => {
   return featureArr.map((obj) => {
     let type;
@@ -25,14 +28,25 @@ const processFeatureObjs = (featureArr) => {
   });
 };
 
+const handleDelete = async (id, list, callback, errorHandler) => {
+  try {
+    let response = await experimentService.deleteExperiment(id);
+    console.log(response);
+    const filteredList = list.filter(obj => obj.id !== id);
+    callback(filteredList);
+  } catch (error) {
+    errorHandler(error.message);
+  }
+}
+
 const sortByDate = (featureArr) => {
   return featureArr.sort((a, b) => {
     return new Date(a.start_date) - new Date(b.start_date);
   });
 };
 
-
-const ScheduledList = ({ scheduledFeatures }) => {
+const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
+  const [error, setError] = useState(null);
   scheduledFeatures = processFeatureObjs(scheduledFeatures);
   scheduledFeatures = sortByDate(scheduledFeatures);
   return (
@@ -45,7 +59,9 @@ const ScheduledList = ({ scheduledFeatures }) => {
       <div className="mt-8 flow-root">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <table className="min-w-full divide-y divide-gray-300">
+            { error
+            ? <p>Error: {error} </p>
+            : <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
                   <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
@@ -89,14 +105,19 @@ const ScheduledList = ({ scheduledFeatures }) => {
                       </a>
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        Delete<span className="sr-only"></span>
-                      </a>
+                    <button
+                      type="button"
+                      className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      onClick={() => handleDelete(featureObj.id, scheduledFeatures, setScheduledFeatures, setError)}
+                    >
+                      Delete
+                    </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            }
           </div>
         </div>
       </div>
