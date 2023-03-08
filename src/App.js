@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import experimentService from './services/experimentService';
-import ScheduledList from './components/SheduledList';
 import SideNav from './components/SideNav';
+import ScheduledList from './components/SheduledList';
+import CurrentToggleRollList from './components/CurrentToggleRollList';
 // import Visualizer from './components/visualizer/Visualizer';
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
   const [currentExperiments, setCurrentExperiments] = useState([]);
   const [scheduledFeatures, setScheduledFeatures] = useState([]);
   const [pastExperiments, setPastExperiments] = useState([]);
+  const [error, setError] = useState(null);
 
   const parseExperiments = (experiments) => {
     let currToggles = [];
@@ -39,7 +41,7 @@ const App = () => {
           }
         }
       } else if (currentDate < startDate) {
-        scheduled.push(obj)
+        scheduled.push(obj);
       } else if (currentDate > endDate && obj.type_id === 3) {
         past.push(obj);
       }
@@ -58,13 +60,25 @@ const App = () => {
       .then(response => {
         setExperiments(response);
         parseExperiments(response);
-      });
+      })
+      .catch(error => {
+        setError(error.message);
+        console.log(error);
+      })
   }, [])
 
   return (
     <>
+    { error
+    ? <p>{error}</p>
+    :
+    <>
     <SideNav />
     <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} />
+    <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" />
+    <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" />
+    </>
+  }
     {/* <Visualizer /> */}
     </>
   );
