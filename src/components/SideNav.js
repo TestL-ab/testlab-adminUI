@@ -166,7 +166,8 @@ const SideNav = () => {
             </button>
             <div className="flex flex-1 justify-between px-4">
           </div>
-
+{/* THIS IS WHERE CONTENT RENDERS:
+if currentView is Current Experimenrs <Current Experiments />  */}
           <main className="flex-1">
             <div className="py-6">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
