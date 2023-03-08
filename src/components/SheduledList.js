@@ -1,26 +1,37 @@
-const people = [
-  { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
-  // More people...
-]
+const processFeatureObjs = (featureObjs) => {
+  return featureObjs.map((obj) => {
+    let type;
+    switch (obj.type_id) {
+      case 1: {
+        type = "Toggle";
+        break
+      }
+      case 2: {
+        type = "Roll-Out";
+        break;
+      } case 3: {
+        type = "Experiment";
+        break;
+      }
+    }
+
+    return {
+      ...obj,
+      startDate: new Date(obj.start_date).toLocaleDateString(),
+      endDate: new Date(obj.end_date).toLocaleDateString(),
+      userPercentage: `${100 * obj.user_percentage}%`,
+      type,
+    };
+  });
+}
 
 const ScheduledList = ({ scheduledFeatures }) => {
-  console.log("scheduled features: ", scheduledFeatures);
+  scheduledFeatures = processFeatureObjs(scheduledFeatures);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">Users</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            A list of all the users in your account including their name, title, email and role.
-          </p>
-        </div>
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <button
-            type="button"
-            className="block rounded-md bg-indigo-600 py-2 px-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Add user
-          </button>
+          <h1 className="text-base font-semibold leading-6 text-gray-900">Scheduled Features</h1>
         </div>
       </div>
       <div className="mt-8 flow-root">
@@ -59,10 +70,11 @@ const ScheduledList = ({ scheduledFeatures }) => {
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
                       {featureObj.name}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.start_date}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.end_date}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type_id}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.user_percentage}</td>
+
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">
                         Edit<span className="sr-only"></span>
