@@ -1,13 +1,29 @@
 import { useState } from 'react';
-import experimentService from "../services/experimentService";
+import experimentService from "../../services/experimentService";
 
 const processFeatureObjs = (featureArr) => {
   return featureArr.map((obj) => {
+    let type;
+    switch (obj.type_id) {
+      case 1: {
+        type = "Toggle";
+        break
+      }
+      case 2: {
+        type = "Roll-Out";
+        break;
+      } case 3: {
+        type = "Experiment";
+        break;
+      }
+    }
+
     return {
       ...obj,
       startDate: new Date(obj.start_date).toLocaleDateString(),
       endDate: new Date(obj.end_date).toLocaleDateString(),
       userPercentage: `${100 * obj.user_percentage}%`,
+      type,
     };
   });
 };
@@ -29,15 +45,15 @@ const sortByDate = (featureArr) => {
   });
 };
 
-const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) => {
+const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
   const [error, setError] = useState(null);
-  currentFeatures = processFeatureObjs(currentFeatures);
-  currentFeatures = sortByDate(currentFeatures);
+  scheduledFeatures = processFeatureObjs(scheduledFeatures);
+  scheduledFeatures = sortByDate(scheduledFeatures);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">{title}</h1>
+          <h1 className="text-base font-semibold leading-6 text-gray-900">Scheduled Features</h1>
         </div>
       </div>
       <div className="mt-8 flow-root">
@@ -50,6 +66,9 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) =
                 <tr>
                   <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
                     Name
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Feature Type
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                     Start Date
@@ -70,11 +89,13 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) =
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {currentFeatures.map((featureObj, idx) => (
+                {scheduledFeatures.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
                       {featureObj.name}
                     </td>
+
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
@@ -87,7 +108,7 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) =
                     <button
                       type="button"
                       className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => handleDelete(featureObj.id, currentFeatures, setCurrentFeatures, setError)}
+                      onClick={() => handleDelete(featureObj.id, scheduledFeatures, setScheduledFeatures, setError)}
                     >
                       Delete
                     </button>
@@ -104,4 +125,4 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) =
   )
 }
 
-export default CurrentToggleRollList;
+export default ScheduledList;

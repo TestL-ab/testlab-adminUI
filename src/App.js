@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import experimentService from './services/experimentService';
 import SideNav from './components/SideNav';
-import ScheduledList from './components/SheduledList';
-import CurrentToggleRollList from './components/CurrentToggleRollList';
-import CurrentExperimentsList from './components/CurrentExperimentsList';
-import PastExperimentsList from './components/PastExperimentsList';
+import ScheduledList from './components/lists/SheduledList';
+import CurrentToggleRollList from './components/lists/CurrentToggleRollList';
+import CurrentExperimentsList from './components/lists/CurrentExperimentsList';
+import PastExperimentsList from './components/lists/PastExperimentsList';
+import Form from './components/Form';
 // import Visualizer from './components/visualizer/Visualizer';
 
 const App = () => {
@@ -75,12 +76,13 @@ const App = () => {
     ? <p>{error}</p>
     :
     <>
-      <SideNav />
+    <Form />
+      {/* <SideNav />
       <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} />
       <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" />
       <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" />
       <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="Current Experiments" />
-      <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" />
+      <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" /> */}
     </>
   }
     {/* <Visualizer /> */}

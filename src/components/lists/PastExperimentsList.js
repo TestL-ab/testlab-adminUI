@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import experimentService from "../services/experimentService";
+import experimentService from "../../services/experimentService";
 
 const processFeatureObjs = (featureArr) => {
   return featureArr.map((obj) => {
@@ -29,10 +29,10 @@ const sortByDate = (featureArr) => {
   });
 };
 
-const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) => {
+const PastExperimentsList = ({ pastFeatures, setpastFeatures, title }) => {
   const [error, setError] = useState(null);
-  currentFeatures = processFeatureObjs(currentFeatures);
-  currentFeatures = sortByDate(currentFeatures);
+  pastFeatures = processFeatureObjs(pastFeatures);
+  pastFeatures = sortByDate(pastFeatures);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -58,11 +58,6 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) 
                     End Date
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Enrolled Users
-                  </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                  </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                   </th>
@@ -73,7 +68,7 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) 
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {currentFeatures.map((featureObj, idx) => (
+                {pastFeatures.map((featureObj, idx) => (
 //  Make name clickable, route to experiment vairant details
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
@@ -81,11 +76,14 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) 
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        Edit<span className="sr-only"></span>
-                      </a>
+{/* need to add link to visualizer in button!!*/}
+                      <button
+                        type="button"
+                        className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                        View Results
+                      </button>
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
 {/* need to add link to visualizer in button!!*/}
@@ -93,14 +91,14 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) 
                         type="button"
                         className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
-                        View Current Results
+                        Repeat Experiment
                       </button>
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                       <button
                         type="button"
                         className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={() => handleDelete(featureObj.id, currentFeatures, setCurrentFeatures, setError)}
+                        onClick={() => handleDelete(featureObj.id, pastFeatures, setpastFeatures, setError)}
                       >
                         Delete
                       </button>
@@ -117,4 +115,4 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) 
   )
 }
 
-export default CurrentExperimentsList;
+export default PastExperimentsList;
