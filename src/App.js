@@ -4,7 +4,7 @@ import './App.css';
 import ExperimentForm from './components/ExperimentForm';
 import Home from './components/Home'
 import experimentService from './services/experimentService';
-import Visualizer from './components/Visualizer';
+import Visualizer from './components/visualizer/Visualizer'
 
 import SideNav from './components/SideNav';
 
