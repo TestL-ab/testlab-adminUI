@@ -1,5 +1,5 @@
-const processFeatureObjs = (featureObjs) => {
-  return featureObjs.map((obj) => {
+const processFeatureObjs = (featureArr) => {
+  return featureArr.map((obj) => {
     let type;
     switch (obj.type_id) {
       case 1: {
@@ -23,10 +23,18 @@ const processFeatureObjs = (featureObjs) => {
       type,
     };
   });
-}
+};
+
+const sortByDate = (featureArr) => {
+  return featureArr.sort((a, b) => {
+    return new Date(a.start_date) - new Date(b.start_date);
+  });
+};
+
 
 const ScheduledList = ({ scheduledFeatures }) => {
   scheduledFeatures = processFeatureObjs(scheduledFeatures);
+  scheduledFeatures = sortByDate(scheduledFeatures);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
