@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import visualizerService from '../services/visualizerService';
+import visualizerService from '../../services/visualizerService';
 import DataDisplayToggle from './DataDisplayToggle';
 import VisualizerNav from './VisualizerNav';
 
@@ -54,10 +54,8 @@ const mockClickData = [
         setEventData(response)
       })
       .catch(error => {
+        console.log(error);
         setError(error.message);
-        setTimeout(() => {
-          setError(null);
-        }, 5000);
       });
   }, [])
 

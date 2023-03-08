@@ -2,9 +2,13 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:3000/api/experiment';
 
-const getAllExperiments = () => {
-  const request = axios.get(baseURL);
-  return request.then(response => response.data)
+const getAllExperiments = async () => {
+  try {
+    const response = await axios.get(baseURL);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // const getExperiment = async(id) => {
@@ -22,7 +26,11 @@ const createExperiment = async(experiment) => {
 // }
 
 const deleteExperiment = async (id) => {
-  await axios.delete(`${baseURL}/${id}`);
+  try {
+    await axios.delete(`${baseURL}/b/${id}`);
+  } catch (error) {
+    throw error;
+  }
 }
 
 
@@ -44,7 +52,6 @@ const experimentService = {
   deleteExperiment,
   createVariants,
   updateVariants
-
 }
 
 export default experimentService;
