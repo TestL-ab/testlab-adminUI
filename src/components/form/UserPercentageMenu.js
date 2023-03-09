@@ -1,7 +1,6 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react';
-import { useState } from 'react';
-import formUtils from '../../utils/formUtils';
+
 
 const UserPercentageMenu = ({
     percentageObj,
@@ -9,21 +8,10 @@ const UserPercentageMenu = ({
     query,
     setQuery,
     type,
-    scheduledFeatures,
-    currentExperiments,
-    startDate,
-    endDate
+    maxAvailable
   }) => {
-  const [available, setAvailable] = useState(null);
 
-  if (type === 3) {
-    const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
-    const dateArray = formUtils.getDateRange(startDate, endDate);
-    const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
-    console.log(available);
-  }
-
-  const percentages = [
+  let percentages = [
     { id: 0.05, name: "5%" },
     { id: 0.1, name: "10%" },
     { id: 0.15, name: "15%" },
@@ -46,12 +34,16 @@ const UserPercentageMenu = ({
     { id: 1, name: "100%" },
   ]
 
-  const filteredPercentages =
+  let filteredPercentages =
     query === ''
       ? percentages
       : percentages.filter((percentage) => {
           return percentage.name.toLowerCase().includes(query.toLowerCase())
         });
+
+    if (type === 3) {
+      filteredPercentages = filteredPercentages.filter(percentObj => (percentObj.id * 100) <= maxAvailable);
+    }
 
     const classNames = (...classes) => {
       return classes.filter(Boolean).join(' ')
@@ -59,6 +51,7 @@ const UserPercentageMenu = ({
 
   return (
     <Combobox as="div" value={percentageObj} onChange={setPercentageObj}>
+      { type === 3 ? <p>{`For this date range, ${maxAvailable}% of users are available.`}</p> : null }
     <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">Percentage of total users to include in feature</Combobox.Label>
     <div className="relative mt-2">
       <Combobox.Input

@@ -14,11 +14,16 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   const [type, setType] = useState(1);
   const [startDate, setStartDate] = useState(currentDate);
   const [endDate, setEndDate] = useState(null);
-  const [percentageObj, setPercentageObj] = useState({ id: 0.05, name: "5%" });
+  const [percentageObj, setPercentageObj] = useState({});
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
+  const [maxAvailable, setMaxAvailable] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
+      alert(`The total user percentage for experiments in this date period exceeds 100%. Please select a user percentage less than %{maxAvailable}`);
+      return;
+    }
     const featureObj = {
       name: name,
       description: description,
@@ -66,16 +71,18 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
               endDate={endDate}
               setEndDate={setEndDate}
               currentDate={currentDate}
+              type={type}
+              scheduledFeatures={scheduledFeatures}
+              currentExperiments={currentExperiments}
+              maxAvailable={maxAvailable}
+              setMaxAvailable={setMaxAvailable}
             />
             <UserPercentageMenu
               percentageObj={percentageObj}
               setPercentageObj={setPercentageObj}
               query={query} setQuery={setQuery}
               type={type}
-              scheduledFeatures={scheduledFeatures}
-              currentExperiments={currentExperiments}
-              startDate={startDate}
-              endDate={endDate}
+              maxAvailable={maxAvailable}
             />
           </div>
         </div>

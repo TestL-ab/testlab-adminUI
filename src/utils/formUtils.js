@@ -1,12 +1,10 @@
 const getDateRange = (startDate, endDate) => {
-  if (!endDate || !startDate) return [];
   let dateArray = [startDate];
   let currDate = startDate;
 
   while (currDate < endDate) {
     const dateCopy = new Date(currDate);
     currDate = dateCopy.setDate(dateCopy.getDate() + 1);
-
     let date = new Date(currDate);
     if (!dateArray.includes(date)) dateArray.push(date);
   }
