@@ -8,7 +8,8 @@ const UserPercentageMenu = ({
     query,
     setQuery,
     type,
-    maxAvailable
+    maxAvailable,
+    endDate
   }) => {
 
   let percentages = [
@@ -51,7 +52,7 @@ const UserPercentageMenu = ({
 
   return (
     <Combobox as="div" value={percentageObj} onChange={setPercentageObj}>
-      { type === 3 ? <p>{`For this date range, ${maxAvailable}% of users are available.`}</p> : null }
+      { type === 3 && endDate ? <p>{`For this date range, ${maxAvailable}% of users are available.`}</p> : null }
     <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">Percentage of total users to include in feature</Combobox.Label>
     <div className="relative mt-2">
       <Combobox.Input

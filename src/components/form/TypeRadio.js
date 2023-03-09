@@ -1,3 +1,5 @@
+import formUtils from "../../utils/formUtils";
+
 const types = [
   { id: 1,  title: "Toggle" },
   { id: 2, title: "Roll Out" },
@@ -10,6 +12,7 @@ const TypeRadio = ({ type, setType }) => {
     setType(Number(selected.value));
   }
 
+  console.log(type);
   return (
     <div>
       <label className="text-base font-semibold text-gray-900">Feature Type</label>
