@@ -1,5 +1,4 @@
 import DatePicker from 'react-date-picker';
-import { useState } from 'react';
 import formUtils from '../../utils/formUtils';
 
 const DateSelector = ({
@@ -15,11 +14,9 @@ const DateSelector = ({
   setMaxAvailable
 }) => {
 
-  const tomorrow = (() => {
-    const dateCopy = new Date(currentDate);
-    let tomorrow = dateCopy.setDate(dateCopy.getDate() + 1);
-    return new Date(tomorrow);
-  })();
+  const tomorrow =  formUtils.getNextDayDateSelector(currentDate);
+  const processedCurrentDate = formUtils.processDayDateSelector(currentDate);
+  const processedStartDate = formUtils.processDayDateSelector(startDate);
 
   const handleChangeStart = (date) => {
     setStartDate(date);
@@ -55,7 +52,7 @@ const DateSelector = ({
     <label htmlFor="end_date" className="block text-sm font-medium leading-6 text-gray-900">
       End Date
     </label>
-    <DatePicker onChange={handleChangeEnd} value={endDate} minDate={startDate.toString() === currentDate.toString() ? tomorrow : startDate} required={true} />
+    <DatePicker onChange={handleChangeEnd} value={endDate} minDate={processedCurrentDate === processedStartDate ? tomorrow : startDate} required={true} />
   </div>
   )
 };

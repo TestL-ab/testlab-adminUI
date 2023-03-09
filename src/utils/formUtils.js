@@ -8,6 +8,7 @@ const getDateRange = (startDate, endDate) => {
     let date = new Date(currDate);
     if (!dateArray.includes(date)) dateArray.push(date);
   }
+
   return dateArray;
 };
 
@@ -49,5 +50,15 @@ const calculateSpaceAvailable = (dateArray, existingExperiments) => {
   return available;
 };
 
-const formUtils = { getDateRange, processExperiments, calculateSpaceAvailable }
+const processDayDateSelector = (date) => {
+  return date.toString().split(' ').slice(0, 4).join("")
+};
+
+const getNextDayDateSelector = (currentDate) => {
+  const dateCopy = new Date(currentDate);
+  let tomorrow = dateCopy.setDate(dateCopy.getDate() + 1);
+  return new Date(tomorrow);
+};
+
+const formUtils = { getDateRange, processExperiments, calculateSpaceAvailable, processDayDateSelector, getNextDayDateSelector }
 export default formUtils;
