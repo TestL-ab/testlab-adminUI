@@ -60,5 +60,26 @@ const getNextDayDateSelector = (currentDate) => {
   return new Date(tomorrow);
 };
 
-const formUtils = { getDateRange, processExperiments, calculateSpaceAvailable, processDayDateSelector, getNextDayDateSelector }
+const typeSelector = (_, action) => {
+  switch (action.type) {
+    case '1':
+      return 1;
+    case '2':
+      return 2;
+    case '3':
+      return 3;
+    default:
+      throw new Error;
+  }
+}
+
+const formUtils = {
+  getDateRange,
+  processExperiments,
+  calculateSpaceAvailable,
+  processDayDateSelector,
+  getNextDayDateSelector,
+  typeSelector
+};
+
 export default formUtils;

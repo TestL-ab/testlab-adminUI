@@ -7,10 +7,8 @@ const DateSelector = ({
   endDate,
   setEndDate,
   currentDate,
-  type,
   scheduledFeatures,
   currentExperiments,
-  maxAvailable,
   setMaxAvailable
 }) => {
 
@@ -20,26 +18,18 @@ const DateSelector = ({
 
   const handleChangeStart = (date) => {
     setStartDate(date);
-    if (type === 3) {
-      const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
-      const dateArray = formUtils.getDateRange(date, endDate);
-      const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
-      setMaxAvailable(available * 100);
-    } else {
-      setMaxAvailable(null);
-    }
+    const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+    const dateArray = formUtils.getDateRange(date, endDate);
+    const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
+    setMaxAvailable(available * 100);
   }
 
   const handleChangeEnd = (date) => {
     setEndDate(date);
-    if (type === 3) {
-      const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
-      const dateArray = formUtils.getDateRange(startDate, date);
-      const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
-      setMaxAvailable(available * 100);
-    } else {
-      setMaxAvailable(null);
-    }
+    const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+    const dateArray = formUtils.getDateRange(startDate, date);
+    const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
+    setMaxAvailable(available * 100);
   };
 
   return (
