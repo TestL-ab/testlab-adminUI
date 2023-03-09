@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Variants = () => {
-  const [variants, setVariants] = useState([{num: 1, val: "Control", weight, 1, is_control: true}])
+  const [variants, setVariants] = useState([{num: 1, val: "Control", weight: 1, is_control: true}])
   /*
   value, experiment_id, is_control, weight
   for form, just need value (text) and weight (menu), and
