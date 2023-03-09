@@ -1,11 +1,32 @@
-const Buttons = () => {
+const Buttons = ({
+  setName,
+  setDescription,
+  dispatch,
+  setStartDate,
+  setEndDate,
+  setPercentageObj,
+  setQuery,
+  currentDate
+}) => {
+  const handleClearForm = (event) => {
+    event.preventDefault();
+    setName("");
+    setDescription("");
+    dispatch({type: "1"});
+    setStartDate(currentDate);
+    setEndDate(null);
+    setPercentageObj({});
+    setQuery("");
+  };
+
   return (
     <div className="flex justify-end">
       <button
         type="button"
         className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        onClick={handleClearForm}
       >
-        Cancel
+        Clear Form
       </button>
       <button
         type="submit"

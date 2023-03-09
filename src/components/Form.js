@@ -4,6 +4,7 @@ import DescriptionText from './form/DescriptionText';
 import TypeRadio from './form/TypeRadio';
 import DateSelector from './form/DateSelector'
 import UserPercentageMenu from './form/UserPercentageMenu';
+import Variants from './form/Variants';
 import Buttons from './form/Buttons';
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
@@ -18,6 +19,7 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
   const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
+  const isExperiment = type === 3
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,14 +43,14 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
       dispatch({type: "1"});
       setStartDate(currentDate);
       setEndDate(null);
-      setPercentageObj({ id: 0.05, name: "5%" });
+      setPercentageObj({});
       setQuery("");
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
-
+  let strType = String(type);
   return (
     <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
       <div className="space-y-8 divide-y divide-gray-200">
@@ -89,8 +91,17 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
             />
           </div>
         </div>
+        {isExperiment ? <Variants /> : null }
       </div>
-      <Buttons />
+      <Buttons
+        setName={setName}
+        setDescription={setDescription}
+        dispatch={dispatch}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+        setPercentageObj={setPercentageObj}
+        currentDate={currentDate}
+  setQuery/>
     </form>
   )
 };
