@@ -1,7 +1,28 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react';
+import { useState } from 'react';
+import formUtils from '../../utils/formUtils';
 
-const UserPercentageMenu = ({ percentageObj, setPercentageObj, query, setQuery, dateArray }) => {
+const UserPercentageMenu = ({
+    percentageObj,
+    setPercentageObj,
+    query,
+    setQuery,
+    type,
+    scheduledFeatures,
+    currentExperiments,
+    startDate,
+    endDate
+  }) => {
+  const [available, setAvailable] = useState(null);
+
+  if (type === 3) {
+    const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+    const dateArray = formUtils.getDateRange(startDate, endDate);
+    const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
+    console.log(available);
+  }
+
   const percentages = [
     { id: 0.05, name: "5%" },
     { id: 0.1, name: "10%" },
