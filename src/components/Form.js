@@ -6,35 +6,18 @@ import DateSelector from './form/DateSelector'
 import UserPercentageMenu from './form/UserPercentageMenu';
 import Buttons from './form/Buttons';
 import experimentService from '../services/experimentService';
+import formUtils from '../utils/formUtils';
 
 const Form = ({currentExperiments, scheduledFeatures }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  // const [type, setType] = useState(1);
   const [startDate, setStartDate] = useState(currentDate);
   const [endDate, setEndDate] = useState(null);
   const [percentageObj, setPercentageObj] = useState({});
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
-  const [type, dispatch] = useReducer(reducer, 1)
-
-  const initialState = 1;
-
-  function reducer(state, action) {
-    switch (action.type) {
-      case '1':
-        return 1;
-      case '2':
-        console.log("changed");
-        return 2;
-      case '3':
-        return 3;
-      default:
-        console.log(action.type);
-    }
-  }
-
+  const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,7 +38,6 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
       const response = await experimentService.createExperiment(featureObj);
       setName("");
       setDescription("");
-      // setType(1);
       dispatch({type: "1"});
       setStartDate(currentDate);
       setEndDate(null);
