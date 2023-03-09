@@ -1,7 +1,6 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react';
 
-
 const UserPercentageMenu = ({
     percentageObj,
     setPercentageObj,

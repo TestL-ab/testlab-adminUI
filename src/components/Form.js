@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import NameInput from './form/NameInput';
 import DescriptionText from './form/DescriptionText';
 import TypeRadio from './form/TypeRadio';
@@ -11,12 +11,30 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState(1);
+  // const [type, setType] = useState(1);
   const [startDate, setStartDate] = useState(currentDate);
   const [endDate, setEndDate] = useState(null);
   const [percentageObj, setPercentageObj] = useState({});
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
+  const [type, dispatch] = useReducer(reducer, 1)
+
+  const initialState = 1;
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case '1':
+        return 1;
+      case '2':
+        console.log("changed");
+        return 2;
+      case '3':
+        return 3;
+      default:
+        console.log(action.type);
+    }
+  }
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,7 +55,8 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
       const response = await experimentService.createExperiment(featureObj);
       setName("");
       setDescription("");
-      setType(1);
+      // setType(1);
+      dispatch({type: "1"});
       setStartDate(currentDate);
       setEndDate(null);
       setPercentageObj({ id: 0.05, name: "5%" });
@@ -63,7 +82,8 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
             />
             <TypeRadio
               type={type}
-              setType={setType}
+              // setType={setType}
+              dispatch={dispatch}
             />
             <DateSelector
               startDate={startDate}
