@@ -1,4 +1,4 @@
-const Buttons = ({ name, description, type, startDate, endDate, userPercentage }) => {
+const Buttons = () => {
   return (
     <div className="flex justify-end">
       <button

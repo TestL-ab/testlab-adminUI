@@ -7,18 +7,23 @@ import UserPercentageMenu from './form/UserPercentageMenu';
 import Buttons from './form/Buttons';
 import experimentService from '../services/experimentService';
 
-const Form = () => {
+const Form = ({currentExperiments, scheduledFeatures }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState(1);
   const [startDate, setStartDate] = useState(currentDate);
   const [endDate, setEndDate] = useState(null);
-  const [percentageObj, setPercentageObj] = useState({ id: 0.05, name: "5%" });
+  const [percentageObj, setPercentageObj] = useState({});
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
+  const [maxAvailable, setMaxAvailable] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
+      alert(`The total user percentage for experiments in this date period exceeds 100%. Please select a user percentage less than %{maxAvailable}`);
+      return;
+    }
     const featureObj = {
       name: name,
       description: description,
@@ -30,7 +35,6 @@ const Form = () => {
 
     try {
       const response = await experimentService.createExperiment(featureObj);
-      console.log(response);
       setName("");
       setDescription("");
       setType(1);
@@ -38,6 +42,7 @@ const Form = () => {
       setEndDate(null);
       setPercentageObj({ id: 0.05, name: "5%" });
       setQuery("");
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -48,15 +53,41 @@ const Form = () => {
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <NameInput name={name} setName={setName} />
-            <DescriptionText description={description} setDescription={setDescription} />
-            <TypeRadio type={type} setType={setType} />
-            <DateSelector startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} currentDate={currentDate} />
-            <UserPercentageMenu percentageObj={percentageObj} setPercentageObj={setPercentageObj} query={query} setQuery={setQuery} />
+            <NameInput
+              name={name}
+              setName={setName}
+            />
+            <DescriptionText
+              description={description}
+              setDescription={setDescription}
+            />
+            <TypeRadio
+              type={type}
+              setType={setType}
+            />
+            <DateSelector
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              currentDate={currentDate}
+              type={type}
+              scheduledFeatures={scheduledFeatures}
+              currentExperiments={currentExperiments}
+              maxAvailable={maxAvailable}
+              setMaxAvailable={setMaxAvailable}
+            />
+            <UserPercentageMenu
+              percentageObj={percentageObj}
+              setPercentageObj={setPercentageObj}
+              query={query} setQuery={setQuery}
+              type={type}
+              maxAvailable={maxAvailable}
+            />
           </div>
         </div>
       </div>
-      <Buttons name={name} description={description} tppe={type} startDate={startDate} endDate={endDate} userPercentage={percentageObj.id} />
+      <Buttons />
     </form>
   )
 };

@@ -1,8 +1,17 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react';
 
-const UserPercentageMenu = ({ percentageObj, setPercentageObj, query, setQuery }) => {
-  const percentages = [
+
+const UserPercentageMenu = ({
+    percentageObj,
+    setPercentageObj,
+    query,
+    setQuery,
+    type,
+    maxAvailable
+  }) => {
+
+  let percentages = [
     { id: 0.05, name: "5%" },
     { id: 0.1, name: "10%" },
     { id: 0.15, name: "15%" },
@@ -25,12 +34,16 @@ const UserPercentageMenu = ({ percentageObj, setPercentageObj, query, setQuery }
     { id: 1, name: "100%" },
   ]
 
-  const filteredPercentages =
+  let filteredPercentages =
     query === ''
       ? percentages
       : percentages.filter((percentage) => {
           return percentage.name.toLowerCase().includes(query.toLowerCase())
         });
+
+    if (type === 3) {
+      filteredPercentages = filteredPercentages.filter(percentObj => (percentObj.id * 100) <= maxAvailable);
+    }
 
     const classNames = (...classes) => {
       return classes.filter(Boolean).join(' ')
@@ -38,6 +51,7 @@ const UserPercentageMenu = ({ percentageObj, setPercentageObj, query, setQuery }
 
   return (
     <Combobox as="div" value={percentageObj} onChange={setPercentageObj}>
+      { type === 3 ? <p>{`For this date range, ${maxAvailable}% of users are available.`}</p> : null }
     <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">Percentage of total users to include in feature</Combobox.Label>
     <div className="relative mt-2">
       <Combobox.Input
