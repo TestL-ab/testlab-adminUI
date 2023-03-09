@@ -91,28 +91,3 @@ const App = () => {
 }
 
 export default App;
-
-
-// import ExperimentForm from './components/ExperimentForm';
-// import Home from './components/Home'
-// import Visualizer from './components/visualizer/Visualizer'
-// import {BrowserRouter, Routes, Route } from 'react-router-dom';
-
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Home/>}/>
-    //     <Route path="/newExperiment" element={<ExperimentForm/>}/>
-    //     <Route path="/visualizer/:experimentId" element={<Visualizer />} />
-    //   </Routes>
-    //   {/* <SideNav /> */}
-    //   <ScheduledList />
-    //   {/* <Visualizer /> */}
-    // </BrowserRouter>
-    // // <div>
-    // //   <h1>Admin UI</h1>
-    // //   <ExperimentForm/>
-    // // </div>
-    // // <div className="test">
-    // //   <h1>Test</h1>
-    // //   <ExperimentForm></ExperimentForm>
-    // // </div>
