@@ -31,12 +31,6 @@ const Form = ( {currentExperiments, scheduledFeatures }) => {
 
   const existingExperimnts = processExperiments();
 
-  Date.prototype.addDays = function(days) {
-      var date = new Date(this.valueOf());
-      date.setDate(date.getDate() + days);
-      return date;
-  }
-
   const getDates = () => {
     if (!endDate || !startDate) return [];
     let dateArray = [startDate];
@@ -44,7 +38,9 @@ const Form = ( {currentExperiments, scheduledFeatures }) => {
     let currDate = startDate;
 
     while (currDate < endDate) {
-      currDate = currDate.addDays(1);
+      const dateCopy = new Date(currDate);
+      currDate = dateCopy.setDate(dateCopy.getDate() + 1);
+
       let date = new Date(currDate);
       if (!dateArray.includes(date)) dateArray.push(date);
 
