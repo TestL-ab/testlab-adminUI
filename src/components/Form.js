@@ -16,25 +16,11 @@ const Form = ( {currentExperiments, scheduledFeatures }) => {
   const [endDate, setEndDate] = useState(null);
   const [percentageObj, setPercentageObj] = useState({ id: 0.05, name: "5%" });
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
+  let spaceUsed = {};
 
-  const processExperiments = ()=> {
-    let scheduledExperiments = scheduledFeatures.filter(feature => feature.type_id === 3);
-    let existingExperiments = currentExperiments.concat(scheduledExperiments);
-    return existingExperiments.map((experimentObj) => {
-      return {
-        startDate: new Date(experimentObj.start_date),
-        endDate: new Date(experimentObj.end_date),
-        userPercentage: experimentObj.userPercentage,
-      }
-    });
-  }
-
-  const existingExperimnts = processExperiments();
-
-  const getDates = () => {
+  const getDateRange = () => {
     if (!endDate || !startDate) return [];
     let dateArray = [startDate];
-    console.log("startDate: ", startDate, "endDate: ", endDate);
     let currDate = startDate;
 
     while (currDate < endDate) {
@@ -48,8 +34,34 @@ const Form = ( {currentExperiments, scheduledFeatures }) => {
     return dateArray;
   };
 
-  const dateArray = getDates();
-  // console.log("date array: ", dateArray);
+  const processExperiments = ()=> {
+    let scheduledExperiments = scheduledFeatures.filter(feature => feature.type_id === 3);
+    let existingExperiments = currentExperiments.concat(scheduledExperiments);
+    return existingExperiments.map((experimentObj) => {
+      return {
+        startDate: new Date(experimentObj.start_date),
+        endDate: new Date(experimentObj.end_date),
+        userPercentage: experimentObj.user_percentage,
+      };
+    });
+  }
+
+  const existingExperiments = processExperiments();
+  const dateArray = getDateRange();
+
+  dateArray.forEach((date) => {
+    let dateName = date.toISOString();
+    if (!spaceUsed[dateName]) spaceUsed[dateName] = 0;
+
+    existingExperiments.forEach((obj) => {
+      if (date >= obj.startDate && date <= obj.endDate) {
+        spaceUsed[dateName] += obj.userPercentage;
+      }
+    });
+  });
+
+  console.log(spaceUsed);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,7 +76,6 @@ const Form = ( {currentExperiments, scheduledFeatures }) => {
 
     try {
       const response = await experimentService.createExperiment(featureObj);
-      console.log(response);
       setName("");
       setDescription("");
       setType(1);
@@ -72,6 +83,7 @@ const Form = ( {currentExperiments, scheduledFeatures }) => {
       setEndDate(null);
       setPercentageObj({ id: 0.05, name: "5%" });
       setQuery("");
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

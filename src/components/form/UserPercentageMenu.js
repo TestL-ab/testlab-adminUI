@@ -2,8 +2,6 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react';
 
 const UserPercentageMenu = ({ percentageObj, setPercentageObj, query, setQuery, dateArray }) => {
-  console.log("dateArray:", dateArray);
-  console.log("date array length: ", dateArray.length);
   const percentages = [
     { id: 0.05, name: "5%" },
     { id: 0.1, name: "10%" },
