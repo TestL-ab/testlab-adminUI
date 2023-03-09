@@ -83,6 +83,7 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
               query={query} setQuery={setQuery}
               type={type}
               maxAvailable={maxAvailable}
+              endDate={endDate}
             />
           </div>
         </div>
