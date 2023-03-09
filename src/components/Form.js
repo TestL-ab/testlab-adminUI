@@ -7,7 +7,7 @@ import UserPercentageMenu from './form/UserPercentageMenu';
 import Buttons from './form/Buttons';
 import experimentService from '../services/experimentService';
 
-const Form = () => {
+const Form = ( {currentExperiments, scheduledFeatures }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -16,6 +16,44 @@ const Form = () => {
   const [endDate, setEndDate] = useState(null);
   const [percentageObj, setPercentageObj] = useState({ id: 0.05, name: "5%" });
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
+
+  const processExperiments = ()=> {
+    let scheduledExperiments = scheduledFeatures.filter(feature => feature.type_id === 3);
+    let existingExperiments = currentExperiments.concat(scheduledExperiments);
+    return existingExperiments.map((experimentObj) => {
+      return {
+        startDate: new Date(experimentObj.start_date),
+        endDate: new Date(experimentObj.end_date),
+        userPercentage: experimentObj.userPercentage,
+      }
+    });
+  }
+
+  const existingExperimnts = processExperiments();
+
+  Date.prototype.addDays = function(days) {
+      var date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;
+  }
+
+  const getDates = () => {
+    if (!endDate || !startDate) return [];
+    let dateArray = [startDate];
+    console.log("startDate: ", startDate, "endDate: ", endDate);
+    let currDate = startDate;
+
+    while (currDate < endDate) {
+      currDate = currDate.addDays(1);
+      let date = new Date(currDate);
+      if (!dateArray.includes(date)) dateArray.push(date);
+
+    }
+    return dateArray;
+  };
+
+  const dateArray = getDates();
+  // console.log("date array: ", dateArray);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,7 +90,7 @@ const Form = () => {
             <DescriptionText description={description} setDescription={setDescription} />
             <TypeRadio type={type} setType={setType} />
             <DateSelector startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} currentDate={currentDate} />
-            <UserPercentageMenu percentageObj={percentageObj} setPercentageObj={setPercentageObj} query={query} setQuery={setQuery} />
+            <UserPercentageMenu percentageObj={percentageObj} setPercentageObj={setPercentageObj} query={query} setQuery={setQuery} dateArray={dateArray}/>
           </div>
         </div>
       </div>
