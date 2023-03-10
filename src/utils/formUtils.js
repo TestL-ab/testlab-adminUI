@@ -95,7 +95,7 @@ const distinctVariantValues = (variantArr) => {
   return true;
 };
 
-const processVariantData = (variantObjArr) => {
+const processVariantData = (variantObjArr, experimentId) => {
   let variantCopies = [];
   variantObjArr.forEach((obj) => {
     if (obj.value !== "" && obj.weight !== "") {
@@ -106,7 +106,8 @@ const processVariantData = (variantObjArr) => {
   variantCopies = variantCopies.map((obj) => {
     return {
       ...obj,
-      weight: Number(obj.weight) / 100
+      weight: Number(obj.weight) / 100,
+      experiment_id: experimentId
     };
   })
   return variantCopies;
