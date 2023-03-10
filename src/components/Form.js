@@ -19,7 +19,9 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
   const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
-  const isExperiment = type === 3
+  const [experimentId, setExperimentId] = useState(null);
+  const [experimentName, setExperimentName] = useState(null);
+  const [showVariants, setShowVariants] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,6 +40,11 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
 
     try {
       const response = await experimentService.createExperiment(featureObj);
+      if (type === 3) {
+        setExperimentId(response.id);
+        setExperimentName(response.name);
+        setShowVariants(true);
+      }
       setName("");
       setDescription("");
       dispatch({type: "1"});
@@ -45,14 +52,15 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
       setEndDate(null);
       setPercentageObj({});
       setQuery("");
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
-  let strType = String(type);
+
   return (
-    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+    <>
+    { showVariants ? <Variants experimentId={experimentId} experimentName={experimentName} />
+    : <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -66,7 +74,6 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
             />
             <TypeRadio
               type={type}
-              // setType={setType}
               dispatch={dispatch}
             />
             <DateSelector
@@ -91,7 +98,6 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
             />
           </div>
         </div>
-        {isExperiment ? <Variants /> : null }
       </div>
       <Buttons
         setName={setName}
@@ -101,8 +107,11 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
         setEndDate={setEndDate}
         setPercentageObj={setPercentageObj}
         currentDate={currentDate}
-  setQuery/>
-    </form>
+        setQuery={setQuery}
+      />
+      </form>
+    }
+  </>
   )
 };
 

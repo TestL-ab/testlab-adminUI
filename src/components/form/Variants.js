@@ -14,10 +14,15 @@ In addition to "submit" and "reset" have "delete experiment" and "switch to togg
 
 import { useState } from 'react';
 
-const Variants = () => {
+const Variants = ({ experimentId, experimentName }) => {
   const [values, setValues] = useState({ "0": "Control"})
   const [weights, setWeights] = useState({"0": 1});
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
+  console.log("id", experimentId, "name", experimentName);
 
   const handleAddVariant = (event) => {
     event.preventDefault();
@@ -46,8 +51,13 @@ const Variants = () => {
 
   // will need line that displays % available for new variants
   return (
-    <div>
-      <h3 className="text-base font-semibold leading-6 text-gray-900">Variant Details</h3>
+
+<form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+      <div className="space-y-8 divide-y divide-gray-200">
+
+          <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+          <h3 className="text-base font-semibold leading-6 text-gray-900">Variant Details</h3>
       <p className="text-sm text-gray-500">Use this variant as the control for your experiment.</p>
       <div>
         <h2 className="text-base font-semibold leading-6 text-gray-900">Control</h2>
@@ -83,8 +93,9 @@ const Variants = () => {
         />
       </div>
       </fieldset>
-    </div>
-
+          </div>
+        </div>
+      </div>
       <div className="flex justify-end">
         <button
           type="button"
@@ -94,7 +105,7 @@ const Variants = () => {
           Create Additional Variant
         </button>
       </div>
-    </div>
+      </form>
   );
 };
 
