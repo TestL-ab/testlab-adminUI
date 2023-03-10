@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import experimentService from './services/experimentService';
+import experimentUtils from './utils/experimentUtils';
 import SideNav from './components/SideNav';
 import ScheduledList from './components/lists/SheduledList';
 import CurrentToggleRollList from './components/lists/CurrentToggleRollList';
 import CurrentExperimentsList from './components/lists/CurrentExperimentsList';
 import PastExperimentsList from './components/lists/PastExperimentsList';
 import Form from './components/Form';
-// import Visualizer from './components/visualizer/Visualizer';
 
 const App = () => {
   const [experiments, setExperiments] = useState([]);
@@ -18,51 +18,17 @@ const App = () => {
   const [pastExperiments, setPastExperiments] = useState([]);
   const [error, setError] = useState(null);
 
-  const parseExperiments = (experiments) => {
-    let currToggles = [];
-    let currRollOuts = [];
-    let currExperiments = [];
-    let scheduled = [];
-    let past = [];
-
-    const currentDate = new Date();
-
-    experiments.forEach(obj => {
-      const startDate = new Date(obj.start_date);
-      const endDate = new Date(obj.end_date);
-      if (currentDate >= startDate && currentDate <= endDate) {
-        switch(obj.type_id) {
-          case 1: {
-            currToggles.push(obj);
-            break;
-          } case 2: {
-            currRollOuts.push(obj);
-            break;
-          } case 3: {
-            currExperiments.push(obj);
-            break;
-          }
-        }
-      } else if (currentDate < startDate) {
-        scheduled.push(obj);
-      } else if (currentDate > endDate && obj.type_id === 3) {
-        past.push(obj);
-      }
-    })
-
-    setCurrentToggles(currToggles);
-    setCurrentRollOuts(currRollOuts);
-    setCurrentExperiments(currExperiments);
-    setScheduledFeatures(scheduled);
-    setPastExperiments(past);
-  }
-
   useEffect(()=> {
     experimentService
       .getAllExperiments()
       .then(response => {
         setExperiments(response);
-        parseExperiments(response);
+        experimentUtils.parseExperiments(response,
+                                        setCurrentToggles,
+                                        setCurrentRollOuts,
+                                        setCurrentExperiments,
+                                        setScheduledFeatures,
+                                        setPastExperiments);
       })
       .catch(error => {
         setError(error.message);

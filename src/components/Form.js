@@ -19,8 +19,7 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
   const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
-  const [experimentId, setExperimentId] = useState(null);
-  const [experimentName, setExperimentName] = useState(null);
+  const [experimentObj, setExperimentObj] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -41,8 +40,7 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
     try {
       const response = await experimentService.createExperiment(featureObj);
       if (type === 3) {
-        setExperimentId(response.id);
-        setExperimentName(response.name);
+        setExperimentObj(response);
         setShowVariants(true);
       }
       setName("");
@@ -58,60 +56,61 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   };
 
   return (
-    <>
-    { showVariants ? <Variants experimentId={experimentId} experimentName={experimentName} />
-    : <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
-      <div className="space-y-8 divide-y divide-gray-200">
-        <div>
-          <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <NameInput
-              name={name}
-              setName={setName}
-            />
-            <DescriptionText
-              description={description}
-              setDescription={setDescription}
-            />
-            <TypeRadio
-              type={type}
-              dispatch={dispatch}
-            />
-            <DateSelector
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-              currentDate={currentDate}
-              type={type}
-              scheduledFeatures={scheduledFeatures}
-              currentExperiments={currentExperiments}
-              maxAvailable={maxAvailable}
-              setMaxAvailable={setMaxAvailable}
-            />
-            <UserPercentageMenu
-              percentageObj={percentageObj}
-              setPercentageObj={setPercentageObj}
-              query={query} setQuery={setQuery}
-              type={type}
-              maxAvailable={maxAvailable}
-              endDate={endDate}
-            />
-          </div>
-        </div>
-      </div>
-      <Buttons
-        setName={setName}
-        setDescription={setDescription}
-        dispatch={dispatch}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
-        setPercentageObj={setPercentageObj}
-        currentDate={currentDate}
-        setQuery={setQuery}
-      />
-      </form>
-    }
-  </>
+    <Variants experimentObj={experimentObj} setExperimentObj={setExperimentObj} setShowVariants={setShowVariants} />
+  //   <>
+  //   { showVariants ? <Variants experimentObj={experimentObj} />
+  //   : <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+  //     <div className="space-y-8 divide-y divide-gray-200">
+  //       <div>
+  //         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+  //           <NameInput
+  //             name={name}
+  //             setName={setName}
+  //           />
+  //           <DescriptionText
+  //             description={description}
+  //             setDescription={setDescription}
+  //           />
+  //           <TypeRadio
+  //             type={type}
+  //             dispatch={dispatch}
+  //           />
+  //           <DateSelector
+  //             startDate={startDate}
+  //             setStartDate={setStartDate}
+  //             endDate={endDate}
+  //             setEndDate={setEndDate}
+  //             currentDate={currentDate}
+  //             type={type}
+  //             scheduledFeatures={scheduledFeatures}
+  //             currentExperiments={currentExperiments}
+  //             maxAvailable={maxAvailable}
+  //             setMaxAvailable={setMaxAvailable}
+  //           />
+  //           <UserPercentageMenu
+  //             percentageObj={percentageObj}
+  //             setPercentageObj={setPercentageObj}
+  //             query={query} setQuery={setQuery}
+  //             type={type}
+  //             maxAvailable={maxAvailable}
+  //             endDate={endDate}
+  //           />
+  //         </div>
+  //       </div>
+  //     </div>
+  //     <Buttons
+  //       setName={setName}
+  //       setDescription={setDescription}
+  //       dispatch={dispatch}
+  //       setStartDate={setStartDate}
+  //       setEndDate={setEndDate}
+  //       setPercentageObj={setPercentageObj}
+  //       currentDate={currentDate}
+  //       setQuery={setQuery}
+  //     />
+  //     </form>
+  //   }
+  // </>
   )
 };
 
