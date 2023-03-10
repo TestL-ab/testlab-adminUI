@@ -2,6 +2,7 @@ import { Fragment, useState, useReducer } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3BottomLeftIcon,
+  Bars3Icon,
   BellIcon,
   CalendarIcon,
   ChartBarIcon,
@@ -206,7 +207,7 @@ const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurren
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-10 w-6" aria-hidden="true" />
           </button>
           <div className="flex flex-1 justify-between px-4">
           </div>
