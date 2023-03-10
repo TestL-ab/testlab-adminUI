@@ -16,6 +16,8 @@ import Home from './Home'
 import Form from './Form'
 import CurrentExperimentsList from './lists/CurrentExperimentsList'
 import CurrentToggleRollList from './lists/CurrentToggleRollList'
+import PastExperimentsList from './lists/PastExperimentsList'
+import ScheduledList from './lists/ScheduledList'
 
 
 const navigation = [
@@ -31,32 +33,35 @@ const navigation = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-let contentReducer = (state, action) => {
-  switch (action.type) {
-    case 'Home': {
-      return <Home />
-    }
-    case 'Create New Feature' : {
-      return <Form/> 
-    }
-    case 'Current Experiments': {
-      return <CurrentExperimentsList currentFeatures="" setCurrentFeatures="" title=""/>
-    }
-    case 'Current Toggles': {
-      return <CurrentToggleRollList currentFeatures="" setCurrentFeatures="" title=""/>
-    }
-    case 'Current Roll-Outs': {
-      return <CurrentToggleRollList  currentFeatures="" setCurrentFeatures="" title=""/>
-    }
-    case 'Scheduled Features': {
-      return <h1>Add Scheduled Features</h1>
-    }
 
+const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurrentRollouts, currentExperiments, setCurrentExperiments, scheduledFeatures, setScheduledFeatures, pastExperiments, setPastExperiments }) => {
+  let contentReducer = (state, action) => {
+    switch (action.type) {
+      case 'Home': {
+        return <Home />
+      }
+      case 'Create New Feature': {
+        return <Form />
+      }
+      case 'Current Experiments': {
+        return <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="" />
+      }
+      case 'Current Toggles': {
+        return <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="" />
+      }
+      case 'Current Roll-Outs': {
+        return <CurrentToggleRollList currentFeatures={currentRollouts} setCurrentFeatures={setCurrentRollouts} title="" />
+      }
+      case 'Scheduled Features': {
+        return <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} />
+      }
+      case 'Past Experiments': {
+        return <PastExperimentsList pastFeatures={pastExperiments} setpastFeatures={setPastExperiments} title="" />
+      }
+
+    }
+    throw Error('Unknown action: ' + action.type);
   }
-  throw Error('Unknown action: ' + action.type);
-}
-const SideNav = () => {
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentPage, dispatchCurrentPage] = useReducer(contentReducer, <Home />);
 
@@ -65,6 +70,7 @@ const SideNav = () => {
       type: e.target.text,
     })
   }
+
 
   return (
     <>

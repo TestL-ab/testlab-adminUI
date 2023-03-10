@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import experimentService from './services/experimentService';
 import SideNav from './components/SideNav';
-import ScheduledList from './components/lists/SheduledList';
+import ScheduledList from './components/lists/ScheduledList';
 import CurrentToggleRollList from './components/lists/CurrentToggleRollList';
 import CurrentExperimentsList from './components/lists/CurrentExperimentsList';
 import PastExperimentsList from './components/lists/PastExperimentsList';
@@ -79,7 +79,7 @@ const App = () => {
         :
         <>
           <div>
-            <SideNav/>
+            <SideNav currentToggles={currentToggles} setCurrentToggles={setCurrentToggles} currentRollouts={currentRollOuts} setCurrentRollouts={setCurrentRollOuts} currentExperiments={currentExperiments} setCurrentExperiments={setCurrentExperiments} scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} pastExperiments={pastExperiments} setPastExperiments={setPastExperiments}/>
             {/* <AllRoutes/> */}
           </div> 
 
