@@ -2,8 +2,9 @@ import {Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <Link to='/newExperiment'>New Experiment</Link>
-
+    <>
+    <h1>Here's our fancy home page</h1> 
+</>
   );
 }
 export default Home;

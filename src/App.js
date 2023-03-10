@@ -7,6 +7,9 @@ import CurrentToggleRollList from './components/lists/CurrentToggleRollList';
 import CurrentExperimentsList from './components/lists/CurrentExperimentsList';
 import PastExperimentsList from './components/lists/PastExperimentsList';
 import Form from './components/Form';
+import { BrowserRouter } from 'react-router-dom';
+
+
 // import Visualizer from './components/visualizer/Visualizer';
 
 const App = () => {
@@ -72,13 +75,16 @@ const App = () => {
 
   return (
     <>
-      {error
-        ? <p>{error}</p>
+      {error ? <p>{error}</p>
         :
         <>
-          <SideNav />
+          <div>
+            <SideNav/>
+            {/* <AllRoutes/> */}
+          </div> 
 
-          <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} />
+          {/* <SideNav />
+          <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} /> */}
           {/* <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} /> */}
           {/* <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" /> */}
           {/* <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" /> */}
@@ -87,7 +93,7 @@ const App = () => {
         </>
       }
       {/* <Visualizer /> */}
-    </>
+      </>
   );
 }
 
