@@ -79,7 +79,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
     switch(id) {
       case "1":
         if (!checkValidPercent(event.target.value)) {
-          setError1("Please enter only numbers between 1 and 100.")
+          setError1("Error: invalid input")
         } else {
           setError1(null);
         }
@@ -91,7 +91,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         break;
       case "2":
         if (!checkValidPercent(event.target.value)) {
-          setError2("Please enter only numbers between 1 and 100.")
+          setError2("Error: invalid input")
         } else {
           setError2(null);
         }
@@ -103,7 +103,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         break;
       case "3":
         if (!checkValidPercent(event.target.value)) {
-          setError3("Please enter only numbers between 1 and 100.")
+          setError3("Error: invalid input")
         } else {
           setError3(null);
         }
@@ -115,7 +115,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         break;
       case "4":
         if (!checkValidPercent(event.target.value)) {
-          setError4("Please enter only numbers between 1 and 100.")
+          setError4("Error: invalid input")
         } else {
           setError4(null);
         }
@@ -127,7 +127,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         break;
       case "5":
         if (!checkValidPercent(event.target.value)) {
-          setError5("Please enter only numbers between 1 and 100.")
+          setError5("Error: invalid input")
         } else {
           setError5(null);
         }
@@ -217,8 +217,8 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
                   value={variantObj1.weight}
                   onChange={handleChangedWeight}
                   required={true}
-                />%
-                { error1 && <p>{error1}</p> }
+                />
+                { error1 && <p className="mt-2 text-sm text-red-600" >{error1}</p> }
               </div>
             </div>
           </div>
