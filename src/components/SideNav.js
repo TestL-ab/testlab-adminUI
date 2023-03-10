@@ -1,7 +1,6 @@
 import { Fragment, useState, useReducer } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
-  Bars3BottomLeftIcon,
   Bars3Icon,
   BellIcon,
   CalendarIcon,
