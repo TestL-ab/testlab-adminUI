@@ -22,7 +22,7 @@ const processExperiments = (scheduledFeatures, currentExperiments)=> {
       userPercentage: experimentObj.user_percentage,
     };
   });
-}
+};
 
 const populateSpaceUsedObject = (dateArr, experiments) => {
   let obj = {}

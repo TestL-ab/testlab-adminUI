@@ -80,37 +80,16 @@ const App = () => {
 
   return (
     <>
-/*
-    {error ? <p>{error}</p>
-    :
-    <>
-      <div>
-        <SideNav currentToggles={currentToggles} setCurrentToggles={setCurrentToggles} currentRollouts={currentRollOuts} setCurrentRollouts={setCurrentRollOuts} currentExperiments={currentExperiments} setCurrentExperiments={setCurrentExperiments} scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} pastExperiments={pastExperiments} setPastExperiments={setPastExperiments}/>
-        {/* <AllRoutes/> */}
-      </div>
-
-      {/* <SideNav />
-      <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} /> */}
-      {/* <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} /> */}
-      {/* <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" /> */}
-      {/* <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" /> */}
-      {/* <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="Current Experiments" /> */}
-      {/* <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" /> */}
-    </>
-  }
-  {/* <Visualizer /> */}
-  </>
-*/
       {error ? <p>{error}</p>
         :
         <>
           <div>
             <SideNav currentToggles={currentToggles} setCurrentToggles={setCurrentToggles} currentRollouts={currentRollOuts} setCurrentRollouts={setCurrentRollOuts} currentExperiments={currentExperiments} setCurrentExperiments={setCurrentExperiments} scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} pastExperiments={pastExperiments} setPastExperiments={setPastExperiments}/>
             {/* <AllRoutes/> */}
-          </div> 
+          </div>
 
-          {/* <SideNav />
-          <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} /> */}
+          {/* <SideNav /> */}
+          {/* <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} /> */}
           {/* <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} /> */}
           {/* <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" /> */}
           {/* <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" /> */}
@@ -118,9 +97,26 @@ const App = () => {
           {/* <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" /> */}
         </>
       }
-      {/* <Visualizer /> */}
       </>
   );
 }
 
 export default App;
+
+    // {/* {error ? <p>{error}</p>
+    // :
+    // <>
+    //   <div>
+    //     <SideNav currentToggles={currentToggles} setCurrentToggles={setCurrentToggles} currentRollouts={currentRollOuts} setCurrentRollouts={setCurrentRollOuts} currentExperiments={currentExperiments} setCurrentExperiments={setCurrentExperiments} scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} pastExperiments={pastExperiments} setPastExperiments={setPastExperiments}/>
+    //     {/* <AllRoutes/> */}
+    //     </div>
+
+    //     {/* <SideNav />
+    //     <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} /> */}
+    //     {/* <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} /> */}
+    //     {/* <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" /> */}
+    //     {/* <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" /> */}
+    //     {/* <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="Current Experiments" /> */}
+    //     {/* <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" /> */}
+    //   </>
+    // }
