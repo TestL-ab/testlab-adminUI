@@ -1,7 +1,7 @@
 import { Fragment, useState, useReducer } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
-  Bars3BottomLeftIcon,
+  Bars3Icon,
   BellIcon,
   CalendarIcon,
   ChartBarIcon,
@@ -123,8 +123,8 @@ const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurren
                   <div className="flex flex-shrink-0 items-center px-4">
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
+                      src={require("../assets/blueicon.png")}
+                      alt="TestLab"
                     />
                   </div>
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
@@ -163,14 +163,14 @@ const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurren
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-40 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
             <div className="flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                alt="Your Company"
+                src={require('../assets/blueicon.png')}
+                alt="TestLab"
               />
             </div>
             <div className="flex flex-1 flex-col overflow-y-auto">
@@ -202,11 +202,11 @@ const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurren
         <div className="flex flex-col lg:pl-64">
           <button
             type="button"
-            className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
+            className=" px-4 text-white lg:hidden bg-slate-800"
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-10 w-6" aria-hidden="true" />
           </button>
           <div className="flex flex-1 justify-between px-4">
           </div>
