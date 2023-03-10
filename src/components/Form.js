@@ -22,7 +22,6 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
   const [experimentObj, setExperimentObj] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
 
-  console.log(currentExperiments);
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
