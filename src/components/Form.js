@@ -4,6 +4,7 @@ import DescriptionText from './form/DescriptionText';
 import TypeRadio from './form/TypeRadio';
 import DateSelector from './form/DateSelector'
 import UserPercentageMenu from './form/UserPercentageMenu';
+import Variants from './form/Variants';
 import Buttons from './form/Buttons';
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
@@ -18,6 +19,8 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
   const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
+  const [experimentObj, setExperimentObj] = useState(null);
+  const [showVariants, setShowVariants] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,21 +39,27 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
 
     try {
       const response = await experimentService.createExperiment(featureObj);
+      if (type === 3) {
+        setExperimentObj(response);
+        setShowVariants(true);
+      }
       setName("");
       setDescription("");
       dispatch({type: "1"});
       setStartDate(currentDate);
       setEndDate(null);
-      setPercentageObj({ id: 0.05, name: "5%" });
+      setPercentageObj({});
       setQuery("");
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+    <>
+    { showVariants ? <Variants experimentObj={experimentObj} setExperimentObj={setExperimentObj} setShowVariants={setShowVariants} />
+
+    : <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -64,7 +73,6 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
             />
             <TypeRadio
               type={type}
-              // setType={setType}
               dispatch={dispatch}
             />
             <DateSelector
@@ -90,8 +98,19 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
           </div>
         </div>
       </div>
-      <Buttons />
-    </form>
+      <Buttons
+        setName={setName}
+        setDescription={setDescription}
+        dispatch={dispatch}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+        setPercentageObj={setPercentageObj}
+        currentDate={currentDate}
+        setQuery={setQuery}
+      />
+      </form>
+    }
+  </>
   )
 };
 

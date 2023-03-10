@@ -5,7 +5,6 @@ const types = [
 ];
 
 const TypeRadio = ({ type, dispatch }) => {
-console.log("Type: ", type);
   const handleChange = (id) => {
     return function() {dispatch({type: String(id)})}
   }

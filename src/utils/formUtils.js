@@ -71,7 +71,47 @@ const typeSelector = (_, action) => {
     default:
       throw new Error;
   }
-}
+};
+
+const validVariantWeights = (variantArr) => {
+  let totalUsers = 0;
+  variantArr.forEach((obj) => totalUsers += obj.weight);
+  if (totalUsers === 1) return true;
+  alert(`User total is ${Math.floor(totalUsers * 100)}%. Please adjust user percentages so that total is precisely 100%`);
+  return false;
+};
+
+const distinctVariantValues = (variantArr) => {
+  let values = [];
+  for (let i = 0; i < variantArr.length; i++) {
+    let currValue = variantArr[i].value.toLowerCase();
+    if (!values.includes(currValue)) {
+      values.push(currValue)
+    } else {
+      alert(`Each variant value must be distinct. You have two or more values of ${currValue}`);
+      return false;
+    }
+  }
+  return true;
+};
+
+const processVariantData = (variantObjArr, experimentId) => {
+  let variantCopies = [];
+  variantObjArr.forEach((obj) => {
+    if (obj.value !== "" && obj.weight !== "") {
+      variantCopies.push({...obj});
+    }
+  });
+
+  variantCopies = variantCopies.map((obj) => {
+    return {
+      ...obj,
+      weight: Number(obj.weight) / 100,
+      experiment_id: experimentId
+    };
+  })
+  return variantCopies;
+};
 
 const formUtils = {
   getDateRange,
@@ -79,7 +119,10 @@ const formUtils = {
   calculateSpaceAvailable,
   processDayDateSelector,
   getNextDayDateSelector,
-  typeSelector
+  typeSelector,
+  validVariantWeights,
+  distinctVariantValues,
+  processVariantData
 };
 
 export default formUtils;
