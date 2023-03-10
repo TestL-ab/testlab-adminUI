@@ -21,8 +21,8 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
   const [hidden5, setHidden5] = useState(true);
   const [lastVariant, setLastVariant] = useState(2);
 
-  const experimentName = experimentObj.name; //: "Default Test Name for Dev Need to Change code for production";
-  const experimentId = experimentObj.id;// : 4;
+  const experimentName = experimentObj.name;
+  const experimentId = experimentObj.id;
 
   const changeLastVariant = (num) => {
     switch(num) {
@@ -118,13 +118,6 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
     }
   };
 
-  const checkValidPercent = (input) => {
-    const numbersOnlyRegex = new RegExp('[0-9]$', 'g');
-    if (!numbersOnlyRegex.test(input)) return false;
-    if (parseInt(input) > 100 || parseInt(input) < 1) return false;
-    return true;
-  }
-
   const handleChangedWeight = (event) => {
     event.preventDefault();
     const id = event.target.id.split('-').pop();
@@ -191,6 +184,13 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         break;
     }
   };
+
+  const checkValidPercent = (input) => {
+    const numbersOnlyRegex = new RegExp('[0-9]$', 'g');
+    if (!numbersOnlyRegex.test(input)) return false;
+    if (parseInt(input) > 100 || parseInt(input) < 1) return false;
+    return true;
+  }
 
   const handleSubmit = async(event) => {
     event.preventDefault();

@@ -13,7 +13,6 @@ const getDateRange = (startDate, endDate) => {
 };
 
 const processExperiments = (scheduledFeatures, currentExperiments)=> {
-  // console.log(currentExperiments);
   let scheduledExperiments = scheduledFeatures.filter(feature => feature.type_id === 3);
   let existingExperiments = currentExperiments.concat(scheduledExperiments);
   return existingExperiments.map((experimentObj) => {
@@ -108,9 +107,10 @@ const processVariantData = (variantObjArr, experimentId) => {
     return {
       ...obj,
       weight: Number(obj.weight) / 100,
-      experiment_id: experimentId
+      feature_id: experimentId
     };
-  })
+  });
+
   return variantCopies;
 };
 
