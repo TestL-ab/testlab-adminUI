@@ -22,7 +22,6 @@ const TypeRadio = ({ type, dispatch }) => {
                 id={typeObj.id}
                 name="notification-method"
                 type="radio"
-                // defaultChecked={typeObj.id === type}
                 checked={type === typeObj.id}
                 value={typeObj.id}
                 onChange={handleChange(typeObj.id)}

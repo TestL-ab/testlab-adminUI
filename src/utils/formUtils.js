@@ -13,6 +13,7 @@ const getDateRange = (startDate, endDate) => {
 };
 
 const processExperiments = (scheduledFeatures, currentExperiments)=> {
+  // console.log(currentExperiments);
   let scheduledExperiments = scheduledFeatures.filter(feature => feature.type_id === 3);
   let existingExperiments = currentExperiments.concat(scheduledExperiments);
   return existingExperiments.map((experimentObj) => {
@@ -22,7 +23,7 @@ const processExperiments = (scheduledFeatures, currentExperiments)=> {
       userPercentage: experimentObj.user_percentage,
     };
   });
-};
+}
 
 const populateSpaceUsedObject = (dateArr, experiments) => {
   let obj = {}

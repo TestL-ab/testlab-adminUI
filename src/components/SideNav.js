@@ -41,7 +41,7 @@ const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurren
         return <Home />
       }
       case 'Create New Feature': {
-        return <Form />
+        return <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} />
       }
       case 'Current Experiments': {
         return <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="" />

@@ -1,6 +1,6 @@
 import DatePicker from 'react-date-picker';
 import formUtils from '../../utils/formUtils';
-
+import  './brandmark-design.png'
 const DateSelector = ({
   startDate,
   setStartDate,

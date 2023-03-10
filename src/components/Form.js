@@ -9,7 +9,7 @@ import Buttons from './form/Buttons';
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
 
-const Form = ({currentExperiments, scheduledFeatures }) => {
+const Form = ({ currentExperiments, scheduledFeatures }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -22,6 +22,7 @@ const Form = ({currentExperiments, scheduledFeatures }) => {
   const [experimentObj, setExperimentObj] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
 
+  console.log(currentExperiments);
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
