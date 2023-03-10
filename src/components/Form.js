@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import NameInput from './form/NameInput';
 import DescriptionText from './form/DescriptionText';
 import TypeRadio from './form/TypeRadio';
@@ -6,6 +6,7 @@ import DateSelector from './form/DateSelector'
 import UserPercentageMenu from './form/UserPercentageMenu';
 import Variants from './form/Variants';
 import Buttons from './form/Buttons';
+import FormSuccessNotification from './form/FormSuccessNotification'
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
 
@@ -21,6 +22,7 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
   const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
   const [experimentObj, setExperimentObj] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,6 +52,7 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
       setEndDate(null);
       setPercentageObj({});
       setQuery("");
+      setFormSuccess(true);
     } catch (error) {
       console.log(error);
     }
@@ -57,6 +60,7 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
 
   return (
     <>
+    <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
     { showVariants ? <Variants experimentObj={experimentObj} setExperimentObj={setExperimentObj} setShowVariants={setShowVariants} />
 
     : <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
