@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useReducer } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3BottomLeftIcon,
@@ -12,6 +12,13 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import Home from './Home'
+import Form from './Form'
+import CurrentExperimentsList from './lists/CurrentExperimentsList'
+import CurrentToggleRollList from './lists/CurrentToggleRollList'
+import PastExperimentsList from './lists/PastExperimentsList'
+import ScheduledList from './lists/ScheduledList'
+
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -27,8 +34,43 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const SideNav = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurrentRollouts, currentExperiments, setCurrentExperiments, scheduledFeatures, setScheduledFeatures, pastExperiments, setPastExperiments }) => {
+  let contentReducer = (state, action) => {
+    switch (action.type) {
+      case 'Home': {
+        return <Home />
+      }
+      case 'Create New Feature': {
+        return <Form />
+      }
+      case 'Current Experiments': {
+        return <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="" />
+      }
+      case 'Current Toggles': {
+        return <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="" />
+      }
+      case 'Current Roll-Outs': {
+        return <CurrentToggleRollList currentFeatures={currentRollouts} setCurrentFeatures={setCurrentRollouts} title="" />
+      }
+      case 'Scheduled Features': {
+        return <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} />
+      }
+      case 'Past Experiments': {
+        return <PastExperimentsList pastFeatures={pastExperiments} setpastFeatures={setPastExperiments} title="" />
+      }
+
+    }
+    throw Error('Unknown action: ' + action.type);
+  }
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentPage, dispatchCurrentPage] = useReducer(contentReducer, <Home />);
+
+  const handleClick = (e) => {
+    dispatchCurrentPage({
+      type: e.target.text,
+    })
+  }
+
 
   return (
     <>
@@ -91,6 +133,7 @@ const SideNav = () => {
                         <a
                           key={item.name}
                           href={item.href}
+                          onClick={handleClick}
                           className={classNames(
                             item.current
                               ? 'bg-gray-900 text-white'
@@ -136,6 +179,7 @@ const SideNav = () => {
                   <a
                     key={item.name}
                     href={item.href}
+                    onClick={handleClick}
                     className={classNames(
                       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                       'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
@@ -156,26 +200,20 @@ const SideNav = () => {
           </div>
         </div>
         <div className="flex flex-col lg:pl-64">
-            <button
-              type="button"
-              className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
-              <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
-            <div className="flex flex-1 justify-between px-4">
+          <button
+            type="button"
+            className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <span className="sr-only">Open sidebar</span>
+            <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
+          <div className="flex flex-1 justify-between px-4">
           </div>
-{/* THIS IS WHERE CONTENT RENDERS:
+          {/* THIS IS WHERE CONTENT RENDERS:
 if currentView is Current Experimenrs <Current Experiments />  */}
-          <main className="flex-1">
-            <div className="py-6">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-              </div>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">Test</div>
-            </div>
-          </main>
+          {currentPage}
+
         </div>
       </div>
     </>
