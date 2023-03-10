@@ -1,5 +1,6 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react';
+import { useEffect } from 'react';
 
 const UserPercentageMenu = ({
     percentageObj,
@@ -8,9 +9,24 @@ const UserPercentageMenu = ({
     setQuery,
     type,
     maxAvailable,
-    endDate
+    endDate,
   }) => {
 
+  const isToggle = type === 1;
+
+  useEffect(() => {
+    if (isToggle) {
+      setPercentageObj({ id: 1, name: "100%" });
+    } else {
+      setPercentageObj(null);
+    }
+  }, [type]);
+
+  if (isToggle) {
+    return (
+      <p className="text-sm text-gray-500">All users will be enrolled in this feature toggle.</p>
+    );
+  }
   let percentages = [
     { id: 0.05, name: "5%" },
     { id: 0.1, name: "10%" },
@@ -50,9 +66,11 @@ const UserPercentageMenu = ({
     };
 
   return (
+
     <Combobox as="div" value={percentageObj} onChange={setPercentageObj}>
-      { type === 3 && endDate ? <p>{`For this date range, ${maxAvailable}% of users are available.`}</p> : null }
-    <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">Percentage of total users to include in feature</Combobox.Label>
+      { type === 3 && endDate
+      ? <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">For this date range, {maxAvailable}% of users are available. Select the percentage of users to include in this experiment.</Combobox.Label>
+      : <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">Select the percentage of users to include in this feature:</Combobox.Label>}
     <div className="relative mt-2">
       <Combobox.Input
         className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
