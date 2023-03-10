@@ -173,7 +173,7 @@ export default function Home() {
               <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="relative flex flex-wrap items-center justify-center lg:justify-between">
                   {/* Logo */}
-                  <div className="absolute left-0 flex-shrink-0 py-5 lg:static">
+                  {/* <div className="absolute left-0 flex-shrink-0 py-5 lg:static">
                     <a href="#">
                       <span className="sr-only">Your Company</span>
                       <img
@@ -182,7 +182,7 @@ export default function Home() {
                         alt=""
                       />
                     </a>
-                  </div>
+                  </div> */}
 
                   {/* Right section on desktop */}
                   <div className="hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5">
@@ -270,19 +270,6 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Menu button */}
-                  <div className="absolute right-0 flex-shrink-0 lg:hidden">
-                    {/* Mobile menu button */}
-                    <Popover.Button className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-cyan-200 hover:bg-white hover:bg-opacity-10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
-                      <span className="sr-only">Open main menu</span>
-                      {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                      ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                      )}
-                    </Popover.Button>
                   </div>
                 </div>
               </div>
