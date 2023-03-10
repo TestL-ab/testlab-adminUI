@@ -1,8 +1,11 @@
+import VariantPercentageMenu from "./VariantPercentageMenu";
+
 const VariantForm = ({
     num,
     variantObj,
     handleChangedValue,
-    handleChangedWeight
+    handleChangedWeight,
+    error
   }) => {
   return (
     <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -20,6 +23,7 @@ const VariantForm = ({
           onChange={handleChangedValue}
           required={true}
         />
+        { error && <p>{error}</p> }
       </div>
     <div className="sm:col-span-3">
       <label htmlFor={`weight-${num}`} className="block text-sm font-medium leading-6 text-gray-900">
@@ -37,6 +41,7 @@ const VariantForm = ({
           required={true}
         />%
       </div>
+      <VariantPercentageMenu />
     </div>
   </div>
 </div>

@@ -1,5 +1,8 @@
+// will need line that displays % available for new variants
+
 import { useState } from 'react';
 import VariantForm from './VariantForm';
+// import VariantPercentageMenu from './VariantPercentageMenu';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 
@@ -9,16 +12,15 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
   const [variantObj3, setVariantObj3] = useState({ value: "", weight: "" });
   const [variantObj4, setVariantObj4] = useState({ value: "", weight: "" });
   const [variantObj5, setVariantObj5] = useState({ value: "", weight: "" });
+  const [error1, setError1] = useState(null);
+  const [error2, setError2] = useState(null);
+  const [error3, setError3] = useState(null);
+  const [error4, setError4] = useState(null);
+  const [error5, setError5] = useState(null);
 
   const experimentName = experimentObj ? experimentObj.name : "Default Test Name for Dev Need to Change code for production";
   const experimentId = experimentObj ? experimentObj.id : 98;
 
-  /*
-
-//NEED LOGIC TO ENFORCE USER PERCENT!!
-// have to enforce only 1-100 input
-
-  */
   const handleChangedValue = (event) => {
     event.preventDefault();
     const id = event.target.id.split('-').pop();
@@ -62,12 +64,25 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
     }
   };
 
+  const checkValidPercent = (input) => {
+    const numbersOnlyRegex = new RegExp('[0-9]$', 'g');
+    if (!numbersOnlyRegex.test(input)) return false;
+    if (parseInt(input) > 100 || parseInt(input) < 1) return false;
+    return true;
+  }
+
   const handleChangedWeight = (event) => {
     event.preventDefault();
     const id = event.target.id.split('-').pop();
 
+
     switch(id) {
       case "1":
+        if (!checkValidPercent(event.target.value)) {
+          setError1("Please enter only numbers between 1 and 100.")
+        } else {
+          setError1(null);
+        }
         const updatedObj1 = {
           ...variantObj1,
           weight: event.target.value,
@@ -75,6 +90,11 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         setVariantObj1(updatedObj1)
         break;
       case "2":
+        if (!checkValidPercent(event.target.value)) {
+          setError2("Please enter only numbers between 1 and 100.")
+        } else {
+          setError2(null);
+        }
         const updatedObj2 = {
           ...variantObj2,
           weight: event.target.value,
@@ -82,6 +102,11 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         setVariantObj2(updatedObj2)
         break;
       case "3":
+        if (!checkValidPercent(event.target.value)) {
+          setError3("Please enter only numbers between 1 and 100.")
+        } else {
+          setError3(null);
+        }
         const updatedObj3 = {
           ...variantObj3,
           weight: event.target.value,
@@ -89,6 +114,11 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         setVariantObj3(updatedObj3)
         break;
       case "4":
+        if (!checkValidPercent(event.target.value)) {
+          setError4("Please enter only numbers between 1 and 100.")
+        } else {
+          setError4(null);
+        }
         const updatedObj4 = {
           ...variantObj4,
           weight: event.target.value,
@@ -96,6 +126,11 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         setVariantObj4(updatedObj4)
         break;
       case "5":
+        if (!checkValidPercent(event.target.value)) {
+          setError5("Please enter only numbers between 1 and 100.")
+        } else {
+          setError5(null);
+        }
         const updatedObj5 = {
           ...variantObj5,
           weight: event.target.value,
@@ -145,8 +180,6 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
     }
   };
 
-  // will need line that displays % available for new variants
-  /// those subcomponents will need string num 2-5 and variantObj2 or whatever
   return (
     <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
       <div>
@@ -167,6 +200,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
                   value={variantObj1.value}
                   onChange={handleChangedValue}
                   required={true}
+                  aria-invalid={false}
                 />
               </div>
             <div className="sm:col-span-3">
@@ -184,6 +218,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
                   onChange={handleChangedWeight}
                   required={true}
                 />%
+                { error1 && <p>{error1}</p> }
               </div>
             </div>
           </div>
@@ -193,6 +228,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         variantObj={variantObj2}
         handleChangedValue={handleChangedValue}
         handleChangedWeight={handleChangedWeight}
+        error={error2}
       />
       <div className="pt-5">
         <div className="flex justify-start">
