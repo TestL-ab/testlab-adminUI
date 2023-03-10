@@ -1,5 +1,3 @@
-// will need line that displays % available for new variants
-
 import { useState } from 'react';
 import VariantForm from './VariantForm';
 import ControlVariantForm from './ControlVariantForm';
@@ -21,10 +19,10 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
   const [hidden3, setHidden3] = useState(true);
   const [hidden4, setHidden4] = useState(true);
   const [hidden5, setHidden5] = useState(true);
-  const [lastVariant, setLastVariant] = useState(2)
+  const [lastVariant, setLastVariant] = useState(2);
 
-  const experimentName = experimentObj ? experimentObj.name : "Default Test Name for Dev Need to Change code for production";
-  const experimentId = experimentObj ? experimentObj.id : 4;
+  const experimentName = experimentObj.name; //: "Default Test Name for Dev Need to Change code for production";
+  const experimentId = experimentObj.id;// : 4;
 
   const changeLastVariant = (num) => {
     switch(num) {
@@ -230,7 +228,13 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
     // NEED MODAL TO POP UP CONFRIMING, ASK IF WANT TO SWITCH TO TOGGLE OR ROLL-OUT
     try {
       let response = await experimentService.deleteExperiment(experimentId);
-      console.log(response);
+      setExperimentObj(null);
+      setShowVariants(false);
+      setVariantObj1({ is_control: true, value: "", weight: "" });
+      setVariantObj2({ value: "", weight: "" });
+      setVariantObj3({ value: "", weight: "" });
+      setVariantObj4({ value: "", weight: "" });
+      setVariantObj5({ value: "", weight: "" });
     } catch (error) {
       console.log(error);
     }
