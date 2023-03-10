@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import VariantForm from './VariantForm';
-// import VariantPercentageMenu from './VariantPercentageMenu';
+import ControlVariantForm from './ControlVariantForm';
+import VariantButtons from './VariantButtons';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 
@@ -17,9 +18,64 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
   const [error3, setError3] = useState(null);
   const [error4, setError4] = useState(null);
   const [error5, setError5] = useState(null);
+  const [hidden3, setHidden3] = useState(true);
+  const [hidden4, setHidden4] = useState(true);
+  const [hidden5, setHidden5] = useState(true);
+  const [lastVariant, setLastVariant] = useState(2)
 
   const experimentName = experimentObj ? experimentObj.name : "Default Test Name for Dev Need to Change code for production";
-  const experimentId = experimentObj ? experimentObj.id : 98;
+  const experimentId = experimentObj ? experimentObj.id : 4;
+
+  const changeLastVariant = (num) => {
+    switch(num) {
+      case 2:
+        setHidden3(true);
+        setVariantObj3({ value: "", weight: "" })
+        setHidden4(true);
+        setVariantObj4({ value: "", weight: "" });
+        setHidden5(true);
+        setVariantObj5({ value: "", weight: "" });
+        break;
+      case 3:
+        setHidden3(false);
+        setHidden4(true);
+        setVariantObj4({ value: "", weight: "" });
+        setHidden5(true);
+        setVariantObj5({ value: "", weight: "" });
+        break;
+      case 4:
+        setHidden3(false);
+        setHidden4(false);
+        setHidden5(true);
+        setVariantObj5({ value: "", weight: "" });
+        break;
+      case 5:
+        setHidden3(false);
+        setHidden4(false);
+        setHidden5(false);
+        break;
+      default:
+        throw Error('Unknown action.')
+    }
+  };
+
+  const handleAddVariant = (event) => {
+    event.preventDefault();
+    const num = event.target.id.split("-").pop();
+    const nextNum = parseInt(num, 10) + 1;
+    if (nextNum > 5) return;
+    setLastVariant(nextNum);
+    changeLastVariant(nextNum);
+  };
+
+  const handleRemoveVariant = (event) => {
+    event.preventDefault();
+    const num = event.target.id.split("-").pop();
+    const nextNum = parseInt(num, 10) - 1;
+    if (nextNum < 2) return;
+    setLastVariant(nextNum);
+    changeLastVariant(nextNum);
+  }
 
   const handleChangedValue = (event) => {
     event.preventDefault();
@@ -74,8 +130,6 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
   const handleChangedWeight = (event) => {
     event.preventDefault();
     const id = event.target.id.split('-').pop();
-
-
     switch(id) {
       case "1":
         if (!checkValidPercent(event.target.value)) {
@@ -146,7 +200,8 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
                                                      variantObj2,
                                                      variantObj3,
                                                      variantObj4,
-                                                     variantObj5]);
+                                                     variantObj5],
+                                                     experimentId);
 
     if (!formUtils.validVariantWeights(variantArr) || !formUtils.distinctVariantValues(variantArr)) {
       return;
@@ -155,7 +210,8 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
     let variantsObj = { id: experimentId, variants: variantArr };
     try {
       console.log(variantsObj);
-      // const response = await experimentService.createVariants(experimentId, variantsObj)
+      const response = await experimentService.createVariants(experimentId, variantsObj);
+      console.log(response);
       setExperimentObj(null);
       setShowVariants(false);
       setVariantObj1({ is_control: true, value: "", weight: "" });
@@ -185,86 +241,63 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
       <div>
         <h3 className="text-base font-semibold leading-6 text-gray-900">Create Variants for {experimentName}</h3>
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <div className="sm:col-span-3">
-            <p className="mt-1 text-sm text-gray-500">Enter details for your control variant here.</p>
-              <label htmlFor="value-1" className="block text-sm font-medium leading-6 text-gray-900">
-                Control Variant Value
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="value-1"
-                  id="value-1"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  value={variantObj1.value}
-                  onChange={handleChangedValue}
-                  required={true}
-                  aria-invalid={false}
-                />
-              </div>
-            <div className="sm:col-span-3">
-              <label htmlFor="weight-1" className="block text-sm font-medium leading-6 text-gray-900">
-                Control User Percentage
-              </label>
-              <p className="mt-1 text-sm text-gray-500">Enter only integers between 1-100.</p>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="weight-1"
-                  id="weight-1"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  value={variantObj1.weight}
-                  onChange={handleChangedWeight}
-                  required={true}
-                />
-                { error1 && <p className="mt-2 text-sm text-red-600" >{error1}</p> }
-              </div>
-            </div>
-          </div>
-      </div>
+      <ControlVariantForm
+        variantObj={variantObj1}
+        handleChangedValue={handleChangedValue}
+        handleChangedWeight={handleChangedWeight}
+        error={error1}
+      />
       <VariantForm
         num="2"
         variantObj={variantObj2}
         handleChangedValue={handleChangedValue}
         handleChangedWeight={handleChangedWeight}
         error={error2}
+        handleAddVariant={handleAddVariant}
+        handleRemoveVariant={handleRemoveVariant}
+        lastVariant={lastVariant}
       />
-      <div className="pt-5">
-        <div className="flex justify-start">
-          <button
-            type="submit"
-            className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            Submit Variants
-          </button>
-
-        </div>
-        <div className="pt-5">
-        <p className="mt-1 text-sm text-gray-500">All experiments are required to have variants.  If you do not wish to create variants at this time, you may delete the experiment or switch the experiment type to a roll-out (enrolling the same user percentage specified for the experiment in this feature), or a toggle (enrolling all users in this feature).</p>
-        <button
-          type="button"
-          className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          onClick={handleDeleteExperiment}
-        >
-          Delete Experiment
-        </button>
-        <button
-          type="button"
-          className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-        >
-          Change to Roll Out
-        </button>
-        <button
-          type="button"
-          className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-        >
-          Change to Toggle
-        </button>
-      </div>
-      </div>
+      <VariantForm
+        num="3"
+        variantObj={variantObj3}
+        handleChangedValue={handleChangedValue}
+        handleChangedWeight={handleChangedWeight}
+        error={error3}
+        hidden={hidden3}
+        handleAddVariant={handleAddVariant}
+        handleRemoveVariant={handleRemoveVariant}
+        lastVariant={lastVariant}
+      />
+      <VariantForm
+        num="4"
+        variantObj={variantObj4}
+        handleChangedValue={handleChangedValue}
+        handleChangedWeight={handleChangedWeight}
+        error={error4}
+        hidden={hidden4}
+        handleAddVariant={handleAddVariant}
+        handleRemoveVariant={handleRemoveVariant}
+        lastVariant={lastVariant}
+      />
+      <VariantForm
+        num="5"
+        variantObj={variantObj5}
+        handleChangedValue={handleChangedValue}
+        handleChangedWeight={handleChangedWeight}
+        error={error5}
+        hidden={hidden5}
+        handleAddVariant={handleAddVariant}
+        handleRemoveVariant={handleRemoveVariant}
+        lastVariant={lastVariant}
+      />
+      <VariantButtons
+        handleDeleteExperiment={handleDeleteExperiment}
+        handleRemoveVariant={handleRemoveVariant}
+        handleAddVariant={handleAddVariant}
+        lastVariant={lastVariant}
+      />
     </form>
-)
+  );
 };
 
 export default Variants;
