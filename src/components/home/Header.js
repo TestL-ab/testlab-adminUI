@@ -20,12 +20,12 @@ const cards = [
 
 export default function Header() {
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+    <div className="relative isolate overflow-hidden bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <img src={require("../../assets/resized_logo.png")}/>
+          <img className="w-60 h-40" src={require("../../assets/resized_logo.png")} />
         </div>
-        <div className="mx-auto mt-16 grid max-w-xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-6 sm:mt-5 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8">
           {cards.map((card) => (
             <div key={card.name} className="flex gap-x-4 rounded-xl bg-white/5 p-6 ring-1 ring-inset ring-white/10">
               <card.icon className="h- w-5 flex-none text-indigo-400" aria-hidden="true" />
