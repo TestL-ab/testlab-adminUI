@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000/api/experiment';
+const baseURL = 'http://localhost:3000/api/feature';
 
 const getAllExperiments = async () => {
   try {
