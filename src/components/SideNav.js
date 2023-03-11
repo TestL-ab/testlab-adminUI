@@ -14,12 +14,11 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Home from './Home'
 import Form from './Form'
-import ListTemplate from './lists/ListTemplate'
 import CurrentExperimentsList from './lists/CurrentExperimentsList'
-import CurrentToggleRollList from './lists/CurrentToggleRollList'
+import CurrentToggleList from './lists/CurrentToggleList'
+import CurrentRollOutList from './lists/CurrentRollOutList'
 import PastExperimentsList from './lists/PastExperimentsList'
-import ScheduledList from './lists/ScheduledList'
-
+import ScheduledFeaturesList from './lists/ScheduledFeaturesList'
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -65,44 +64,36 @@ const SideNav = ({
         return <CurrentExperimentsList
                   currentFeatures={currentExperiments}
                   setCurrentFeatures={setCurrentExperiments}
-                  title=""
                   setExperimentChange={setExperimentChange}
-                  experimentChange={experimentChange}
                 />
       }
       case 'Current Toggles': {
-        return <CurrentToggleRollList
+          return <CurrentToggleList
                   currentFeatures={currentToggles}
                   setCurrentFeatures={setCurrentToggles}
-                  type={1}
                   setExperimentChange={setExperimentChange}
                 />
       }
       case 'Current Roll-Outs': {
-        return <CurrentToggleRollList
-                  currentFeatures={currentRollouts}
-                  setCurrentFeatures={setCurrentRollouts}
-                  type={2}
-                  setExperimentChange={setExperimentChange}
-                />
+        return <CurrentRollOutList
+                currentFeatures={currentRollouts}
+                setCurrentFeatures={setCurrentRollouts}
+                setExperimentChange={setExperimentChange}
+              />
       }
       case 'Scheduled Features': {
-        return <ScheduledList
+        return <ScheduledFeaturesList
                   scheduledFeatures={scheduledFeatures}
                   setScheduledFeatures={setScheduledFeatures}
                   setExperimentChange={setExperimentChange}
                 />
       }
       case 'Past Experiments': {
-        return <ListTemplate
-          setExperimentChange={setExperimentChange}
-          featureDataObj={{title: "Past Experiments",
-            description: "View your past experiments and experiment analysis.",
-            features: pastExperiments,
-            setFeatures: setPastExperiments,
-            listType: "past experiments"
-          }}
-        />
+        return <PastExperimentsList
+                  pastFeatures={pastExperiments}
+                  setpastFeatures={setPastExperiments}
+                  setExperimentChange={setExperimentChange}
+                />
       }
     }
     throw Error('Unknown action: ' + action.type);

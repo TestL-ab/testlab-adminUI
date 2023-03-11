@@ -9,11 +9,12 @@ const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChang
   const [processedFeatures, setProcessedFeatures] = useState([...pastFeatures]);
 
   useEffect(() => {
-    setProcessedFeatures(listUtils.processFeatureObjs(processedFeatures));
-    setProcessedFeatures(listUtils.sortByDate(processedFeatures));
   }, [processedFeatures])
 
-  const emptyList = processedFeatures.length === 0;
+  let processed = listUtils.processFeatureObjs(processedFeatures);
+  processed = listUtils.sortByDate(processed);
+
+  const emptyList = processed.length === 0;
 
   const handleDelete = async (id, list, callback) => {
     setDeleteObj({id, list, callback, setError});
@@ -33,11 +34,17 @@ const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChang
       setProcessedFeatures={setProcessedFeatures}
     />
 
-<div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+<div className="max-w-7xl sm:px-6 lg:px-8">
       <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-      <h3 className="text-base font-semibold leading-6 text-gray-900">Past Experiments</h3>
-      <p className="mt-1 text-sm text-gray-500">
-        View your past experiments and experiment analysis.
+      <div className="md:flex md:items-center md:justify-between">
+      <div className="min-w-0 flex-1">
+        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+          Past Experiments
+        </h2>
+      </div>
+    </div>
+      <p className="mt-2 max-w-4xl text-sm text-gray-500">
+      View your past experiments and experiment analysis.
       </p>
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -69,7 +76,7 @@ const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChang
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {processedFeatures.map((featureObj, idx) => (
+                {processed.map((featureObj, idx) => (
 //  Make name clickable, route to experiment vairant details
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
