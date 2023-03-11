@@ -36,6 +36,7 @@ const Form = ({ currentExperiments, scheduledFeatures, experimentChange, setExpe
       type_id: type,
       start_date: startDate.toISOString(),
       end_date: endDate.toISOString(),
+      is_running: true,
       user_percentage: percentageObj.id
     };
 
