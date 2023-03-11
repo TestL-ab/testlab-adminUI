@@ -3,11 +3,6 @@ import './App.css';
 import experimentService from './services/experimentService';
 import experimentUtils from './utils/experimentUtils';
 import SideNav from './components/SideNav';
-import ScheduledList from './components/lists/ScheduledList';
-import CurrentToggleRollList from './components/lists/CurrentToggleRollList';
-import CurrentExperimentsList from './components/lists/CurrentExperimentsList';
-import PastExperimentsList from './components/lists/PastExperimentsList';
-import Form from './components/Form';
 
 const App = () => {
   const [experiments, setExperiments] = useState([]);
@@ -31,13 +26,14 @@ const App = () => {
                                         setCurrentExperiments,
                                         setScheduledFeatures,
                                         setPastExperiments);
-
       })
       .catch(error => {
         setError(error.message);
         console.log(error);
       })
   }, [experimentChange]);
+  console.log("pastexperiments", pastExperiments);
+  console.log("scheduled", scheduledFeatures);
 
   return (
     <>
