@@ -1,4 +1,5 @@
 const processFeatureObjs = (featureArr) => {
+  console.log(featureArr);
   return featureArr.map((obj) => {
     let type;
     switch (obj.type_id) {

@@ -9,11 +9,12 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type, setE
   const [processedFeatures, setProcessedFeatures] = useState([...currentFeatures]);
 
   useEffect(() => {
-    setProcessedFeatures(listUtils.processFeatureObjs(processedFeatures));
-    setProcessedFeatures(listUtils.sortByDate(processedFeatures));
   }, [processedFeatures])
 
-  const emptyList = processedFeatures.length === 0;
+  let processed = listUtils.processFeatureObjs(processedFeatures);
+  processed = listUtils.sortByDate(processed);
+
+  const emptyList = processed.length === 0;
   const title = type === 1 ? "Toggles" : "Roll Outs"
   const isToggle = type === 1;
 
@@ -76,7 +77,7 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type, setE
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {processedFeatures.map((featureObj, idx) => (
+                {processed.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{featureObj.name}</td>
 

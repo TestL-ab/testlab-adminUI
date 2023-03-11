@@ -14,6 +14,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Home from './Home'
 import Form from './Form'
+import ListTemplate from './lists/ListTemplate'
 import CurrentExperimentsList from './lists/CurrentExperimentsList'
 import CurrentToggleRollList from './lists/CurrentToggleRollList'
 import PastExperimentsList from './lists/PastExperimentsList'
@@ -93,13 +94,16 @@ const SideNav = ({
                 />
       }
       case 'Past Experiments': {
-        return <PastExperimentsList
-                  pastFeatures={pastExperiments}
-                  setpastFeatures={setPastExperiments}
-                  setExperimentChange={setExperimentChange}
-                />
+        return <ListTemplate
+          setExperimentChange={setExperimentChange}
+          featureDataObj={{title: "Past Experiments",
+            description: "View your past experiments and experiment analysis.",
+            features: pastExperiments,
+            setFeatures: setPastExperiments,
+            listType: "past experiments"
+          }}
+        />
       }
-
     }
     throw Error('Unknown action: ' + action.type);
   }
