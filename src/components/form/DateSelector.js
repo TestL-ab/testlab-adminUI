@@ -12,7 +12,7 @@ const DateSelector = ({
   setMaxAvailable
 }) => {
 
-  const tomorrow =  formUtils.getNextDayDateSelector(currentDate);
+  const tomorrow = formUtils.getNextDayDateSelector(currentDate);
   const processedCurrentDate = formUtils.processDayDateSelector(currentDate);
   const processedStartDate = formUtils.processDayDateSelector(startDate);
 

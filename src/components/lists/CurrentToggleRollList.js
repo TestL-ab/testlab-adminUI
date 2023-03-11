@@ -1,50 +1,44 @@
 import { useState } from 'react';
-import experimentService from "../../services/experimentService";
+import listUtils from "../../utils/listUtils";
+import DeleteAlert from '../DeleteAlert';
 
-const processFeatureObjs = (featureArr) => {
-  return featureArr.map((obj) => {
-    return {
-      ...obj,
-      startDate: new Date(obj.start_date).toLocaleDateString(),
-      endDate: new Date(obj.end_date).toLocaleDateString(),
-      userPercentage: `${100 * obj.user_percentage}%`,
-    };
-  });
-};
-
-const handleDelete = async (id, list, callback, errorHandler) => {
-  try {
-    let response = await experimentService.deleteExperiment(id);
-    console.log(response);
-    const filteredList = list.filter(obj => obj.id !== id);
-    callback(filteredList);
-  } catch (error) {
-    errorHandler(error.message);
-  }
-}
-
-const sortByDate = (featureArr) => {
-  return featureArr.sort((a, b) => {
-    return new Date(a.start_date) - new Date(b.start_date);
-  });
-};
-
-const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) => {
+const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) => {
+  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
+  const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
-  currentFeatures = processFeatureObjs(currentFeatures);
-  currentFeatures = sortByDate(currentFeatures);
+
+  currentFeatures = listUtils.processFeatureObjs(currentFeatures);
+  currentFeatures = listUtils.sortByDate(currentFeatures);
+  const emptyList = currentFeatures.length === 0;
+  const title = type === 1 ? "Toggles" : "Roll Outs"
+  const isToggle = type === 1;
+
+  const handleDelete = async (id, list, callback) => {
+    setDeleteObj({id, list, callback, setError});
+    setOpenDeleteAlert(true);
+  };
+
   return (
+    <>
+    <DeleteAlert
+      openDeleteAlert={openDeleteAlert}
+      setOpenDeleteAlert={setOpenDeleteAlert}
+      deleteObj={deleteObj}
+      setDeleteObj={setDeleteObj}
+    />
+    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+      <h3 className="text-base font-semibold leading-6 text-gray-900">Current {title}</h3>
+      <p className="mt-1 text-sm text-gray-500">
+        View your and edit your current {title.toLowerCase()}.
+      </p>
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">{title}</h1>
-        </div>
       </div>
       <div className="mt-8 flow-root">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            { error
-            ? <p>Error: {error} </p>
+            {  emptyList
+            ? <h3 className="text-base font-semibold leading-6 text-gray-900">You do not currently have any {title.toLowerCase()} to display.</h3>
             : <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
@@ -57,9 +51,13 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) =
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                     End Date
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Enrolled Users
-                  </th>
+
+                  { isToggle
+                    ? null
+                    : <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        Enrolled Users
+                      </th>
+                  }
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -77,7 +75,12 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) =
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
+
+                    { isToggle
+                      ? null
+                      : <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
+                    }
+
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">
                         Edit<span className="sr-only"></span>
@@ -101,6 +104,8 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, title }) =
         </div>
       </div>
     </div>
+    </div>
+    </>
   )
 }
 
