@@ -28,6 +28,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Header from './home/Header'
+import FormModal from './updateform/Modal'
 const user = {
   name: 'Chelsea Hagon',
   email: 'chelsea.hagon@example.com',
@@ -155,7 +156,13 @@ function classNames(...classes) {
 }
 
 export default function Home() {
-  return <Header />
+  // return <FormModal />
+  return (
+    <>
+      <Header />
+      <FormModal/>
+    </>
+  )
   return (
     <>
       {/*
