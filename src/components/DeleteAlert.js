@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import experimentService from '../services/experimentService';
 
-const DeleteAlert = ( { openDeleteAlert, setOpenDeleteAlert, deleteObj, setDeleteObj }) => {
+const DeleteAlert = ( { openDeleteAlert, setOpenDeleteAlert, deleteObj, setDeleteObj, setError }) => {
   const cancelButtonRef = useRef(null)
 
   const handleConfirmDelete = async (event) => {
@@ -16,6 +16,7 @@ const DeleteAlert = ( { openDeleteAlert, setOpenDeleteAlert, deleteObj, setDelet
       setDeleteObj(null);
     } catch (error) {
       setDeleteObj(null);
+      setError(error.message);
       console.log(error);
     }
     setOpenDeleteAlert(false);
@@ -63,8 +64,12 @@ const DeleteAlert = ( { openDeleteAlert, setOpenDeleteAlert, deleteObj, setDelet
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to delete this feature? The record of the feature, including any associated event data
-                        will be permanently removed. This action cannot be undone.
+                        Are you sure you want to delete this feature? </p>
+                      <p className="text-sm text-gray-500">
+                        If the feature is currently running, it will stop immediately.
+                      </p>
+                      <p className="text-sm text-gray-500">
+                         The record of the feature, including any associated event data will be permanently removed.
                       </p>
                     </div>
                   </div>

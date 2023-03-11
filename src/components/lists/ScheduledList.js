@@ -6,11 +6,13 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
+
   scheduledFeatures = listUtils.processFeatureObjs(scheduledFeatures);
   scheduledFeatures = listUtils.sortByDate(scheduledFeatures);
+  const emptyList = scheduledFeatures.length === 0;
 
-  const handleDelete = async (id, list, callback, errorHandler) => {
-    setDeleteObj({id, list, callback, errorHandler});
+  const handleDelete = async (id, list, callback) => {
+    setDeleteObj({id, list, callback, setError});
     setOpenDeleteAlert(true);
   };
 
@@ -22,17 +24,17 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
       deleteObj={deleteObj}
       setDeleteObj={setDeleteObj}
     />
+    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+      <h3 className="text-base font-semibold leading-6 text-gray-900">Scheduled Feature</h3>
+      <p className="mt-1 text-sm text-gray-500">
+        View and edit your upcoming toggles, roll-outs, and experiments.
+      </p>
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">Scheduled Features</h1>
-        </div>
-      </div>
       <div className="mt-8 flow-root">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            { error
-            ? <p>Error: {error} </p>
+            {  emptyList
+            ? <h3 className="text-base font-semibold leading-6 text-gray-900">You do not currently have any scheduled features to display.</h3>
             : <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
@@ -80,7 +82,7 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
                     <button
                       type="button"
                       className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => handleDelete(featureObj.id, scheduledFeatures, setScheduledFeatures, setError)}
+                      onClick={() => handleDelete(featureObj.id, scheduledFeatures, setScheduledFeatures)}
                     >
                       Delete
                     </button>
@@ -94,6 +96,7 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
         </div>
       </div>
     </div>
+    </ div>
   </>
   )
 }

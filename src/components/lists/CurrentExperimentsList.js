@@ -1,50 +1,42 @@
 import { useState } from 'react';
-import experimentService from "../../services/experimentService";
-
-const processFeatureObjs = (featureArr) => {
-  return featureArr.map((obj) => {
-    return {
-      ...obj,
-      startDate: new Date(obj.start_date).toLocaleDateString(),
-      endDate: new Date(obj.end_date).toLocaleDateString(),
-      userPercentage: `${100 * obj.user_percentage}%`,
-    };
-  });
-};
-
-const handleDelete = async (id, list, callback, errorHandler) => {
-  try {
-    let response = await experimentService.deleteExperiment(id);
-    console.log(response);
-    const filteredList = list.filter(obj => obj.id !== id);
-    callback(filteredList);
-  } catch (error) {
-    errorHandler(error.message);
-  }
-}
-
-const sortByDate = (featureArr) => {
-  return featureArr.sort((a, b) => {
-    return new Date(a.start_date) - new Date(b.start_date);
-  });
-};
+import listUtils from '../../utils/listUtils';
+import DeleteAlert from '../DeleteAlert';
 
 const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) => {
+  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
+  const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
-  currentFeatures = processFeatureObjs(currentFeatures);
-  currentFeatures = sortByDate(currentFeatures);
+  currentFeatures = listUtils.processFeatureObjs(currentFeatures);
+  currentFeatures = listUtils.sortByDate(currentFeatures);
+
+  const handleDelete = async (id, list, callback) => {
+    setDeleteObj({id, list, callback, setError});
+    setOpenDeleteAlert(true);
+  };
+
+  const emptyList = currentFeatures.length === 0;
   return (
+    <>
+    <DeleteAlert
+      openDeleteAlert={openDeleteAlert}
+      setOpenDeleteAlert={setOpenDeleteAlert}
+      deleteObj={deleteObj}
+      setDeleteObj={setDeleteObj}
+    />
+    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+      <h3 className="text-base font-semibold leading-6 text-gray-900">Current Experiments</h3>
+      <p className="mt-1 text-sm text-gray-500">
+        View and edit your current experiments.
+      </p>
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">{title}</h1>
-        </div>
+
       </div>
       <div className="mt-8 flow-root">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            { error
-            ? <p>Error: {error} </p>
+            {  emptyList
+            ? <h3 className="text-base font-semibold leading-6 text-gray-900">You do have any current experiments to display.</h3>
             : <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
@@ -114,7 +106,9 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) 
         </div>
       </div>
     </div>
-  )
-}
+    </div>
+    </>
+  );
+};
 
 export default CurrentExperimentsList;

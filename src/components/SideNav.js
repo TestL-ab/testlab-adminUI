@@ -47,16 +47,16 @@ const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurren
         return <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="" />
       }
       case 'Current Toggles': {
-        return <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="" />
+        return <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} type={1} />
       }
       case 'Current Roll-Outs': {
-        return <CurrentToggleRollList currentFeatures={currentRollouts} setCurrentFeatures={setCurrentRollouts} title="" />
+        return <CurrentToggleRollList currentFeatures={currentRollouts} setCurrentFeatures={setCurrentRollouts} type={2} />
       }
       case 'Scheduled Features': {
         return <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} />
       }
       case 'Past Experiments': {
-        return <PastExperimentsList pastFeatures={pastExperiments} setpastFeatures={setPastExperiments} title="" />
+        return <PastExperimentsList pastFeatures={pastExperiments} setpastFeatures={setPastExperiments} />
       }
 
     }
