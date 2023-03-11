@@ -82,7 +82,6 @@ const ScheduledFeaturesList = ({ scheduledFeatures, setScheduledFeatures, setExp
               <tbody className="bg-white">
                 {processed.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
                       <DescriptionDisplay
                         name={featureObj.name}

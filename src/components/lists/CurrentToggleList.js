@@ -83,6 +83,7 @@ const CurrentToggleList = ({ currentFeatures, setCurrentFeatures, setExperimentC
                         rowLength={50}
                         type={featureObj.type_id}
                         id={featureObj.id}
+                        featuresArr={processed}
                       />
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>

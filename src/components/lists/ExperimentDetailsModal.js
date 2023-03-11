@@ -11,6 +11,10 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
   const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
   const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
   const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
+  const handleClick = (event) => {
+    event.preventDefault();
+// need to figure out how to render event data
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -105,6 +109,13 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
                         </dl>
                         </div>
                         </div>
+                        <button
+                          type="button"
+                          className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          onClick={handleClick}
+                        >
+                          View Analytics
+                        </button>
                       </dl>
                     </div>
                     </div>
