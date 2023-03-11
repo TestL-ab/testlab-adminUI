@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import DeleteAlert from '../DeleteAlert';
+import DescriptionDisplay from './DescriptionDisplay';
 import listUtils from '../../utils/listUtils';
 
 const ScheduledFeaturesList = ({ scheduledFeatures, setScheduledFeatures, setExperimentChange }) => {
@@ -81,7 +82,10 @@ const ScheduledFeaturesList = ({ scheduledFeatures, setScheduledFeatures, setExp
               <tbody className="bg-white">
                 {processed.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{featureObj.name}</td>
+
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
+                      <DescriptionDisplay name={featureObj.name} description={featureObj.description || "No description provided."} rowLength={30} />
+                    </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
