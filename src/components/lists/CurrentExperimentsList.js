@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import listUtils from '../../utils/listUtils';
 import DeleteAlert from '../DeleteAlert';
 
-const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) => {
+const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, setExperimentChange, experimentChange }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
-  currentFeatures = listUtils.processFeatureObjs(currentFeatures);
-  currentFeatures = listUtils.sortByDate(currentFeatures);
+
+  useEffect(() => {
+    currentFeatures = listUtils.processFeatureObjs(currentFeatures);
+    currentFeatures = listUtils.sortByDate(currentFeatures);
+  }, [currentFeatures]);
+  // currentFeatures = listUtils.processFeatureObjs(currentFeatures);
+  // currentFeatures = listUtils.sortByDate(currentFeatures);
 
   const handleDelete = async (id, list, callback) => {
     setDeleteObj({id, list, callback, setError});
@@ -22,6 +27,7 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, title }) 
       setOpenDeleteAlert={setOpenDeleteAlert}
       deleteObj={deleteObj}
       setDeleteObj={setDeleteObj}
+      setExperimentChange={setExperimentChange}
     />
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
       <h3 className="text-base font-semibold leading-6 text-gray-900">Current Experiments</h3>

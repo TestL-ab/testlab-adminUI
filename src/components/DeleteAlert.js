@@ -3,17 +3,29 @@ import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import experimentService from '../services/experimentService';
 
-const DeleteAlert = ( { openDeleteAlert, setOpenDeleteAlert, deleteObj, setDeleteObj, setError }) => {
+const DeleteAlert = ({
+  openDeleteAlert,
+  setOpenDeleteAlert,
+  deleteObj,
+  setDeleteObj,
+  setError,
+  setExperimentChange,
+  processedFeatures,
+  setProcessedFeatures
+ }) => {
   const cancelButtonRef = useRef(null)
 
   const handleConfirmDelete = async (event) => {
     event.preventDefault();
     try {
       let response = await experimentService.deleteExperiment(deleteObj.id);
-      console.log(response);
+      console.log("processed features before delete: ", processedFeatures)
+      setProcessedFeatures(processedFeatures.filter((obj) => obj.id !== deleteObj.id));
+      console.log("processed features afetr delete inside alert", processedFeatures);
       const filteredList = deleteObj.list.filter(obj => obj.id !== deleteObj.id);
       deleteObj.callback(filteredList);
       setDeleteObj(null);
+      setExperimentChange(true);
     } catch (error) {
       setDeleteObj(null);
       setError(error.message);

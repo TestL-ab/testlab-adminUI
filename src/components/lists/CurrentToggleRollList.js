@@ -3,7 +3,7 @@ import listUtils from '../../utils/listUtils';
 import DeleteAlert from '../DeleteAlert';
 import DescriptionToggle from './DescriptionToggle';
 
-const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) => {
+const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type, setExperimentChange }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
@@ -26,6 +26,7 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) =>
       setOpenDeleteAlert={setOpenDeleteAlert}
       deleteObj={deleteObj}
       setDeleteObj={setDeleteObj}
+      setExperimentChange={setExperimentChange}
     />
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
       <h3 className="text-base font-semibold leading-6 text-gray-900">Current {title}</h3>

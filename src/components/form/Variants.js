@@ -5,7 +5,7 @@ import VariantButtons from './VariantButtons';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 
-const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
+const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperimentChange }) => {
   const [variantObj1, setVariantObj1] = useState({ is_control: true, value: "", weight: "" });
   const [variantObj2, setVariantObj2] = useState({ value: "", weight: "" });
   const [variantObj3, setVariantObj3] = useState({ value: "", weight: "" });
@@ -212,6 +212,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
       console.log(response);
       setExperimentObj(null);
       setShowVariants(false);
+      setExperimentChange(true);
       setVariantObj1({ is_control: true, value: "", weight: "" });
       setVariantObj2({ value: "", weight: "" });
       setVariantObj3({ value: "", weight: "" });
@@ -230,6 +231,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
       let response = await experimentService.deleteExperiment(experimentId);
       setExperimentObj(null);
       setShowVariants(false);
+      setExperimentChange(true);
       setVariantObj1({ is_control: true, value: "", weight: "" });
       setVariantObj2({ value: "", weight: "" });
       setVariantObj3({ value: "", weight: "" });

@@ -11,7 +11,7 @@ import Form from './components/Form';
 
 const App = () => {
   const [experiments, setExperiments] = useState([]);
-  const [experimentChange, setExperimentChange] = useState(1);
+  const [experimentChange, setExperimentChange] = useState(false);
   const [currentToggles, setCurrentToggles] = useState([]);
   const [currentRollOuts, setCurrentRollOuts] = useState([]);
   const [currentExperiments, setCurrentExperiments] = useState([]);
@@ -19,8 +19,9 @@ const App = () => {
   const [pastExperiments, setPastExperiments] = useState([]);
   const [error, setError] = useState(null);
 
+  console.log("experiment change from app: ", experimentChange);
+  // console.log(scheduledFeatures);
   useEffect(() => {
-    console.log("rendering");
     experimentService
       .getAllExperiments()
       .then(response => {
@@ -38,7 +39,7 @@ const App = () => {
         setError(error.message);
         console.log(error);
       })
-  }, [experimentChange])
+  }, [experimentChange]);
 
   return (
     <>
@@ -57,7 +58,8 @@ const App = () => {
               setScheduledFeatures={setScheduledFeatures}
               pastExperiments={pastExperiments}
               setPastExperiments={setPastExperiments}
-              setExperimentChange={setExperimentChange} />
+              setExperimentChange={setExperimentChange}
+              experimentChange={experimentChange} />
             {/* <AllRoutes/> */}
           </div>
 
