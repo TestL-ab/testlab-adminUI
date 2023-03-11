@@ -10,7 +10,7 @@ import FormSuccessNotification from './form/FormSuccessNotification'
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
 
-const Form = ({ currentExperiments, scheduledFeatures, experimentChange, setExperimentChange }) => {
+const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -36,6 +36,7 @@ const Form = ({ currentExperiments, scheduledFeatures, experimentChange, setExpe
       type_id: type,
       start_date: startDate.toISOString(),
       end_date: endDate.toISOString(),
+      is_running: true,
       user_percentage: percentageObj.id
     };
 
@@ -70,11 +71,20 @@ const Form = ({ currentExperiments, scheduledFeatures, experimentChange, setExpe
             setShowVariants={setShowVariants}
             setExperimentChange={setExperimentChange}
           />
-      : <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-      <h3 className="text-base font-semibold leading-6 text-gray-900">Create Feature</h3>
-      <p className="mt-1 text-sm text-gray-500">
-        Enter details for your new toggle, roll-out, or experiment here.
+      : <div className="max-w-7xl sm:px-6 lg:px-8">
+    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+    <div className="md:flex md:items-center md:justify-between">
+      <div className="min-w-0 flex-1">
+        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+         Create Feature
+        </h2>
+      </div>
+    </div>
+      <p className="mt-2 max-w-4xl text-sm text-gray-500">
+      Enter details for your new toggle, roll-out, or experiment here.
       </p>
+      <div className="px-4 sm:px-6 lg:px-8">
+      <div className="mt-8 flow-root">
       <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
@@ -127,9 +137,12 @@ const Form = ({ currentExperiments, scheduledFeatures, experimentChange, setExpe
         </div>
       </form>
       </div>
+      </div>
+      </div>
+      </div>
     }
     </>
-  )
+  );
 };
 
 export default Form;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import listUtils from '../../utils/listUtils';
 import DeleteAlert from '../DeleteAlert';
+import DescriptionDisplay from './DescriptionDisplay';
 
 const CurrentRollOutList = ({ currentFeatures, setCurrentFeatures, setExperimentChange }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
@@ -43,11 +44,9 @@ const CurrentRollOutList = ({ currentFeatures, setCurrentFeatures, setExperiment
       </div>
     </div>
       <p className="mt-2 max-w-4xl text-sm text-gray-500">
-      View and edit your upcoming roll-outs.
+      View and edit your upcoming roll-outs, ordered by start date.
       </p>
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="sm:flex sm:items-center">
-      </div>
       <div className="mt-8 flow-root">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -80,8 +79,9 @@ const CurrentRollOutList = ({ currentFeatures, setCurrentFeatures, setExperiment
               <tbody className="bg-white">
                 {processed.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{featureObj.name}</td>
-
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
+                      <DescriptionDisplay name={featureObj.name} description={featureObj.description || "No description provided."} rowLength={50} />
+                    </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
