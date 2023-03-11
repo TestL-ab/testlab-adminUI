@@ -1,17 +1,3 @@
-import { Fragment, useState } from 'react'
-import { Dialog, RadioGroup, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { StarIcon } from '@heroicons/react/20/solid'
-
-const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
-
-  const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
-  console.log("experiment", experiment)
-
-  return (
 
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -54,7 +40,8 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
                   </button>
 
                   <div className="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:items-center lg:gap-x-8">
-
+                    <div className="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
+                    </div>
                     <div className="sm:col-span-8 lg:col-span-7">
                       <h2 className="text-xl font-medium text-gray-900 sm:pr-12">{experiment.name}</h2>
 
@@ -99,8 +86,3 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
         </div>
       </Dialog>
     </Transition.Root>
-
-  )
-};
-
-export default ExperimentDetailsModal;

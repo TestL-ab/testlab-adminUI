@@ -1,19 +1,23 @@
+import { useState } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import listUtils from '../../utils/listUtils';
+import ExperimentDetailsModal from './ExperimentDetailsModal';
+    // will need to use features Obj for experimentDetails Modal !!!
 
-const DescriptionDisplay = ({ name, description, rowLength, type, id }) => {
-
+const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
+  const [open, setOpen] = useState(false)
   const processedDescription = listUtils.processDescription(description, rowLength);
-
   const experiment = type === 3 ? true : false;
 
   const handleClick = (event) => {
     event.preventDefault();
-    alert(`this should display everything for experiment # ${id}`);
-  }
+    setOpen(true);
+  };
 
   return (
+    <>
+    <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} />
     <Disclosure as="div" className="pt-6">
       {({ open }) => (
         <>
@@ -46,6 +50,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id }) => {
         </>
       )}
     </Disclosure>
+    </>
   );
 };
 
