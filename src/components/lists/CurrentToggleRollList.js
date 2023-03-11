@@ -1,15 +1,19 @@
-import { useState } from 'react';
-import listUtils from "../../utils/listUtils";
+import { useState, useEffect } from 'react';
+import listUtils from '../../utils/listUtils';
 import DeleteAlert from '../DeleteAlert';
 
-const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) => {
+const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type, setExperimentChange }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
+  const [processedFeatures, setProcessedFeatures] = useState([...currentFeatures]);
 
-  currentFeatures = listUtils.processFeatureObjs(currentFeatures);
-  currentFeatures = listUtils.sortByDate(currentFeatures);
-  const emptyList = currentFeatures.length === 0;
+  useEffect(() => {
+    setProcessedFeatures(listUtils.processFeatureObjs(processedFeatures));
+    setProcessedFeatures(listUtils.sortByDate(processedFeatures));
+  }, [processedFeatures])
+
+  const emptyList = processedFeatures.length === 0;
   const title = type === 1 ? "Toggles" : "Roll Outs"
   const isToggle = type === 1;
 
@@ -25,6 +29,10 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) =>
       setOpenDeleteAlert={setOpenDeleteAlert}
       deleteObj={deleteObj}
       setDeleteObj={setDeleteObj}
+      setExperimentChange={setExperimentChange}
+      setError={setError}
+      processedFeatures={processedFeatures}
+      setProcessedFeatures={setProcessedFeatures}
     />
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
       <h3 className="text-base font-semibold leading-6 text-gray-900">Current {title}</h3>
@@ -68,11 +76,10 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) =>
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {currentFeatures.map((featureObj, idx) => (
+                {processedFeatures.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                      {featureObj.name}
-                    </td>
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{featureObj.name}</td>
+
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
 

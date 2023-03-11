@@ -11,6 +11,7 @@ import Form from './components/Form';
 
 const App = () => {
   const [experiments, setExperiments] = useState([]);
+  const [experimentChange, setExperimentChange] = useState(false);
   const [currentToggles, setCurrentToggles] = useState([]);
   const [currentRollOuts, setCurrentRollOuts] = useState([]);
   const [currentExperiments, setCurrentExperiments] = useState([]);
@@ -18,65 +19,25 @@ const App = () => {
   const [pastExperiments, setPastExperiments] = useState([]);
   const [error, setError] = useState(null);
 
-/*
-  useEffect(()=> {
-  const parseExperiments = (experiments) => {
-    let currToggles = [];
-    let currRollOuts = [];
-    let currExperiments = [];
-    let scheduled = [];
-    let past = [];
-
-    const currentDate = new Date();
-
-    experiments.forEach(obj => {
-      const startDate = new Date(obj.start_date);
-      const endDate = new Date(obj.end_date);
-      if (currentDate >= startDate && currentDate <= endDate) {
-        switch (obj.type_id) {
-          case 1: {
-            currToggles.push(obj);
-            break;
-          } case 2: {
-            currRollOuts.push(obj);
-            break;
-          } case 3: {
-            currExperiments.push(obj);
-            break;
-          }
-        }
-      } else if (currentDate < startDate) {
-        scheduled.push(obj);
-      } else if (currentDate > endDate && obj.type_id === 3) {
-        past.push(obj);
-      }
-    })
-
-    setCurrentToggles(currToggles);
-    setCurrentRollOuts(currRollOuts);
-    setCurrentExperiments(currExperiments);
-    setScheduledFeatures(scheduled);
-    setPastExperiments(past);
-  }
-  */
-
   useEffect(() => {
     experimentService
       .getAllExperiments()
       .then(response => {
         setExperiments(response);
+        setExperimentChange(false);
         experimentUtils.parseExperiments(response,
                                         setCurrentToggles,
                                         setCurrentRollOuts,
                                         setCurrentExperiments,
                                         setScheduledFeatures,
                                         setPastExperiments);
+
       })
       .catch(error => {
         setError(error.message);
         console.log(error);
       })
-  }, [])
+  }, [experimentChange]);
 
   return (
     <>
@@ -84,7 +45,19 @@ const App = () => {
         :
         <>
           <div>
-            <SideNav currentToggles={currentToggles} setCurrentToggles={setCurrentToggles} currentRollouts={currentRollOuts} setCurrentRollouts={setCurrentRollOuts} currentExperiments={currentExperiments} setCurrentExperiments={setCurrentExperiments} scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} pastExperiments={pastExperiments} setPastExperiments={setPastExperiments}/>
+            <SideNav
+              currentToggles={currentToggles}
+              setCurrentToggles={setCurrentToggles}
+              currentRollouts={currentRollOuts}
+              setCurrentRollouts={setCurrentRollOuts}
+              currentExperiments={currentExperiments}
+              setCurrentExperiments={setCurrentExperiments}
+              scheduledFeatures={scheduledFeatures}
+              setScheduledFeatures={setScheduledFeatures}
+              pastExperiments={pastExperiments}
+              setPastExperiments={setPastExperiments}
+              setExperimentChange={setExperimentChange}
+              experimentChange={experimentChange} />
             {/* <AllRoutes/> */}
           </div>
 

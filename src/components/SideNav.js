@@ -34,29 +34,70 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurrentRollouts, currentExperiments, setCurrentExperiments, scheduledFeatures, setScheduledFeatures, pastExperiments, setPastExperiments }) => {
+const SideNav = ({
+  currentToggles,
+  setCurrentToggles,
+  currentRollouts,
+  setCurrentRollouts,
+  currentExperiments,
+  setCurrentExperiments,
+  scheduledFeatures,
+  setScheduledFeatures,
+  pastExperiments,
+  setPastExperiments,
+  experimentChange,
+  setExperimentChange
+}) => {
   let contentReducer = (state, action) => {
     switch (action.type) {
       case 'Home': {
         return <Home />
       }
       case 'Create New Feature': {
-        return <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} />
+        return <Form
+                  currentExperiments={currentExperiments}
+                  scheduledFeatures={scheduledFeatures}
+                  setExperimentChange={setExperimentChange}
+                />
       }
       case 'Current Experiments': {
-        return <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="" />
+        return <CurrentExperimentsList
+                  currentFeatures={currentExperiments}
+                  setCurrentFeatures={setCurrentExperiments}
+                  title=""
+                  setExperimentChange={setExperimentChange}
+                  experimentChange={experimentChange}
+                />
       }
       case 'Current Toggles': {
-        return <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} type={1} />
+        return <CurrentToggleRollList
+                  currentFeatures={currentToggles}
+                  setCurrentFeatures={setCurrentToggles}
+                  type={1}
+                  setExperimentChange={setExperimentChange}
+                />
       }
       case 'Current Roll-Outs': {
-        return <CurrentToggleRollList currentFeatures={currentRollouts} setCurrentFeatures={setCurrentRollouts} type={2} />
+        return <CurrentToggleRollList
+                  currentFeatures={currentRollouts}
+                  setCurrentFeatures={setCurrentRollouts}
+                  type={2}
+                  setExperimentChange={setExperimentChange}
+                />
       }
       case 'Scheduled Features': {
-        return <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} />
+        return <ScheduledList
+                  scheduledFeatures={scheduledFeatures}
+                  setScheduledFeatures={setScheduledFeatures}
+                  setExperimentChange={setExperimentChange}
+                />
       }
       case 'Past Experiments': {
-        return <PastExperimentsList pastFeatures={pastExperiments} setpastFeatures={setPastExperiments} />
+        return <PastExperimentsList
+                  pastFeatures={pastExperiments}
+                  setpastFeatures={setPastExperiments}
+                  setExperimentChange={setExperimentChange}
+                />
       }
 
     }

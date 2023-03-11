@@ -5,7 +5,7 @@ import VariantButtons from './VariantButtons';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 
-const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
+const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperimentChange }) => {
   const [variantObj1, setVariantObj1] = useState({ is_control: true, value: "", weight: "" });
   const [variantObj2, setVariantObj2] = useState({ value: "", weight: "" });
   const [variantObj3, setVariantObj3] = useState({ value: "", weight: "" });
@@ -212,6 +212,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
       console.log(response);
       setExperimentObj(null);
       setShowVariants(false);
+      setExperimentChange(true);
       setVariantObj1({ is_control: true, value: "", weight: "" });
       setVariantObj2({ value: "", weight: "" });
       setVariantObj3({ value: "", weight: "" });
@@ -225,11 +226,51 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
 
   const handleDeleteExperiment = async (event) => {
     event.preventDefault();
-    // NEED MODAL TO POP UP CONFRIMING, ASK IF WANT TO SWITCH TO TOGGLE OR ROLL-OUT
     try {
       let response = await experimentService.deleteExperiment(experimentId);
       setExperimentObj(null);
       setShowVariants(false);
+      setExperimentChange(true);
+      setVariantObj1({ is_control: true, value: "", weight: "" });
+      setVariantObj2({ value: "", weight: "" });
+      setVariantObj3({ value: "", weight: "" });
+      setVariantObj4({ value: "", weight: "" });
+      setVariantObj5({ value: "", weight: "" });
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+// want to try to consolidate toggle and roll out into change type
+  const handleChangeToToggle = async (event) => {
+    event.preventDefault();
+    try {
+      // first change type to 1
+      // NEED TO HAVE UPDATE ROUTE
+      // let response = await experimentService.deleteExperiment(experimentId);
+      setExperimentObj(null);
+      setShowVariants(false);
+      setExperimentChange(true);
+      setVariantObj1({ is_control: true, value: "", weight: "" });
+      setVariantObj2({ value: "", weight: "" });
+      setVariantObj3({ value: "", weight: "" });
+      setVariantObj4({ value: "", weight: "" });
+      setVariantObj5({ value: "", weight: "" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeToRollOut = async (event) => {
+    event.preventDefault();
+    try {
+      // first change type to 2
+      // NEED TO HAVE UPDATE ROUTE
+      // let response = await experimentService.deleteExperiment(experimentId);
+      setExperimentObj(null);
+      setShowVariants(false);
+      setExperimentChange(true);
       setVariantObj1({ is_control: true, value: "", weight: "" });
       setVariantObj2({ value: "", weight: "" });
       setVariantObj3({ value: "", weight: "" });
@@ -248,9 +289,6 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
       be precisely 100%.
     </p>
     <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
-      {/* <div>
-        <h3 className="text-base font-semibold leading-6 text-gray-900">Create Variants for {experimentName}</h3>
-      </div> */}
       <ControlVariantForm
         variantObj={variantObj1}
         handleChangedValue={handleChangedValue}
@@ -302,6 +340,8 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
       />
       <VariantButtons
         handleDeleteExperiment={handleDeleteExperiment}
+        handleChangeToToggle={handleChangeToToggle}
+        handleChangeToRollOut={handleChangeToRollOut}
         handleRemoveVariant={handleRemoveVariant}
         handleAddVariant={handleAddVariant}
         lastVariant={lastVariant}

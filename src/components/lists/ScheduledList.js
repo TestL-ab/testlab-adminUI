@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DeleteAlert from '../DeleteAlert';
 import listUtils from '../../utils/listUtils';
 
-const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
+const ScheduledList = ({ scheduledFeatures, setScheduledFeatures, setExperimentChange }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
+  const [processedFeatures, setProcessedFeatures] = useState([...scheduledFeatures]);
 
-  scheduledFeatures = listUtils.processFeatureObjs(scheduledFeatures);
-  scheduledFeatures = listUtils.sortByDate(scheduledFeatures);
-  const emptyList = scheduledFeatures.length === 0;
+  useEffect(() => {
+    setProcessedFeatures(listUtils.processFeatureObjs(processedFeatures));
+    setProcessedFeatures(listUtils.sortByDate(processedFeatures));
+  }, [processedFeatures])
+
+  const emptyList = processedFeatures.length === 0;
 
   const handleDelete = async (id, list, callback) => {
     setDeleteObj({id, list, callback, setError});
@@ -23,6 +27,10 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
       setOpenDeleteAlert={setOpenDeleteAlert}
       deleteObj={deleteObj}
       setDeleteObj={setDeleteObj}
+      setExperimentChange={setExperimentChange}
+      setError={setError}
+      processedFeatures={processedFeatures}
+      setProcessedFeatures={setProcessedFeatures}
     />
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
       <h3 className="text-base font-semibold leading-6 text-gray-900">Scheduled Feature</h3>
@@ -63,12 +71,9 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {scheduledFeatures.map((featureObj, idx) => (
+                {processedFeatures.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                      {featureObj.name}
-                    </td>
-
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{featureObj.name}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
@@ -82,7 +87,7 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
                     <button
                       type="button"
                       className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => handleDelete(featureObj.id, scheduledFeatures, setScheduledFeatures)}
+                      onClick={() => handleDelete(featureObj.id, scheduledFeatures, setScheduledFeatures, processedFeatures)}
                     >
                       Delete
                     </button>
@@ -98,7 +103,7 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
     </div>
     </ div>
   </>
-  )
-}
+  );
+};
 
 export default ScheduledList;
