@@ -17,7 +17,7 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
   const [startDate, setStartDate] = useState(currentDate);
   const [endDate, setEndDate] = useState(null);
   const [percentageObj, setPercentageObj] = useState({});
-  const [query, setQuery] = useState('') // for UserPercentageMenu--it's a tailwind thing
+  const [query, setQuery] = useState(''); // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
   const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
   const [experimentObj, setExperimentObj] = useState(null);
@@ -62,8 +62,13 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
     <>
     <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
     { showVariants
-      ? <Variants experimentObj={experimentObj} setExperimentObj={setExperimentObj} setShowVariants={setShowVariants} />
-      : <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+      ?  <Variants experimentObj={experimentObj} setExperimentObj={setExperimentObj} setShowVariants={setShowVariants} />
+      : <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+      <h3 className="text-base font-semibold leading-6 text-gray-900">Create Feature</h3>
+      <p className="mt-1 text-sm text-gray-500">
+        Enter details for your new toggle, roll-out, or experiment here.
+      </p>
+      <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
             <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -100,21 +105,23 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
                 endDate={endDate}
               />
             </div>
+
           </div>
+          <Buttons
+              setName={setName}
+              setDescription={setDescription}
+              dispatch={dispatch}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+              setPercentageObj={setPercentageObj}
+              currentDate={currentDate}
+              setQuery={setQuery}
+            />
         </div>
-        <Buttons
-          setName={setName}
-          setDescription={setDescription}
-          dispatch={dispatch}
-          setStartDate={setStartDate}
-          setEndDate={setEndDate}
-          setPercentageObj={setPercentageObj}
-          currentDate={currentDate}
-          setQuery={setQuery}
-        />
       </form>
+      </div>
     }
-  </>
+    </>
   )
 };
 

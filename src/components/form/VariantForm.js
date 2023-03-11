@@ -4,7 +4,7 @@ const VariantForm = ({
     handleChangedValue,
     handleChangedWeight,
     error,
-    hidden
+    hidden,
   }) => {
 
   return (

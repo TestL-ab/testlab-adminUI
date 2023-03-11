@@ -241,10 +241,16 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
   };
 
   return (
+    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+    <h3 className="text-base font-semibold leading-6 text-gray-900">Create Variants for {experimentName}</h3>
+    <p className="mt-1 text-sm text-gray-500">
+      Create up to five variants. Each variant value must be distinct, an the sum of user percentages must
+      be precisely 100%.
+    </p>
     <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
-      <div>
+      {/* <div>
         <h3 className="text-base font-semibold leading-6 text-gray-900">Create Variants for {experimentName}</h3>
-      </div>
+      </div> */}
       <ControlVariantForm
         variantObj={variantObj1}
         handleChangedValue={handleChangedValue}
@@ -301,6 +307,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants }) => {
         lastVariant={lastVariant}
       />
     </form>
+    </div>
   );
 };
 

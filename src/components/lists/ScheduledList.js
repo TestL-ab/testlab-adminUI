@@ -1,55 +1,27 @@
 import { useState } from 'react';
-import experimentService from "../../services/experimentService";
-
-const processFeatureObjs = (featureArr) => {
-  return featureArr.map((obj) => {
-    let type;
-    switch (obj.type_id) {
-      case 1: {
-        type = "Toggle";
-        break
-      }
-      case 2: {
-        type = "Roll-Out";
-        break;
-      } case 3: {
-        type = "Experiment";
-        break;
-      }
-    }
-
-    return {
-      ...obj,
-      startDate: new Date(obj.start_date).toLocaleDateString(),
-      endDate: new Date(obj.end_date).toLocaleDateString(),
-      userPercentage: `${100 * obj.user_percentage}%`,
-      type,
-    };
-  });
-};
-
-const handleDelete = async (id, list, callback, errorHandler) => {
-  try {
-    let response = await experimentService.deleteExperiment(id);
-    console.log(response);
-    const filteredList = list.filter(obj => obj.id !== id);
-    callback(filteredList);
-  } catch (error) {
-    errorHandler(error.message);
-  }
-}
-
-const sortByDate = (featureArr) => {
-  return featureArr.sort((a, b) => {
-    return new Date(a.start_date) - new Date(b.start_date);
-  });
-};
+import DeleteAlert from '../DeleteAlert';
+import listUtils from '../../utils/listUtils';
 
 const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
+  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
+  const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
-  scheduledFeatures = processFeatureObjs(scheduledFeatures);
-  scheduledFeatures = sortByDate(scheduledFeatures);
+  scheduledFeatures = listUtils.processFeatureObjs(scheduledFeatures);
+  scheduledFeatures = listUtils.sortByDate(scheduledFeatures);
+
+  const handleDelete = async (id, list, callback, errorHandler) => {
+    setDeleteObj({id, list, callback, errorHandler});
+    setOpenDeleteAlert(true);
+  };
+
   return (
+    <>
+    <DeleteAlert
+      openDeleteAlert={openDeleteAlert}
+      setOpenDeleteAlert={setOpenDeleteAlert}
+      deleteObj={deleteObj}
+      setDeleteObj={setDeleteObj}
+    />
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
@@ -122,6 +94,7 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
         </div>
       </div>
     </div>
+  </>
   )
 }
 
