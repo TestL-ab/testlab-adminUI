@@ -34,14 +34,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurrentRollouts, currentExperiments, setCurrentExperiments, scheduledFeatures, setScheduledFeatures, pastExperiments, setPastExperiments }) => {
+const SideNav = ({ currentToggles, setCurrentToggles, currentRollouts, setCurrentRollouts, currentExperiments, setCurrentExperiments, scheduledFeatures, setScheduledFeatures, pastExperiments, setPastExperiments, setExperimentChange, experimentChange }) => {
   let contentReducer = (state, action) => {
     switch (action.type) {
       case 'Home': {
         return <Home />
       }
       case 'Create New Feature': {
-        return <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} />
+        return <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} setExperimentChange={setExperimentChange} />
       }
       case 'Current Experiments': {
         return <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="" />

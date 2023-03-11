@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import DeleteAlert from '../DeleteAlert';
 import listUtils from '../../utils/listUtils';
+import DescriptionToggle from './DescriptionToggle';
 
 const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
@@ -65,10 +66,7 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures }) => {
               <tbody className="bg-white">
                 {scheduledFeatures.map((featureObj, idx) => (
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                      {featureObj.name}
-                    </td>
-
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{featureObj.name}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>

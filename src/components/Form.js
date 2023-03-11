@@ -10,7 +10,7 @@ import FormSuccessNotification from './form/FormSuccessNotification'
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
 
-const Form = ({ currentExperiments, scheduledFeatures }) => {
+const Form = ({ currentExperiments, scheduledFeatures, experimentChange, setExperimentChange }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -41,6 +41,7 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
 
     try {
       const response = await experimentService.createExperiment(featureObj);
+      console.log(response);
       if (type === 3) {
         setExperimentObj(response);
         setShowVariants(true);
@@ -53,6 +54,7 @@ const Form = ({ currentExperiments, scheduledFeatures }) => {
       setPercentageObj({});
       setQuery("");
       setFormSuccess(true);
+      setExperimentChange(true);
     } catch (error) {
       console.log(error);
     }

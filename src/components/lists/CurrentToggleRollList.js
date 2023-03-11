@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import listUtils from "../../utils/listUtils";
+import listUtils from '../../utils/listUtils';
 import DeleteAlert from '../DeleteAlert';
+import DescriptionToggle from './DescriptionToggle';
 
 const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
@@ -72,7 +73,9 @@ const CurrentToggleRollList = ({ currentFeatures, setCurrentFeatures, type }) =>
                   <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
                       {featureObj.name}
+                      <DescriptionToggle featureObj = {featureObj} />
                     </td>
+
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
 
