@@ -1,4 +1,11 @@
-const VariantButtons = ({ handleRemoveVariant, handleAddVariant, handleDeleteExperiment, lastVariant }) => {
+const VariantButtons = ({
+  handleRemoveVariant,
+  handleAddVariant,
+  handleDeleteExperiment,
+  lastVariant,
+  handleChangeToToggle,
+  handleChangeToRollOut
+ }) => {
   const secondVariantIsLast = lastVariant === 2;
   const fifthVariantIsLast = lastVariant === 5;
   return (
@@ -44,12 +51,14 @@ const VariantButtons = ({ handleRemoveVariant, handleAddVariant, handleDeleteExp
         <button
           type="button"
           className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          onClick={(e) => handleChangeToRollOut} // want to try this with handleChangeType(2)
         >
           Change to Roll Out
         </button>
         <button
           type="button"
           className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          onClick={handleChangeToToggle}
           >
           Change to Toggle
         </button>
