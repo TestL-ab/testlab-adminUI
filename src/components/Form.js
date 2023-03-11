@@ -10,7 +10,7 @@ import FormSuccessNotification from './form/FormSuccessNotification'
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
 
-const Form = ({ currentExperiments, scheduledFeatures, experimentChange, setExperimentChange }) => {
+const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

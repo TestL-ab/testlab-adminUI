@@ -32,8 +32,6 @@ const App = () => {
         console.log(error);
       })
   }, [experimentChange]);
-  console.log("pastexperiments", pastExperiments);
-  console.log("scheduled", scheduledFeatures);
 
   return (
     <>
