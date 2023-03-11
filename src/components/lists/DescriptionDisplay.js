@@ -1,25 +1,17 @@
 import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
+import listUtils from '../../utils/listUtils';
 
-const DescriptionDisplay = ({ name, description, rowLength }) => {
-  const processDescription = (description) => {
-    let rows = description.split(" ").reduce((acc, word) => {
-      if (acc.length === 0) {
-        return [word];
-      }
-      const currentRow = acc[acc.length - 1];
-      if ((currentRow + " " + word).length <= rowLength) {
-        acc[acc.length - 1] = currentRow + " " + word;
-      } else {
-        acc.push(word);
-      }
-      return acc;
-    }, [])
+const DescriptionDisplay = ({ name, description, rowLength, type, id }) => {
 
-    return rows;
+  const processedDescription = listUtils.processDescription(description, rowLength);
+
+  const experiment = type === 3 ? true : false;
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    alert(`this should display everything for experiment # ${id}`);
   }
-
-  const processedDescription = processDescription(description);
 
   return (
     <Disclosure as="div" className="pt-6">
@@ -41,6 +33,15 @@ const DescriptionDisplay = ({ name, description, rowLength }) => {
             {processedDescription.map((row, idx) => {
               return <p key={idx} className="text-base leading-7 text-sm text-gray-600">{row}</p>
             })}
+            {experiment &&
+                  <button
+                    type="button"
+                    className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    onClick={handleClick}
+                  >
+                    View Eperiment Details
+                  </button>
+            }
           </Disclosure.Panel>
         </>
       )}

@@ -31,6 +31,24 @@ const sortByDate = (featureArr) => {
   });
 };
 
-const listUtils = { processFeatureObjs, sortByDate };
+const processDescription = (description, rowLength) => {
+  let rows = description.split(" ").reduce((acc, word) => {
+    if (acc.length === 0) {
+      return [word];
+    }
+    const currentRow = acc[acc.length - 1];
+    if ((currentRow + " " + word).length <= rowLength) {
+      acc[acc.length - 1] = currentRow + " " + word;
+    } else {
+      acc.push(word);
+    }
+    return acc;
+  }, [])
+
+  return rows;
+}
+
+
+const listUtils = { processFeatureObjs, sortByDate, processDescription };
 
 export default listUtils;
