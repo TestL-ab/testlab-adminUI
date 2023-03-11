@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import DeleteAlert from '../DeleteAlert';
 import listUtils from '../../utils/listUtils';
-import DescriptionToggle from './DescriptionToggle';
 
 const ScheduledList = ({ scheduledFeatures, setScheduledFeatures, setExperimentChange }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
@@ -10,7 +9,6 @@ const ScheduledList = ({ scheduledFeatures, setScheduledFeatures, setExperimentC
   const [processedFeatures, setProcessedFeatures] = useState([...scheduledFeatures]);
 
   useEffect(() => {
-    console.log("in useEffect", processedFeatures);
     setProcessedFeatures(listUtils.processFeatureObjs(processedFeatures));
     setProcessedFeatures(listUtils.sortByDate(processedFeatures));
   }, [processedFeatures])

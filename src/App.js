@@ -19,8 +19,6 @@ const App = () => {
   const [pastExperiments, setPastExperiments] = useState([]);
   const [error, setError] = useState(null);
 
-  console.log("experiment change from app: ", experimentChange);
-  // console.log(scheduledFeatures);
   useEffect(() => {
     experimentService
       .getAllExperiments()

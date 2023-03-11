@@ -19,9 +19,7 @@ const DeleteAlert = ({
     event.preventDefault();
     try {
       let response = await experimentService.deleteExperiment(deleteObj.id);
-      console.log("processed features before delete: ", processedFeatures)
       setProcessedFeatures(processedFeatures.filter((obj) => obj.id !== deleteObj.id));
-      console.log("processed features afetr delete inside alert", processedFeatures);
       const filteredList = deleteObj.list.filter(obj => obj.id !== deleteObj.id);
       deleteObj.callback(filteredList);
       setDeleteObj(null);
