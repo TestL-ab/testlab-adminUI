@@ -64,7 +64,8 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
 {/*This is where the core piece of the modal goes!!!                 */}
-{<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants}/>}
+{/* {<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants}/>} */}
+<Visualizer />
                     {/* <div className="sm:col-span-8 lg:col-span-7">
                       <div className="overflow-hidden bg-white shadow sm:rounded-lg">
                         <div className="px-4 py-5 sm:px-6">

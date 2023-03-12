@@ -157,8 +157,7 @@ function classNames(...classes) {
 
 
 export default function Home() {
-  return <Visualizer/>
-  // return <Header />
+  return <Header />
   return (
     <>
       {/*
