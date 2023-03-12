@@ -20,6 +20,6 @@ const getFeatureAnalysis = async(featureId) => {
   }
 }
 
-const visualizerService = { getExperimentEventData }
+const visualizerService = { getExperimentEventData, getFeatureAnalysis }
 
 export default visualizerService;
