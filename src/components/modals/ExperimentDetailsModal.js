@@ -2,38 +2,50 @@ import { Fragment, useReducer, useState } from 'react'
 import { Dialog, RadioGroup, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/20/solid'
-import Visualizer from '../visualizer/Visualizer-original';
-import VisualizerModal from './Visualizer';
+import Visualizer from './Visualizer';
 import ExperimentDetails from './ExperimentDetails';
 
-const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
-let contentReducer = (state, action) => {
-  switch(action.type) {
-    case 'EXPERIMENT_DETAILS': {
-      return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick}/>
-    }
-    case 'VISUALIZER': {
-      return <Visualizer />
-    }
-  }
-};
- const handleClick = (event) => {
-  event.preventDefault();
-  // need to figure out how to render event data
-  //open visualize modal and pass down the appropriate props.
+//where do we reset the currentModalPage to the experiment details?? 
+// add a button on the visualizer to return to experiment details
 
-  dispatchModalPage({
-    type: 'Visualizer'
-  }
-  // <Visualizer/>
-  )
+const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage }) => {
+  console.log("render experimentdetailsmodal");
+  let contentReducer = (state, action) => {
+    console.log("STATE FROM REDUCER: ", state);
+    switch (action.type) {
+      case 'EXPERIMENT_DETAILS': {
+        return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
+      }
+      case 'VISUALIZER_1': {
+        return <Visualizer experiment={experiment} handleClick={handleClick}/>
+      }
+    }
+  };
+  const handleClick = (event) => {
+    console.log("modal page is currently: ", modalPage.type.name);
+    event.preventDefault();
+    // need to figure out how to render event data
+    //open visualize modal and pass down the appropriate props.
+    //s
 
-};
+    if (modalPage.type.name === "ExperimentDetails") {
+      dispatchModalPage({
+        type: 'VISUALIZER_1'
+      })
+    } else {
+      console.log("handleClick and dispatch to Experiment Details");
+      dispatchModalPage({
+        type: 'EXPERIMENT_DETAILS',
+      })
+    }
+
+
+  };
 
   const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
   const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
   const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
-  let [modalPage, dispatchModalPage] = useReducer(contentReducer,<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick}/> )
+  let [modalPage, dispatchModalPage] = useReducer(contentReducer, <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />)
 
   //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
 
@@ -78,7 +90,10 @@ let contentReducer = (state, action) => {
                     <button
                       type="button"
                       className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        setCurrModalPage('Experiment Details');
+                        setOpen(false);
+                      }}
                     >
                       <span className="sr-only">Close</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />

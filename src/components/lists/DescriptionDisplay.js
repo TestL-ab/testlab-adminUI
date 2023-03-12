@@ -7,6 +7,7 @@ import ExperimentDetailsModal from '../modals/ExperimentDetailsModal';
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
   const [open, setOpen] = useState(false)
+  const [currModalPage, setCurrModalPage] = useState('Experiment Details');
   const processedDescription = listUtils.processDescription(description, rowLength);
   const experiment = type === 3 ? true : false;
 
@@ -17,7 +18,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
 
   return (
     <>
-    <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} />
+    <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} currModalPage={currModalPage} setCurrModalPage={setCurrModalPage}/>
     <Disclosure as="div" className="pt-6">
       {({ open }) => (
         <>

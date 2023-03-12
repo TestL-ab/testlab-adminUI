@@ -40,6 +40,7 @@ const mockClickData = [
     }
   ]
   const Visualizer = () => {
+    console.log("render Visualizer within modal");
   const experimentId = 3; // will use code on line below when router is working and params are supplied
   // const { experimentId } = useParams(); // will need this for real routes in useeffect below
   const [eventData, setEventData] = useState([]);
