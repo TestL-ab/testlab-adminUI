@@ -3,7 +3,6 @@ import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import listUtils from '../../utils/listUtils';
 import ExperimentDetailsModal from './ExperimentDetailsModal';
-    // will need to use features Obj for experimentDetails Modal !!!
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
   const [open, setOpen] = useState(false)
@@ -43,7 +42,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
                     className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={handleClick}
                   >
-                    View Eperiment Details
+                    View Experiment Details
                   </button>
             }
           </Disclosure.Panel>
