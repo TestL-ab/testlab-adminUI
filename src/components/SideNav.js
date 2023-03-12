@@ -49,7 +49,6 @@ const SideNav = ({
   setExperimentChange
 }) => {
   let contentReducer = (state, action) => {
-    console.log("state in content reducer: ", state);
     switch (action.type) {
       case 'Home': {
         return <Home />
@@ -111,7 +110,6 @@ const SideNav = ({
         return {...navLink, current: false}
       }
     })
-    console.log("navigation", navigation);
     dispatchCurrentPage({
       type: e.target.text,
     })
