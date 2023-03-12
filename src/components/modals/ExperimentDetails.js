@@ -1,16 +1,10 @@
 import Visualizer from "./Visualizer.js";
 
-const ExperimentDetails = ({experiment, controlVariant, otherVariants, setModalPage}) => {
+const ExperimentDetails = ({experiment, controlVariant, otherVariants, dispatchModalPage, handleClick}) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
-  const handleClick = (event) => {
-    event.preventDefault();
-    // need to figure out how to render event data
-    //open visualize modal and pass down the appropriate props.
-    setModalPage(<Visualizer/>)
-
-  };
+ 
   return (
     <>
       <div className="sm:col-span-8 lg:col-span-7">

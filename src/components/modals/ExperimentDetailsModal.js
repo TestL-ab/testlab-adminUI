@@ -9,19 +9,35 @@ import ExperimentDetails from './ExperimentDetails';
 const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
 let contentReducer = (state, action) => {
   switch(action.type) {
-    case 'Experiment Details': {
-      return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} dispatchModalPage={dispatchModalPage}/>
+    case 'EXPERIMENT_DETAILS': {
+      return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick}/>
     }
-    case 'Visualizer': {
+    case 'VISUALIZER': {
       return <Visualizer />
     }
   }
+};
+ const handleClick = (event) => {
+  event.preventDefault();
+  // need to figure out how to render event data
+  //open visualize modal and pass down the appropriate props.
+
+  dispatchModalPage({
+    type: 'Visualizer'
+  }
+  // <Visualizer/>
+  )
+
 };
 
   const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
   const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
   const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
-  const [modalPage, dispatchModalPage] = useReducer(contentReducer,<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} dispatchModalPage={dispatchModalPage}/> )
+  let [modalPage, dispatchModalPage] = useReducer(contentReducer,<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick}/> )
+
+  //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
+
+
 
   // const [currentPage, setModalPage] = useState(<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} setModalPage={setModalPage}/>)
 
