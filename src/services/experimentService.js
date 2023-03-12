@@ -13,7 +13,7 @@ const getAllExperiments = async () => {
 
 const createExperiment = async(experimentObj) => {
   try {
-    const response = await axios.put(baseURL, experimentObj);
+    const response = await axios.post(baseURL, experimentObj);
     return response.data;
   } catch (error) {
     throw error;
