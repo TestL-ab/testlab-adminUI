@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:3000/api';
 
-const getExperimentEventData = async(experimentId) => {
+const getExperimentEventData = async(variantId) => {
   try {
-    const response = await axios.get(`${baseURL}/events/feature/${experimentId}`);
+    const response = await axios.get(`${baseURL}/events/feature/${variantId}`);
     return response.data;
   } catch (error) {
     throw error;

@@ -3,7 +3,9 @@ import visualizerService from '../../services/visualizerService';
 
 export default function Visualizer({ experiment, handleClick }) {
   const experimentId = experiment.id;
+
   const [eventData, setEventData] = useState([]);
+  const [featureAnalysis, setFeatureAnalysis] = useState([]);
   const [error, setError] = useState(null);
   // usereducer for the different visualizer options to display on the page -- additional useState for which button is toggled?
 
@@ -11,12 +13,21 @@ export default function Visualizer({ experiment, handleClick }) {
     visualizerService
       .getExperimentEventData(experimentId)
       .then(response => {
-        setEventData(response)
+        setEventData(response);
+        visualizerService.getFeatureAnalysis(experimentId)
+        .then(response => {
+          setFeatureAnalysis(response);
+        })
       })
       .catch(error => {
         setError(error.message);
       });
   }, [])
+
+  console.log(`here's the event data passed to visualizer for experiment ${experimentId}`);
+  console.log(eventData);
+  console.log(`here's the feature analysis data passed visualizer`);
+  console.log(featureAnalysis);
 
   return (
     <>
