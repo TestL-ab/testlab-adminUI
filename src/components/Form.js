@@ -10,7 +10,7 @@ import FormSuccessNotification from './form/FormSuccessNotification'
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
 
-const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange }) => {
+const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, existingNames }) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -23,11 +23,16 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange }) =>
   const [experimentObj, setExperimentObj] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
+  const [nameTaken, setNameTaken] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
       alert(`The total user percentage for experiments in this date period exceeds 100%. Please select a user percentage less than %{maxAvailable}`);
+      return;
+    }
+    if (nameTaken) {
+      alert(`A feature with the name ${name} already exists. Please create a different name.`);
       return;
     }
     const featureObj = {
@@ -92,6 +97,9 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange }) =>
               <NameInput
                 name={name}
                 setName={setName}
+                existingNames={existingNames}
+                nameTaken={nameTaken}
+                setNameTaken={setNameTaken}
               />
               <DescriptionText
                 description={description}
