@@ -1,4 +1,6 @@
-const ExperimentDetails = ({experiment, controlVariant, otherVariants}) => {
+import Visualizer from "./Visualizer.js";
+
+const ExperimentDetails = ({experiment, controlVariant, otherVariants, setModalPage}) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
@@ -6,7 +8,7 @@ const ExperimentDetails = ({experiment, controlVariant, otherVariants}) => {
     event.preventDefault();
     // need to figure out how to render event data
     //open visualize modal and pass down the appropriate props.
-
+    setModalPage(<Visualizer/>)
 
   };
   return (
