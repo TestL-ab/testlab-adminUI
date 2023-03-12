@@ -240,15 +240,19 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
-// want to try to consolidate toggle and roll out into change type
   const handleChangeToToggle = async (event) => {
     event.preventDefault();
     try {
-      // first change type to 1
-      // NEED TO HAVE UPDATE ROUTE
-      // let response = await experimentService.deleteExperiment(experimentId);
+      const updatedExperimentObj = {
+        ...experimentObj,
+        type_id: 1,
+        user_percentage: 1
+      };
+
+      const responseObj = await experimentService.updateFeature(experimentId, updatedExperimentObj);
+      console.log(responseObj);
       setExperimentObj(null);
       setShowVariants(false);
       setExperimentChange(true);
@@ -265,9 +269,13 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
   const handleChangeToRollOut = async (event) => {
     event.preventDefault();
     try {
-      // first change type to 2
-      // NEED TO HAVE UPDATE ROUTE
-      // let response = await experimentService.deleteExperiment(experimentId);
+      const updatedExperimentObj = {
+        ...experimentObj,
+        type_id: 2,
+      };
+
+      const responseObj = await experimentService.updateFeature(experimentId, updatedExperimentObj);
+      console.log(responseObj);
       setExperimentObj(null);
       setShowVariants(false);
       setExperimentChange(true);
