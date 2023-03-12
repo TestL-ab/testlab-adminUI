@@ -6,12 +6,15 @@ import Visualizer from './Visualizer';
 import ExperimentDetails from './ExperimentDetails';
 
 //where do we reset the currentModalPage to the experiment details?? 
-// add a button on the visualizer to return to experiment details
+// ON CLOSING THE MODAL, reset.
+    // need to figure out how to render event data
+    //open visualize modal and pass down the appropriate props.
+    //s
+
 
 const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage }) => {
-  console.log("render experimentdetailsmodal");
+
   let contentReducer = (state, action) => {
-    console.log("STATE FROM REDUCER: ", state);
     switch (action.type) {
       case 'EXPERIMENT_DETAILS': {
         return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
@@ -21,34 +24,35 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
       }
     }
   };
+
   const handleClick = (event) => {
-    console.log("modal page is currently: ", modalPage.type.name);
     event.preventDefault();
-    // need to figure out how to render event data
-    //open visualize modal and pass down the appropriate props.
-    //s
 
     if (modalPage.type.name === "ExperimentDetails") {
       dispatchModalPage({
         type: 'VISUALIZER_1'
       })
     } else {
-      console.log("handleClick and dispatch to Experiment Details");
       dispatchModalPage({
         type: 'EXPERIMENT_DETAILS',
       })
     }
-
-
   };
+
+  const initializeExperimentModalState = (initialState) => {
+    console.log("INITIAL STATE FOR FUNC: ");
+    console.log(initialState);
+    return (<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />)
+  }
 
   const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
   const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
   const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
-  let [modalPage, dispatchModalPage] = useReducer(contentReducer, <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />)
+  let [modalPage, dispatchModalPage] = useReducer(contentReducer, <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />, initializeExperimentModalState)
 
   //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
 
+  console.log("rendering with modal page ", modalPage.type.name);
 
 
   // const [currentPage, setModalPage] = useState(<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} setModalPage={setModalPage}/>)
@@ -91,7 +95,7 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
                       type="button"
                       className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
                       onClick={() => {
-                        setCurrModalPage('Experiment Details');
+                        dispatchModalPage({type:'EXPERIMENT_DETAILS'});
                         setOpen(false);
                       }}
                     >
