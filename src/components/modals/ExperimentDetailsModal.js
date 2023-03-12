@@ -18,7 +18,6 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
 
   //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
 
-  console.log("rendering with modal page ", modalPage.type.name);
 
 
   // const [currentPage, setModalPage] = useState(<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} setModalPage={setModalPage}/>)

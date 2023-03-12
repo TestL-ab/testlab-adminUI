@@ -9,11 +9,8 @@ import Visualizer from '../modals/Visualizer';
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
   const [open, setOpen] = useState(false)
-  const [currModalPage, setCurrModalPage] = useState('Experiment Details');
   const processedDescription = listUtils.processDescription(description, rowLength);
   const isExperiment = type === 3 ? true : false;
-
-
   const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
   const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
   const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
@@ -54,8 +51,6 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   };
 
   const initializeExperimentModalState = (initialState) => {
-    console.log("INITIAL STATE FOR FUNC: ");
-    console.log(initialState);
     return (<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />)
   }
 
@@ -63,7 +58,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   let [modalPage, dispatchModalPage] = useReducer(contentReducer, <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />, initializeExperimentModalState)
   return (
     <>
-      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} currModalPage={currModalPage} setCurrModalPage={setCurrModalPage} modalPage={modalPage} dispatchModalPage={dispatchModalPage}/>
+      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} modalPage={modalPage} dispatchModalPage={dispatchModalPage}/>
       <Disclosure as="div" className="pt-6">
         {({ open }) => (
           <>

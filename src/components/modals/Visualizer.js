@@ -1,5 +1,23 @@
-export default function Visualizer({experiment, handleClick}) {
-  console.log("rendering the visualizer");
+import {useState, useEffect, useReducer} from 'react';
+import visualizerService from '../../services/visualizerService';
+
+export default function Visualizer({ experiment, handleClick }) {
+  const experimentId = experiment.id;
+  const [eventData, setEventData] = useState([]);
+  const [error, setError] = useState(null);
+  // usereducer for the different visualizer options to display on the page -- additional useState for which button is toggled?
+
+  useEffect(() => {
+    visualizerService
+      .getExperimentEventData(experimentId)
+      .then(response => {
+        setEventData(response)
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  }, [])
+
   return (
     <>
       <div className="sm:col-span-8 lg:col-span-7">
@@ -24,3 +42,12 @@ export default function Visualizer({experiment, handleClick}) {
     </>
   )
 }
+
+// console.log("render Visualizer within modal");
+// const experimentId = 3; // will use code on line below when router is working and params are supplied
+// // const { experimentId } = useParams(); // will need this for real routes in useeffect below
+// const [eventData, setEventData] = useState([]);
+// const [error, setError] = useState(null);
+// const DISPLAYS = ["Raw Graph", "User Click Percentages"]
+// const [currentDisplay, setCurrentDisplay] = useState(DISPLAYS[0]);
+

@@ -1,7 +1,6 @@
 import Visualizer from "./Visualizer.js";
 
 const ExperimentDetails = ({experiment, controlVariant, otherVariants, dispatchModalPage, handleClick}) => {
-  console.log("render experimentdetails within modal");
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
