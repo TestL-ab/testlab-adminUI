@@ -1,9 +1,15 @@
-const NameInput = ({ name, setName }) => {
+const NameInput = ({ name, setName, existingNames, nameTaken, setNameTaken }) => {
   const handleInput = (event) => {
     event.preventDefault();
     const value = event.target.value;
+    existingNames.includes(value.toLowerCase().trim())
+      ? setNameTaken(true)
+      : setNameTaken(false);
     setName(value);
   }
+
+  console.log("existing name:", existingNames[0])
+  console.log("nameTaken:", nameTaken);
 
   return (
     <div className="sm:col-span-4">
@@ -21,6 +27,7 @@ const NameInput = ({ name, setName }) => {
         required={true}
       />
     </div>
+    {nameTaken && <p className="mt-2 text-sm text-red-600">A feature with this name already exists. Please enter another name.</p>}
   </div>
   );
 }

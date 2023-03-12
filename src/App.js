@@ -12,6 +12,7 @@ const App = () => {
   const [currentExperiments, setCurrentExperiments] = useState([]);
   const [scheduledFeatures, setScheduledFeatures] = useState([]);
   const [pastExperiments, setPastExperiments] = useState([]);
+  const [existingNames, setExitstingNames] = useState([])
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const App = () => {
         setExperiments(response);
         setExperimentChange(false);
         experimentUtils.parseExperiments(response,
+                                        setExitstingNames,
                                         setCurrentToggles,
                                         setCurrentRollOuts,
                                         setCurrentExperiments,
@@ -51,17 +53,11 @@ const App = () => {
               pastExperiments={pastExperiments}
               setPastExperiments={setPastExperiments}
               setExperimentChange={setExperimentChange}
-              experimentChange={experimentChange} />
+              experimentChange={experimentChange}
+              existingNames={existingNames}
+            />
             {/* <AllRoutes/> */}
           </div>
-
-          {/* <SideNav /> */}
-          {/* <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} /> */}
-          {/* <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} /> */}
-          {/* <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" /> */}
-          {/* <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" /> */}
-          {/* <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="Current Experiments" /> */}
-          {/* <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" /> */}
         </>
       }
       </>
@@ -69,21 +65,3 @@ const App = () => {
 }
 
 export default App;
-
-    // {/* {error ? <p>{error}</p>
-    // :
-    // <>
-    //   <div>
-    //     <SideNav currentToggles={currentToggles} setCurrentToggles={setCurrentToggles} currentRollouts={currentRollOuts} setCurrentRollouts={setCurrentRollOuts} currentExperiments={currentExperiments} setCurrentExperiments={setCurrentExperiments} scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} pastExperiments={pastExperiments} setPastExperiments={setPastExperiments}/>
-    //     {/* <AllRoutes/> */}
-    //     </div>
-
-    //     {/* <SideNav />
-    //     <Form currentExperiments={currentExperiments} scheduledFeatures={scheduledFeatures} /> */}
-    //     {/* <ScheduledList scheduledFeatures={scheduledFeatures} setScheduledFeatures={setScheduledFeatures} /> */}
-    //     {/* <CurrentToggleRollList currentFeatures={currentToggles} setCurrentFeatures={setCurrentToggles} title="Current Toggles" /> */}
-    //     {/* <CurrentToggleRollList currentFeatures={currentRollOuts} setCurrentFeatures={setCurrentRollOuts} title="Current Roll Outs" /> */}
-    //     {/* <CurrentExperimentsList currentFeatures={currentExperiments} setCurrentFeatures={setCurrentExperiments} title="Current Experiments" /> */}
-    //     {/* <PastExperimentsList pastFeatures={pastExperiments} setPastFeatures={setPastExperiments} title="Past Experiments" /> */}
-    //   </>
-    // }

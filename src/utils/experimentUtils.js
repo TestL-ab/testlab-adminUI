@@ -1,4 +1,5 @@
-const parseExperiments = (experiments, setCurrentToggles, setCurrentRollOuts, setCurrentExperiments, setScheduledFeatures, setPastExperiments) => {
+const parseExperiments = (experiments, setExitstingNames, setCurrentToggles, setCurrentRollOuts, setCurrentExperiments, setScheduledFeatures, setPastExperiments) => {
+  let names = [];
   let currToggles = [];
   let currRollOuts = [];
   let currExperiments = [];
@@ -8,6 +9,7 @@ const parseExperiments = (experiments, setCurrentToggles, setCurrentRollOuts, se
   const currentDate = new Date();
 
   experiments.forEach(obj => {
+    names.push(obj.name.toLowerCase().trim());
     const startDate = new Date(obj.start_date);
     const endDate = new Date(obj.end_date);
     if (currentDate >= startDate && currentDate <= endDate) {
@@ -30,6 +32,7 @@ const parseExperiments = (experiments, setCurrentToggles, setCurrentRollOuts, se
     }
   })
 
+  setExitstingNames(names);
   setCurrentToggles(currToggles);
   setCurrentRollOuts(currRollOuts);
   setCurrentExperiments(currExperiments);

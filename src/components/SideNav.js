@@ -46,7 +46,8 @@ const SideNav = ({
   pastExperiments,
   setPastExperiments,
   experimentChange,
-  setExperimentChange
+  setExperimentChange,
+  existingNames
 }) => {
   let contentReducer = (state, action) => {
     switch (action.type) {
@@ -58,6 +59,7 @@ const SideNav = ({
                   currentExperiments={currentExperiments}
                   scheduledFeatures={scheduledFeatures}
                   setExperimentChange={setExperimentChange}
+                  existingNames={existingNames}
                 />
       }
       case 'Current Experiments': {
