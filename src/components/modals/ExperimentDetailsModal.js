@@ -12,43 +12,9 @@ import ExperimentDetails from './ExperimentDetails';
     //s
 
 
-const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage }) => {
+const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage, modalPage, dispatchModalPage }) => {
 
-  let contentReducer = (state, action) => {
-    switch (action.type) {
-      case 'EXPERIMENT_DETAILS': {
-        return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
-      }
-      case 'VISUALIZER_1': {
-        return <Visualizer experiment={experiment} handleClick={handleClick}/>
-      }
-    }
-  };
 
-  const handleClick = (event) => {
-    event.preventDefault();
-
-    if (modalPage.type.name === "ExperimentDetails") {
-      dispatchModalPage({
-        type: 'VISUALIZER_1'
-      })
-    } else {
-      dispatchModalPage({
-        type: 'EXPERIMENT_DETAILS',
-      })
-    }
-  };
-
-  const initializeExperimentModalState = (initialState) => {
-    console.log("INITIAL STATE FOR FUNC: ");
-    console.log(initialState);
-    return (<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />)
-  }
-
-  const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
-  const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
-  const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
-  let [modalPage, dispatchModalPage] = useReducer(contentReducer, <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />, initializeExperimentModalState)
 
   //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
 

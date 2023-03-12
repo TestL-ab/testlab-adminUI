@@ -3,6 +3,7 @@ import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import listUtils from '../../utils/listUtils';
 import ExperimentDetailsModal from '../modals/ExperimentDetailsModal';
+import ExperimentDetails from '../modals/ExperimentDetails';
 // will need to use features Obj for experimentDetails Modal !!!
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
@@ -11,14 +12,52 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   const processedDescription = listUtils.processDescription(description, rowLength);
   const experiment = type === 3 ? true : false;
 
-  const handleClick = (event) => {
+
+  const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
+  const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
+  const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
+
+
+  const handleModalOpenClick = (event) => {
     event.preventDefault();
     setOpen(true);
+  }; 
+   let contentReducer = (state, action) => {
+    switch (action.type) {
+      case 'EXPERIMENT_DETAILS': {
+        return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
+      }
+      case 'VISUALIZER_1': {
+        return <Visualizer experiment={experiment} handleClick={handleClick}/>
+      }
+    }
   };
 
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    if (modalPage.type.name === "ExperimentDetails") {
+      dispatchModalPage({
+        type: 'VISUALIZER_1'
+      })
+    } else {
+      dispatchModalPage({
+        type: 'EXPERIMENT_DETAILS',
+      })
+    }
+  };
+
+  const initializeExperimentModalState = (initialState) => {
+    console.log("INITIAL STATE FOR FUNC: ");
+    console.log(initialState);
+    return (<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />)
+  }
+
+
+  let [modalPage, dispatchModalPage] = useReducer(contentReducer, <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />, initializeExperimentModalState)
   return (
     <>
-      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} currModalPage={currModalPage} setCurrModalPage={setCurrModalPage} />
+      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} currModalPage={currModalPage} setCurrModalPage={setCurrModalPage} modalPage={modalPage} dispatchModalPage={dispatchModalPage}/>
       <Disclosure as="div" className="pt-6">
         {({ open }) => (
           <>
@@ -42,7 +81,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
                 <button
                   type="button"
                   className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={handleClick}
+                  onClick={handleModalOpenClick}
                 >
                   View Experiment Details
                 </button>
