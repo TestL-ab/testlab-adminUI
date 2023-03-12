@@ -4,7 +4,7 @@ import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import listUtils from '../../utils/listUtils';
 import ExperimentDetailsModal from './ExperimentDetailsModal';
 
-const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
+const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr, futureExperiment }) => {
   const [open, setOpen] = useState(false)
   const processedDescription = listUtils.processDescription(description, rowLength);
   const experiment = type === 3 ? true : false;
@@ -16,7 +16,13 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
 
   return (
     <>
-    <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} />
+    <ExperimentDetailsModal
+      id={id}
+      featuresArr={featuresArr}
+      open={open}
+      setOpen={setOpen}
+      futureExperiment={futureExperiment}
+    />
     <Disclosure as="div" className="pt-6">
       {({ open }) => (
         <>

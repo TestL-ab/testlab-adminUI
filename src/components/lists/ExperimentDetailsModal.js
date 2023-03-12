@@ -3,7 +3,7 @@ import { Dialog, RadioGroup, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/20/solid'
 
-const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
+const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, futureExperiment }) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
@@ -109,13 +109,15 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
                         </dl>
                         </div>
                         </div>
-                        <button
-                          type="button"
-                          className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                          onClick={handleClick}
-                        >
-                          View Analytics
-                        </button>
+                        { !futureExperiment &&
+                          <button
+                            type="button"
+                            className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            onClick={handleClick}
+                          >
+                            View Analytics
+                          </button>
+                        }
                       </dl>
                     </div>
                     </div>
