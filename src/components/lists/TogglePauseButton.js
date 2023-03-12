@@ -8,7 +8,6 @@ const TogglePauseButton = ({featureObj, processedFeatures, setProcessedFeatures,
   }, [isRunning]);
 
   const is_running = featureObj.is_running;
-  console.log(featureObj.name, is_running, isRunning);
 
   const handleTogglePause = async (event) => {
     event.preventDefault();
@@ -17,7 +16,7 @@ const TogglePauseButton = ({featureObj, processedFeatures, setProcessedFeatures,
       ...featureObj,
       is_running: !isRunning,
     }
-    // console.log(featureObj.is_running, updatedFeatureObj.is_running);
+
     try {
       const responseObj = await experimentService.updateFeature(id, updatedFeatureObj);
       console.log(responseObj);

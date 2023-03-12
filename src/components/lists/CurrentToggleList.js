@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import listUtils from '../../utils/listUtils';
 import DeleteAlert from '../DeleteAlert';
 import DescriptionDisplay from './DescriptionDisplay';
+import TogglePauseButton from './TogglePauseButton';
 
 const CurrentToggleList = ({ currentFeatures, setCurrentFeatures, setExperimentChange }) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
@@ -66,8 +67,6 @@ const CurrentToggleList = ({ currentFeatures, setCurrentFeatures, setExperimentC
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                  </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
                     <span className="sr-only">Edit</span>
                   </th>
@@ -88,6 +87,14 @@ const CurrentToggleList = ({ currentFeatures, setCurrentFeatures, setExperimentC
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <TogglePauseButton
+                        featureObj={featureObj}
+                        setExperimentChange={setExperimentChange}
+                        processedFeatures={processed}
+                        setProcessedFeatures={setProcessedFeatures}
+                      />
+                    </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">
                         Edit<span className="sr-only"></span>
