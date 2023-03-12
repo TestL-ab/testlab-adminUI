@@ -1,9 +1,11 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useReducer, useState } from 'react'
 import { Dialog, RadioGroup, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/20/solid'
+import Visualizer from '../visualizer/Visualizer';
 
 const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
@@ -14,9 +16,12 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
   const handleClick = (event) => {
     event.preventDefault();
 // need to figure out how to render event data
-  };
+    //open visualize modal and pass down the appropriate props.
 
+
+  };
   return (
+    <>
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
         <Transition.Child
@@ -127,7 +132,7 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen }) => {
         </div>
       </Dialog>
     </Transition.Root>
-
+    </>
   )
 };
 

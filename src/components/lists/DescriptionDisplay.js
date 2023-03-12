@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import listUtils from '../../utils/listUtils';
-import ExperimentDetailsModal from './ExperimentDetailsModal';
+import ExperimentDetailsModal from '../modals/ExperimentDetailsModal';
     // will need to use features Obj for experimentDetails Modal !!!
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
