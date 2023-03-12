@@ -20,7 +20,7 @@ import CurrentRollOutList from './lists/CurrentRollOutList'
 import PastExperimentsList from './lists/PastExperimentsList'
 import ScheduledFeaturesList from './lists/ScheduledFeaturesList'
 
-const navigation = [
+let navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
   { name: 'Create New Feature', href: '#', icon: UsersIcon, current: false },
   { name: 'Current Toggles', href: '#', icon: FolderIcon, current: false },
@@ -49,6 +49,7 @@ const SideNav = ({
   setExperimentChange
 }) => {
   let contentReducer = (state, action) => {
+    console.log("state in content reducer: ", state);
     switch (action.type) {
       case 'Home': {
         return <Home />
@@ -102,6 +103,15 @@ const SideNav = ({
   const [currentPage, dispatchCurrentPage] = useReducer(contentReducer, <Home />);
 
   const handleClick = (e) => {
+    e.preventDefault();
+    navigation = navigation.map(navLink => {
+      if (navLink.name === e.target.text) {
+        return {...navLink, current: true};
+      } else {
+        return {...navLink, current: false}
+      }
+    })
+    console.log("navigation", navigation);
     dispatchCurrentPage({
       type: e.target.text,
     })
