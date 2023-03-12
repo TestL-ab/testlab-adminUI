@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import listUtils from '../../utils/listUtils';
 import ExperimentDetailsModal from '../modals/ExperimentDetailsModal';
 import ExperimentDetails from '../modals/ExperimentDetails';
+import Visualizer from '../modals/Visualizer';
 // will need to use features Obj for experimentDetails Modal !!!
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
   const [open, setOpen] = useState(false)
   const [currModalPage, setCurrModalPage] = useState('Experiment Details');
   const processedDescription = listUtils.processDescription(description, rowLength);
-  const experiment = type === 3 ? true : false;
+  const isExperiment = type === 3 ? true : false;
 
 
   const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
@@ -20,8 +21,13 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
 
   const handleModalOpenClick = (event) => {
     event.preventDefault();
+    dispatchModalPage({
+      type: 'EXPERIMENT_DETAILS'
+    })
     setOpen(true);
+
   }; 
+
    let contentReducer = (state, action) => {
     switch (action.type) {
       case 'EXPERIMENT_DETAILS': {
@@ -77,7 +83,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
               {processedDescription.map((row, idx) => {
                 return <p key={idx} className="text-base leading-7 text-sm text-gray-600">{row}</p>
               })}
-              {experiment &&
+              {isExperiment &&
                 <button
                   type="button"
                   className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
