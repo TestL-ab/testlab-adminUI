@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 
 const SimpleBarChart = ({featureAnalysis}) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
@@ -32,8 +32,11 @@ const SimpleBarChart = ({featureAnalysis}) => {
 //         "total_users": 0
 //     }
 // ]
+
+  let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
+    return sum + currFeature.event_total
+  }, 0)
   let processedAnalysis = featureAnalysis.map(feature => {
-    console.log(feature);
     let name = feature.value
     if (feature.is_control) {
       name = name + ' (Control)'
@@ -41,7 +44,8 @@ const SimpleBarChart = ({featureAnalysis}) => {
     return {
       value: name, 
       isControl: feature.is_control,
-      'Clicks Received': feature.event_total
+      'Clicks Received': feature.event_total, 
+      percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
   })
 
@@ -67,7 +71,10 @@ const SimpleBarChart = ({featureAnalysis}) => {
         <YAxis />
         <Tooltip/>
         <Legend />
-        <Bar dataKey='Clicks Received' fill="#8884d8"/>
+        <Bar dataKey='Clicks Received' fill="#8884d8">
+          <LabelList dataKey='percent' position="top"/>
+        </Bar>
+
 
       </BarChart>
       </>
