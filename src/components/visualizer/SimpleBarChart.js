@@ -47,7 +47,7 @@ const SimpleBarChart = ({featureAnalysis}) => {
           {processedAnalysis.map(((obj,idx) => {
             return (
               <>
-              <LabelList dataKey='percent' position="top"/>
+              <LabelList key={`cell-${idx}`} dataKey='percent' position="top"/>
               <Cell key={`cell-${idx}`} fill={visualizerUtils.themeColors[idx]} />
               </>
             )

@@ -1,13 +1,13 @@
 import Visualizer from "./Visualizer.js";
 
-const ExperimentDetails = ({experiment, controlVariant, otherVariants, dispatchModalPage, handleClick}) => {
+const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatchModalPage, handleClick, futureExperiment }) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
- 
+
   return (
     <>
-      <div className="sm:col-span-8 lg:col-span-7">
+      <div className="sm:col-span-8 lg:col-span-7 px-4 py-4">
         <div className="overflow-hidden bg-white shadow sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-base font-semibold leading-6 text-gray-900">{experiment.name}</h3>
@@ -60,13 +60,13 @@ const ExperimentDetails = ({experiment, controlVariant, otherVariants, dispatchM
                   </dl>
                 </div>
               </div>
-              <button
+              {futureExperiment ? null : <button
                 type="button"
                 className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={handleClick}
               >
                 View Analytics
-              </button>
+              </button>}
             </dl>
           </div>
         </div>

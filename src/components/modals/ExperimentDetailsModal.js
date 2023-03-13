@@ -5,23 +5,8 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import Visualizer from './Visualizer';
 import ExperimentDetails from './ExperimentDetails';
 
-//where do we reset the currentModalPage to the experiment details?? 
-// ON CLOSING THE MODAL, reset.
-    // need to figure out how to render event data
-    //open visualize modal and pass down the appropriate props.
-    //s
-
 
 const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage, modalPage, dispatchModalPage }) => {
-
-
-  //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
-
-
-
-  // const [currentPage, setModalPage] = useState(<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} setModalPage={setModalPage}/>)
-
-
   return (
     <>
       <Transition.Root show={open} as={Fragment}>
@@ -54,12 +39,11 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
                 leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
               >
                 <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
-                  <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+                  <div className="relative flex w-full items-center overflow-hidden bg-white    sm:rounded-lg" >
                     <button
                       type="button"
                       className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
                       onClick={() => {
-                        dispatchModalPage({type:'EXPERIMENT_DETAILS'});
                         setOpen(false);
                       }}
                     >
@@ -67,8 +51,6 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                     {/*This is where the core piece of the modal goes!!!                 */}
-                    {/* {<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants}/>} */}
-                    {/* <Visualizer /> */}
                     {modalPage}
                   </div>
                 </Dialog.Panel>
