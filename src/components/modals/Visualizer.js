@@ -1,7 +1,16 @@
-import {useState, useEffect, useReducer} from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import visualizerService from '../../services/visualizerService';
+import { ArrowLeftCircleIcon } from '@heroicons/react/20/solid';
 
-export default function Visualizer({ experiment, handleClick, featureAnalysis, eventData, error}) {
+/*
+icon possibilites: 
+export { default as ArrowLeftCircleIcon } from './ArrowLeftCircleIcon'
+export { default as ArrowLeftOnRectangleIcon } from './ArrowLeftOnRectangleIcon'
+export { default as ArrowLeftIcon } from './ArrowLeftIcon'
+BackwardIcon
+*/
+
+export default function Visualizer({ experiment, handleClick, featureAnalysis, eventData, error }) {
   const experimentId = experiment.id;
   const variantArr = experiment['variant_arr'];
 
@@ -20,7 +29,9 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                 className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={handleClick}
               >
-                Return to Experiment Details
+                <div className="flex items-center">
+                  <ArrowLeftCircleIcon className="h-6 w-6" aria-hidden="true" /> Return to Experiment Details
+                </div>
               </button>
             </dl>
           </div>
@@ -29,12 +40,3 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
     </>
   )
 }
-
-// console.log("render Visualizer within modal");
-// const experimentId = 3; // will use code on line below when router is working and params are supplied
-// // const { experimentId } = useParams(); // will need this for real routes in useeffect below
-// const [eventData, setEventData] = useState([]);
-// const [error, setError] = useState(null);
-// const DISPLAYS = ["Raw Graph", "User Click Percentages"]
-// const [currentDisplay, setCurrentDisplay] = useState(DISPLAYS[0]);
-
