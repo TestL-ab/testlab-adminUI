@@ -15,7 +15,6 @@ import ExperimentDetails from './ExperimentDetails';
 const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage, modalPage, dispatchModalPage }) => {
 
 
-
   //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
 
 
