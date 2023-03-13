@@ -15,11 +15,7 @@ BackwardIcon
 export default function Visualizer({ experiment, handleClick, featureAnalysis, eventData, error, setError }) {
   const experimentId = experiment.id;
   const variantArr = experiment['variant_arr'];
-  // const [errorMessage, setErrorMessage] = useState(error);
-  // console.log("feature analysis is: ", featureAnalysis);
-  // if (eventData.length === 0 ) {
-  //   setErrorMessage('There is no event data yet recorded');
-  // }
+
   return (
     <div>
       {error

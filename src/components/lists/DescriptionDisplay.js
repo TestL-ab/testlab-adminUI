@@ -51,7 +51,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
    let contentReducer = (state, action) => {
     switch (action.type) {
       case 'EXPERIMENT_DETAILS': {
-        return <ExperimentDetails error={error} setError={setError} experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
+        return <ExperimentDetails error={error} setError={setError} experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} futureExperiment={futureExperiment}/>
       }
       case 'VISUALIZER_1': {
         return <Visualizer error={error} setError={setError} eventData={eventData} featureAnalysis={featureAnalysis} experiment={experiment} handleClick={handleClick}/>
@@ -74,7 +74,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   };
 
   const initializeExperimentModalState = (initialState) => {
-    return (<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />)
+    return (<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} futureExperiment={futureExperiment} />)
   }
 
 
