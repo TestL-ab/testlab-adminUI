@@ -1,13 +1,15 @@
-import { useState, useReducer } from 'react';
+import { useState, useReducer, useEffect } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import listUtils from '../../utils/listUtils';
 import ExperimentDetailsModal from '../modals/ExperimentDetailsModal';
 import ExperimentDetails from '../modals/ExperimentDetails';
 import Visualizer from '../modals/Visualizer';
+import visualizerService from '../../services/visualizerService';
 // will need to use features Obj for experimentDetails Modal !!!
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
+  const experimentId = id;
   const [eventData, setEventData] = useState([]);
   const [featureAnalysis, setFeatureAnalysis] = useState([]);
   const [error, setError] = useState(null);
@@ -36,8 +38,6 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
 
 
-
-
   const handleModalOpenClick = (event) => {
     event.preventDefault();
     dispatchModalPage({
@@ -50,10 +50,10 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
    let contentReducer = (state, action) => {
     switch (action.type) {
       case 'EXPERIMENT_DETAILS': {
-        return <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
+        return <ExperimentDetails error={error} experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
       }
       case 'VISUALIZER_1': {
-        return <Visualizer experiment={experiment} handleClick={handleClick}/>
+        return <Visualizer error={error} eventData={eventData} featureAnalysis={featureAnalysis} experiment={experiment} handleClick={handleClick}/>
       }
     }
   };

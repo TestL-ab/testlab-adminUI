@@ -1,29 +1,29 @@
 import {useState, useEffect, useReducer} from 'react';
 import visualizerService from '../../services/visualizerService';
 
-export default function Visualizer({ experiment, handleClick }) {
+export default function Visualizer({ experiment, handleClick, featureAnalysis, eventData, error}) {
   const experimentId = experiment.id;
   const variantArr = experiment['variant_arr'];
-  console.log(experiment);
-  const [eventData, setEventData] = useState([]);
-  const [featureAnalysis, setFeatureAnalysis] = useState([]);
-  const [error, setError] = useState(null);
-  // usereducer for the different visualizer options to display on the page -- additional useState for which button is toggled?
+  // console.log(experiment);
+  // const [eventData, setEventData] = useState([]);
+  // const [featureAnalysis, setFeatureAnalysis] = useState([]);
+  // const [error, setError] = useState(null);
+  // // usereducer for the different visualizer options to display on the page -- additional useState for which button is toggled?
 
-  useEffect(() => {
-    visualizerService
-      .getExperimentEventData(experimentId)//experiment['variant_arr'][0])
-      .then(response => {
-        setEventData(response);
-        visualizerService.getFeatureAnalysis(experimentId)
-        .then(response => {
-          setFeatureAnalysis(response);
-        })
-      })
-      .catch(error => {
-        setError(error.message);
-      });
-  }, [])
+  // useEffect(() => {
+  //   visualizerService
+  //     .getExperimentEventData(experimentId)//experiment['variant_arr'][0])
+  //     .then(response => {
+  //       setEventData(response);
+  //       visualizerService.getFeatureAnalysis(experimentId)
+  //       .then(response => {
+  //         setFeatureAnalysis(response);
+  //       })
+  //     })
+  //     .catch(error => {
+  //       setError(error.message);
+  //     });
+  // }, [])
 
   console.log(`here's the event data passed to visualizer for experiment ${experimentId}`);
   console.log(eventData);
