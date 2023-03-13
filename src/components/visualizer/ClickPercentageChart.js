@@ -12,6 +12,7 @@ const parseValue = (value) => {
 }
 
 const UserPercentageChart = ({clickData}) => {
+  console.log("on render of userPercentChart", clickData);
   const RADIAN = Math.PI / 180;
   const COLORS = ["#82ca9d", "#8884d8"];
 

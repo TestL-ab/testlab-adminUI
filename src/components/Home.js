@@ -28,6 +28,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Header from './home/Header'
+import Visualizer from './visualizer/OrigVisualizer'
 const user = {
   name: 'Chelsea Hagon',
   email: 'chelsea.hagon@example.com',
@@ -153,6 +154,7 @@ const announcements = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
 
 export default function Home() {
   return <Header />
