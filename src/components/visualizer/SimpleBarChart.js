@@ -43,22 +43,16 @@ const SimpleBarChart = ({featureAnalysis}) => {
         <YAxis />
         <Tooltip/>
         <Legend />
-        {/* <Bar dataKey='Clicks Received' fill="#8884d8">
-          <LabelList dataKey='percent' position="top"/>
-        </Bar> */}
         <Bar dataKey="Clicks Received">
           {processedAnalysis.map(((obj,idx) => {
-            return <Cell key={`cell-${idx}`} fill={visualizerUtils.themeColors[idx]} />
+            return (
+              <>
+              <LabelList dataKey='percent' position="top"/>
+              <Cell key={`cell-${idx}`} fill={visualizerUtils.themeColors[idx]} />
+              </>
+            )
           }))}
         </Bar>
-{/* this could be how  */}
-        {/* <Bar dataKey="value">
-    {
-      data.map((entry, index) => (
-        <Cell key={`cell-${index}`} stroke={colors[index]}  strokeWidth={index === 2 ? 4 : 1}/>
-      ))
-    }
-  </Bar> */}
       </BarChart>
       </>
   );
