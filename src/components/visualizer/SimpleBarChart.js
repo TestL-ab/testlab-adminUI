@@ -1,84 +1,78 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
 const SimpleBarChart = ({featureAnalysis}) => {
-  console.log("feature Analysis: ", featureAnalysis);
-  return (<h1> Here's where we render a bar chart!</h1>);
+  const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
+//   [
+//     {
+//         "id": 6,
+//         "value": "v1",
+//         "is_control": true,
+//         "weight": "0.15",
+//         "event_total": 0,
+//         "distinct_user_events_total": 0,
+//         "total_users": 0
+//     },
+//     {
+//         "id": 7,
+//         "value": "v2",
+//         "is_control": false,
+//         "weight": "0.8",
+//         "event_total": 0,
+//         "distinct_user_events_total": 0,
+//         "total_users": 0
+//     },
+//     {
+//         "id": 8,
+//         "value": "v3",
+//         "is_control": false,
+//         "weight": "0.05",
+//         "event_total": 0,
+//         "distinct_user_events_total": 0,
+//         "total_users": 0
+//     }
+// ]
+  let processedAnalysis = featureAnalysis.map(feature => {
+    console.log(feature);
+    let name = feature.value
+    if (feature.is_control) {
+      name = name + ' (Control)'
+    }
+    return {
+      value: name, 
+      isControl: feature.is_control,
+      'Clicks Received': feature.event_total
+    }
+  })
+
+  if (featureAnalysis.length === 0 || noEventsRecorded) {
+    return (<h1>Not enough event data to display comparison</h1>)
+  }
+  
+  return (
+    <>
+      <BarChart
+      width={500}
+      height={300}
+      data={processedAnalysis}
+      margin={{
+        top:5, 
+        right: 30, 
+        left: 20,
+        bottom: 5,
+      }}
+      >
+        <CartesianGrid strokeDasharray="3 3"/>
+        <XAxis dataKey='value'/>
+        <YAxis />
+        <Tooltip/>
+        <Legend />
+        <Bar dataKey='Clicks Received' fill="#8884d8"/>
+
+      </BarChart>
+      </>
+  );
 }
 
 
 export default SimpleBarChart;
-// export default class Example extends PureComponent {
-//   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-tpz8r';
-
-//   render() {
-//     return (
-//       <ResponsiveContainer width="100%" height="100%">
-//         <BarChart
-//           width={500}
-//           height={300}
-//           data={data}
-//           margin={{
-//             top: 5,
-//             right: 30,
-//             left: 20,
-//             bottom: 5,
-//           }}
-//         >
-//           <CartesianGrid strokeDasharray="3 3" />
-//           <XAxis dataKey="name" />
-//           <YAxis />
-//           <Tooltip />
-//           <Legend />
-//           <Bar dataKey="pv" fill="#8884d8" />
-//           <Bar dataKey="uv" fill="#82ca9d" />
-//         </BarChart>
-//       </ResponsiveContainer>
-//     );
-//   }
-// }

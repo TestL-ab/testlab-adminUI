@@ -44,6 +44,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
       type: 'EXPERIMENT_DETAILS'
     })
     setOpen(true);
+
   }; 
 
    let contentReducer = (state, action) => {
@@ -59,6 +60,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
 
   const handleClick = (event) => {
     event.preventDefault();
+
     if (modalPage.type.name === "ExperimentDetails") {
       dispatchModalPage({
         type: 'VISUALIZER_1'
