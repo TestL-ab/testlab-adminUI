@@ -1,10 +1,10 @@
 import visualizerUtils from "../../utils/visualizerUtils"
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from "recharts";
 
-const DailyLineChart = ({ eventData }) => {
+const DailyLineChart = ({ eventData , featureAnalysis}) => {
   //first filter the data by variant. ??
   //then map the filtered data so that it is by DAY or HOUR, sum together the events at that slot? 
-  let parsedData = visualizerUtils.parseByDay(eventData);
+  let parsedData = visualizerUtils.parseByDay(eventData, featureAnalysis);
 
   console.log(parsedData);
   return (
