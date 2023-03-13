@@ -29,8 +29,6 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
       .catch(error => {
         setError(error.message);
       });
-      console.log("EVENT DATA LOADED: ", eventData);
-      console.log("ANALYSIS DATA LOADED: ", featureAnalysis);
   }, [])
 
   const processedDescription = listUtils.processDescription(description, rowLength);
