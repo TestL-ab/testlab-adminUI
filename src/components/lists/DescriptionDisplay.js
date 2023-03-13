@@ -8,11 +8,12 @@ import Visualizer from '../modals/Visualizer';
 import visualizerService from '../../services/visualizerService';
 // will need to use features Obj for experimentDetails Modal !!!
 
-const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
+const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr, futureExperiment }) => {
   const experimentId = id;
   const [eventData, setEventData] = useState([]);
   const [featureAnalysis, setFeatureAnalysis] = useState([]);
   const [error, setError] = useState(null);
+
   const [open, setOpen] = useState(false)
  
 
@@ -80,7 +81,8 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   let [modalPage, dispatchModalPage] = useReducer(contentReducer, <ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />, initializeExperimentModalState)
   return (
     <>
-      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} modalPage={modalPage} dispatchModalPage={dispatchModalPage}/>
+
+      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} modalPage={modalPage} dispatchModalPage={dispatchModalPage} futureExperiment={futureExperiment}/>
       <Disclosure as="div" className="pt-6">
         {({ open }) => (
           <>
@@ -113,6 +115,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
           </>
         )}
       </Disclosure>
+
     </>
   );
 };

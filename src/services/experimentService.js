@@ -11,9 +11,9 @@ const getAllExperiments = async () => {
   }
 }
 
-const createExperiment = async(experiment) => {
+const createExperiment = async(experimentObj) => {
   try {
-    const response = await axios.post(baseURL, experiment);
+    const response = await axios.post(baseURL, experimentObj);
     return response.data;
   } catch (error) {
     throw error;
@@ -27,6 +27,15 @@ const deleteExperiment = async (id) => {
     throw error;
   }
 };
+
+const updateFeature = async (id, featureObj) => {
+  try {
+    const response = await axios.put(`${baseURL}/${id}`, featureObj);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
 
 const createVariants = async(id, variantsArr) => {
   try {
@@ -46,6 +55,7 @@ const updateVariants = async (id, variantsArr) => {
 const experimentService = {
   getAllExperiments,
   createExperiment,
+  updateFeature,
   deleteExperiment,
   createVariants,
   updateVariants

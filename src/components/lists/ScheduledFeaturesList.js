@@ -14,6 +14,7 @@ const ScheduledFeaturesList = ({ scheduledFeatures, setScheduledFeatures, setExp
 
   let processed = listUtils.processFeatureObjs(processedFeatures);
   processed = listUtils.sortByDate(processed);
+  const futureExperiment = true;
 
   const emptyList = processed.length === 0;
 
@@ -90,6 +91,7 @@ const ScheduledFeaturesList = ({ scheduledFeatures, setScheduledFeatures, setExp
                         type={featureObj.type_id}
                         id={featureObj.id}
                         featuresArr={processed}
+                        futureExperiment={futureExperiment}
                       />
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type}</td>
