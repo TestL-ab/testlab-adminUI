@@ -3,36 +3,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 
 const SimpleBarChart = ({featureAnalysis}) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
-//   [
-//     {
-//         "id": 6,
-//         "value": "v1",
-//         "is_control": true,
-//         "weight": "0.15",
-//         "event_total": 0,
-//         "distinct_user_events_total": 0,
-//         "total_users": 0
-//     },
-//     {
-//         "id": 7,
-//         "value": "v2",
-//         "is_control": false,
-//         "weight": "0.8",
-//         "event_total": 0,
-//         "distinct_user_events_total": 0,
-//         "total_users": 0
-//     },
-//     {
-//         "id": 8,
-//         "value": "v3",
-//         "is_control": false,
-//         "weight": "0.05",
-//         "event_total": 0,
-//         "distinct_user_events_total": 0,
-//         "total_users": 0
-//     }
-// ]
-
+  console.log(featureAnalysis);
   let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
     return sum + currFeature.event_total
   }, 0)
@@ -50,7 +21,7 @@ const SimpleBarChart = ({featureAnalysis}) => {
   })
 
   if (featureAnalysis.length === 0 || noEventsRecorded) {
-    return (<h1>Not enough event data to display comparison</h1>)
+    return (<h1 className='text-red-400'>Not enough event data to display comparison</h1>)
   }
   
   return (
