@@ -5,23 +5,8 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import Visualizer from './Visualizer';
 import ExperimentDetails from './ExperimentDetails';
 
-//where do we reset the currentModalPage to the experiment details?? 
-// ON CLOSING THE MODAL, reset.
-    // need to figure out how to render event data
-    //open visualize modal and pass down the appropriate props.
-    //s
-
 
 const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage, modalPage, dispatchModalPage }) => {
-
-
-  //how do you pass dispatchModalPage on to the two subcomponents of the modal?????
-
-
-
-  // const [currentPage, setModalPage] = useState(<ExperimentDetails experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} setModalPage={setModalPage}/>)
-
-
   return (
     <>
       <Transition.Root show={open} as={Fragment}>
