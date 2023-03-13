@@ -8,12 +8,34 @@ import Visualizer from '../modals/Visualizer';
 // will need to use features Obj for experimentDetails Modal !!!
 
 const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresArr }) => {
+  const [eventData, setEventData] = useState([]);
+  const [featureAnalysis, setFeatureAnalysis] = useState([]);
+  const [error, setError] = useState(null);
   const [open, setOpen] = useState(false)
+ 
+
+  useEffect(() => {
+    visualizerService
+      .getExperimentEventData(experimentId)//experiment['variant_arr'][0])
+      .then(response => {
+        setEventData(response);
+        visualizerService.getFeatureAnalysis(experimentId)
+        .then(response => {
+          setFeatureAnalysis(response);
+        })
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  }, [])
+
   const processedDescription = listUtils.processDescription(description, rowLength);
   const isExperiment = type === 3 ? true : false;
   const experiment = featuresArr.filter(featureObj => featureObj.id === id).pop();
   const controlVariant = experiment.variant_arr.filter(variant => variant.is_control).pop();
   const otherVariants = experiment.variant_arr.filter(variant => !variant.is_control);
+
+
 
 
   const handleModalOpenClick = (event) => {

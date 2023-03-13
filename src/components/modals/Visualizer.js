@@ -10,13 +10,7 @@ export default function Visualizer({ experiment, handleClick }) {
   const [error, setError] = useState(null);
   // usereducer for the different visualizer options to display on the page -- additional useState for which button is toggled?
 
-
-  //need to change to call getExperimentEventData for EACH variant.
   useEffect(() => {
-    // console.log("exprimentID:" ,experiment['variant_arr'][0].id);
-    // experiment[variant_arr].forEach(variant => {
-
-    // })
     visualizerService
       .getExperimentEventData(experimentId)//experiment['variant_arr'][0])
       .then(response => {
