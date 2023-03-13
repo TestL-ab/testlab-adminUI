@@ -39,25 +39,25 @@ const mockClickData = [
       new_clicks: 150, // click events from this variant on this date
     }
   ]
-  const Visualizer = () => {
+  const OriginalVisualizer = ({eventData, featureAnalysis}) => {
     console.log("render Visualizer within modal");
-  const experimentId = 3; // will use code on line below when router is working and params are supplied
+  // const experimentId = 3; // will use code on line below when router is working and params are supplied
   // const { experimentId } = useParams(); // will need this for real routes in useeffect below
-  const [eventData, setEventData] = useState([]);
+  // const [eventData, setEventData] = useState([]);
   const [error, setError] = useState(null);
   const DISPLAYS = ["Raw Graph", "User Click Percentages"]
   const [currentDisplay, setCurrentDisplay] = useState(DISPLAYS[0]);
 
-  useEffect(() => {
-     visualizerService
-      .getExperimentEventData(experimentId)
-      .then(response => {
-        setEventData(response)
-      })
-      .catch(error => {
-        setError(error.message);
-      });
-  }, [])
+  // useEffect(() => {
+  //    visualizerService
+  //     .getExperimentEventData(experimentId)
+  //     .then(response => {
+  //       setEventData(response)
+  //     })
+  //     .catch(error => {
+  //       setError(error.message);
+  //     });
+  // }, [])
 
   return (
     <div>
@@ -75,4 +75,4 @@ const mockClickData = [
   );
 };
 
-export default Visualizer;
+export default OriginalVisualizer;

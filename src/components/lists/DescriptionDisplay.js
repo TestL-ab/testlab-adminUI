@@ -44,23 +44,21 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
       type: 'EXPERIMENT_DETAILS'
     })
     setOpen(true);
-
   }; 
 
    let contentReducer = (state, action) => {
     switch (action.type) {
       case 'EXPERIMENT_DETAILS': {
-        return <ExperimentDetails error={error} experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
+        return <ExperimentDetails error={error} setError={setError} experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} />
       }
       case 'VISUALIZER_1': {
-        return <Visualizer error={error} eventData={eventData} featureAnalysis={featureAnalysis} experiment={experiment} handleClick={handleClick}/>
+        return <Visualizer error={error} setError={setError} eventData={eventData} featureAnalysis={featureAnalysis} experiment={experiment} handleClick={handleClick}/>
       }
     }
   };
 
   const handleClick = (event) => {
     event.preventDefault();
-
     if (modalPage.type.name === "ExperimentDetails") {
       dispatchModalPage({
         type: 'VISUALIZER_1'

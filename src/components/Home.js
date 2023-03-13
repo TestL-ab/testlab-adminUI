@@ -28,7 +28,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Header from './home/Header'
-import Visualizer from './visualizer/Visualizer-original'
+import Visualizer from './visualizer/OrigVisualizer'
 const user = {
   name: 'Chelsea Hagon',
   email: 'chelsea.hagon@example.com',

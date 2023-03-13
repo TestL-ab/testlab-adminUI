@@ -20,6 +20,7 @@ const parseValue = (value) => {
 }
 
 const Graph = ({ clickData }) => {
+  console.log(clickData);
   const processedData = clickData.map((variantObj) => {
     return {
       name: parseValue(variantObj.value),
@@ -27,6 +28,10 @@ const Graph = ({ clickData }) => {
       "Total Clicks": variantObj.event_total,
     }
   });
+  console.log("processedData: ", processedData);
+  if (processedData.length === 0 ) {
+    return <h1>No click data exists to create graph.</h1>
+  }
 
   return (
     <React.Fragment>
