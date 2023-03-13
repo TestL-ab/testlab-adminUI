@@ -12,8 +12,17 @@ const parseByDay = (eventData, variantNameMap) => {
       sortedDataObj[formattedDate][variantName] = sortedDataObj[formattedDate][variantName] + 1 || 1 ;
     }
   })
-  console.log("after parseByDay fxn: ", sortedDataObj);
-  return sortedDataObj;
+//parse back to array of objects with appropriate properties
+  let finalParsedArr = [];
+  for (let timestamp in sortedDataObj) {
+    let dataPoint = {};
+    dataPoint["date"] = timestamp;
+    for (let varName in sortedDataObj[timestamp]) {
+      dataPoint[varName] = sortedDataObj[timestamp][varName]
+    }
+    finalParsedArr.push(dataPoint);
+  }
+  return finalParsedArr;
 
 };
 
@@ -26,9 +35,20 @@ const createVariantNameMap = (featureAnalysis) => {
   return variantNameMap;
 }
 
+const themeColors = [
+
+    "#2A2493", 
+    "#FF00C8", 
+    "#19D038",
+    "#D2772B"
+  
+
+];
+
 const visualizerUtils = {
   parseByDay,
-  createVariantNameMap
+  createVariantNameMap,
+  themeColors
 };
 
 export default visualizerUtils;
