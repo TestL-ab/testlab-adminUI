@@ -4,7 +4,7 @@ import DescriptionText from './DescriptionText';
 import TypeRadio from './TypeRadio';
 import DateSelector from './DateSelector'
 import UserPercentageMenu from './UserPercentageMenu';
-import Variants from './Variants';
+import UpdateVariants from './UpdateVariants';
 import UpdateButtons from './UpdateButtons';
 import FormSuccessNotification from '../form/FormSuccessNotification';
 import experimentService from '../../services/experimentService';
@@ -81,7 +81,7 @@ const UpdateForm = ({
     <>
     <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
     { showVariants
-      ?  <Variants
+      ?  <UpdateVariants
             experimentObj={experimentObj}
             setExperimentObj={setExperimentObj}
             setShowVariants={setShowVariants}
