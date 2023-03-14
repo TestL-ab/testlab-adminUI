@@ -1,7 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import NameInput from './NameInput';
 import DescriptionText from './DescriptionText';
-import TypeRadio from './TypeRadio';
 import DateSelector from './DateSelector'
 import UserPercentageMenu from './UserPercentageMenu';
 import UpdateVariants from './UpdateVariants';
@@ -18,9 +17,9 @@ const UpdateForm = ({
   existingNames
 }) => {
   const currentDate = new Date();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [endDate, setEndDate] = useState(null);
+  const [name, setName] = useState(featureObj.name);
+  const [description, setDescription] = useState(featureObj.description);
+  const [endDate, setEndDate] = useState(new Date(featureObj.end_date));
   const [percentageObj, setPercentageObj] = useState({});
   const [query, setQuery] = useState(''); // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
@@ -30,7 +29,6 @@ const UpdateForm = ({
   const [nameTaken, setNameTaken] = useState(false);
   const type = featureObj.type_id;
   const startDate = new Date(featureObj.startDate);
-  console.log("type:", type, "startDate:", startDate)
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
@@ -84,6 +82,7 @@ const UpdateForm = ({
       ?  <UpdateVariants
             experimentObj={experimentObj}
             setExperimentObj={setExperimentObj}
+            showVariants={showVariants}
             setShowVariants={setShowVariants}
             setExperimentChange={setExperimentChange}
           />
@@ -135,6 +134,7 @@ const UpdateForm = ({
                 type={type}
                 maxAvailable={maxAvailable}
                 endDate={endDate}
+                currentPercent={featureObj.user_percentage}
               />
             </div>
           </div>
@@ -161,13 +161,3 @@ const UpdateForm = ({
 };
 
 export default UpdateForm;
-
-
-{/* <div key={variant.id} className="px-4 py-5 sm:p-6">
-<dt className="text-base font-normal text-gray-900">{variant.value}</dt>
-<dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-  <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-    <span className="ml-2 text-sm font-medium text-gray-500">{variant.weight * 100}% of users in experiment</span>
-  </div>
-</dd>
-</div> */}

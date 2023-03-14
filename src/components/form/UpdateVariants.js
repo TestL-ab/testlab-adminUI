@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import VariantForm from './VariantForm';
 import ControlVariantForm from './ControlVariantForm';
-import VariantButtons from './VariantButtons';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
+import UpdateVariantButtons from './UpdateVariantButtons';
 
-const UpdateVariants = ({ experimentObj, setExperimentObj, setShowVariants, setExperimentChange }) => {
+const UpdateVariants = ({ experimentObj, setExperimentObj, showVariants, setShowVariants, setExperimentChange }) => {
   const [variantObj1, setVariantObj1] = useState({ is_control: true, value: "", weight: "" });
   const [variantObj2, setVariantObj2] = useState({ value: "", weight: "" });
   const [variantObj3, setVariantObj3] = useState({ value: "", weight: "" });
@@ -212,111 +212,46 @@ const UpdateVariants = ({ experimentObj, setExperimentObj, setShowVariants, setE
     return true;
   }
 
-  const handleSubmit = async(event) => {
+  const handleUpdate = async(event) => {
     event.preventDefault();
-    const variantArr = formUtils.processVariantData([variantObj1,
-                                                     variantObj2,
-                                                     variantObj3,
-                                                     variantObj4,
-                                                     variantObj5],
-                                                     experimentId);
+    // const variantArr = formUtils.processVariantData([variantObj1,
+                                                    //  variantObj2,
+                                                    //  variantObj3,
+                                                    //  variantObj4,
+                                                    //  variantObj5],
+                                                    //  experimentId);
 
-    if (!formUtils.validVariantWeights(variantArr) || !formUtils.distinctVariantValues(variantArr)) {
-      return;
-    }
+    // if (!formUtils.validVariantWeights(variantArr) || !formUtils.distinctVariantValues(variantArr)) {
+    //   return;
+    // }
 
-    let variantsObj = { id: experimentId, variants: variantArr };
-    try {
-      console.log(variantsObj);
-      const response = await experimentService.createVariants(experimentId, variantsObj);
-      console.log(response);
-      setExperimentObj(null);
-      setShowVariants(false);
-      setExperimentChange(true);
-      setVariantObj1({ is_control: true, value: "", weight: "" });
-      setVariantObj2({ value: "", weight: "" });
-      setVariantObj3({ value: "", weight: "" });
-      setVariantObj4({ value: "", weight: "" });
-      setVariantObj5({ value: "", weight: "" });
-    }
-    catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDeleteExperiment = async (event) => {
-    event.preventDefault();
-    try {
-      let response = await experimentService.deleteExperiment(experimentId);
-      setExperimentObj(null);
-      setShowVariants(false);
-      setExperimentChange(true);
-      setVariantObj1({ is_control: true, value: "", weight: "" });
-      setVariantObj2({ value: "", weight: "" });
-      setVariantObj3({ value: "", weight: "" });
-      setVariantObj4({ value: "", weight: "" });
-      setVariantObj5({ value: "", weight: "" });
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const handleChangeToToggle = async (event) => {
-    event.preventDefault();
-    try {
-      const updatedExperimentObj = {
-        ...experimentObj,
-        type_id: 1,
-        user_percentage: 1
-      };
-
-      const responseObj = await experimentService.updateFeature(experimentId, updatedExperimentObj);
-      console.log(responseObj);
-      setExperimentObj(null);
-      setShowVariants(false);
-      setExperimentChange(true);
-      setVariantObj1({ is_control: true, value: "", weight: "" });
-      setVariantObj2({ value: "", weight: "" });
-      setVariantObj3({ value: "", weight: "" });
-      setVariantObj4({ value: "", weight: "" });
-      setVariantObj5({ value: "", weight: "" });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleChangeToRollOut = async (event) => {
-    event.preventDefault();
-    try {
-      const updatedExperimentObj = {
-        ...experimentObj,
-        type_id: 2,
-      };
-
-      const responseObj = await experimentService.updateFeature(experimentId, updatedExperimentObj);
-      console.log(responseObj);
-      setExperimentObj(null);
-      setShowVariants(false);
-      setExperimentChange(true);
-      setVariantObj1({ is_control: true, value: "", weight: "" });
-      setVariantObj2({ value: "", weight: "" });
-      setVariantObj3({ value: "", weight: "" });
-      setVariantObj4({ value: "", weight: "" });
-      setVariantObj5({ value: "", weight: "" });
-    } catch (error) {
-      console.log(error);
-    }
+    // let variantsObj = { id: experimentId, variants: variantArr };
+    // try {
+    //   console.log(variantsObj);
+    //   const response = await experimentService.createVariants(experimentId, variantsObj);
+    //   console.log(response);
+    //   setExperimentObj(null);
+    //   setShowVariants(false);
+    //   setExperimentChange(true);
+    //   setVariantObj1({ is_control: true, value: "", weight: "" });
+    //   setVariantObj2({ value: "", weight: "" });
+    //   setVariantObj3({ value: "", weight: "" });
+    //   setVariantObj4({ value: "", weight: "" });
+    //   setVariantObj5({ value: "", weight: "" });
+    // }
+    // catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-    <h3 className="text-base font-semibold leading-6 text-gray-900">Create Variants for {experimentName}</h3>
+    <h3 className="text-base font-semibold leading-6 text-gray-900">Update Variants for {experimentName}</h3>
     <p className="mt-1 text-sm text-gray-500">
       Create up to five variants. Each variant value must be distinct, an the sum of user percentages must
       be precisely 100%.
     </p>
-    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleUpdate}>
       <ControlVariantForm
         variantObj={variantObj1}
         handleChangedValue={handleChangedValue}
@@ -366,13 +301,13 @@ const UpdateVariants = ({ experimentObj, setExperimentObj, setShowVariants, setE
         handleRemoveVariant={handleRemoveVariant}
         lastVariant={lastVariant}
       />
-      <VariantButtons
-        handleDeleteExperiment={handleDeleteExperiment}
-        handleChangeToToggle={handleChangeToToggle}
-        handleChangeToRollOut={handleChangeToRollOut}
+      <UpdateVariantButtons
         handleRemoveVariant={handleRemoveVariant}
         handleAddVariant={handleAddVariant}
         lastVariant={lastVariant}
+        showVariants={showVariants}
+        setShowVariants={setShowVariants}
+        type={experimentObj.type_id}
       />
     </form>
     </div>

@@ -9,7 +9,7 @@ const UserPercentageMenu = ({
     setQuery,
     type,
     maxAvailable,
-    endDate,
+    endDate
   }) => {
 
   const isToggle = type === 1;

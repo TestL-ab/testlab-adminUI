@@ -8,9 +8,6 @@ const NameInput = ({ name, setName, existingNames, nameTaken, setNameTaken }) =>
     setName(value);
   }
 
-  console.log("existing name:", existingNames[0])
-  console.log("nameTaken:", nameTaken);
-
   return (
     <div className="sm:col-span-4">
     <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">

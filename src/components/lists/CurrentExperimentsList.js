@@ -29,8 +29,6 @@ const CurrentExperimentsList = ({
   const [featureToUpdate, setFeatureToUpdate] = useState(null);
   const [processedFeatures, setProcessedFeatures] = useState([...currentFeatures]);
 
-
-
   useEffect(() => {
   }, [processedFeatures])
 
