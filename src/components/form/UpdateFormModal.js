@@ -62,15 +62,6 @@ const UpdateFormModal = ({
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
 
-                    <div className="sm:col-span-8 lg:col-span-7 px-4 py-4">
-        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
-          <div className="px-4 py-5 sm:px-6">
-
-            </div>
-            </div>
-            </div>
-
-
 <UpdateForm
   featureObj={featureObj}
   currentExperiments={currentExperiments}

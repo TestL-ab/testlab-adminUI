@@ -114,6 +114,10 @@ const processVariantData = (variantObjArr, experimentId) => {
   return variantCopies;
 };
 
+const processDateForUpdate = (date) => {
+  return new Date(date).toLocaleDateString();
+};
+
 const formUtils = {
   getDateRange,
   processExperiments,
@@ -123,7 +127,8 @@ const formUtils = {
   typeSelector,
   validVariantWeights,
   distinctVariantValues,
-  processVariantData
+  processVariantData,
+  processDateForUpdate
 };
 
 export default formUtils;

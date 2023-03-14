@@ -116,11 +116,9 @@ const UpdateForm = ({
                 description={description}
                 setDescription={setDescription}
               />
-
               <DateSelector
                 startDate={startDate}
                 isUpdate={true}
-                // setStartDate={setStartDate}
                 endDate={endDate}
                 setEndDate={setEndDate}
                 currentDate={currentDate}
@@ -130,7 +128,7 @@ const UpdateForm = ({
                 maxAvailable={maxAvailable}
                 setMaxAvailable={setMaxAvailable}
               />
-              <UserPercentageMenu
+          <UserPercentageMenu
                 percentageObj={percentageObj}
                 setPercentageObj={setPercentageObj}
                 query={query} setQuery={setQuery}
@@ -139,13 +137,10 @@ const UpdateForm = ({
                 endDate={endDate}
               />
             </div>
-
           </div>
           <Buttons
               setName={setName}
               setDescription={setDescription}
-              // dispatch={dispatch}
-              // setStartDate={setStartDate}
               setEndDate={setEndDate}
               setPercentageObj={setPercentageObj}
               currentDate={currentDate}
