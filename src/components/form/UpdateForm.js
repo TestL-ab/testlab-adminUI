@@ -1,16 +1,21 @@
 import React, { useState, useReducer } from 'react';
-import NameInput from './form/NameInput';
-import DescriptionText from './form/DescriptionText';
-import TypeRadio from './form/TypeRadio';
-import DateSelector from './form/DateSelector'
-import UserPercentageMenu from './form/UserPercentageMenu';
-import Variants from './form/Variants';
-import Buttons from './form/Buttons';
-import FormSuccessNotification from './form/FormSuccessNotification'
-import experimentService from '../services/experimentService';
-import formUtils from '../utils/formUtils';
+import NameInput from './NameInput';
+import DescriptionText from './DescriptionText';
+import TypeRadio from './TypeRadio';
+import DateSelector from './DateSelector'
+import UserPercentageMenu from './UserPercentageMenu';
+import Variants from './Variants';
+import Buttons from './Buttons';
+import FormSuccessNotification from '../form/FormSuccessNotification';
+import experimentService from '../../services/experimentService';
+import formUtils from '../../utils/formUtils';
 
-const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, existingNames }) => {
+const UpdateForm = ({
+  currentExperiments,
+  scheduledFeatures,
+  setExperimentChange,
+  existingNames
+}) => {
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -65,6 +70,23 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
       console.log(error);
     }
   };
+
+  // const handleConfirmDelete = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     let response = await experimentService.deleteExperiment(deleteObj.id);
+  //     setProcessedFeatures(processedFeatures.filter((obj) => obj.id !== deleteObj.id));
+  //     const filteredList = deleteObj.list.filter(obj => obj.id !== deleteObj.id);
+  //     deleteObj.callback(filteredList);
+  //     setDeleteObj(null);
+  //     setExperimentChange(true);
+  //   } catch (error) {
+  //     setDeleteObj(null);
+  //     setError(error.message);
+  //     console.log(error);
+  //   }
+  //   setOpenDeleteAlert(false);
+  // };
 
   return (
     <>
@@ -153,4 +175,4 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
   );
 };
 
-export default Form;
+export default UpdateForm;
