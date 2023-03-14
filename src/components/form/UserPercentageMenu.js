@@ -10,6 +10,7 @@ const UserPercentageMenu = ({
     type,
     maxAvailable,
     endDate,
+    currentPercentage
   }) => {
 
   const isToggle = type === 1;
@@ -17,6 +18,9 @@ const UserPercentageMenu = ({
   useEffect(() => {
     if (isToggle) {
       setPercentageObj({ id: 1, name: "100%" });
+    } else if (currentPercentage) {
+      const currentPercentObj = percentages.filter(percentObj => percentObj.id === currentPercentage).pop();
+      setPercentageObj(currentPercentObj);
     } else {
       setPercentageObj(null);
     }
@@ -116,7 +120,7 @@ const UserPercentageMenu = ({
       )}
     </div>
   </Combobox>
-  )
+  );
 };
 
 export default UserPercentageMenu;

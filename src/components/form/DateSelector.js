@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import DatePicker from 'react-date-picker';
 import formUtils from '../../utils/formUtils';
 import  './brandmark-design.png'
@@ -9,12 +10,23 @@ const DateSelector = ({
   currentDate,
   scheduledFeatures,
   currentExperiments,
-  setMaxAvailable
+  setMaxAvailable,
+  isUpdate
 }) => {
 
   const tomorrow = formUtils.getNextDayDateSelector(currentDate);
   const processedCurrentDate = formUtils.processDayDateSelector(currentDate);
   const processedStartDate = formUtils.processDayDateSelector(startDate);
+  const updateStartDate = formUtils.processDateForUpdate(startDate);
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+      const dateArray = formUtils.getDateRange(startDate, endDate);
+      const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
+      setMaxAvailable(available * 100);
+    }
+  }, []);
 
   const handleChangeStart = (date) => {
     setStartDate(date);
@@ -38,7 +50,10 @@ const DateSelector = ({
     <label htmlFor="start_date" className="block text-sm font-medium leading-6 text-gray-900">
       Start Date
     </label>
-    <DatePicker onChange={handleChangeStart} value={startDate} minDate={currentDate} maxDate={endDate} required={true} />
+    {isUpdate
+    ? <p>{updateStartDate}</p>
+     : <DatePicker onChange={handleChangeStart} value={startDate} minDate={currentDate} maxDate={endDate} required={true} /> }
+
     <label htmlFor="end_date" className="block text-sm font-medium leading-6 text-gray-900">
       End Date
     </label>

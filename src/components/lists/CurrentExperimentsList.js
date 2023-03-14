@@ -3,11 +3,30 @@ import listUtils from '../../utils/listUtils';
 import DeleteAlert from '../DeleteAlert';
 import DescriptionDisplay from './DescriptionDisplay';
 import TogglePauseButton from './TogglePauseButton';
+import UpdateFormModal from '../form/UpdateFormModal';
 
-const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, setExperimentChange }) => {
+/*
+need to pull:
+  featureObj,
+  currentExperiments,
+  scheduledFeatures,
+  existingNames
+
+*/
+
+const CurrentExperimentsList = ({
+  currentFeatures,
+  setCurrentFeatures,
+  setExperimentChange,
+  currentExperiments,
+  scheduledFeatures,
+  existingNames
+}) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [featureToUpdate, setFeatureToUpdate] = useState(null);
   const [processedFeatures, setProcessedFeatures] = useState([...currentFeatures]);
 
   useEffect(() => {
@@ -18,9 +37,14 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, setExperi
 
   const emptyList = processed.length === 0;
 
-  const handleDelete = async (id, list, callback) => {
+  const handleShowDeleteConfirmation = (id, list, callback) => {
     setDeleteObj({id, list, callback, setError});
     setOpenDeleteAlert(true);
+  };
+
+  const handleShowUpdateForm = (featureObj) => {
+    setFeatureToUpdate(featureObj);
+    setShowUpdateModal(true);
   };
 
   return (
@@ -34,6 +58,19 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, setExperi
       setError={setError}
       processedFeatures={processedFeatures}
       setProcessedFeatures={setProcessedFeatures}
+    />
+    <UpdateFormModal
+      showUpdateModal={showUpdateModal}
+      setShowUpdateModal={setShowUpdateModal}
+      featureToUpdate={featureToUpdate}
+      setFeatureToUpdate={setFeatureToUpdate}
+      setExperimentChange={setExperimentChange}
+      processedFeatures={processedFeatures}
+      setProcessedFeatures={setProcessedFeatures}
+      featureObj={featureToUpdate}
+      currentExperiments={currentExperiments}
+      scheduledFeatures={scheduledFeatures}
+      existingNames={existingNames}
     />
     <div className="max-w-7xl sm:px-6 lg:px-8">
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -102,15 +139,19 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, setExperi
                       />
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        Edit<span className="sr-only"></span>
-                      </a>
+                      <button
+                        type="button"
+                        className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        onClick={() => handleShowUpdateForm(featureObj)} // show update modal
+                      >
+                        Edit
+                      </button>
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                       <button
                         type="button"
                         className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={() => handleDelete(featureObj.id, currentFeatures, setCurrentFeatures, setError)}
+                        onClick={() => handleShowDeleteConfirmation(featureObj.id, currentFeatures, setCurrentFeatures, setError)}
                       >
                         Delete
                       </button>
