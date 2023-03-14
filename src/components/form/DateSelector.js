@@ -9,7 +9,8 @@ const DateSelector = ({
   currentDate,
   scheduledFeatures,
   currentExperiments,
-  setMaxAvailable
+  setMaxAvailable,
+  isUpdate
 }) => {
 
   const tomorrow = formUtils.getNextDayDateSelector(currentDate);
@@ -32,13 +33,17 @@ const DateSelector = ({
     setMaxAvailable(available * 100);
   };
 
+  console.log(startDate);
+
   return (
     <div className="pt-5">
     <h3 className="text-base font-semibold leading-6 text-gray-900">Select Dates</h3>
     <label htmlFor="start_date" className="block text-sm font-medium leading-6 text-gray-900">
       Start Date
     </label>
-    <DatePicker onChange={handleChangeStart} value={startDate} minDate={currentDate} maxDate={endDate} required={true} />
+      {isUpdate && <p>{processedStartDate}</p>}
+     {!isUpdate && <DatePicker onChange={handleChangeStart} value={startDate} minDate={currentDate} maxDate={endDate} required={true} /> }
+
     <label htmlFor="end_date" className="block text-sm font-medium leading-6 text-gray-900">
       End Date
     </label>

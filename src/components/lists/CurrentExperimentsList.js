@@ -5,13 +5,31 @@ import DescriptionDisplay from './DescriptionDisplay';
 import TogglePauseButton from './TogglePauseButton';
 import UpdateFormModal from '../form/UpdateFormModal';
 
-const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, setExperimentChange }) => {
+/*
+need to pull:
+  featureObj,
+  currentExperiments,
+  scheduledFeatures,
+  existingNames
+
+*/
+
+const CurrentExperimentsList = ({
+  currentFeatures,
+  setCurrentFeatures,
+  setExperimentChange,
+  currentExperiments,
+  scheduledFeatures,
+  existingNames
+}) => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [deleteObj, setDeleteObj] = useState(true);
   const [error, setError] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [featureToUpdate, setFeatureToUpdate] = useState(null);
   const [processedFeatures, setProcessedFeatures] = useState([...currentFeatures]);
+
+
 
   useEffect(() => {
   }, [processedFeatures])
@@ -51,6 +69,10 @@ const CurrentExperimentsList = ({ currentFeatures, setCurrentFeatures, setExperi
       setExperimentChange={setExperimentChange}
       processedFeatures={processedFeatures}
       setProcessedFeatures={setProcessedFeatures}
+      featureObj={featureToUpdate}
+      currentExperiments={currentExperiments}
+      scheduledFeatures={scheduledFeatures}
+      existingNames={existingNames}
     />
     <div className="max-w-7xl sm:px-6 lg:px-8">
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">

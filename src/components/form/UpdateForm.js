@@ -11,6 +11,7 @@ import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 
 const UpdateForm = ({
+  featureObj,
   currentExperiments,
   scheduledFeatures,
   setExperimentChange,
@@ -19,74 +20,62 @@ const UpdateForm = ({
   const currentDate = new Date();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState(currentDate);
   const [endDate, setEndDate] = useState(null);
   const [percentageObj, setPercentageObj] = useState({});
   const [query, setQuery] = useState(''); // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
-  const [type, dispatch] = useReducer(formUtils.typeSelector, 1)
   const [experimentObj, setExperimentObj] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
   const [nameTaken, setNameTaken] = useState(false);
+  const type = featureObj.type_id;
+  const startDate = new Date(featureObj.startDate);
+  console.log("type:", type, "startDate:", startDate)
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
-      alert(`The total user percentage for experiments in this date period exceeds 100%. Please select a user percentage less than %{maxAvailable}`);
-      return;
-    }
-    if (nameTaken) {
-      alert(`A feature with the name ${name} already exists. Please create a different name.`);
-      return;
-    }
-    const featureObj = {
-      name: name,
-      description: description,
-      type_id: type,
-      start_date: startDate.toISOString(),
-      end_date: endDate.toISOString(),
-      is_running: true,
-      user_percentage: percentageObj.id
-    };
-
-    try {
-      const response = await experimentService.createExperiment(featureObj);
-      console.log(response);
-      if (type === 3) {
-        setExperimentObj(response);
-        setShowVariants(true);
-      }
-      setName("");
-      setDescription("");
-      dispatch({type: "1"});
-      setStartDate(currentDate);
-      setEndDate(null);
-      setPercentageObj({});
-      setQuery("");
-      setFormSuccess(true);
-      setExperimentChange(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // const handleConfirmDelete = async (event) => {
+  // const handleSubmit = async (event) => {
   //   event.preventDefault();
+  //   if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
+  //     alert(`The total user percentage for experiments in this date period exceeds 100%. Please select a user percentage less than %{maxAvailable}`);
+  //     return;
+  //   }
+  //   if (nameTaken) {
+  //     alert(`A feature with the name ${name} already exists. Please create a different name.`);
+  //     return;
+  //   }
+  //   const featureObj = {
+  //     name: name,
+  //     description: description,
+  //     type_id: type,
+  //     start_date: startDate.toISOString(),
+  //     end_date: endDate.toISOString(),
+  //     is_running: true,
+  //     user_percentage: percentageObj.id
+  //   };
+
   //   try {
-  //     let response = await experimentService.deleteExperiment(deleteObj.id);
-  //     setProcessedFeatures(processedFeatures.filter((obj) => obj.id !== deleteObj.id));
-  //     const filteredList = deleteObj.list.filter(obj => obj.id !== deleteObj.id);
-  //     deleteObj.callback(filteredList);
-  //     setDeleteObj(null);
+  //     const response = await experimentService.createExperiment(featureObj);
+  //     console.log(response);
+  //     if (type === 3) {
+  //       setExperimentObj(response);
+  //       setShowVariants(true);
+  //     }
+  //     setName("");
+  //     setDescription("");
+  //     // dispatch({type: "1"});
+  //     // setStartDate(currentDate);
+  //     setEndDate(null);
+  //     setPercentageObj({});
+  //     setQuery("");
+  //     setFormSuccess(true);
   //     setExperimentChange(true);
   //   } catch (error) {
-  //     setDeleteObj(null);
-  //     setError(error.message);
   //     console.log(error);
   //   }
-  //   setOpenDeleteAlert(false);
   // };
+
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -103,16 +92,16 @@ const UpdateForm = ({
     <div className="md:flex md:items-center md:justify-between">
       <div className="min-w-0 flex-1">
         <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-         Create Feature
+         Update {featureObj.name}
         </h2>
       </div>
     </div>
       <p className="mt-2 max-w-4xl text-sm text-gray-500">
-      Enter details for your new toggle, roll-out, or experiment here.
+      Note: feature type and start date may not be changed.
       </p>
       <div className="px-4 sm:px-6 lg:px-8">
       <div className="mt-8 flow-root">
-      <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+      <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleUpdate}>
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
             <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -127,13 +116,11 @@ const UpdateForm = ({
                 description={description}
                 setDescription={setDescription}
               />
-              <TypeRadio
-                type={type}
-                dispatch={dispatch}
-              />
+
               <DateSelector
                 startDate={startDate}
-                setStartDate={setStartDate}
+                isUpdate={true}
+                // setStartDate={setStartDate}
                 endDate={endDate}
                 setEndDate={setEndDate}
                 currentDate={currentDate}
@@ -157,8 +144,8 @@ const UpdateForm = ({
           <Buttons
               setName={setName}
               setDescription={setDescription}
-              dispatch={dispatch}
-              setStartDate={setStartDate}
+              // dispatch={dispatch}
+              // setStartDate={setStartDate}
               setEndDate={setEndDate}
               setPercentageObj={setPercentageObj}
               currentDate={currentDate}
@@ -176,3 +163,13 @@ const UpdateForm = ({
 };
 
 export default UpdateForm;
+
+
+{/* <div key={variant.id} className="px-4 py-5 sm:p-6">
+<dt className="text-base font-normal text-gray-900">{variant.value}</dt>
+<dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+  <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+    <span className="ml-2 text-sm font-medium text-gray-500">{variant.weight * 100}% of users in experiment</span>
+  </div>
+</dd>
+</div> */}

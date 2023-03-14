@@ -67,6 +67,9 @@ const SideNav = ({
                   currentFeatures={currentExperiments}
                   setCurrentFeatures={setCurrentExperiments}
                   setExperimentChange={setExperimentChange}
+                  currentExperiments={currentExperiments}
+                  scheduledFeatures={scheduledFeatures}
+                  existingNames={existingNames}
                 />
       }
       case 'Current Toggles': {
