@@ -105,10 +105,19 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                 description={description}
                 setDescription={setDescription}
               />
+
+<div>
+
+  <div class="table-auto border-spacing-1.5">
+<div class="table-row">
+<div class="table-cell">
               <TypeRadio
                 type={type}
                 dispatch={dispatch}
               />
+              </div>
+              <div class="table-cell"></div>
+              <div class="table-cell">
               <DateSelector
                 startDate={startDate}
                 setStartDate={setStartDate}
@@ -121,6 +130,9 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                 maxAvailable={maxAvailable}
                 setMaxAvailable={setMaxAvailable}
               />
+            <div class="table-cell"></div>
+</div>
+<div class="table-cell">
               <UserPercentageMenu
                 percentageObj={percentageObj}
                 setPercentageObj={setPercentageObj}
@@ -130,7 +142,10 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                 endDate={endDate}
               />
             </div>
-
+            </div>
+            </div>
+            </div>
+            </div>
           </div>
           <Buttons
               setName={setName}

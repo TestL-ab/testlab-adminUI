@@ -39,26 +39,23 @@ const App = () => {
     <>
       {error ? <p>{error}</p>
         :
-        <>
-          <div>
-            <SideNav
-              currentToggles={currentToggles}
-              setCurrentToggles={setCurrentToggles}
-              currentRollouts={currentRollOuts}
-              setCurrentRollouts={setCurrentRollOuts}
-              currentExperiments={currentExperiments}
-              setCurrentExperiments={setCurrentExperiments}
-              scheduledFeatures={scheduledFeatures}
-              setScheduledFeatures={setScheduledFeatures}
-              pastExperiments={pastExperiments}
-              setPastExperiments={setPastExperiments}
-              setExperimentChange={setExperimentChange}
-              experimentChange={experimentChange}
-              existingNames={existingNames}
-            />
-            {/* <AllRoutes/> */}
-          </div>
-        </>
+          <SideNav
+            currentToggles={currentToggles}
+            setCurrentToggles={setCurrentToggles}
+            currentRollouts={currentRollOuts}
+            setCurrentRollouts={setCurrentRollOuts}
+            currentExperiments={currentExperiments}
+            setCurrentExperiments={setCurrentExperiments}
+            scheduledFeatures={scheduledFeatures}
+            setScheduledFeatures={setScheduledFeatures}
+            pastExperiments={pastExperiments}
+            setPastExperiments={setPastExperiments}
+            setExperimentChange={setExperimentChange}
+            experimentChange={experimentChange}
+            existingNames={existingNames}
+          />
+        //     {/* <AllRoutes/> */}
+
       }
       </>
   );

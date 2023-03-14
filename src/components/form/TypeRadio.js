@@ -13,8 +13,8 @@ const TypeRadio = ({ type, dispatch }) => {
     <div>
       <label className="text-base font-semibold text-gray-900">Feature Type</label>
       <p className="text-sm text-gray-500">Select one.</p>
-      <fieldset className="mt-4">
-        <legend className="sr-only">Notification method</legend>
+      {/* <fieldset className="mt-4">
+        <legend className="sr-only">Notification method</legend> */}
         <div className="space-y-4">
           {types.map((typeObj) => (
             <div key={typeObj.id} className="flex items-center">
@@ -33,7 +33,7 @@ const TypeRadio = ({ type, dispatch }) => {
             </div>
           ))}
         </div>
-      </fieldset>
+      {/* </fieldset> */}
     </div>
   );
 }
