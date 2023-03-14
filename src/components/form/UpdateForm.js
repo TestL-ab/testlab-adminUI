@@ -15,7 +15,9 @@ const UpdateForm = ({
   scheduledFeatures,
   setExperimentChange,
   existingNames,
-  setShowUpdateModal
+  setShowUpdateModal,
+  processedFeatures,
+  setProcessedFeatures
 }) => {
   const currentDate = new Date();
   const [name, setName] = useState(featureObj.name);
@@ -52,6 +54,8 @@ const UpdateForm = ({
 
     try {
       const response = await experimentService.updateFeature(featureObj.id, updatedFeatureObj);
+      const updatedFeatures = processedFeatures.map(featObj => featObj.id === response.id ? response : featObj);
+      setProcessedFeatures(updatedFeatures);
       setShowUpdateModal(false);
       setFormSuccess(true);
       setExperimentChange(true);

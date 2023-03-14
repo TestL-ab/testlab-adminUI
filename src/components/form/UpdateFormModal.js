@@ -69,6 +69,8 @@ const UpdateFormModal = ({
   setExperimentChange={setExperimentChange}
   existingNames={existingNames}
   setShowUpdateModal={setShowUpdateModal}
+  processedFeatures={processedFeatures}
+  setProcessedFeatures={setProcessedFeatures}
 />
 
 
