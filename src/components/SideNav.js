@@ -77,6 +77,9 @@ const SideNav = ({
                   currentFeatures={currentToggles}
                   setCurrentFeatures={setCurrentToggles}
                   setExperimentChange={setExperimentChange}
+                  currentExperiments={currentExperiments}
+                  scheduledFeatures={scheduledFeatures}
+                  existingNames={existingNames}
                 />
       }
       case 'Current Roll-Outs': {
@@ -84,6 +87,9 @@ const SideNav = ({
                 currentFeatures={currentRollouts}
                 setCurrentFeatures={setCurrentRollouts}
                 setExperimentChange={setExperimentChange}
+                currentExperiments={currentExperiments}
+                scheduledFeatures={scheduledFeatures}
+                existingNames={existingNames}
               />
       }
       case 'Scheduled Features': {
@@ -91,6 +97,9 @@ const SideNav = ({
                   scheduledFeatures={scheduledFeatures}
                   setScheduledFeatures={setScheduledFeatures}
                   setExperimentChange={setExperimentChange}
+                  currentExperiments={currentExperiments}
+                  existingNames={existingNames}
+                  // currentFeatures={currentFeatures}
                 />
       }
       case 'Past Experiments': {
