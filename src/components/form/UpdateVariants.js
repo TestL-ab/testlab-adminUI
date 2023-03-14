@@ -5,7 +5,17 @@ import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 import UpdateVariantButtons from './UpdateVariantButtons';
 
-const UpdateVariants = ({ experimentObj, setExperimentObj, showVariants, setShowVariants, setExperimentChange }) => {
+const UpdateVariants = ({
+  experimentObj,
+  setExperimentObj,
+  showVariants,
+  setShowVariants,
+  setExperimentChange,
+  processedFeatures,
+  setProcessedFeatures,
+  setShowUpdateModal,
+  setFormSuccess
+ }) => {
   const [variantObj1, setVariantObj1] = useState({ is_control: true, value: "", weight: "" });
   const [variantObj2, setVariantObj2] = useState({ value: "", weight: "" });
   const [variantObj3, setVariantObj3] = useState({ value: "", weight: "" });
@@ -233,6 +243,17 @@ const UpdateVariants = ({ experimentObj, setExperimentObj, showVariants, setShow
       console.log(response);
       setExperimentObj(null);
       setShowVariants(false);
+      setExperimentChange(true);
+      const updatedFeatures = processedFeatures.map(featObj => {
+        if (featObj.id === experimentObj.id) {
+         return {...featObj, variant_arr: response};
+         } else {
+          return featObj;
+         }
+        });
+      setProcessedFeatures(updatedFeatures);
+      setShowUpdateModal(false);
+      setFormSuccess(true);
       setExperimentChange(true);
       setVariantObj1({ is_control: true, value: "", weight: "" });
       setVariantObj2({ value: "", weight: "" });
