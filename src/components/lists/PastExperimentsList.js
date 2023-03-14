@@ -72,7 +72,7 @@ const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChang
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 </th>
                 <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                  <span className="sr-only">Repeat Experiment</span>
+
                 </th>
               </tr>
             </thead>
@@ -91,11 +91,11 @@ const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChang
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
-                  <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
+                  {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                     <a href="#" className="text-indigo-600 hover:text-indigo-900">
                       Repeat Experiment<span className="sr-only"></span>
                     </a>
-                  </td>
+                  </td> */}
                   <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                     <button
                       type="button"
