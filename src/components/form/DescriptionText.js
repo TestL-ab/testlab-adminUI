@@ -1,4 +1,4 @@
-const DescriptionText = ({description, setDescription}) => {
+const DescriptionText = ({ description, setDescription }) => {
   const handleInput = (event) => {
     event.preventDefault();
     const value = event.target.value;
@@ -7,7 +7,7 @@ const DescriptionText = ({description, setDescription}) => {
 
   return (
     <div className="col-span-5">
-      <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+      <label htmlFor="about" className="font-semibold text-gray-900">
         Description
       </label>
       <p className="mt-2 text-sm text-gray-500">Include helpful reminders about this feature, and experiment hypothesis if relevant.</p>
@@ -21,7 +21,7 @@ const DescriptionText = ({description, setDescription}) => {
           onChange={handleInput}
         />
       </div>
-  </div>
+    </div>
   )
 }
 
