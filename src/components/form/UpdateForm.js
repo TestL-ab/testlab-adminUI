@@ -134,7 +134,7 @@ const UpdateForm = ({
                 type={type}
                 maxAvailable={maxAvailable}
                 endDate={endDate}
-                currentPercent={featureObj.user_percentage}
+                currentPercentage={featureObj.user_percentage}
               />
             </div>
           </div>
