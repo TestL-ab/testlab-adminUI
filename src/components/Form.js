@@ -106,7 +106,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                       /><p></p>
                       <div className='table sm:col-span-5'>
                         <div className="table-row">
-                          <div className="table-cell">
+                          <div className="table-cell pr-1.5">
                             <TypeRadio
                               type={type}
                               dispatch={dispatch}

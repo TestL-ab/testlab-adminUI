@@ -10,7 +10,7 @@ const TypeRadio = ({ type, dispatch }) => {
   }
 
   return (
-    <div className="w-40">
+    <div className="col-span-2 w-32">
       <label className="text-base font-semibold text-gray-900">Feature Type</label>
       <p className="text-sm text-gray-500">Select one.</p>
       <fieldset className="mt-4">

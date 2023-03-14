@@ -28,7 +28,7 @@ const UserPercentageMenu = ({
 
   if (isToggle) {
     return (
-      <p className="text-sm text-gray-500 w-60">All users will be enrolled in this feature toggle.</p>
+      <p className="text-sm text-gray-500 col-span-3">All users will be enrolled in this feature toggle.</p>
     );
   }
   let percentages = [
