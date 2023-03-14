@@ -5,15 +5,6 @@ import DescriptionDisplay from './DescriptionDisplay';
 import TogglePauseButton from './TogglePauseButton';
 import UpdateFormModal from '../form/UpdateFormModal';
 
-/*
-need to pull:
-  featureObj,
-  currentExperiments,
-  scheduledFeatures,
-  existingNames
-
-*/
-
 const CurrentExperimentsList = ({
   currentFeatures,
   setCurrentFeatures,
