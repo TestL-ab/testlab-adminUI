@@ -108,7 +108,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
 
 <div>
 
-  <div class="table-auto border-spacing-1.5">
+  <div class="table-fixed">
 <div class="table-row">
 <div class="table-cell">
               <TypeRadio
@@ -116,7 +116,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                 dispatch={dispatch}
               />
               </div>
-              <div class="table-cell"></div>
+              {/* <div class="table-cell">LETS SEE IF THIS MAKES A SPACE</div> */}
               <div class="table-cell">
               <DateSelector
                 startDate={startDate}
@@ -130,9 +130,8 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                 maxAvailable={maxAvailable}
                 setMaxAvailable={setMaxAvailable}
               />
-            <div class="table-cell"></div>
 </div>
-<div class="table-cell">
+<div class="table-cell" >
               <UserPercentageMenu
                 percentageObj={percentageObj}
                 setPercentageObj={setPercentageObj}

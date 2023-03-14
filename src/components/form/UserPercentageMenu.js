@@ -28,7 +28,7 @@ const UserPercentageMenu = ({
 
   if (isToggle) {
     return (
-      <p className="text-sm text-gray-500">All users will be enrolled in this feature toggle.</p>
+      <p className="text-sm text-gray-500 w-60">All users will be enrolled in this feature toggle.</p>
     );
   }
   let percentages = [
@@ -70,7 +70,7 @@ const UserPercentageMenu = ({
     };
 
   return (
-<div className="pt-5">
+<div className="pt-5 w-60">
     <Combobox as="div" value={percentageObj} onChange={setPercentageObj}>
       { type === 3 && endDate
       ? <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">For this date range, {maxAvailable}% of users are available. Select the percentage of users to include in this experiment.</Combobox.Label>

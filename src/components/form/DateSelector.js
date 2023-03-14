@@ -45,8 +45,7 @@ const DateSelector = ({
   };
 
   return (
-    <div>
-    <div className="pt-5">
+    <div className="pt-5 w-48">
     <h3 className="text-base font-semibold leading-6 text-gray-900">Select Dates</h3>
     <label htmlFor="start_date" className="block text-sm font-medium leading-6 text-gray-900">
       Start Date
@@ -59,7 +58,6 @@ const DateSelector = ({
       End Date
     </label>
     <DatePicker onChange={handleChangeEnd} value={endDate} minDate={processedCurrentDate === processedStartDate ? tomorrow : startDate} required={true} />
-  </div>
   </div>
   );
 };
