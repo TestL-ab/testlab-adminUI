@@ -25,9 +25,10 @@ const UpdateVariants = ({ experimentObj, setExperimentObj, showVariants, setShow
   const experimentId = experimentObj.id;
 
   useEffect(() => {
-    const control = experimentObj.variant_arr.filter(obj => obj.is_control).pop() || experimentObj[0];
-    const tests = experimentObj.variant_arr.filter(obj => !obj.is_control);
-    if (tests.length === experimentObj.variant_arr.length) control = test.shift();
+    const variantObjArr = experimentObj.variant_arr.map(obj => { return {...obj, weight: obj.weight * 100}})
+    const control = variantObjArr.filter(obj => obj.is_control).pop() || experimentObj[0];
+    const tests = variantObjArr.filter(obj => !obj.is_control);
+    if (tests.length === variantObjArr.length) control = tests.shift();
     if (control) setVariantObj1(control);
     if (tests[0]) setVariantObj2(tests[0]);
     if (tests[1]) {
@@ -214,34 +215,34 @@ const UpdateVariants = ({ experimentObj, setExperimentObj, showVariants, setShow
 
   const handleUpdate = async(event) => {
     event.preventDefault();
-    // const variantArr = formUtils.processVariantData([variantObj1,
-                                                    //  variantObj2,
-                                                    //  variantObj3,
-                                                    //  variantObj4,
-                                                    //  variantObj5],
-                                                    //  experimentId);
+    const variantArr = formUtils.processVariantData([variantObj1,
+                                                     variantObj2,
+                                                     variantObj3,
+                                                     variantObj4,
+                                                     variantObj5],
+                                                     experimentId);
 
-    // if (!formUtils.validVariantWeights(variantArr) || !formUtils.distinctVariantValues(variantArr)) {
-    //   return;
-    // }
+    if (!formUtils.validVariantWeights(variantArr) || !formUtils.distinctVariantValues(variantArr)) {
+      return;
+    }
 
-    // let variantsObj = { id: experimentId, variants: variantArr };
-    // try {
-    //   console.log(variantsObj);
-    //   const response = await experimentService.createVariants(experimentId, variantsObj);
-    //   console.log(response);
-    //   setExperimentObj(null);
-    //   setShowVariants(false);
-    //   setExperimentChange(true);
-    //   setVariantObj1({ is_control: true, value: "", weight: "" });
-    //   setVariantObj2({ value: "", weight: "" });
-    //   setVariantObj3({ value: "", weight: "" });
-    //   setVariantObj4({ value: "", weight: "" });
-    //   setVariantObj5({ value: "", weight: "" });
-    // }
-    // catch (error) {
-    //   console.log(error);
-    // }
+    let variantsObj = { id: experimentId, variants: variantArr };
+    try {
+      console.log(variantsObj);
+      const response = await experimentService.createVariants(experimentId, variantsObj);
+      console.log(response);
+      setExperimentObj(null);
+      setShowVariants(false);
+      setExperimentChange(true);
+      setVariantObj1({ is_control: true, value: "", weight: "" });
+      setVariantObj2({ value: "", weight: "" });
+      setVariantObj3({ value: "", weight: "" });
+      setVariantObj4({ value: "", weight: "" });
+      setVariantObj5({ value: "", weight: "" });
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 
   return (
