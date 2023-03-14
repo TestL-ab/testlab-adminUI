@@ -6,7 +6,7 @@ const DescriptionText = ({description, setDescription}) => {
   };
 
   return (
-    <div className="col-span-5 w-96">
+    <div className="col-span-5">
       <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
         Description
       </label>

@@ -45,7 +45,7 @@ const DateSelector = ({
   };
 
   return (
-    <div className="pt-5 w-60">
+    <div className="pt-5 w-48">
     <h3 className="text-base font-semibold leading-6 text-gray-900">Select Dates</h3>
     <label htmlFor="start_date" className="block text-sm font-medium leading-6 text-gray-900">
       Start Date
