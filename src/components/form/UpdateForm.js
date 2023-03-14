@@ -5,7 +5,7 @@ import TypeRadio from './TypeRadio';
 import DateSelector from './DateSelector'
 import UserPercentageMenu from './UserPercentageMenu';
 import Variants from './Variants';
-import Buttons from './Buttons';
+import UpdateButtons from './UpdateButtons';
 import FormSuccessNotification from '../form/FormSuccessNotification';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
@@ -24,7 +24,7 @@ const UpdateForm = ({
   const [percentageObj, setPercentageObj] = useState({});
   const [query, setQuery] = useState(''); // for UserPercentageMenu--it's a tailwind thing
   const [maxAvailable, setMaxAvailable] = useState(null);
-  const [experimentObj, setExperimentObj] = useState(null);
+  const [experimentObj, setExperimentObj] = useState(featureObj);
   const [showVariants, setShowVariants] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
   const [nameTaken, setNameTaken] = useState(false);
@@ -138,13 +138,16 @@ const UpdateForm = ({
               />
             </div>
           </div>
-          <Buttons
+          <UpdateButtons
               setName={setName}
               setDescription={setDescription}
               setEndDate={setEndDate}
               setPercentageObj={setPercentageObj}
               currentDate={currentDate}
               setQuery={setQuery}
+              type={featureObj.type_id}
+              showVariants={showVariants}
+              setShowVariants={setShowVariants}
             />
         </div>
       </form>
