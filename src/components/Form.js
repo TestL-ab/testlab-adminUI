@@ -54,7 +54,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
       }
       setName("");
       setDescription("");
-      dispatch({type: "1"});
+      dispatch({ type: "1" });
       setStartDate(currentDate);
       setEndDate(null);
       setPercentageObj({});
@@ -68,101 +68,96 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
 
   return (
     <>
-    <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
-    { showVariants
-      ?  <Variants
-            experimentObj={experimentObj}
-            setExperimentObj={setExperimentObj}
-            setShowVariants={setShowVariants}
-            setExperimentChange={setExperimentChange}
-          />
-      : <div className="max-w-7xl sm:px-6 lg:px-8">
-    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-    <div className="md:flex md:items-center md:justify-between">
-      <div className="min-w-0 flex-1">
-        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-         Create Feature
-        </h2>
-      </div>
-    </div>
-      <p className="mt-2 max-w-4xl text-sm text-gray-500">
-      Enter details for your new toggle, roll-out, or experiment here.
-      </p>
-      <div className="px-4 sm:px-6 lg:px-8">
-      <div className="mt-8 flow-root">
-      <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
-        <div className="space-y-8 divide-y divide-gray-200">
-          <div>
-            <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <NameInput
-                name={name}
-                setName={setName}
-                existingNames={existingNames}
-                nameTaken={nameTaken}
-                setNameTaken={setNameTaken}
-              />
-              <DescriptionText
-                description={description}
-                setDescription={setDescription}
-              />
-
-<div>
-
-  <div class="table-fixed">
-<div class="table-row">
-<div class="table-cell">
-              <TypeRadio
-                type={type}
-                dispatch={dispatch}
-              />
+      <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
+      {showVariants
+        ? <Variants
+          experimentObj={experimentObj}
+          setExperimentObj={setExperimentObj}
+          setShowVariants={setShowVariants}
+          setExperimentChange={setExperimentChange}
+        />
+        : <div className="max-w-7xl sm:px-6 lg:px-8">
+          <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+            <div className="md:flex md:items-center md:justify-between">
+              <div className="min-w-0 flex-1">
+                <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                  Create Feature
+                </h2>
               </div>
-              {/* <div class="table-cell">LETS SEE IF THIS MAKES A SPACE</div> */}
-              <div class="table-cell">
-              <DateSelector
-                startDate={startDate}
-                setStartDate={setStartDate}
-                endDate={endDate}
-                setEndDate={setEndDate}
-                currentDate={currentDate}
-                type={type}
-                scheduledFeatures={scheduledFeatures}
-                currentExperiments={currentExperiments}
-                maxAvailable={maxAvailable}
-                setMaxAvailable={setMaxAvailable}
-              />
-</div>
-<div class="table-cell" >
-              <UserPercentageMenu
-                percentageObj={percentageObj}
-                setPercentageObj={setPercentageObj}
-                query={query} setQuery={setQuery}
-                type={type}
-                maxAvailable={maxAvailable}
-                endDate={endDate}
-              />
             </div>
-            </div>
-            </div>
-            </div>
+            <p className="mt-2 max-w-4xl text-sm text-gray-500">
+              Enter details for your new toggle, roll-out, or experiment here.
+            </p>
+            <div className="px-4 sm:px-6 lg:px-8">
+              <div className="mt-8 flow-root">
+                <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+                  <div className="space-y-8 divide-y divide-gray-200">
+                    <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                      <NameInput
+                        name={name}
+                        setName={setName}
+                        existingNames={existingNames}
+                        nameTaken={nameTaken}
+                        setNameTaken={setNameTaken}
+                      />
+                      <DescriptionText
+                        description={description}
+                        setDescription={setDescription}
+                      /><p></p>
+                      <div className='table'>
+                        <div className="table-row">
+                          <div className="table-cell">
+                            <TypeRadio
+                              type={type}
+                              dispatch={dispatch}
+                            />
+                          </div>
+                          <div className="table-cell">
+                            <DateSelector
+                              startDate={startDate}
+                              setStartDate={setStartDate}
+                              endDate={endDate}
+                              setEndDate={setEndDate}
+                              currentDate={currentDate}
+                              type={type}
+                              scheduledFeatures={scheduledFeatures}
+                              currentExperiments={currentExperiments}
+                              maxAvailable={maxAvailable}
+                              setMaxAvailable={setMaxAvailable}
+                            />
+                          </div>
+                          <div className="sm:col-span-5">
+                            <div className="table-cell" >
+                              <UserPercentageMenu
+                                percentageObj={percentageObj}
+                                setPercentageObj={setPercentageObj}
+                                query={query} setQuery={setQuery}
+                                type={type}
+                                maxAvailable={maxAvailable}
+                                endDate={endDate}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <Buttons
+                    setName={setName}
+                    setDescription={setDescription}
+                    dispatch={dispatch}
+                    setStartDate={setStartDate}
+                    setEndDate={setEndDate}
+                    setPercentageObj={setPercentageObj}
+                    currentDate={currentDate}
+                    setQuery={setQuery}
+                  />
+                </form>
+              </div>
             </div>
           </div>
-          <Buttons
-              setName={setName}
-              setDescription={setDescription}
-              dispatch={dispatch}
-              setStartDate={setStartDate}
-              setEndDate={setEndDate}
-              setPercentageObj={setPercentageObj}
-              currentDate={currentDate}
-              setQuery={setQuery}
-            />
         </div>
-      </form>
-      </div>
-      </div>
-      </div>
-      </div>
-    }
+      }
     </>
   );
 };

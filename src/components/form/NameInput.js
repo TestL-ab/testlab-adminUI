@@ -9,7 +9,7 @@ const NameInput = ({ name, setName, existingNames, nameTaken, setNameTaken }) =>
   }
 
   return (
-    <div className="sm:col-span-4">
+    <div className="sm:col-span-5">
     <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
       Feature Name
     </label>
