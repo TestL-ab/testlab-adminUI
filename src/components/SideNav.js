@@ -221,13 +221,13 @@ const SideNav = ({
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-40 lg:flex-col">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
             <div className="flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
               <img
                 className="h-8 w-auto"
-                src={require('../assets/blueicon.png')}
+                src={require('../assets/beaker-logo.png')}
                 alt="TestLab"
               />
             </div>

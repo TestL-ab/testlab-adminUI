@@ -131,7 +131,7 @@ const CurrentRollOutList = ({
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                               <button
                                 type="button"
-                                className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="rounded bg-testLabBlue py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                                 onClick={() => handleShowUpdateForm(featureObj)} // show update modal
                               >
                                 Edit
@@ -140,7 +140,7 @@ const CurrentRollOutList = ({
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                               <button
                                 type="button"
-                                className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="rounded bg-testLabBlue py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                                 onClick={() => handleDelete(featureObj.id, currentFeatures, setCurrentFeatures, setError)}
                               >
                                 Delete

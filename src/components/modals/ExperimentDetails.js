@@ -36,7 +36,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
                       <div key={controlVariant.id} className="px-4 py-5 sm:p-6">
                         <dt className="text-base font-normal text-gray-900">{controlVariant.value}</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                          <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                          <div className="flex items-baseline text-2xl font-semibold text-testLabBlue">
                             <span className="ml-2 text-sm font-medium text-gray-500">{controlVariant.weight * 100}% of users in experiment</span>
                           </div>
                           <div className={classNames('bg-green-100 text-green-800', 'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0')}>
@@ -51,7 +51,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
                       <div key={variant.id} className="px-4 py-5 sm:p-6">
                         <dt className="text-base font-normal text-gray-900">{variant.value}</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                          <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                          <div className="flex items-baseline text-2xl font-semibold text-testLabBlue">
                             <span className="ml-2 text-sm font-medium text-gray-500">{variant.weight * 100}% of users in experiment</span>
                           </div>
                         </dd>
@@ -62,7 +62,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
               </div>
               {futureExperiment ? null : <button
                 type="button"
-                className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="rounded-full bg-testLabBlue w-32 h-8 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                 onClick={handleClick}
               >
                 View Analytics

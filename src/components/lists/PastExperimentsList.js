@@ -92,14 +92,14 @@ const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChang
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
                             {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                    <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                    <a href="#" className="text-testLabBlue hover:text-indigo-900">
                       Repeat Experiment<span className="sr-only"></span>
                     </a>
                   </td> */}
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                               <button
                                 type="button"
-                                className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="rounded bg-testLabBlue py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                                 onClick={() => handleDelete(featureObj.id, pastFeatures, setpastFeatures, setError)}
                               >
                                 Delete
