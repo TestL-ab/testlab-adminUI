@@ -36,14 +36,14 @@ const TogglePauseButton = ({ featureObj, processedFeatures, setProcessedFeatures
       {isRunning
         ? <button
           type="button"
-          className="rounded bg-white py-1 px-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          className="rounded bg-white py-1 px-2 text-s font-semibold text-testLabBlue shadow-sm ring-1 ring-inset ring-testLabBlue hover:ring-testLabBeige hover:text-white hover:bg-testLabBeige"
           onClick={handleTogglePause}
         >
           Pause Feature
         </button>
         : <button
           type="button"
-          className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="rounded bg-testLabBlue py-1 px-2 text-s font-semibold text-white shadow-sm hover:bg-testLabBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
           onClick={handleTogglePause}
         >
           Resume Feature

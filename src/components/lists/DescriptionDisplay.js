@@ -105,7 +105,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
               {isExperiment &&
                 <button
                   type="button"
-                  className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-full bg-testLabBlue py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                   onClick={handleModalOpenClick}
                 >
                   View Experiment Details

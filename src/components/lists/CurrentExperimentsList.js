@@ -64,7 +64,7 @@ const CurrentExperimentsList = ({
         existingNames={existingNames}
       />
       <div className="max-w-7xl sm:px-6 lg:px-8">
-        <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+        <div className="border-b border-gray-200 rounded-lg bg-white px-4 py-5 sm:px-6">
           <div className="md:flex md:items-center md:justify-between">
             <div className="min-w-0 flex-1">
               <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
@@ -86,7 +86,7 @@ const CurrentExperimentsList = ({
                     : <table className="min-w-full divide-y divide-gray-300">
                       <thead>
                         <tr>
-                          <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3 ">
+                          <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
                             Name
                           </th>
                           <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -132,7 +132,7 @@ const CurrentExperimentsList = ({
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                               <button
                                 type="button"
-                                className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="rounded bg-testLabBlue py-1 px-2 text-s font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                                 onClick={() => handleShowUpdateForm(featureObj)} // show update modal
                               >
                                 Edit
@@ -141,7 +141,7 @@ const CurrentExperimentsList = ({
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                               <button
                                 type="button"
-                                className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="rounded bg-testLabBlue py-1 px-2 text-s font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                                 onClick={() => handleShowDeleteConfirmation(featureObj.id, currentFeatures, setCurrentFeatures, setError)}
                               >
                                 Delete
