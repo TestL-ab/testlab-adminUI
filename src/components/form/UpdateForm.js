@@ -14,7 +14,8 @@ const UpdateForm = ({
   currentExperiments,
   scheduledFeatures,
   setExperimentChange,
-  existingNames
+  existingNames,
+  setShowUpdateModal
 }) => {
   const currentDate = new Date();
   const [name, setName] = useState(featureObj.name);
@@ -30,49 +31,33 @@ const UpdateForm = ({
   const type = featureObj.type_id;
   const startDate = new Date(featureObj.startDate);
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   if (type === 3 && (percentageObj.id * 100) > maxAvailable) {
-  //     alert(`The total user percentage for experiments in this date period exceeds 100%. Please select a user percentage less than %{maxAvailable}`);
-  //     return;
-  //   }
-  //   if (nameTaken) {
-  //     alert(`A feature with the name ${name} already exists. Please create a different name.`);
-  //     return;
-  //   }
-  //   const featureObj = {
-  //     name: name,
-  //     description: description,
-  //     type_id: type,
-  //     start_date: startDate.toISOString(),
-  //     end_date: endDate.toISOString(),
-  //     is_running: true,
-  //     user_percentage: percentageObj.id
-  //   };
-
-  //   try {
-  //     const response = await experimentService.createExperiment(featureObj);
-  //     console.log(response);
-  //     if (type === 3) {
-  //       setExperimentObj(response);
-  //       setShowVariants(true);
-  //     }
-  //     setName("");
-  //     setDescription("");
-  //     // dispatch({type: "1"});
-  //     // setStartDate(currentDate);
-  //     setEndDate(null);
-  //     setPercentageObj({});
-  //     setQuery("");
-  //     setFormSuccess(true);
-  //     setExperimentChange(true);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const handleUpdate = async (event) => {
     event.preventDefault();
+
+    if (nameTaken && name !== experimentObj.name) {
+      alert(`A feature with the name ${name} already exists. Please create a different name.`);
+      return;
+    }
+
+    const updatedFeatureObj = {
+      id: featureObj.id,
+      name: name,
+      description: description,
+      type_id: type,
+      start_date: startDate.toISOString(),
+      end_date: endDate.toISOString(),
+      is_running: true,
+      user_percentage: percentageObj.id
+    };
+
+    try {
+      const response = await experimentService.updateFeature(featureObj.id, updatedFeatureObj);
+      setShowUpdateModal(false);
+      setFormSuccess(true);
+      setExperimentChange(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -1,4 +1,4 @@
-import { Fragment, useReducer, useState } from 'react';
+import { Fragment, useEffect, useReducer, useState } from 'react';
 import { Dialog, RadioGroup, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import UpdateForm from './UpdateForm';
@@ -11,13 +11,13 @@ const UpdateFormModal = ({
   setExperimentChange,
   processedFeatures,
   setProcessedFeatures,
-
   featureObj,
   currentExperiments,
   scheduledFeatures,
   existingNames
 }) => {
-  console.log(featureToUpdate);
+  useEffect(() => {}, [showUpdateModal]);
+
   return (
     <>
       <Transition.Root show={showUpdateModal} as={Fragment}>
@@ -68,6 +68,7 @@ const UpdateFormModal = ({
   scheduledFeatures={scheduledFeatures}
   setExperimentChange={setExperimentChange}
   existingNames={existingNames}
+  setShowUpdateModal={setShowUpdateModal}
 />
 
 
