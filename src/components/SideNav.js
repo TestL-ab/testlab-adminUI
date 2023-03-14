@@ -56,58 +56,58 @@ const SideNav = ({
       }
       case 'Create New Feature': {
         return <Form
-                  currentExperiments={currentExperiments}
-                  scheduledFeatures={scheduledFeatures}
-                  setExperimentChange={setExperimentChange}
-                  existingNames={existingNames}
-                />
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          setExperimentChange={setExperimentChange}
+          existingNames={existingNames}
+        />
       }
       case 'Current Experiments': {
         return <CurrentExperimentsList
-                  currentFeatures={currentExperiments}
-                  setCurrentFeatures={setCurrentExperiments}
-                  setExperimentChange={setExperimentChange}
-                  currentExperiments={currentExperiments}
-                  scheduledFeatures={scheduledFeatures}
-                  existingNames={existingNames}
-                />
+          currentFeatures={currentExperiments}
+          setCurrentFeatures={setCurrentExperiments}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          existingNames={existingNames}
+        />
       }
       case 'Current Toggles': {
-          return <CurrentToggleList
-                  currentFeatures={currentToggles}
-                  setCurrentFeatures={setCurrentToggles}
-                  setExperimentChange={setExperimentChange}
-                  currentExperiments={currentExperiments}
-                  scheduledFeatures={scheduledFeatures}
-                  existingNames={existingNames}
-                />
+        return <CurrentToggleList
+          currentFeatures={currentToggles}
+          setCurrentFeatures={setCurrentToggles}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          existingNames={existingNames}
+        />
       }
       case 'Current Roll-Outs': {
         return <CurrentRollOutList
-                currentFeatures={currentRollouts}
-                setCurrentFeatures={setCurrentRollouts}
-                setExperimentChange={setExperimentChange}
-                currentExperiments={currentExperiments}
-                scheduledFeatures={scheduledFeatures}
-                existingNames={existingNames}
-              />
+          currentFeatures={currentRollouts}
+          setCurrentFeatures={setCurrentRollouts}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          existingNames={existingNames}
+        />
       }
       case 'Scheduled Features': {
         return <ScheduledFeaturesList
-                  scheduledFeatures={scheduledFeatures}
-                  setScheduledFeatures={setScheduledFeatures}
-                  setExperimentChange={setExperimentChange}
-                  currentExperiments={currentExperiments}
-                  existingNames={existingNames}
-                  // currentFeatures={currentFeatures}
-                />
+          scheduledFeatures={scheduledFeatures}
+          setScheduledFeatures={setScheduledFeatures}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          existingNames={existingNames}
+        // currentFeatures={currentFeatures}
+        />
       }
       case 'Past Experiments': {
         return <PastExperimentsList
-                  pastFeatures={pastExperiments}
-                  setpastFeatures={setPastExperiments}
-                  setExperimentChange={setExperimentChange}
-                />
+          pastFeatures={pastExperiments}
+          setpastFeatures={setPastExperiments}
+          setExperimentChange={setExperimentChange}
+        />
       }
     }
     throw Error('Unknown action: ' + action.type);
@@ -119,9 +119,9 @@ const SideNav = ({
     e.preventDefault();
     navigation = navigation.map(navLink => {
       if (navLink.name === e.target.text) {
-        return {...navLink, current: true};
+        return { ...navLink, current: true };
       } else {
-        return {...navLink, current: false}
+        return { ...navLink, current: false }
       }
     })
     dispatchCurrentPage({

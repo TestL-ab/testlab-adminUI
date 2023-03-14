@@ -12,7 +12,7 @@ const DeleteAlert = ({
   setExperimentChange,
   processedFeatures,
   setProcessedFeatures
- }) => {
+}) => {
   const cancelButtonRef = useRef(null)
 
   const handleConfirmDelete = async (event) => {
@@ -79,7 +79,7 @@ const DeleteAlert = ({
                         If the feature is currently running, it will stop immediately.
                       </p>
                       <p className="text-sm text-gray-500">
-                         The record of the feature, including any associated event data will be permanently removed.
+                        The record of the feature, including any associated event data will be permanently removed.
                       </p>
                     </div>
                   </div>

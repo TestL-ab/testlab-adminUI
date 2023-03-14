@@ -1,16 +1,16 @@
 const types = [
-  { id: 1,  title: "Toggle" },
+  { id: 1, title: "Toggle" },
   { id: 2, title: "Roll Out" },
-  { id: 3, title: "Experiment"}
+  { id: 3, title: "Experiment" }
 ];
 
 const TypeRadio = ({ type, dispatch }) => {
   const handleChange = (id) => {
-    return function() {dispatch({type: String(id)})}
+    return function () { dispatch({ type: String(id) }) }
   }
 
   return (
-    <div>
+    <div className="col-span-2 w-40">
       <label className="text-base font-semibold text-gray-900">Feature Type</label>
       <p className="text-sm text-gray-500">Select one.</p>
       <fieldset className="mt-4">
@@ -18,7 +18,7 @@ const TypeRadio = ({ type, dispatch }) => {
         <div className="space-y-4">
           {types.map((typeObj) => (
             <div key={typeObj.id} className="flex items-center">
-               <input
+              <input
                 id={typeObj.id}
                 name="notification-method"
                 type="radio"
