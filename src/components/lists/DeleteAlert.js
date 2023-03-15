@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import experimentService from '../services/experimentService';
+import experimentService from '../../services/experimentService';
 
 const DeleteAlert = ({
   openDeleteAlert,
@@ -39,7 +39,7 @@ const DeleteAlert = ({
 
   return (
     <Transition.Root show={openDeleteAlert} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpenDeleteAlert}>
+      <Dialog as="div" className="rounded relative z-10" initialFocus={cancelButtonRef} onClose={setOpenDeleteAlert}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

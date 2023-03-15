@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/quicksand": "^4.5.12",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
     "@tailwindcss/aspect-ratio": "^0.4.2",

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import DatePicker from 'react-date-picker';
 import formUtils from '../../utils/formUtils';
-import './brandmark-design.png'
+
 const DateSelector = ({
   startDate,
   setStartDate,
@@ -58,7 +58,7 @@ const DateSelector = ({
       <label htmlFor="end_date" className="block text-sm font-medium leading-6 text-gray-900">
         End Date
       </label>
-      <DatePicker onChange={handleChangeEnd} value={endDate} minDate={processedCurrentDate === processedStartDate ? tomorrow : startDate} required={true} />
+      <DatePicker style={{"border-radius": 20}} onChange={handleChangeEnd} value={endDate} minDate={processedCurrentDate === processedStartDate ? tomorrow : startDate} required={true} />
     </div>
   );
 };

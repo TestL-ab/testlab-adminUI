@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import listUtils from '../../utils/listUtils';
-import DeleteAlert from '../DeleteAlert';
+import DeleteAlert from './DeleteAlert';
 import DescriptionDisplay from './DescriptionDisplay';
 
 const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChange }) => {
@@ -25,7 +25,7 @@ const PastExperimentsList = ({ pastFeatures, setpastFeatures, setExperimentChang
   return (
     <div className="h-screen relative isolate overflow-hidden bg-gray-900 h">
     <svg
-      className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+      className="absolute inset-0 -z-10 h-full w-full [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
       aria-hidden="true"
     >
       <defs>
