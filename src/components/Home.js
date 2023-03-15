@@ -59,15 +59,17 @@ const Home = () => {
       {/* <section className="hero container max-w-screen-lg mx-auto pb-10 flex justify-center"> */}
       <section className="hero container max-w-screen-lg mx-auto pb-10 flex flex-col items-center">
         <img
-          src={require('../assets/full_logo_transparent.png')}
+          src={require('../assets/full_logo_transparent_bottom_crop.png')}
           alt="TestLab"
         />
+        <a href="https://testl-ab.github.io/">
         <button
           type="button"
-          className="rounded-full bg-testLabDarkBlue py-2.5 px-4 text-sm font-semibold text-testLabBeige shadow-sm hover:bg-testLabBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="rounded-full bg-testLabDarkBlue py-2.5 px-4 text-sm font-semibold text-testLabBeige shadow-sm hover:bg-testLabBlue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           View Documentation
         </button>
+        </a>
       </section>
 
 
