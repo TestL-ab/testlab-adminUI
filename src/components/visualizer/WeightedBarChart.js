@@ -13,11 +13,13 @@ const WeightedBarChart = ({ featureAnalysis }) => {
     if (feature.is_control) {
       name = name + ' (Control)'
     }
+    let weightedTotal = feature.event_total * feature.weight;
+    let weightedDistinct = feature.distinct_user_events_total * feature.weight;
     return {
       value: name,
       isControl: feature.is_control,
-      'Total Clicks': feature.event_total,
-      'Distinct Clicks': feature.distinct_user_events_total,
+      'Total Clicks': weightedTotal,
+      'Distinct Clicks': weightedDistinct,
       percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
   })

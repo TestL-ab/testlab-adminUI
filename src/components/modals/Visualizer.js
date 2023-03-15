@@ -42,7 +42,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                     </div>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                     <h1>Raw Event Data</h1>
-                    <p className='text-gray-500 text-sm'>Total of all event data</p>
+                    <p className='text-gray-500 text-sm font-style: italic'>Total of all event data, split based on distinct users</p>
 
                     {<SimpleBarChart featureAnalysis={featureAnalysis} />}
                   </div>
