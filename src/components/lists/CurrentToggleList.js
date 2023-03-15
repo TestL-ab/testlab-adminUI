@@ -149,8 +149,6 @@ const CurrentToggleList = ({
                             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                               End Date
                             </th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
-                            </th>
                             <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
                               <span className="sr-only">Edit</span>
                             </th>
