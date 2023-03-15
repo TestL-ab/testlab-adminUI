@@ -1,3 +1,5 @@
+import { RadioGroup } from '@headlessui/react'
+
 const types = [
   { id: 1, title: "Toggle" },
   { id: 2, title: "Roll Out" },
@@ -25,8 +27,7 @@ const TypeRadio = ({ type, dispatch }) => {
                 checked={type === typeObj.id}
                 value={typeObj.id}
                 onChange={handleChange(typeObj.id)}
-                className="h-4 w-4 border-gray-300 text-testLabBlue focus:ring-testLabBlue"
-              />
+                className="h-4 w-4 border-gray-300 text-testLabBlue focus:ring-testLabBlue"              />
               <label htmlFor={typeObj.id} className="ml-3 block text-sm font-medium leading-6 text-gray-900">
                 {typeObj.title}
               </label>
