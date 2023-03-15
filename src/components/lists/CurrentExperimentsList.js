@@ -112,10 +112,10 @@ const CurrentExperimentsList = ({
         existingNames={existingNames}
       />
       <div className="max-w-7xl sm:px-6 lg:px-8">
-        <div className="border-b border-gray-200 rounded-lg bg-white px-4 py-5 sm:px-6">
+        <div className="border-b border-gray-200 rounded-lg bg-testLabBackground px-4 py-5 sm:px-6">
           <div className="md:flex md:items-center md:justify-between">
             <div className="min-w-0 flex-1">
-              <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+              <h2 className="text-2xl font-bold leading-7 text-testLabDarkBlue sm:truncate sm:text-3xl sm:tracking-tight">
                 Current Experiments
               </h2>
             </div>
@@ -130,33 +130,35 @@ const CurrentExperimentsList = ({
               <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   {emptyList
-                    ? <h3 className="text-base font-semibold leading-6 text-gray-900">You do not have any current experiments to display.</h3>
-                    : <table className="min-w-full divide-y divide-gray-300">
-                      <thead>
+                    ? <h3 className="text-base font-semibold leading-6 text-testLabDarkBlue">You do not have any current experiments to display.</h3>
+                    : <table className="rounded-lg min-w-full divide-y divide-gray-300">
+                      <thead className='rounded bg-testLabTableHead'>
                         <tr>
-                          <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
+                          <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-testLabDarkBlue sm:pl-3">
                             Name
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                             Start Date
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                             End Date
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                            Enrolled Users
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                            Enrolled User
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                          </th>
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                           </th>
                           <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                            <span className="sr-only">Edit</span>
+
                           </th>
                         </tr>
                       </thead>
                       <tbody className="bg-white">
                         {processed.map((featureObj, idx) => (
-                          <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
+                          <tr key={featureObj.id} className={idx % 2 === 0 ? "bg-white" : 'bg-testLabBackground'}>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-testLabDarkBlue sm:pl-3">
                               <DescriptionDisplay
                                 name={featureObj.name}
                                 description={featureObj.description || "No description provided."}

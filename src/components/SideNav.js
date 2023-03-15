@@ -181,7 +181,7 @@ const SideNav = ({
                   <div className="flex flex-shrink-0 items-center px-4">
                     <img
                       className="h-8 w-auto"
-                      src={require("../assets/blueicon.png")}
+                      src={require("../assets/beaker-logo.png")}
                       alt="TestLab"
                     />
                   </div>
