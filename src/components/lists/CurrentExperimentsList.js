@@ -127,7 +127,7 @@ const CurrentExperimentsList = ({
                 </h2>
               </div>
             </div>
-            <p className="mt-2 max-w-4xl text-sm text-gray-500">
+            <p className="mt-2 max-w-4xl text-s text-gray-500">
               View and edit your current experiments, ordered by start date.
             </p>
             <div className="px-4 sm:px-6 lg:px-8">
@@ -141,21 +141,21 @@ const CurrentExperimentsList = ({
                       : <table className="rounded-lg min-w-full divide-y divide-gray-300">
                         <thead className='rounded bg-testLabTableHead'>
                           <tr>
-                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-testLabDarkBlue sm:pl-3">
+                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-s font-semibold text-testLabDarkBlue sm:pl-3">
                               Name
                             </th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                            <th scope="col" className="px-3 py-3.5 text-left text-s font-semibold text-testLabDarkBlue">
                               Start Date
                             </th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                            <th scope="col" className="px-3 py-3.5 text-left text-s font-semibold text-testLabDarkBlue">
                               End Date
                             </th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                            <th scope="col" className="px-3 py-3.5 text-left text-s font-semibold text-testLabDarkBlue">
                               Enrolled User
                             </th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                            <th scope="col" className="px-3 py-3.5 text-left text-s font-semibold text-testLabDarkBlue">
                             </th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                            <th scope="col" className="px-3 py-3.5 text-left text-s font-semibold text-testLabDarkBlue">
                             </th>
                             <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
 
@@ -165,7 +165,7 @@ const CurrentExperimentsList = ({
                         <tbody className="bg-white">
                           {processed.map((featureObj, idx) => (
                             <tr key={featureObj.id} className={idx % 2 === 0 ? "bg-white" : 'bg-testLabBackground'}>
-                              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-testLabDarkBlue sm:pl-3">
+                              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-s font-medium text-testLabDarkBlue sm:pl-3">
                                 <DescriptionDisplay
                                   name={featureObj.name}
                                   description={featureObj.description || "No description provided."}
@@ -175,10 +175,10 @@ const CurrentExperimentsList = ({
                                   featuresArr={processed}
                                 />
                               </td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <td className="whitespace-nowrap px-3 py-4 text-s text-gray-500">{featureObj.startDate}</td>
+                              <td className="whitespace-nowrap px-3 py-4 text-s text-gray-500">{featureObj.endDate}</td>
+                              <td className="whitespace-nowrap px-3 py-4 text-s text-gray-500">{featureObj.userPercentage}</td>
+                              <td className="whitespace-nowrap px-3 py-4 text-s text-gray-500">
                                 <TogglePauseButton
                                   featureObj={featureObj}
                                   setExperimentChange={setExperimentChange}
