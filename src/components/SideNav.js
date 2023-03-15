@@ -270,6 +270,12 @@ const SideNav = ({
           </button>
           <div className="flex flex-1 justify-between px-4">
           </div>
+          <div className="relative isolate overflow-hidden bg-gray-900">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <div className="mx-auto max-w-2xl lg:mx-0"></div>
+              <div className="mx-auto grid max-w-xl grid-cols-1 gap-6 sm:mt-5 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"></div>
+            </div>
+          </div>
           {/* THIS IS WHERE CONTENT RENDERS:
 if currentView is Current Experimenrs <Current Experiments />  */}
           {currentPage}
