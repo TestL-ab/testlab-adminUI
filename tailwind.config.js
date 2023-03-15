@@ -7,14 +7,14 @@ content: ["./src/**/*.{html,js}"],
 theme: {
   extend: {
     fontFamily: {
-      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      sans: ['Quicksand', ...defaultTheme.fontFamily.sans],
     },
     colors: {
       testLabBlue: "#8CC3DF", // buttons - was indigo-600
       testLabBeige: "#C8D1C5", // button hover - was indigo-500
-      testLabBackground: "#f1f8fa",
+      testLabBackground: "#f1f8fa", // background on forms/lists
       testLabBlueGrey: "#eff2f4",
-      testLabDarkBlue: "#0f3654"
+      testLabDarkBlue: "#0f3654" // title text for all pages
     },
 },
   plugins: [
