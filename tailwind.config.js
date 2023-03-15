@@ -11,7 +11,10 @@ theme: {
     },
     colors: {
       testLabBlue: "#8CC3DF", // buttons - was indigo-600
-      testLabBeige: "#C8D1C5" // button hover - was indigo-500
+      testLabBeige: "#C8D1C5", // button hover - was indigo-500
+      testLabBackground: "#f1f8fa",
+      testLabBlueGrey: "#eff2f4",
+      testLabDarkBlue: "#0f3654"
     },
 },
   plugins: [

@@ -39,7 +39,55 @@ const CurrentExperimentsList = ({
   };
 
   return (
-    <>
+    <div className="h-screen relative isolate overflow-hidden bg-gray-900 h">
+      <svg
+        className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern
+            id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc"
+            width={200}
+            height={200}
+            x="50%"
+            y={-1}
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M.5 200V.5H200" fill="none" />
+          </pattern>
+        </defs>
+        <svg x="50%" y={-1} className="overflow-visible fill-gray-800/20">
+          <path
+            d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+            strokeWidth={0}
+          />
+        </svg>
+        <rect width="100%" height="100%" strokeWidth={0} fill="url(#983e3e4c-de6d-4c3f-8d64-b9761d1534cc)" />
+      </svg>
+      <svg
+        viewBox="0 0 1108 632"
+        aria-hidden="true"
+        className="absolute top-10 left-[calc(50%-4rem)] -z-10 w-[69.25rem] max-w-none transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]"
+      >
+        <path
+          fill="url(#175c433f-44f6-4d59-93f0-c5c51ad5566d)"
+          fillOpacity=".2"
+          d="M235.233 402.609 57.541 321.573.83 631.05l234.404-228.441 320.018 145.945c-65.036-115.261-134.286-322.756 109.01-230.655C968.382 433.026 1031 651.247 1092.23 459.36c48.98-153.51-34.51-321.107-82.37-385.717L810.952 324.222 648.261.088 235.233 402.609Z"
+        />
+        <defs>
+          <linearGradient
+            id="175c433f-44f6-4d59-93f0-c5c51ad5566d"
+            x1="1220.59"
+            x2="-85.053"
+            y1="432.766"
+            y2="638.714"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#4F46E5" />
+            <stop offset={1} stopColor="#80CAFF" />
+          </linearGradient>
+        </defs>
+      </svg>
       <DeleteAlert
         openDeleteAlert={openDeleteAlert}
         setOpenDeleteAlert={setOpenDeleteAlert}
@@ -64,10 +112,10 @@ const CurrentExperimentsList = ({
         existingNames={existingNames}
       />
       <div className="max-w-7xl sm:px-6 lg:px-8">
-        <div className="border-b border-gray-200 rounded-lg bg-white px-4 py-5 sm:px-6">
+        <div className="border-b border-gray-200 rounded-lg bg-testLabBackground px-4 py-5 sm:px-6">
           <div className="md:flex md:items-center md:justify-between">
             <div className="min-w-0 flex-1">
-              <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+              <h2 className="text-2xl font-bold leading-7 text-testLabDarkBlue sm:truncate sm:text-3xl sm:tracking-tight">
                 Current Experiments
               </h2>
             </div>
@@ -82,33 +130,35 @@ const CurrentExperimentsList = ({
               <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   {emptyList
-                    ? <h3 className="text-base font-semibold leading-6 text-gray-900">You do not have any current experiments to display.</h3>
-                    : <table className="min-w-full divide-y divide-gray-300">
-                      <thead>
+                    ? <h3 className="text-base font-semibold leading-6 text-testLabDarkBlue">You do not have any current experiments to display.</h3>
+                    : <table className="rounded-lg min-w-full divide-y divide-gray-300">
+                      <thead className='rounded bg-testLabTableHead'>
                         <tr>
-                          <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
+                          <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-testLabDarkBlue sm:pl-3">
                             Name
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                             Start Date
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                             End Date
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                            Enrolled Users
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                            Enrolled User
                           </th>
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
+                          </th>
+                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                           </th>
                           <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                            <span className="sr-only">Edit</span>
+
                           </th>
                         </tr>
                       </thead>
                       <tbody className="bg-white">
                         {processed.map((featureObj, idx) => (
-                          <tr key={featureObj.id} className={idx % 2 === 0 ? undefined : 'bg-gray-50'}>
-                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
+                          <tr key={featureObj.id} className={idx % 2 === 0 ? "bg-white" : 'bg-testLabBackground'}>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-testLabDarkBlue sm:pl-3">
                               <DescriptionDisplay
                                 name={featureObj.name}
                                 description={featureObj.description || "No description provided."}
@@ -158,7 +208,7 @@ const CurrentExperimentsList = ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
