@@ -35,16 +35,19 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
 {/* //how to force the graphs to be centered?  */}
                 <div className='container mx-auto '>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
-                      <h2>Weighted Click Data</h2>
+                      <h1>Weighted Event Data</h1>
+                      <p className='text-gray-500 text-sm'>Corrects for percentage of users in each variant</p>
                       {/* legend should have the weight of each variant */}
                       <WeightedBarChart featureAnalysis={featureAnalysis}/>
                     </div>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
-                    <h2>Raw Click Data</h2>
+                    <h1>Raw Event Data</h1>
+                    <p className='text-gray-500 text-sm'>Total of all event data</p>
+
                     {<SimpleBarChart featureAnalysis={featureAnalysis} />}
                   </div>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
-                    <h2>Timeline of Click Data</h2>
+                    <h1>Timeline of Event Data</h1>
                     {<DailyLineChart eventData={eventData} featureAnalysis={featureAnalysis}/>}
                   </div>
                 </div>
