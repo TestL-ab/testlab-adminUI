@@ -20,7 +20,7 @@ const UpdateToggleVariantButton = ({
     <>
       { displayShowVariantButton && <button
         type="button"
-        className="rounded bg-white py-1 px-2 text-sm font-semibold text-testLabBlue shadow-sm ring-1 ring-inset ring-testLabBlue hover:ring-testLabBeige hover:text-white hover:bg-testLabBeige"
+        className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-testLabBlue shadow-sm ring-1 ring-inset ring-testLabBlue hover:bg-testLabBeige hover:text-white hover:ring-testLabBeige"
         onClick={handleToggleVariants}
       >
         Show Variant Form
@@ -28,7 +28,7 @@ const UpdateToggleVariantButton = ({
       { displayShowExperimentButton &&
       <button
         type="button"
-        className="rounded bg-white py-1 px-2 text-sm font-semibold text-testLabBlue shadow-sm ring-1 ring-inset ring-testLabBlue hover:ring-testLabBeige hover:text-white hover:bg-testLabBeige"
+        className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-testLabBlue shadow-sm ring-1 ring-inset ring-testLabBlue hover:bg-testLabBeige hover:text-white hover:ring-testLabBeige"
         onClick={handleToggleVariants}
       >
         Show Experiment Form

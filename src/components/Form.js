@@ -193,10 +193,10 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                               endDate={endDate}
                             />
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                          </div>
+                          </div>
+                          </div>
+                                            </div>
                   <Buttons
                     setName={setName}
                     setDescription={setDescription}
@@ -207,6 +207,10 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                     currentDate={currentDate}
                     setQuery={setQuery}
                   />
+
+
+
+
                 </form>
               </div>
             </div>

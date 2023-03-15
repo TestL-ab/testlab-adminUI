@@ -2,7 +2,6 @@ import { useState } from 'react';
 import VariantForm from './VariantForm';
 import ControlVariantForm from './ControlVariantForm';
 import VariantButtons from './VariantButtons';
-import FormSuccessNotification from './FormSuccessNotification';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 
@@ -67,7 +66,6 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
     if (nextNum > 5) return;
     setLastVariant(nextNum);
     changeLastVariant(nextNum);
-    setFormSuccess(true);
   };
 
   const handleRemoveVariant = (event) => {
@@ -214,6 +212,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
       console.log(variantsObj);
       const response = await experimentService.createVariants(experimentId, variantsObj);
       console.log(response);
+      setFormSuccess(true);
       setExperimentObj(null);
       setShowVariants(false);
       setExperimentChange(true);
