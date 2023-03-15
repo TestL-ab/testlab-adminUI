@@ -2,18 +2,11 @@ import { Fragment, useState, useReducer } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
-  BellIcon,
   CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
   HomeIcon,
-  InboxIcon,
-  UsersIcon,
   XMarkIcon,
   BeakerIcon,
-  ListBulletIcon,
   AdjustmentsHorizontalIcon,
-  PlusCircleIcon,
   PlusIcon,
   ArrowsRightLeftIcon,
   ArchiveBoxIcon
