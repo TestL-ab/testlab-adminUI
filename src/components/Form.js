@@ -24,6 +24,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
   const [showVariants, setShowVariants] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
   const [nameTaken, setNameTaken] = useState(false);
+  const successMessage = "Feature created successfully!";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -74,9 +75,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
           <div className="mx-auto grid max-w-xl grid-cols-1 gap-6 sm:mt-5 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"></div>
         </div>
       </div>
-
-
-      <div className="h-screen relative isolate overflow-hidden bg-gray-900 h">
+      <div className="h-screen relative isolate overflow-y-auto overflow-x-hidden bg-gray-900 h">
         <svg
           className="absolute inset-0 -z-10 h-full w-full [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
           aria-hidden="true"
@@ -93,7 +92,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
               <path d="M.5 200V.5H200" fill="none" />
             </pattern>
           </defs>
-          <svg x="50%" y={-1} className="overflow-visible fill-gray-800/20">
+          <svg x="50%" y={-1} className="overflow-auto fill-gray-800/20">
             <path
               d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
               strokeWidth={0}
@@ -125,16 +124,17 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
             </linearGradient>
           </defs>
         </svg>
-        <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
+        <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} message={successMessage} />
         {showVariants
           ? <Variants
             experimentObj={experimentObj}
             setExperimentObj={setExperimentObj}
             setShowVariants={setShowVariants}
             setExperimentChange={setExperimentChange}
+            setFormSuccess={setFormSuccess}
           />
-          : <div className="max-w-7xl sm:px-6 lg:px-8">
-            <div className="border-b border-gray-200 rounded-lg bg-testLabBackground px-4 py-5 sm:px-6">
+          : <div className="max-w-7xl sm:px-6 lg:px-8 overflow-auto">
+            <div className="border-b border-gray-200 rounded-lg bg-testLabBackground px-4 py-5 sm:px-6 overflow-auto">
               <div className="md:flex md:items-center md:justify-between">
                 <div className="min-w-0 flex-1">
                   <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">

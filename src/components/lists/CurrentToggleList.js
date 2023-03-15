@@ -47,7 +47,7 @@ const CurrentToggleList = ({
           <div className="mx-auto grid max-w-xl grid-cols-1 gap-6 sm:mt-5 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"></div>
         </div>
       </div>
-      <div className="h-screen relative isolate overflow-hidden bg-gray-900 h">
+      <div className="h-screen relative isolate overflow-y-auto overflow-x-hidden bg-gray-900 h">
         <svg
           className="absolute inset-0 -z-10 h-full w-full [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
           aria-hidden="true"

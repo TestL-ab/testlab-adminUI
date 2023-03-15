@@ -2,7 +2,7 @@ import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 
-const FormSuccessNotification = ({ formSuccess, setFormSuccess }) => {
+const FormSuccessNotification = ({ formSuccess, setFormSuccess, message }) => {
 
   const cancelButtonRef = useRef(null)
 
@@ -39,7 +39,7 @@ const FormSuccessNotification = ({ formSuccess, setFormSuccess }) => {
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                      Feature created successfully!
+                      {message}
                     </Dialog.Title>
                   </div>
                 </div>
