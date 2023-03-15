@@ -10,6 +10,13 @@ import {
   InboxIcon,
   UsersIcon,
   XMarkIcon,
+  BeakerIcon,
+  ListBulletIcon,
+  AdjustmentsHorizontalIcon,
+  PlusCircleIcon,
+  PlusIcon,
+  ArrowsRightLeftIcon,
+  ArchiveBoxIcon
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Home from './Home'
@@ -22,12 +29,12 @@ import ScheduledFeaturesList from './lists/ScheduledFeaturesList'
 
 let navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'Create New Feature', href: '#', icon: UsersIcon, current: false },
-  { name: 'Current Toggles', href: '#', icon: FolderIcon, current: false },
-  { name: 'Current Roll-Outs', href: '#', icon: FolderIcon, current: false },
-  { name: 'Current Experiments', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Create New Feature', href: '#', icon: PlusIcon, current: false },
+  { name: 'Current Toggles', href: '#', icon: ArrowsRightLeftIcon, current: false },
+  { name: 'Current Roll-Outs', href: '#', icon: AdjustmentsHorizontalIcon, current: false },
+  { name: 'Current Experiments', href: '#', icon: BeakerIcon, current: false },
   { name: 'Scheduled Features', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Past Experiments', href: '#', icon: InboxIcon, current: false },
+  { name: 'Past Experiments', href: '#', icon: ArchiveBoxIcon, current: false },
 ]
 
 function classNames(...classes) {
@@ -269,17 +276,6 @@ const SideNav = ({
           </button>
           <div className="flex flex-1 justify-between px-4">
           </div>
-
-
-
-          {/* <div className="relative isolate overflow-hidden bg-gray-900">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-              <div className="mx-auto max-w-2xl lg:mx-0"></div>
-              <div className="mx-auto grid max-w-xl grid-cols-1 gap-6 sm:mt-5 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"></div>
-            </div>
-          </div>
- */}
-
 
           {/* THIS IS WHERE CONTENT RENDERS:
 if currentView is Current Experimenrs <Current Experiments />  */}
