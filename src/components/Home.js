@@ -559,22 +559,17 @@ const Home = () => {
           </linearGradient>
         </defs>
       </svg>
-      <div className="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:py-40 lg:px-8">
 
 
-
-
-
-
+      <section className="hero container max-w-screen-lg mx-auto pb-10 flex justify-center">
         <img
           src={require('../assets/full_logo_transparent.png')}
           alt="TestLab"
         />
+      </section>
 
 
-
-
-      </div>
+      {/* </div> */}
     </div>
   );
 };
