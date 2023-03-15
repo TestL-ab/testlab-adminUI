@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import visualizerUtils from '../../utils/visualizerUtils';
 
-const SimpleBarChart = ({ featureAnalysis }) => {
+const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
   console.log(featureAnalysis);
   let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
-    return sum + currFeature.event_total
+    return sum + currFeature.distinct_user_events_total
   }, 0)
   let processedAnalysis = featureAnalysis.map(feature => {
     let name = feature.value
@@ -70,4 +70,4 @@ const SimpleBarChart = ({ featureAnalysis }) => {
 }
 
 
-export default SimpleBarChart;
+export default WeightedBarChart;

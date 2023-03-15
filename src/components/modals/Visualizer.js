@@ -4,6 +4,7 @@ import Graph from '../visualizer/Graph';
 import ClickPercentageChart from '../visualizer/ClickPercentageChart'
 import SimpleBarChart from '../visualizer/SimpleBarChart';
 import DailyLineChart from '../visualizer/LineChart';
+import WeightedBarChart from '../visualizer/WeightedBarChart';
 /*
 icon possibilites: 
 export { default as ArrowLeftCircleIcon } from './ArrowLeftCircleIcon'
@@ -33,6 +34,11 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
               <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
 {/* //how to force the graphs to be centered?  */}
                 <div className='container mx-auto '>
+                  <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
+                      <h2>Weighted Click Data</h2>
+                      {/* legend should have the weight of each variant */}
+                      <WeightedBarChart featureAnalysis={featureAnalysis}/>
+                    </div>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                     <h2>Raw Click Data</h2>
                     {<SimpleBarChart featureAnalysis={featureAnalysis} />}

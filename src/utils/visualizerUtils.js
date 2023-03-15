@@ -13,6 +13,13 @@ const parseByDay = (eventData, variantNameMap) => {
     }
   })
 //parse back to array of objects with appropriate properties
+
+/*
+{date: 'today', 
+varian1: 50, 
+variant2: 1000
+}
+*/
   let finalParsedArr = [];
   for (let timestamp in sortedDataObj) {
     let dataPoint = {};
@@ -29,7 +36,7 @@ const parseByDay = (eventData, variantNameMap) => {
 const createVariantNameMap = (featureAnalysis) => {
   let variantNameMap = {};
   featureAnalysis.forEach(variant => {
-    let variantId = variant.id;
+    let variantId = variant.g;
     variantNameMap[variantId] = variant.value;
   })
   return variantNameMap;
