@@ -151,7 +151,7 @@ const CurrentExperimentsList = ({
                               End Date
                             </th>
                             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
-                              Enrolled User
+                              Enrolled Users
                             </th>
                             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-testLabDarkBlue">
                             </th>
