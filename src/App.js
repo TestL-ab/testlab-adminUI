@@ -40,7 +40,8 @@ const App = () => {
       {error ? <p>{error}</p>
         :
         <>
-          <div>
+          <div> 
+            {/* change parent div to tailwind UI container?  */}
             <SideNav
               currentToggles={currentToggles}
               setCurrentToggles={setCurrentToggles}
