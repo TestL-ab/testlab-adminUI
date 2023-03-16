@@ -10,7 +10,7 @@ const DescriptionText = ({ description, setDescription }) => {
       <label htmlFor="about" className="font-semibold text-gray-900">
         Description
       </label>
-      <p className="mt-2 text-sm text-gray-500">Include helpful reminders about this feature, and experiment hypothesis if relevant.</p>
+      <p className="mt-2 text-sm text-gray-500">Include helpful reminders about this feature along with your experiment hypothesis, if relevant.</p>
       <div className="mt-2">
         <textarea
           rows={4}

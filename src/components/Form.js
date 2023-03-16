@@ -143,7 +143,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                 </div>
               </div>
               <p className="mt-2 max-w-4xl text-sm text-gray-500">
-                Enter details for your new toggle, roll out, or experiment here.
+                Enter details for your new toggle, rollout, or experiment here.
               </p>
               <div className="px-4 sm:px-6 lg:px-8 mt-8 flow-root">
                 <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
