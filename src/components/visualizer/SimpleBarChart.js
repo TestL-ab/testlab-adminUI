@@ -49,7 +49,7 @@ const SimpleBarChart = ({ featureAnalysis }) => {
             return (
               <>
                 <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
-                <Cell key={`cell-${idx}`} fill={visualizerUtils.themeColors[idx]} />
+                <Cell key={`cell-${idx}`} />
               </>
             )
           }))}
