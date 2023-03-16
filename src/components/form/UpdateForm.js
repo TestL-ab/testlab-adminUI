@@ -101,6 +101,7 @@ const UpdateForm = ({
                           name={name}
                           setName={setName}
                           existingNames={existingNames}
+                          updateFeatureCurrentName={featureObj.name}
                           nameTaken={nameTaken}
                           setNameTaken={setNameTaken}
                         />
