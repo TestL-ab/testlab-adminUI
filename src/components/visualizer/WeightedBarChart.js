@@ -18,7 +18,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
     return {
       value: name,
       isControl: feature.is_control,
-      'Total Clicks': weightedTotal,
+      'Total Clicks': weightedTotal-weightedDistinct,
       'Distinct Clicks': weightedDistinct,
       percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
@@ -46,21 +46,21 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Clicks" stackId="a">
+        <Bar dataKey="Total Clicks" stackId="a" fill={visualizerUtils.themeColors[0]}>
           {processedAnalysis.map(((obj, idx) => {
             return (
               <>
                 <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
-                <Cell key={`cell-${idx}`} fill={visualizerUtils.themeColors[idx]} />
+                <Cell key={`cell-${idx}`}  />
               </>
             )
           }))}
         </Bar>
-        <Bar dataKey="Distinct Clicks" stackId="a">
+        <Bar dataKey="Distinct Clicks" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
               <>
-                <Cell key={`distinct-${idx}`} fill={visualizerUtils.themeColors[idx+processedAnalysis.length]}/>
+                <Cell key={`distinct-${idx}`} />
                 {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
               </>
             )

@@ -16,7 +16,7 @@ const SimpleBarChart = ({ featureAnalysis }) => {
     return {
       value: name,
       isControl: feature.is_control,
-      'Total Clicks': feature.event_total,
+      'Total Clicks': feature.event_total-feature.distinct_user_events_total,
       'Distinct Clicks': feature.distinct_user_events_total,
       percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
