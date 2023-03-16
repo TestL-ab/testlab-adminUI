@@ -1,7 +1,14 @@
-const NameInput = ({ name, setName, existingNames, nameTaken, setNameTaken }) => {
+const NameInput = ({ name, setName, existingNames, nameTaken, setNameTaken, updateFeatureCurrentName }) => {
   const handleInput = (event) => {
     event.preventDefault();
     const value = event.target.value;
+    if (updateFeatureCurrentName &&
+        updateFeatureCurrentName.toLowerCase().trim() === value.toLowerCase().trim()) {
+          setNameTaken(false);
+          setName(value);
+          return
+        }
+
     existingNames.includes(value.toLowerCase().trim())
       ? setNameTaken(true)
       : setNameTaken(false);
