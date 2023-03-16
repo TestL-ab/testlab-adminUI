@@ -44,7 +44,7 @@ const SimpleBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Clicks" fill={visualizerUtils.themeColors[0]}>
+        <Bar dataKey="Total Clicks" fill={visualizerUtils.themeColors[0]} stackId="a">
           {processedAnalysis.map(((obj, idx) => {
             return (
               <>
@@ -54,11 +54,11 @@ const SimpleBarChart = ({ featureAnalysis }) => {
             )
           }))}
         </Bar>
-        <Bar dataKey="Distinct Clicks" >
+        <Bar dataKey="Distinct Clicks" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
               <>
-                <Cell key={`distinct-${idx}`} fill={visualizerUtils.themeColors[idx+processedAnalysis.length]}/>
+                <Cell key={`distinct-${idx}`} />
                 {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
               </>
             )

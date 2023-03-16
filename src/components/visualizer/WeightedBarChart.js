@@ -46,7 +46,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Clicks">
+        <Bar dataKey="Total Clicks" stackId="a">
           {processedAnalysis.map(((obj, idx) => {
             return (
               <>
@@ -56,7 +56,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
             )
           }))}
         </Bar>
-        <Bar dataKey="Distinct Clicks">
+        <Bar dataKey="Distinct Clicks" stackId="a">
           {processedAnalysis.map((obj, idx) => {
             return (
               <>
