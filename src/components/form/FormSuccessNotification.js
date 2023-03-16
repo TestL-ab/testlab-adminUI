@@ -2,9 +2,13 @@ import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 
-const FormSuccessNotification = ({ formSuccess, setFormSuccess, message }) => {
+const FormSuccessNotification = ({ formSuccess, setFormSuccess, message, isUpdate, setShowUpdateModal  }) => {
+  const cancelButtonRef = useRef(null);
 
-  const cancelButtonRef = useRef(null)
+  const handleClose = (event) => {
+    if (isUpdate) setShowUpdateModal(false);
+    setFormSuccess(false);
+  }
 
   return (
     <Transition.Root show={formSuccess} as={Fragment}>
@@ -47,7 +51,8 @@ const FormSuccessNotification = ({ formSuccess, setFormSuccess, message }) => {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-testLabBlue px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-                    onClick={() => setFormSuccess(false)}
+                    // onClick={() => setFormSuccess(false)}
+                    onClick={handleClose}
                   >
                     Close
                   </button>

@@ -24,7 +24,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
   const [showVariants, setShowVariants] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
   const [nameTaken, setNameTaken] = useState(false);
-  const successMessage = "Feature created successfully!";
+  const successMessage = `Feature created successfully!`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

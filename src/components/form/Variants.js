@@ -20,8 +20,6 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
   const [hidden4, setHidden4] = useState(true);
   const [hidden5, setHidden5] = useState(true);
   const [lastVariant, setLastVariant] = useState(2);
-  // const [formSuccess, setFormSuccess] = useState(false);
-  // const successMessage = `Variants added to ${experimentObj.name} successfully!`;
 
   const experimentName = experimentObj.name;
   const experimentId = experimentObj.id;
