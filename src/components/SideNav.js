@@ -26,7 +26,7 @@ let navigation = [
   { name: 'Current Toggles', href: '#', icon: ArrowsRightLeftIcon, current: false },
   { name: 'Current Roll-Outs', href: '#', icon: AdjustmentsHorizontalIcon, current: false },
   { name: 'Current Experiments', href: '#', icon: BeakerIcon, current: false },
-  { name: 'Scheduled Features', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Upcoming Features', href: '#', icon: CalendarIcon, current: false },
   { name: 'Past Experiments', href: '#', icon: ArchiveBoxIcon, current: false },
 ]
 
@@ -92,7 +92,7 @@ const SideNav = ({
           existingNames={existingNames}
         />
       }
-      case 'Scheduled Features': {
+      case 'Upcoming Features': {
         return <ScheduledFeaturesList
           scheduledFeatures={scheduledFeatures}
           setScheduledFeatures={setScheduledFeatures}

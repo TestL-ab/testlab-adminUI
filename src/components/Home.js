@@ -50,12 +50,6 @@ const Home = () => {
         </defs>
       </svg>
 
-
-
-
-
-
-
       {/* <section className="hero container max-w-screen-lg mx-auto pb-10 flex justify-center"> */}
       <section className="hero container max-w-screen-lg mx-auto pb-10 flex flex-col items-center">
         <img
@@ -71,11 +65,6 @@ const Home = () => {
         </button>
         </a>
       </section>
-
-
-
-
-
     </div>
   );
 };
