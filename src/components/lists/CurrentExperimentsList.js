@@ -178,7 +178,7 @@ const CurrentExperimentsList = ({
                               </td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
+                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{`${Math.floor(featureObj.user_percentage * 100)}%`}</td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 <TogglePauseButton
                                   featureObj={featureObj}
