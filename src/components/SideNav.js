@@ -24,9 +24,9 @@ let navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
   { name: 'Create New Feature', href: '#', icon: PlusIcon, current: false },
   { name: 'Current Toggles', href: '#', icon: ArrowsRightLeftIcon, current: false },
-  { name: 'Current Roll-Outs', href: '#', icon: AdjustmentsHorizontalIcon, current: false },
+  { name: 'Current Rollouts', href: '#', icon: AdjustmentsHorizontalIcon, current: false },
   { name: 'Current Experiments', href: '#', icon: BeakerIcon, current: false },
-  { name: 'Scheduled Features', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Upcoming Features', href: '#', icon: CalendarIcon, current: false },
   { name: 'Past Experiments', href: '#', icon: ArchiveBoxIcon, current: false },
 ]
 
@@ -82,7 +82,7 @@ const SideNav = ({
           existingNames={existingNames}
         />
       }
-      case 'Current Roll-Outs': {
+      case 'Current Rollouts': {
         return <CurrentRollOutList
           currentFeatures={currentRollouts}
           setCurrentFeatures={setCurrentRollouts}
@@ -92,7 +92,7 @@ const SideNav = ({
           existingNames={existingNames}
         />
       }
-      case 'Scheduled Features': {
+      case 'Upcoming Features': {
         return <ScheduledFeaturesList
           scheduledFeatures={scheduledFeatures}
           setScheduledFeatures={setScheduledFeatures}

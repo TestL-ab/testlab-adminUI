@@ -7,7 +7,7 @@ const processFeatureObjs = (featureArr) => {
         break
       }
       case 2: {
-        type = "Roll-Out";
+        type = "Rollout";
         break;
       } case 3: {
         type = "Experiment";

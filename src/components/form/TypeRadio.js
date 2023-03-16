@@ -2,7 +2,7 @@ import { RadioGroup } from '@headlessui/react'
 
 const types = [
   { id: 1, title: "Toggle" },
-  { id: 2, title: "Roll Out" },
+  { id: 2, title: "Rollout" },
   { id: 3, title: "Experiment" }
 ];
 
