@@ -8,7 +8,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
   return (
     <>
       <div className="sm:col-span-8 lg:col-span-7 px-4 py-4">
-        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div className="overflow-hidden bg-white sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-lg font-semibold leading-6 text-gray-900">{experiment.name}</h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">{experiment.description}</p>
@@ -33,7 +33,6 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
                   <br />
 
 
-
                   <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     <li key={controlVariant.id} className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
                       <div className="flex w-full items-center justify-between space-x-6 p-6">
@@ -43,7 +42,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
 
                             <p className="text-sm font-bold break-normal text-gray-900">{controlVariant.value}</p>
                           </div>
-                          <span className="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+                          <span className="inline-block flex-shrink-0 rounded-full bg-green-100 mt-2 px-2 py-1 text-xs font-semibold text-green-800">
                               Control
                             </span>
                             <br/>
