@@ -28,7 +28,7 @@ const SimpleBarChart = ({ featureAnalysis }) => {
 
   return (
     <>
-      <BarChart
+      <BarChart className='simple-barchart'
         width={500}
         height={300}
         data={processedAnalysis}
