@@ -49,8 +49,6 @@ const Home = () => {
           </linearGradient>
         </defs>
       </svg>
-
-      {/* <section className="hero container max-w-screen-lg mx-auto pb-10 flex justify-center"> */}
       <section className="hero container max-w-screen-lg mx-auto pb-10 flex flex-col items-center">
         <img
           src={require('../assets/full_logo_transparent_bottom_crop.png')}
