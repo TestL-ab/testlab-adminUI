@@ -105,6 +105,7 @@ const CurrentExperimentsList = ({
           processedFeatures={processedFeatures}
           setProcessedFeatures={setProcessedFeatures}
         />
+
         <UpdateFormModal
           showUpdateModal={showUpdateModal}
           setShowUpdateModal={setShowUpdateModal}

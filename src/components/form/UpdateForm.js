@@ -17,7 +17,7 @@ const UpdateForm = ({
   existingNames,
   setShowUpdateModal,
   processedFeatures,
-  setProcessedFeatures
+  setProcessedFeatures,
 }) => {
   const currentDate = new Date();
   const [name, setName] = useState(featureObj.name);
@@ -32,6 +32,7 @@ const UpdateForm = ({
   const [nameTaken, setNameTaken] = useState(false);
   const type = featureObj.type_id;
   const startDate = new Date(featureObj.startDate);
+  const successMessage = `${featureObj.name} successfully updated!`;
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -56,7 +57,6 @@ const UpdateForm = ({
       const response = await experimentService.updateFeature(featureObj.id, updatedFeatureObj);
       const updatedFeatures = processedFeatures.map(featObj => featObj.id === response.id ? response : featObj);
       setProcessedFeatures(updatedFeatures);
-      setShowUpdateModal(false);
       setFormSuccess(true);
       setExperimentChange(true);
     } catch (error) {
@@ -66,7 +66,13 @@ const UpdateForm = ({
 
   return (
     <>
-      <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
+      <FormSuccessNotification
+        formSuccess={formSuccess}
+        setFormSuccess={setFormSuccess}
+        isUpdate={true}
+        setShowUpdateModal={setShowUpdateModal}
+        message={successMessage}
+      />
       {showVariants
         ? <UpdateVariants
           experimentObj={experimentObj}
@@ -105,6 +111,7 @@ const UpdateForm = ({
                           nameTaken={nameTaken}
                           setNameTaken={setNameTaken}
                         />
+
                         <DescriptionText
                           description={description}
                           setDescription={setDescription}
