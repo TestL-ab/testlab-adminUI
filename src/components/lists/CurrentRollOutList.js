@@ -124,12 +124,12 @@ const CurrentRollOutList = ({
             <div className="md:flex md:items-center md:justify-between">
               <div className="min-w-0 flex-1">
                 <h2 className="text-2xl font-bold leading-7 text-testLabDarkBlue sm:truncate sm:text-3xl sm:tracking-tight">
-                  Current Roll-Outs
+                  Current Rollouts
                 </h2>
               </div>
             </div>
             <p className="mt-2 max-w-4xl text-sm text-gray-500">
-              View and edit your upcoming roll-outs, ordered by start date.
+              View and edit your upcoming rollouts, ordered by start date.
             </p>
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="mt-8 flow-root">

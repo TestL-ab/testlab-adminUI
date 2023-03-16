@@ -128,7 +128,7 @@ const ScheduledFeaturesList = ({
               </div>
             </div>
             <p className="mt-2 max-w-4xl text-sm text-gray-500">
-              View and edit your upcoming toggles, roll-outs, and experiments, ordered by start date.
+              View and edit your upcoming toggles, rollouts, and experiments, ordered by start date.
             </p>
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="mt-8 flow-root">
