@@ -123,7 +123,7 @@ const CurrentToggleList = ({
           <div className="border-b border-gray-200 rounded-lg bg-testLabBackground px-4 py-5 sm:px-6">
             <div className="md:flex md:items-center md:justify-between">
               <div className="min-w-0 flex-1">
-                <h2 className="text-2xl font-bold leading-7 text-testLabDarkBlue sm:truncate sm:text-3xl sm:tracking-tight">
+                <h2 className="font-bold text-2xlt leading-7 text-testLabDarkBlue sm:truncate sm:text-3xl sm:tracking-tight">
                   Current Toggles
                 </h2>
               </div>

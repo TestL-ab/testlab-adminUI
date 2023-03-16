@@ -8,6 +8,7 @@ theme: {
   extend: {
     fontFamily: {
       sans: ['Quicksand', ...defaultTheme.fontFamily.sans],
+      titleFont: ['Lato', ...defaultTheme.fontFamily.sans]
     },
     colors: {
       testLabBlue: "#8CC3DF", // buttons - was indigo-600
