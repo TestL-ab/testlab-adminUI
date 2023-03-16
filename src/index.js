@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "@fontsource/quicksand";
+import "@fontsource/lato";
 import './index.css';
 import App from './App';
 

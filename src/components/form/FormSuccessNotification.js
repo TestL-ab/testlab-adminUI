@@ -46,7 +46,7 @@ const FormSuccessNotification = ({ formSuccess, setFormSuccess, message }) => {
                 <div className="mt-3 text-center sm:mt-5">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
+                    className="inline-flex w-full justify-center rounded-md bg-testLabBlue px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
                     onClick={() => setFormSuccess(false)}
                   >
                     Close
