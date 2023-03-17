@@ -13,7 +13,8 @@ const DateSelector = ({
   scheduledFeatures,
   currentExperiments,
   setMaxAvailable,
-  isUpdate
+  isUpdate,
+  updateId
 }) => {
 
   const tomorrow = formUtils.getNextDayDateSelector(currentDate);
@@ -23,7 +24,15 @@ const DateSelector = ({
 
   useEffect(() => {
     if (startDate && endDate) {
-      const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+      let existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+      console.log(existingExperiments.length)
+      if (isUpdate) {
+        existingExperiments = existingExperiments.filter((obj) => {
+          console.log(obj, updateId)
+           return obj.id !== updateId
+        });
+        console.log("after", existingExperiments.length)
+      }
       const dateArray = formUtils.getDateRange(startDate, endDate);
       const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
       setMaxAvailable(available * 100);
@@ -32,7 +41,10 @@ const DateSelector = ({
 
   const handleChangeStart = (date) => {
     setStartDate(date);
-    const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+    let existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+    if (isUpdate) {
+      existingExperiments = existingExperiments.filter((obj) => obj.id !== updateId);
+    }
     const dateArray = formUtils.getDateRange(date, endDate);
     const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
     setMaxAvailable(available * 100);
@@ -40,7 +52,10 @@ const DateSelector = ({
 
   const handleChangeEnd = (date) => {
     setEndDate(date);
-    const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+    let existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
+    if (isUpdate) {
+      existingExperiments = existingExperiments.filter((obj) => obj.id !== updateId);
+    }
     const dateArray = formUtils.getDateRange(startDate, date);
     const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
     setMaxAvailable(available * 100);

@@ -20,6 +20,7 @@ const processExperiments = (scheduledFeatures, currentExperiments)=> {
       startDate: new Date(experimentObj.start_date),
       endDate: new Date(experimentObj.end_date),
       userPercentage: experimentObj.user_percentage,
+      id: experimentObj.id
     };
   });
 }

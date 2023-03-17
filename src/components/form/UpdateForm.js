@@ -119,6 +119,7 @@ const UpdateForm = ({
                         <DateSelector
                           startDate={startDate}
                           isUpdate={true}
+                          updateId={featureObj.id}
                           endDate={endDate}
                           setEndDate={setEndDate}
                           currentDate={currentDate}

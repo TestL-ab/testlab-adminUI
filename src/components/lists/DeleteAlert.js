@@ -24,6 +24,7 @@ const DeleteAlert = ({
       deleteObj.callback(filteredList);
       setDeleteObj(null);
       setExperimentChange(true);
+      console.log("deleted");
     } catch (error) {
       setDeleteObj(null);
       setError(error.message);
