@@ -7,7 +7,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
 
   return (
     <>
-      <div className="sm:col-span-8 lg:col-span-7 px-4 py-4">
+      <div className="sm:col-span-2 lg:col-span-2 px-4 py-4">
         <div className="overflow-hidden bg-white sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-lg font-semibold leading-6 text-gray-900">{experiment.name}</h3>
@@ -20,7 +20,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
                 <dd className="mt-1 text-s text-gray-900">{experiment.startDate}</dd>
               </div>
 
-              <div className="sm:col-span-1">
+              <div className="sm:col-span-2">
                 <dt className="text-s font-medium text-gray-500">End Date</dt>
                 <dd className="mt-1 text-s text-gray-900">{experiment.endDate}</dd>
               </div>
