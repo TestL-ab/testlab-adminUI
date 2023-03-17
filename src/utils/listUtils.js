@@ -19,7 +19,7 @@ const processFeatureObjs = (featureArr) => {
       ...obj,
       startDate: new Date(obj.start_date).toLocaleDateString(),
       endDate: new Date(obj.end_date).toLocaleDateString(),
-      userPercentage: `${100 * obj.user_percentage}%`,
+      userPercentage: `${Math.floor(100 * obj.user_percentage)}%`,
       type,
     };
   });
