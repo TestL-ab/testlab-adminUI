@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer } from 'react';
 import NameInput from './form/NameInput';
 import DescriptionText from './form/DescriptionText';
 import TypeRadio from './form/TypeRadio';
@@ -24,16 +24,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
   const [showVariants, setShowVariants] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
   const [nameTaken, setNameTaken] = useState(false);
-  const [existingExperiments, setExistingExperiments] = useState([]);
   const successMessage = `Feature created successfully!`;
-
-  useEffect(() => {
-    setExistingExperiments(formUtils.processExperiments(scheduledFeatures, currentExperiments));
-  }, []);
-
-  useEffect(() => {
-    console.log("existing experiments", existingExperiments);
-  }, [existingExperiments]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -61,7 +52,6 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
       if (type === 3) {
         setExperimentObj(response);
         setShowVariants(true);
-        setExistingExperiments(existingExperiments.concat(response));
       }
       setName("");
       setDescription("");
@@ -190,7 +180,6 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                             currentExperiments={currentExperiments}
                             maxAvailable={maxAvailable}
                             setMaxAvailable={setMaxAvailable}
-                            existingExperiments={existingExperiments}
                           />
                         </div>
                         <div className="sm:col-span-5">

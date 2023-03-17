@@ -12,10 +12,8 @@ const DateSelector = ({
   currentDate,
   scheduledFeatures,
   currentExperiments,
-  maxAvailable,
   setMaxAvailable,
-  isUpdate,
-  existingExperiments
+  isUpdate
 }) => {
 
   const tomorrow = formUtils.getNextDayDateSelector(currentDate);
@@ -25,15 +23,12 @@ const DateSelector = ({
 
   useEffect(() => {
     if (startDate && endDate) {
-      console.log("existing experiments from date selector", existingExperiments);
-
+      const existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
       const dateArray = formUtils.getDateRange(startDate, endDate);
       const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
       setMaxAvailable(available * 100);
-      console.log("max available:", maxAvailable);
     }
-    console.log("date selector rerendering");
-  }, [existingExperiments]);
+  }, []);
 
   const handleChangeStart = (date) => {
     setStartDate(date);
