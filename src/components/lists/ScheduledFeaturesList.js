@@ -178,7 +178,7 @@ const ScheduledFeaturesList = ({
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.type}</td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.startDate}</td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.endDate}</td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{`${Math.floor(featureObj.user_percentage * 100)}%`}</td>
+                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{featureObj.userPercentage}</td>
                               <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                                 <button
                                   type="button"
