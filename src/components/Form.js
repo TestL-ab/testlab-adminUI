@@ -9,6 +9,7 @@ import Buttons from './form/Buttons';
 import FormSuccessNotification from './form/FormSuccessNotification'
 import experimentService from '../services/experimentService';
 import formUtils from '../utils/formUtils';
+import listUtils from '../utils/listUtils';
 
 const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, existingNames }) => {
   const currentDate = new Date();
@@ -24,6 +25,10 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
   const [showVariants, setShowVariants] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
   const [nameTaken, setNameTaken] = useState(false);
+  const [currExps, setCurrExps] = useState([...currentExperiments]);
+
+
+
   const successMessage = `Feature created successfully!`;
 
   const handleSubmit = async (event) => {
@@ -52,6 +57,8 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
       if (type === 3) {
         setExperimentObj(response);
         setShowVariants(true);
+        const processedResponse = listUtils.processFeatureObjs([response]).pop();
+        setCurrExps(currExps.concat(processedResponse));
       }
       setName("");
       setDescription("");
@@ -178,7 +185,7 @@ const Form = ({ currentExperiments, scheduledFeatures, setExperimentChange, exis
                             currentDate={currentDate}
                             type={type}
                             scheduledFeatures={scheduledFeatures}
-                            currentExperiments={currentExperiments}
+                            currentExperiments={currExps}
                             maxAvailable={maxAvailable}
                             setMaxAvailable={setMaxAvailable}
                           />
