@@ -44,7 +44,8 @@ const SimpleBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Clicks" fill={visualizerUtils.themeColors[0]} stackId="a">
+
+        <Bar dataKey="Total Clicks"  fill={visualizerUtils.themeColors[0]} stackId="a">
           {processedAnalysis.map(((obj, idx) => {
             return (
               <>
