@@ -30,6 +30,7 @@ const UpdateVariants = ({
   const [hidden4, setHidden4] = useState(true);
   const [hidden5, setHidden5] = useState(true);
   const [lastVariant, setLastVariant] = useState(2);
+
   const [formSuccess, setFormSuccess] = useState(false);
 
   const experimentName = experimentObj.name;
@@ -48,6 +49,7 @@ const UpdateVariants = ({
       setHidden3(false);
     }
     if (tests[2]) {
+
       setVariantObj4(tests[2]);
       setHidden4(false);
     }

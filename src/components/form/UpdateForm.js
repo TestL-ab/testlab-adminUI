@@ -57,6 +57,8 @@ const UpdateForm = ({
       const response = await experimentService.updateFeature(featureObj.id, updatedFeatureObj);
       const updatedFeatures = processedFeatures.map(featObj => featObj.id === response.id ? response : featObj);
       setProcessedFeatures(updatedFeatures);
+    //  setShowUpdateModal(false);
+
       setFormSuccess(true);
       setExperimentChange(true);
     } catch (error) {

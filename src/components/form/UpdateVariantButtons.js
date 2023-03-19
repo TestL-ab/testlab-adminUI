@@ -12,6 +12,7 @@ const UpdateVariantButtons = ({
   const fifthVariantIsLast = lastVariant === 5;
   return (
     <>
+
       {fifthVariantIsLast
         ? null
         : <button

@@ -1,5 +1,6 @@
 const parseByDay = (eventData, variantNameMap) => {
-
+  console.log("parsing by day");
+  console.log("variantNameMap: ", variantNameMap);
   let sortedDataObj = {};
 
   eventData.forEach(event => {
@@ -13,6 +14,13 @@ const parseByDay = (eventData, variantNameMap) => {
     }
   })
 //parse back to array of objects with appropriate properties
+
+/*
+{date: 'today', 
+varian1: 50, 
+variant2: 1000
+}
+*/
   let finalParsedArr = [];
   for (let timestamp in sortedDataObj) {
     let dataPoint = {};
@@ -27,6 +35,7 @@ const parseByDay = (eventData, variantNameMap) => {
 };
 
 const createVariantNameMap = (featureAnalysis) => {
+  console.log("feature Analysis passed", featureAnalysis);
   let variantNameMap = {};
   featureAnalysis.forEach(variant => {
     let variantId = variant.id;
@@ -36,7 +45,10 @@ const createVariantNameMap = (featureAnalysis) => {
 }
 
 const themeColors = [
-
+    // testLabBlueGray, 
+    // testLabDarkBlue,
+    // "#OF3654", 
+    // "#EFF2F4", 
     "#2A2493", 
     "#FF00C8", 
     "#19D038",
