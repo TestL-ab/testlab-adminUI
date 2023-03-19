@@ -15,17 +15,17 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   const [error, setError] = useState(null);
 
   const [open, setOpen] = useState(false)
- 
+
 
   useEffect(() => {
     visualizerService
-      .getExperimentEventData(experimentId)//experiment['variant_arr'][0])
+      .getExperimentEventData(experimentId)
       .then(response => {
         setEventData(response);
         visualizerService.getFeatureAnalysis(experimentId)
-        .then(response => {
-          setFeatureAnalysis(response);
-        })
+          .then(response => {
+            setFeatureAnalysis(response);
+          })
       })
       .catch(error => {
         setError(error.message);
@@ -46,15 +46,15 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
     })
     setOpen(true);
 
-  }; 
+  };
 
-   let contentReducer = (state, action) => {
+  let contentReducer = (state, action) => {
     switch (action.type) {
       case 'EXPERIMENT_DETAILS': {
-        return <ExperimentDetails error={error} setError={setError} experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} futureExperiment={futureExperiment}/>
+        return <ExperimentDetails error={error} setError={setError} experiment={experiment} controlVariant={controlVariant} otherVariants={otherVariants} handleClick={handleClick} futureExperiment={futureExperiment} />
       }
       case 'VISUALIZER_1': {
-        return <Visualizer error={error} setError={setError} eventData={eventData} featureAnalysis={featureAnalysis} experiment={experiment} handleClick={handleClick}/>
+        return <Visualizer error={error} setError={setError} eventData={eventData} featureAnalysis={featureAnalysis} experiment={experiment} handleClick={handleClick} />
       }
     }
   };
@@ -82,13 +82,13 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
   return (
     <>
 
-      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} modalPage={modalPage} dispatchModalPage={dispatchModalPage} futureExperiment={futureExperiment}/>
+      <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} modalPage={modalPage} dispatchModalPage={dispatchModalPage} futureExperiment={futureExperiment} />
       <Disclosure as="div" className="pt-6">
         {({ open }) => (
           <>
             <dt>
               <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
-                <span className="text-base text-sm font-semibold leading-7">{name}</span>
+                <span className="text-base text-s font-semibold leading-7">{name}</span>
                 <span className="ml-6 flex h-7 items-center">
                   {open ? (
                     <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
@@ -105,7 +105,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
               {isExperiment &&
                 <button
                   type="button"
-                  className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-full bg-testLabBlue py-1 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                   onClick={handleModalOpenClick}
                 >
                   View Experiment Details

@@ -5,7 +5,7 @@ import VariantButtons from './VariantButtons';
 import experimentService from '../../services/experimentService';
 import formUtils from '../../utils/formUtils';
 
-const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperimentChange }) => {
+const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperimentChange, setFormSuccess }) => {
   const [variantObj1, setVariantObj1] = useState({ is_control: true, value: "", weight: "" });
   const [variantObj2, setVariantObj2] = useState({ value: "", weight: "" });
   const [variantObj3, setVariantObj3] = useState({ value: "", weight: "" });
@@ -25,7 +25,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
   const experimentId = experimentObj.id;
 
   const changeLastVariant = (num) => {
-    switch(num) {
+    switch (num) {
       case 2:
         setHidden3(true);
         setVariantObj3({ value: "", weight: "" })
@@ -79,7 +79,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
     event.preventDefault();
     const id = event.target.id.split('-').pop();
     console.log(id);
-    switch(id) {
+    switch (id) {
       case "1":
         const updatedObj1 = {
           ...variantObj1,
@@ -121,7 +121,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
   const handleChangedWeight = (event) => {
     event.preventDefault();
     const id = event.target.id.split('-').pop();
-    switch(id) {
+    switch (id) {
       case "1":
         if (!checkValidPercent(event.target.value)) {
           setError1("Error: invalid input")
@@ -192,14 +192,14 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
     return true;
   }
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const variantArr = formUtils.processVariantData([variantObj1,
-                                                     variantObj2,
-                                                     variantObj3,
-                                                     variantObj4,
-                                                     variantObj5],
-                                                     experimentId);
+      variantObj2,
+      variantObj3,
+      variantObj4,
+      variantObj5],
+      experimentId);
 
     if (!formUtils.validVariantWeights(variantArr) || !formUtils.distinctVariantValues(variantArr)) {
       return;
@@ -210,6 +210,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
       console.log(variantsObj);
       const response = await experimentService.createVariants(experimentId, variantsObj);
       console.log(response);
+      setFormSuccess(true);
       setExperimentObj(null);
       setShowVariants(false);
       setExperimentChange(true);
@@ -290,72 +291,76 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
   };
 
   return (
-    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-    <h3 className="text-base font-semibold leading-6 text-gray-900">Create Variants for {experimentName}</h3>
-    <p className="mt-1 text-sm text-gray-500">
-      Create up to five variants. Each variant value must be distinct, an the sum of user percentages must
-      be precisely 100%.
-    </p>
-    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
-      <ControlVariantForm
-        variantObj={variantObj1}
-        handleChangedValue={handleChangedValue}
-        handleChangedWeight={handleChangedWeight}
-        error={error1}
-      />
-      <VariantForm
-        num="2"
-        variantObj={variantObj2}
-        handleChangedValue={handleChangedValue}
-        handleChangedWeight={handleChangedWeight}
-        error={error2}
-        handleAddVariant={handleAddVariant}
-        handleRemoveVariant={handleRemoveVariant}
-        lastVariant={lastVariant}
-      />
-      <VariantForm
-        num="3"
-        variantObj={variantObj3}
-        handleChangedValue={handleChangedValue}
-        handleChangedWeight={handleChangedWeight}
-        error={error3}
-        hidden={hidden3}
-        handleAddVariant={handleAddVariant}
-        handleRemoveVariant={handleRemoveVariant}
-        lastVariant={lastVariant}
-      />
-      <VariantForm
-        num="4"
-        variantObj={variantObj4}
-        handleChangedValue={handleChangedValue}
-        handleChangedWeight={handleChangedWeight}
-        error={error4}
-        hidden={hidden4}
-        handleAddVariant={handleAddVariant}
-        handleRemoveVariant={handleRemoveVariant}
-        lastVariant={lastVariant}
-      />
-      <VariantForm
-        num="5"
-        variantObj={variantObj5}
-        handleChangedValue={handleChangedValue}
-        handleChangedWeight={handleChangedWeight}
-        error={error5}
-        hidden={hidden5}
-        handleAddVariant={handleAddVariant}
-        handleRemoveVariant={handleRemoveVariant}
-        lastVariant={lastVariant}
-      />
-      <VariantButtons
-        handleDeleteExperiment={handleDeleteExperiment}
-        handleChangeToToggle={handleChangeToToggle}
-        handleChangeToRollOut={handleChangeToRollOut}
-        handleRemoveVariant={handleRemoveVariant}
-        handleAddVariant={handleAddVariant}
-        lastVariant={lastVariant}
-      />
-    </form>
-    </div>
+    <>
+      {/* <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} message={successMessage} /> */}
+
+      <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+        <h2 className="text-base font-bold leading-6 text-gray-900">Create Variants for {experimentName}</h2>
+        <p className="mt-1 text-sm text-gray-500">
+          Create up to five variants. Each variant value must be distinct, an the sum of user percentages must
+          be precisely 100%.
+        </p>
+        <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+          <ControlVariantForm
+            variantObj={variantObj1}
+            handleChangedValue={handleChangedValue}
+            handleChangedWeight={handleChangedWeight}
+            error={error1}
+          />
+          <VariantForm
+            num="2"
+            variantObj={variantObj2}
+            handleChangedValue={handleChangedValue}
+            handleChangedWeight={handleChangedWeight}
+            error={error2}
+            handleAddVariant={handleAddVariant}
+            handleRemoveVariant={handleRemoveVariant}
+            lastVariant={lastVariant}
+          />
+          <VariantForm
+            num="3"
+            variantObj={variantObj3}
+            handleChangedValue={handleChangedValue}
+            handleChangedWeight={handleChangedWeight}
+            error={error3}
+            hidden={hidden3}
+            handleAddVariant={handleAddVariant}
+            handleRemoveVariant={handleRemoveVariant}
+            lastVariant={lastVariant}
+          />
+          <VariantForm
+            num="4"
+            variantObj={variantObj4}
+            handleChangedValue={handleChangedValue}
+            handleChangedWeight={handleChangedWeight}
+            error={error4}
+            hidden={hidden4}
+            handleAddVariant={handleAddVariant}
+            handleRemoveVariant={handleRemoveVariant}
+            lastVariant={lastVariant}
+          />
+          <VariantForm
+            num="5"
+            variantObj={variantObj5}
+            handleChangedValue={handleChangedValue}
+            handleChangedWeight={handleChangedWeight}
+            error={error5}
+            hidden={hidden5}
+            handleAddVariant={handleAddVariant}
+            handleRemoveVariant={handleRemoveVariant}
+            lastVariant={lastVariant}
+          />
+          <VariantButtons
+            handleDeleteExperiment={handleDeleteExperiment}
+            handleChangeToToggle={handleChangeToToggle}
+            handleChangeToRollOut={handleChangeToRollOut}
+            handleRemoveVariant={handleRemoveVariant}
+            handleAddVariant={handleAddVariant}
+            lastVariant={lastVariant}
+          />
+        </form>
+      </div>
+    </>
   );
 };
 

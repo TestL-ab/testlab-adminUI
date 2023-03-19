@@ -38,8 +38,8 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
                 leaveFrom="opacity-100 translate-y-0 md:scale-100"
                 leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
               >
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
-                  <div className="relative flex w-full items-center overflow-hidden bg-white    sm:rounded-lg" >
+                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-fit md:px-4 lg:max-w-fit">
+                  <div className="relative flex w-full items-center overflow-hidden bg-white sm:rounded-lg" >
                     <button
                       type="button"
                       className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"

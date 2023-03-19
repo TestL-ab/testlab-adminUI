@@ -7,7 +7,7 @@ import DailyLineChart from '../visualizer/LineChart';
 import WeightedBarChart from '../visualizer/WeightedBarChart';
 import visualizerService from '../../services/visualizerService';
 /*
-icon possibilites: 
+icon possibilites:
 export { default as ArrowLeftCircleIcon } from './ArrowLeftCircleIcon'
 export { default as ArrowLeftOnRectangleIcon } from './ArrowLeftOnRectangleIcon'
 export { default as ArrowLeftIcon } from './ArrowLeftIcon'
@@ -58,7 +58,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                   <button
                     type="button"
-                    className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="rounded-full bg-testLabBlue py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                     onClick={handleClick}
                   >
                     <div className="flex items-center">

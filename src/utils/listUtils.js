@@ -7,7 +7,7 @@ const processFeatureObjs = (featureArr) => {
         break
       }
       case 2: {
-        type = "Roll-Out";
+        type = "Rollout";
         break;
       } case 3: {
         type = "Experiment";
@@ -19,7 +19,7 @@ const processFeatureObjs = (featureArr) => {
       ...obj,
       startDate: new Date(obj.start_date).toLocaleDateString(),
       endDate: new Date(obj.end_date).toLocaleDateString(),
-      userPercentage: `${100 * obj.user_percentage}%`,
+      userPercentage: `${Math.floor(100 * obj.user_percentage)}%`,
       type,
     };
   });

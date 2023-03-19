@@ -17,7 +17,7 @@ const UpdateForm = ({
   existingNames,
   setShowUpdateModal,
   processedFeatures,
-  setProcessedFeatures
+  setProcessedFeatures,
 }) => {
   const currentDate = new Date();
   const [name, setName] = useState(featureObj.name);
@@ -32,6 +32,7 @@ const UpdateForm = ({
   const [nameTaken, setNameTaken] = useState(false);
   const type = featureObj.type_id;
   const startDate = new Date(featureObj.startDate);
+  const successMessage = `${featureObj.name} successfully updated!`;
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -56,7 +57,8 @@ const UpdateForm = ({
       const response = await experimentService.updateFeature(featureObj.id, updatedFeatureObj);
       const updatedFeatures = processedFeatures.map(featObj => featObj.id === response.id ? response : featObj);
       setProcessedFeatures(updatedFeatures);
-      setShowUpdateModal(false);
+    //  setShowUpdateModal(false);
+
       setFormSuccess(true);
       setExperimentChange(true);
     } catch (error) {
@@ -66,89 +68,98 @@ const UpdateForm = ({
 
   return (
     <>
-    <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} />
-    { showVariants
-      ?  <UpdateVariants
-            experimentObj={experimentObj}
-            setExperimentObj={setExperimentObj}
-            showVariants={showVariants}
-            setShowVariants={setShowVariants}
-            setExperimentChange={setExperimentChange}
-            processedFeatures={processedFeatures}
-            setProcessedFeatures={setProcessedFeatures}
-            setShowUpdateModal={setShowUpdateModal}
-            setFormSuccess={setFormSuccess}
-          />
-      : <div className="max-w-7xl sm:px-6 lg:px-8">
-    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-    <div className="md:flex md:items-center md:justify-between">
-      <div className="min-w-0 flex-1">
-        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-         Update {featureObj.name}
-        </h2>
-      </div>
-    </div>
-      <p className="mt-2 max-w-4xl text-sm text-gray-500">
-      Note: feature type and start date may not be changed.
-      </p>
-      <div className="px-4 sm:px-6 lg:px-8">
-      <div className="mt-8 flow-root">
-      <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleUpdate}>
-        <div className="space-y-8 divide-y divide-gray-200">
-          <div>
-            <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <NameInput
-                name={name}
-                setName={setName}
-                existingNames={existingNames}
-                nameTaken={nameTaken}
-                setNameTaken={setNameTaken}
-              />
-              <DescriptionText
-                description={description}
-                setDescription={setDescription}
-              />
-              <DateSelector
-                startDate={startDate}
-                isUpdate={true}
-                endDate={endDate}
-                setEndDate={setEndDate}
-                currentDate={currentDate}
-                type={type}
-                scheduledFeatures={scheduledFeatures}
-                currentExperiments={currentExperiments}
-                maxAvailable={maxAvailable}
-                setMaxAvailable={setMaxAvailable}
-              />
-          <UserPercentageMenu
-                percentageObj={percentageObj}
-                setPercentageObj={setPercentageObj}
-                query={query} setQuery={setQuery}
-                type={type}
-                maxAvailable={maxAvailable}
-                endDate={endDate}
-                currentPercentage={featureObj.user_percentage}
-              />
+      <FormSuccessNotification
+        formSuccess={formSuccess}
+        setFormSuccess={setFormSuccess}
+        isUpdate={true}
+        setShowUpdateModal={setShowUpdateModal}
+        message={successMessage}
+      />
+      {showVariants
+        ? <UpdateVariants
+          experimentObj={experimentObj}
+          setExperimentObj={setExperimentObj}
+          showVariants={showVariants}
+          setShowVariants={setShowVariants}
+          setExperimentChange={setExperimentChange}
+          processedFeatures={processedFeatures}
+          setProcessedFeatures={setProcessedFeatures}
+          setShowUpdateModal={setShowUpdateModal}
+          setFormSuccess={setFormSuccess}
+        />
+        : <div className="max-w-7xl sm:px-6 lg:px-8">
+          <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+            <div className="md:flex md:items-center md:justify-between">
+              <div className="min-w-0 flex-1">
+                <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                  Update {featureObj.name}
+                </h2>
+              </div>
+            </div>
+            <p className="mt-2 max-w-4xl text-sm text-gray-500">
+              Note: feature type and start date may not be changed.
+            </p>
+            <div className="px-4 sm:px-6 lg:px-8">
+              <div className="mt-8 flow-root">
+                <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleUpdate}>
+                  <div className="space-y-8 divide-y divide-gray-200">
+                    <div>
+                      <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                        <NameInput
+                          name={name}
+                          setName={setName}
+                          existingNames={existingNames}
+                          updateFeatureCurrentName={featureObj.name}
+                          nameTaken={nameTaken}
+                          setNameTaken={setNameTaken}
+                        />
+
+                        <DescriptionText
+                          description={description}
+                          setDescription={setDescription}
+                        />
+                        <DateSelector
+                          startDate={startDate}
+                          isUpdate={true}
+                          updateId={featureObj.id}
+                          endDate={endDate}
+                          setEndDate={setEndDate}
+                          currentDate={currentDate}
+                          type={type}
+                          scheduledFeatures={scheduledFeatures}
+                          currentExperiments={currentExperiments}
+                          maxAvailable={maxAvailable}
+                          setMaxAvailable={setMaxAvailable}
+                        />
+                        <UserPercentageMenu
+                          percentageObj={percentageObj}
+                          setPercentageObj={setPercentageObj}
+                          query={query} setQuery={setQuery}
+                          type={type}
+                          maxAvailable={maxAvailable}
+                          endDate={endDate}
+                          currentPercentage={featureObj.user_percentage}
+                        />
+                      </div>
+                    </div>
+                    <UpdateButtons
+                      setName={setName}
+                      setDescription={setDescription}
+                      setEndDate={setEndDate}
+                      setPercentageObj={setPercentageObj}
+                      currentDate={currentDate}
+                      setQuery={setQuery}
+                      type={featureObj.type_id}
+                      showVariants={showVariants}
+                      setShowVariants={setShowVariants}
+                    />
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-          <UpdateButtons
-              setName={setName}
-              setDescription={setDescription}
-              setEndDate={setEndDate}
-              setPercentageObj={setPercentageObj}
-              currentDate={currentDate}
-              setQuery={setQuery}
-              type={featureObj.type_id}
-              showVariants={showVariants}
-              setShowVariants={setShowVariants}
-            />
         </div>
-      </form>
-      </div>
-      </div>
-      </div>
-      </div>
-    }
+      }
     </>
   );
 };
