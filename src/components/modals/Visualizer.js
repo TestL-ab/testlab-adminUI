@@ -39,7 +39,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                 <div className='container mx-auto '>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                       <h1>Weighted Event Data</h1>
-                      <p className='text-gray-500 text-sm'>Total events correct for percentage of users in each variant</p>
+                      <p className='text-gray-500 text-sm font-style: italic'>Total events correct for percentage of users in each variant</p>
                       {/* legend should have the weight of each variant */}
 
                       <WeightedBarChart featureAnalysis={featureAnalysis}/>
