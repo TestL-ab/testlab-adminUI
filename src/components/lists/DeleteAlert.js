@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import experimentService from '../services/experimentService';
+import experimentService from '../../services/experimentService';
 
 const DeleteAlert = ({
   openDeleteAlert,
@@ -12,7 +12,7 @@ const DeleteAlert = ({
   setExperimentChange,
   processedFeatures,
   setProcessedFeatures
- }) => {
+}) => {
   const cancelButtonRef = useRef(null)
 
   const handleConfirmDelete = async (event) => {
@@ -24,6 +24,7 @@ const DeleteAlert = ({
       deleteObj.callback(filteredList);
       setDeleteObj(null);
       setExperimentChange(true);
+      console.log("deleted");
     } catch (error) {
       setDeleteObj(null);
       setError(error.message);
@@ -39,7 +40,7 @@ const DeleteAlert = ({
 
   return (
     <Transition.Root show={openDeleteAlert} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpenDeleteAlert}>
+      <Dialog as="div" className="rounded relative z-10" initialFocus={cancelButtonRef} onClose={setOpenDeleteAlert}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -79,7 +80,7 @@ const DeleteAlert = ({
                         If the feature is currently running, it will stop immediately.
                       </p>
                       <p className="text-sm text-gray-500">
-                         The record of the feature, including any associated event data will be permanently removed.
+                        The record of the feature, including any associated event data will be permanently removed.
                       </p>
                     </div>
                   </div>

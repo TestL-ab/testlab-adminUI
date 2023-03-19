@@ -22,12 +22,12 @@ const App = () => {
         setExperiments(response);
         setExperimentChange(false);
         experimentUtils.parseExperiments(response,
-                                        setExitstingNames,
-                                        setCurrentToggles,
-                                        setCurrentRollOuts,
-                                        setCurrentExperiments,
-                                        setScheduledFeatures,
-                                        setPastExperiments);
+          setExitstingNames,
+          setCurrentToggles,
+          setCurrentRollOuts,
+          setCurrentExperiments,
+          setScheduledFeatures,
+          setPastExperiments);
       })
       .catch(error => {
         setError(error.message);
@@ -39,29 +39,25 @@ const App = () => {
     <>
       {error ? <p>{error}</p>
         :
-        <>
-          <div> 
-            {/* change parent div to tailwind UI container?  */}
-            <SideNav
-              currentToggles={currentToggles}
-              setCurrentToggles={setCurrentToggles}
-              currentRollouts={currentRollOuts}
-              setCurrentRollouts={setCurrentRollOuts}
-              currentExperiments={currentExperiments}
-              setCurrentExperiments={setCurrentExperiments}
-              scheduledFeatures={scheduledFeatures}
-              setScheduledFeatures={setScheduledFeatures}
-              pastExperiments={pastExperiments}
-              setPastExperiments={setPastExperiments}
-              setExperimentChange={setExperimentChange}
-              experimentChange={experimentChange}
-              existingNames={existingNames}
-            />
-            {/* <AllRoutes/> */}
-          </div>
-        </>
+
+        <SideNav
+          currentToggles={currentToggles}
+          setCurrentToggles={setCurrentToggles}
+          currentRollouts={currentRollOuts}
+          setCurrentRollouts={setCurrentRollOuts}
+          currentExperiments={currentExperiments}
+          setCurrentExperiments={setCurrentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          setScheduledFeatures={setScheduledFeatures}
+          pastExperiments={pastExperiments}
+          setPastExperiments={setPastExperiments}
+          setExperimentChange={setExperimentChange}
+          experimentChange={experimentChange}
+          existingNames={existingNames}
+        />
+        //     {/* <AllRoutes/> */}
       }
-      </>
+    </>
   );
 }
 

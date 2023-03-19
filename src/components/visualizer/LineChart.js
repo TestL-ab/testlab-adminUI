@@ -12,7 +12,7 @@ const DailyLineChart = ({ eventData , featureAnalysis}) => {
     return (<h1 className='text-red-400'>Not enough event data to display history</h1>)
   } 
   return (
-    <LineChart width={730} height={250} data={parsedData}
+    <LineChart width={730} height={250} data={parsedData} className='linechart'
       margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date"/>
@@ -20,7 +20,7 @@ const DailyLineChart = ({ eventData , featureAnalysis}) => {
       <Tooltip />
       <Legend />
       {Object.values(variantNameMap).map((varName,idx) => {
-        return <Line key={varName} type="monotone" dataKey={varName} stroke={visualizerUtils.themeColors[idx]}/>
+        return <Line key={`line-${idx}`} type="monotone" dataKey={varName} stroke={visualizerUtils.themeColors[idx]}/>
       })}
     </LineChart>)
 }

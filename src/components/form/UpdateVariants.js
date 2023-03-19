@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import VariantForm from './VariantForm';
 import ControlVariantForm from './ControlVariantForm';
-import VariantButtons from './VariantButtons';
 import experimentService from '../../services/experimentService';
+import FormSuccessNotification from './FormSuccessNotification';
 import formUtils from '../../utils/formUtils';
+import UpdateVariantButtons from './UpdateVariantButtons';
 
-const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperimentChange, setFormSuccess }) => {
+const UpdateVariants = ({
+  experimentObj,
+  setExperimentObj,
+  showVariants,
+  setShowVariants,
+  setExperimentChange,
+  processedFeatures,
+  setProcessedFeatures,
+  setShowUpdateModal
+}) => {
   const [variantObj1, setVariantObj1] = useState({ is_control: true, value: "", weight: "" });
   const [variantObj2, setVariantObj2] = useState({ value: "", weight: "" });
   const [variantObj3, setVariantObj3] = useState({ value: "", weight: "" });
@@ -21,8 +31,33 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
   const [hidden5, setHidden5] = useState(true);
   const [lastVariant, setLastVariant] = useState(2);
 
+  const [formSuccess, setFormSuccess] = useState(false);
+
   const experimentName = experimentObj.name;
   const experimentId = experimentObj.id;
+  const successMessage = `Variants for ${experimentName} updated successfully!`;
+
+  useEffect(() => {
+    const variantObjArr = experimentObj.variant_arr.map(obj => { return { ...obj, weight: obj.weight * 100 } })
+    const control = variantObjArr.filter(obj => obj.is_control).pop() || experimentObj[0];
+    const tests = variantObjArr.filter(obj => !obj.is_control);
+    if (tests.length === variantObjArr.length) control = tests.shift();
+    if (control) setVariantObj1(control);
+    if (tests[0]) setVariantObj2(tests[0]);
+    if (tests[1]) {
+      setVariantObj3(tests[1]);
+      setHidden3(false);
+    }
+    if (tests[2]) {
+
+      setVariantObj4(tests[2]);
+      setHidden4(false);
+    }
+    if (tests[3]) {
+      setVariantObj5(tests[3]);
+      setHidden5(false);
+    }
+  }, []);
 
   const changeLastVariant = (num) => {
     switch (num) {
@@ -192,7 +227,7 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
     return true;
   }
 
-  const handleSubmit = async (event) => {
+  const handleUpdate = async (event) => {
     event.preventDefault();
     const variantArr = formUtils.processVariantData([variantObj1,
       variantObj2,
@@ -207,12 +242,18 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
 
     let variantsObj = { id: experimentId, variants: variantArr };
     try {
-      console.log(variantsObj);
       const response = await experimentService.createVariants(experimentId, variantsObj);
       console.log(response);
+      setExperimentChange(true);
+      const updatedFeatures = processedFeatures.map(featObj => {
+        if (featObj.id === experimentObj.id) {
+          return { ...featObj, variant_arr: response };
+        } else {
+          return featObj;
+        }
+      });
+      setProcessedFeatures(updatedFeatures);
       setFormSuccess(true);
-      setExperimentObj(null);
-      setShowVariants(false);
       setExperimentChange(true);
       setVariantObj1({ is_control: true, value: "", weight: "" });
       setVariantObj2({ value: "", weight: "" });
@@ -225,82 +266,22 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
     }
   };
 
-  const handleDeleteExperiment = async (event) => {
-    event.preventDefault();
-    try {
-      let response = await experimentService.deleteExperiment(experimentId);
-      setExperimentObj(null);
-      setShowVariants(false);
-      setExperimentChange(true);
-      setVariantObj1({ is_control: true, value: "", weight: "" });
-      setVariantObj2({ value: "", weight: "" });
-      setVariantObj3({ value: "", weight: "" });
-      setVariantObj4({ value: "", weight: "" });
-      setVariantObj5({ value: "", weight: "" });
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const handleChangeToToggle = async (event) => {
-    event.preventDefault();
-    try {
-      const updatedExperimentObj = {
-        ...experimentObj,
-        type_id: 1,
-        user_percentage: 1
-      };
-
-      const responseObj = await experimentService.updateFeature(experimentId, updatedExperimentObj);
-      console.log(responseObj);
-      setExperimentObj(null);
-      setShowVariants(false);
-      setExperimentChange(true);
-      setVariantObj1({ is_control: true, value: "", weight: "" });
-      setVariantObj2({ value: "", weight: "" });
-      setVariantObj3({ value: "", weight: "" });
-      setVariantObj4({ value: "", weight: "" });
-      setVariantObj5({ value: "", weight: "" });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleChangeToRollOut = async (event) => {
-    event.preventDefault();
-    try {
-      const updatedExperimentObj = {
-        ...experimentObj,
-        type_id: 2,
-      };
-
-      const responseObj = await experimentService.updateFeature(experimentId, updatedExperimentObj);
-      console.log(responseObj);
-      setExperimentObj(null);
-      setShowVariants(false);
-      setExperimentChange(true);
-      setVariantObj1({ is_control: true, value: "", weight: "" });
-      setVariantObj2({ value: "", weight: "" });
-      setVariantObj3({ value: "", weight: "" });
-      setVariantObj4({ value: "", weight: "" });
-      setVariantObj5({ value: "", weight: "" });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
-      {/* <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} message={successMessage} /> */}
-
+      <FormSuccessNotification
+        formSuccess={formSuccess}
+        setFormSuccess={setFormSuccess}
+        isUpdate={true}
+        setShowUpdateModal={setShowUpdateModal}
+        message={successMessage}
+      />
       <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-        <h2 className="text-base font-bold leading-6 text-gray-900">Create Variants for {experimentName}</h2>
+        <h3 className="text-base font-semibold leading-6 text-gray-900">Update Variants for {experimentName}</h3>
         <p className="mt-1 text-sm text-gray-500">
           Create up to five variants. Each variant value must be distinct, an the sum of user percentages must
           be precisely 100%.
         </p>
-        <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+        <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleUpdate}>
           <ControlVariantForm
             variantObj={variantObj1}
             handleChangedValue={handleChangedValue}
@@ -350,13 +331,13 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
           />
-          <VariantButtons
-            handleDeleteExperiment={handleDeleteExperiment}
-            handleChangeToToggle={handleChangeToToggle}
-            handleChangeToRollOut={handleChangeToRollOut}
+          <UpdateVariantButtons
             handleRemoveVariant={handleRemoveVariant}
             handleAddVariant={handleAddVariant}
             lastVariant={lastVariant}
+            showVariants={showVariants}
+            setShowVariants={setShowVariants}
+            type={experimentObj.type_id}
           />
         </form>
       </div>
@@ -364,4 +345,4 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
   );
 };
 
-export default Variants;
+export default UpdateVariants;

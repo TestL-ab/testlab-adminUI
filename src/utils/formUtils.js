@@ -20,6 +20,7 @@ const processExperiments = (scheduledFeatures, currentExperiments)=> {
       startDate: new Date(experimentObj.start_date),
       endDate: new Date(experimentObj.end_date),
       userPercentage: experimentObj.user_percentage,
+      id: experimentObj.id
     };
   });
 }
@@ -114,6 +115,10 @@ const processVariantData = (variantObjArr, experimentId) => {
   return variantCopies;
 };
 
+const processDateForUpdate = (date) => {
+  return new Date(date).toLocaleDateString();
+};
+
 const formUtils = {
   getDateRange,
   processExperiments,
@@ -123,7 +128,8 @@ const formUtils = {
   typeSelector,
   validVariantWeights,
   distinctVariantValues,
-  processVariantData
+  processVariantData,
+  processDateForUpdate
 };
 
 export default formUtils;

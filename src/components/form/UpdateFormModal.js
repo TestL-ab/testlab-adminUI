@@ -1,16 +1,27 @@
-import { Fragment, useReducer, useState } from 'react'
-import { Dialog, RadioGroup, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { StarIcon } from '@heroicons/react/20/solid'
-import Visualizer from './Visualizer';
-import ExperimentDetails from './ExperimentDetails';
+import { Fragment, useEffect, useReducer, useState } from 'react';
+import { Dialog, RadioGroup, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import UpdateForm from './UpdateForm';
 
+const UpdateFormModal = ({
+  showUpdateModal,
+  setShowUpdateModal,
+  featureToUpdate,
+  setFeatureToUpdate,
+  setExperimentChange,
+  processedFeatures,
+  setProcessedFeatures,
+  featureObj,
+  currentExperiments,
+  scheduledFeatures,
+  existingNames
+}) => {
+  useEffect(() => {}, [showUpdateModal]);
 
-const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage, setCurrModalPage, modalPage, dispatchModalPage }) => {
   return (
     <>
-      <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={setOpen}>
+      <Transition.Root show={showUpdateModal} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={setShowUpdateModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -38,20 +49,32 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
                 leaveFrom="opacity-100 translate-y-0 md:scale-100"
                 leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
               >
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-fit md:px-4 lg:max-w-fit">
-                  <div className="relative flex w-full items-center overflow-hidden bg-white sm:rounded-lg" >
+                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
+                  <div className="relative flex w-full items-center overflow-hidden bg-white    sm:rounded-lg" >
                     <button
                       type="button"
                       className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
                       onClick={() => {
-                        setOpen(false);
+                        setShowUpdateModal(false);
                       }}
                     >
                       <span className="sr-only">Close</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
-                    {/*This is where the core piece of the modal goes!!!                 */}
-                    {modalPage}
+
+<UpdateForm
+  featureObj={featureObj}
+  currentExperiments={currentExperiments}
+  scheduledFeatures={scheduledFeatures}
+  setExperimentChange={setExperimentChange}
+  existingNames={existingNames}
+  setShowUpdateModal={setShowUpdateModal}
+  processedFeatures={processedFeatures}
+  setProcessedFeatures={setProcessedFeatures}
+/>
+
+
+
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -64,4 +87,4 @@ const ExperimentDetailsModal = ({ id, featuresArr, open, setOpen, currModalPage,
 
 }
 
-export default ExperimentDetailsModal;
+export default UpdateFormModal;

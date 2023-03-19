@@ -4,8 +4,10 @@ import Graph from '../visualizer/Graph';
 import ClickPercentageChart from '../visualizer/ClickPercentageChart'
 import SimpleBarChart from '../visualizer/SimpleBarChart';
 import DailyLineChart from '../visualizer/LineChart';
+import WeightedBarChart from '../visualizer/WeightedBarChart';
+import visualizerService from '../../services/visualizerService';
 /*
-icon possibilites: 
+icon possibilites:
 export { default as ArrowLeftCircleIcon } from './ArrowLeftCircleIcon'
 export { default as ArrowLeftOnRectangleIcon } from './ArrowLeftOnRectangleIcon'
 export { default as ArrowLeftIcon } from './ArrowLeftIcon'
@@ -15,6 +17,8 @@ BackwardIcon
 export default function Visualizer({ experiment, handleClick, featureAnalysis, eventData, error, setError }) {
   const experimentId = experiment.id;
   const variantArr = experiment['variant_arr'];
+
+  const stringForWeightedVariants = visualizerService.weightsToString(featureAnalysis);
 
   return (
     <div>
@@ -34,18 +38,27 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
 {/* //how to force the graphs to be centered?  */}
                 <div className='container mx-auto '>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
-                    <h2>Raw Click Data</h2>
+                      <h1>Weighted Event Data</h1>
+                      <p className='text-gray-500 text-sm'>Total events correct for percentage of users in each variant</p>
+                      {/* legend should have the weight of each variant */}
+
+                      <WeightedBarChart featureAnalysis={featureAnalysis}/>
+                    </div>
+                  <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
+                    <h1>Raw Event Data</h1>
+                    <p className='text-gray-500 text-sm font-style: italic'>Total of all event data, split based on distinct users</p>
+
                     {<SimpleBarChart featureAnalysis={featureAnalysis} />}
                   </div>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
-                    <h2>Timeline of Click Data</h2>
+                    <h1>Timeline of Event Data</h1>
                     {<DailyLineChart eventData={eventData} featureAnalysis={featureAnalysis}/>}
                   </div>
                 </div>
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                   <button
                     type="button"
-                    className="rounded-full bg-indigo-600 py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="rounded-full bg-testLabBlue py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                     onClick={handleClick}
                   >
                     <div className="flex items-center">

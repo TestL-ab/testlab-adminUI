@@ -2,22 +2,24 @@ import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import visualizerUtils from '../../utils/visualizerUtils';
 
-const SimpleBarChart = ({ featureAnalysis }) => {
+const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
   console.log(featureAnalysis);
   let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
-    return sum + currFeature.event_total
+    return sum + currFeature.distinct_user_events_total
   }, 0)
   let processedAnalysis = featureAnalysis.map(feature => {
     let name = feature.value
     if (feature.is_control) {
       name = name + ' (Control)'
     }
+    let weightedTotal = feature.event_total * feature.weight;
+    let weightedDistinct = feature.distinct_user_events_total * feature.weight;
     return {
       value: name,
       isControl: feature.is_control,
-      'Total Clicks': feature.event_total-feature.distinct_user_events_total,
-      'Distinct Clicks': feature.distinct_user_events_total,
+      'Total Clicks': weightedTotal-weightedDistinct,
+      'Distinct Clicks': weightedDistinct,
       percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
   })
@@ -28,7 +30,7 @@ const SimpleBarChart = ({ featureAnalysis }) => {
 
   return (
     <>
-      <BarChart className='simple-barchart'
+      <BarChart className='weighted-barchart'
         width={500}
         height={300}
         data={processedAnalysis}
@@ -44,12 +46,12 @@ const SimpleBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Clicks" fill={visualizerUtils.themeColors[0]} stackId="a">
+        <Bar dataKey="Total Clicks" stackId="a" fill={visualizerUtils.themeColors[0]}>
           {processedAnalysis.map(((obj, idx) => {
             return (
               <>
                 <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
-                <Cell key={`cell-${idx}`} />
+                <Cell key={`cell-${idx}`}  />
               </>
             )
           }))}
@@ -70,4 +72,4 @@ const SimpleBarChart = ({ featureAnalysis }) => {
 }
 
 
-export default SimpleBarChart;
+export default WeightedBarChart;

@@ -2,14 +2,14 @@ import { Fragment, useState, useReducer } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
-  BellIcon,
   CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
   HomeIcon,
-  InboxIcon,
-  UsersIcon,
   XMarkIcon,
+  BeakerIcon,
+  AdjustmentsHorizontalIcon,
+  PlusIcon,
+  ArrowsRightLeftIcon,
+  ArchiveBoxIcon
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Home from './Home'
@@ -22,12 +22,12 @@ import ScheduledFeaturesList from './lists/ScheduledFeaturesList'
 
 let navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'Create New Feature', href: '#', icon: UsersIcon, current: false },
-  { name: 'Current Toggles', href: '#', icon: FolderIcon, current: false },
-  { name: 'Current Roll-Outs', href: '#', icon: FolderIcon, current: false },
-  { name: 'Current Experiments', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Scheduled Features', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Past Experiments', href: '#', icon: InboxIcon, current: false },
+  { name: 'Create New Feature', href: '#', icon: PlusIcon, current: false },
+  { name: 'Current Toggles', href: '#', icon: ArrowsRightLeftIcon, current: false },
+  { name: 'Current Rollouts', href: '#', icon: AdjustmentsHorizontalIcon, current: false },
+  { name: 'Current Experiments', href: '#', icon: BeakerIcon, current: false },
+  { name: 'Upcoming Features', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Past Experiments', href: '#', icon: ArchiveBoxIcon, current: false },
 ]
 
 function classNames(...classes) {
@@ -56,46 +56,58 @@ const SideNav = ({
       }
       case 'Create New Feature': {
         return <Form
-                  currentExperiments={currentExperiments}
-                  scheduledFeatures={scheduledFeatures}
-                  setExperimentChange={setExperimentChange}
-                  existingNames={existingNames}
-                />
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          setExperimentChange={setExperimentChange}
+          existingNames={existingNames}
+        />
       }
       case 'Current Experiments': {
         return <CurrentExperimentsList
-                  currentFeatures={currentExperiments}
-                  setCurrentFeatures={setCurrentExperiments}
-                  setExperimentChange={setExperimentChange}
-                />
+          currentFeatures={currentExperiments}
+          setCurrentFeatures={setCurrentExperiments}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          existingNames={existingNames}
+        />
       }
       case 'Current Toggles': {
-          return <CurrentToggleList
-                  currentFeatures={currentToggles}
-                  setCurrentFeatures={setCurrentToggles}
-                  setExperimentChange={setExperimentChange}
-                />
+        return <CurrentToggleList
+          currentFeatures={currentToggles}
+          setCurrentFeatures={setCurrentToggles}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          existingNames={existingNames}
+        />
       }
-      case 'Current Roll-Outs': {
+      case 'Current Rollouts': {
         return <CurrentRollOutList
-                currentFeatures={currentRollouts}
-                setCurrentFeatures={setCurrentRollouts}
-                setExperimentChange={setExperimentChange}
-              />
+          currentFeatures={currentRollouts}
+          setCurrentFeatures={setCurrentRollouts}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          scheduledFeatures={scheduledFeatures}
+          existingNames={existingNames}
+        />
       }
-      case 'Scheduled Features': {
+      case 'Upcoming Features': {
         return <ScheduledFeaturesList
-                  scheduledFeatures={scheduledFeatures}
-                  setScheduledFeatures={setScheduledFeatures}
-                  setExperimentChange={setExperimentChange}
-                />
+          scheduledFeatures={scheduledFeatures}
+          setScheduledFeatures={setScheduledFeatures}
+          setExperimentChange={setExperimentChange}
+          currentExperiments={currentExperiments}
+          existingNames={existingNames}
+        // currentFeatures={currentFeatures}
+        />
       }
       case 'Past Experiments': {
         return <PastExperimentsList
-                  pastFeatures={pastExperiments}
-                  setpastFeatures={setPastExperiments}
-                  setExperimentChange={setExperimentChange}
-                />
+          pastFeatures={pastExperiments}
+          setpastFeatures={setPastExperiments}
+          setExperimentChange={setExperimentChange}
+        />
       }
     }
     throw Error('Unknown action: ' + action.type);
@@ -107,16 +119,15 @@ const SideNav = ({
     e.preventDefault();
     navigation = navigation.map(navLink => {
       if (navLink.name === e.target.text) {
-        return {...navLink, current: true};
+        return { ...navLink, current: true };
       } else {
-        return {...navLink, current: false}
+        return { ...navLink, current: false }
       }
     })
     dispatchCurrentPage({
       type: e.target.text,
     })
   }
-
 
   return (
     <>
@@ -169,7 +180,7 @@ const SideNav = ({
                   <div className="flex flex-shrink-0 items-center px-4">
                     <img
                       className="h-8 w-auto"
-                      src={require("../assets/blueicon.png")}
+                      src={require("../assets/beaker-logo.png")}
                       alt="TestLab"
                     />
                   </div>
@@ -209,13 +220,15 @@ const SideNav = ({
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-40 lg:flex-col">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
             <div className="flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
               <img
-                className="h-8 w-auto"
-                src={require('../assets/blueicon.png')}
+                // className="h-8 w-auto"
+                // src={require('../assets/beaker-logo.png')}
+                src={require('../assets/full_logo_transparent.png')}
+
                 alt="TestLab"
               />
             </div>
@@ -256,6 +269,7 @@ const SideNav = ({
           </button>
           <div className="flex flex-1 justify-between px-4">
           </div>
+
           {/* THIS IS WHERE CONTENT RENDERS:
 if currentView is Current Experimenrs <Current Experiments />  */}
           {currentPage}
