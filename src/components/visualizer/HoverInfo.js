@@ -3,9 +3,9 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 export default function HoverInfo({featureAnalysis}) {
   return (
     <div className="group relative text-2xl">
-    
+          <InformationCircleIcon/>
+
       <button className="bg-gray-300 text-gray-700 py-4 px-6 rounded inline-flex items-center group">
-        <InformationCircleIcon/>
        {/* <span className="mr-1">Menu</span> */}
         {/* <svg
           className="fill-current h-4 w-4 group-hover:rotate-180 transition-transform"
