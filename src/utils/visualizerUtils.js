@@ -45,7 +45,10 @@ const createVariantNameMap = (featureAnalysis) => {
 }
 
 const themeColors = [
-
+    // testLabBlueGray, 
+    // testLabDarkBlue,
+    // "#OF3654", 
+    // "#EFF2F4", 
     "#2A2493", 
     "#FF00C8", 
     "#19D038",

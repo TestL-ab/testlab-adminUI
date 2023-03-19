@@ -19,7 +19,18 @@ const getFeatureAnalysis = async(featureId) => {
     throw error;
   }
 }
+/*
+[{id:9, value: 'Test', weight: '0.15'}, 
+{id:10, value:'Test2', weight:'0.85'}]
+*/
+const weightsToString = (featureAnalysis) => {
+  let outputString = '';
+  featureAnalysis.forEach(variant => {
+    outputString += `${variant.value} is exposed to ${variant.weight*100} % of users enrolled in experiment`
+  })
+  //take as input feature analysis 
+}
 
-const visualizerService = { getExperimentEventData, getFeatureAnalysis }
+const visualizerService = { getExperimentEventData, getFeatureAnalysis, weightsToString }
 
 export default visualizerService;

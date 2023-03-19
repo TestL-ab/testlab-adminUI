@@ -5,6 +5,7 @@ import ClickPercentageChart from '../visualizer/ClickPercentageChart'
 import SimpleBarChart from '../visualizer/SimpleBarChart';
 import DailyLineChart from '../visualizer/LineChart';
 import WeightedBarChart from '../visualizer/WeightedBarChart';
+import visualizerService from '../../services/visualizerService';
 /*
 icon possibilites: 
 export { default as ArrowLeftCircleIcon } from './ArrowLeftCircleIcon'
@@ -16,6 +17,8 @@ BackwardIcon
 export default function Visualizer({ experiment, handleClick, featureAnalysis, eventData, error, setError }) {
   const experimentId = experiment.id;
   const variantArr = experiment['variant_arr'];
+
+  const stringForWeightedVariants = visualizerService.weightsToString(featureAnalysis);
 
   return (
     <div>
@@ -36,8 +39,9 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                 <div className='container mx-auto '>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                       <h1>Weighted Event Data</h1>
-                      <p className='text-gray-500 text-sm'>Corrects for percentage of users in each variant</p>
+                      <p className='text-gray-500 text-sm'>Total events correct for percentage of users in each variant</p>
                       {/* legend should have the weight of each variant */}
+
                       <WeightedBarChart featureAnalysis={featureAnalysis}/>
                     </div>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
