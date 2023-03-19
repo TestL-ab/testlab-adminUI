@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import visualizerUtils from '../../utils/visualizerUtils';
+import HoverInfo from './HoverInfo';
 
 const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
@@ -30,6 +31,10 @@ const WeightedBarChart = ({ featureAnalysis }) => {
 
   return (
     <>
+      <HoverInfo featureAnalysis={featureAnalysis}/>
+      {/* <div>
+        <button class="text-gray-500 opacity-0 hover:opacity-100">Info</button>
+      </div> */}
       <BarChart className='weighted-barchart'
         width={500}
         height={300}
