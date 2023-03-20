@@ -30,10 +30,6 @@ const WeightedBarChart = ({ featureAnalysis }) => {
 
   return (
     <>
-      {/* <HoverInfo featureAnalysis={featureAnalysis}/> */}
-      {/* <div>
-        <button class="text-gray-500 opacity-0 hover:opacity-100">Info</button>
-      </div> */}
       <BarChart className='weighted-barchart'
         width={500}
         height={400}

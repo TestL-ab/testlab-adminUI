@@ -3,7 +3,7 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 export default function HoverInfo({ featureAnalysis }) {
   return (
     <div className="group flex relative">
-      <span class="bg-white text-black px-1 py-2">
+      <span className="bg-white text-black px-1 py-2">
         <svg
           className="flex fill-current h-3 w-3 "
           xmlns="http://www.w3.org/2000/svg"
