@@ -16,7 +16,7 @@ const DailyLineChart = ({ eventData , featureAnalysis}) => {
       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date"/>
-      <YAxis label={{value: 'clicks', angle: -90, position:'left'}}/>
+      <YAxis label={{value: 'Events', angle: -90, position:'left'}}/>
       <Tooltip />
       <Legend />
       {Object.values(variantNameMap).map((varName,idx) => {
