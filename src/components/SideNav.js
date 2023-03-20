@@ -118,14 +118,14 @@ const SideNav = ({
   const handleClick = (e) => {
     e.preventDefault();
     navigation = navigation.map(navLink => {
-      if (navLink.name === e.target.text) {
+      if (navLink.name === e.currentTarget.text) {
         return { ...navLink, current: true };
       } else {
         return { ...navLink, current: false }
       }
     })
     dispatchCurrentPage({
-      type: e.target.text,
+      type: e.currentTarget.text,
     })
   }
 
