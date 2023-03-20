@@ -12,7 +12,7 @@ const DailyLineChart = ({ eventData , featureAnalysis}) => {
     return (<h1 className='text-red-400'>Not enough event data to display history</h1>)
   } 
   return (
-    <LineChart width={500} height={300} data={parsedData} className='linechart'
+    <LineChart width={700} height={300} data={parsedData} className='linechart'
       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date"/>
