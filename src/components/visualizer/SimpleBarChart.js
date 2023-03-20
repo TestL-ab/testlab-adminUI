@@ -47,20 +47,20 @@ const SimpleBarChart = ({ featureAnalysis }) => {
         <Bar dataKey="Total Events"  fill={visualizerUtils.themeColors[0]} stackId="a">
           {processedAnalysis.map(((obj, idx) => {
             return (
-              <>
-                <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
+              // <>
+                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
                 <Cell key={`cell-${idx}`} />
-              </>
+              // {/* </> */}
             )
           }))}
         </Bar>
         <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
-              <>
+              // <>
                 <Cell key={`distinct-${idx}`} />
-                {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
-              </>
+                // {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
+              // {/* </> */}
             )
           })}
         </Bar>
