@@ -11,7 +11,7 @@ const ExperimentDetails = ({ experiment, controlVariant, otherVariants, dispatch
         <div className="overflow-hidden bg-white sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <h1 className="text-2xl font-extrabold leading-6 text-gray-900">{experiment.name}</h1>
-            <p className="pt-2 mt-1 max-w-2xl text-sm text-gray-500">Experiment Description: {experiment.description}</p>
+            <p className="pt-2 leading-relaxed mt-1 italic tracking-tight max-w-2xl text-descr text-gray-500">Experiment Description: {experiment.description}</p>
           </div>
           <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
             <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-4">
