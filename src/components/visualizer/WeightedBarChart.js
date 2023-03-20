@@ -15,8 +15,8 @@ const WeightedBarChart = ({ featureAnalysis }) => {
     if (feature.is_control) {
       name = name + ' (Control)'
     }
-    let weightedTotal = feature.event_total * feature.weight;
-    let weightedDistinct = feature.distinct_user_events_total * feature.weight;
+    let weightedTotal = feature.event_total / feature.weight;
+    let weightedDistinct = feature.distinct_user_events_total / feature.weight;
     return {
       value: name,
       isControl: feature.is_control,
