@@ -2,22 +2,21 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 export default function HoverInfo({featureAnalysis}) {
   return (
+    // relative vs absolute vs -- absolute should add padding between graphs
     <div className="group relative text-2xl">
-          <InformationCircleIcon/>
-
-      <button className="bg-gray-300 text-gray-700 py-4 px-6 rounded inline-flex items-center group">
-       {/* <span className="mr-1">Menu</span> */}
-        {/* <svg
-          className="fill-current h-4 w-4 group-hover:rotate-180 transition-transform"
+        <svg
+          className="flex fill-current h-4 w-4 transition-transform"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
         >
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-        </svg> */}
-      </button>
+          <InformationCircleIcon />
+        </svg>
       
-      {/* menu list */}
-      <ul className="rounded absolute hidden text-gray-700 pt-1 group-hover:block w-56">
+    <div className="rounded absolute hidden bg-testLabBlueGray text-gray-500 pt-1 group-hover:inline w-100 text-xs">
+      <p>Testing what content I can add</p>
+    </div>
+      {/* menu list
+      <ul className="rounded absolute hidden text-gray-500 pt-1 group-hover:block w-56">
         <li className="bg-gray-200 hover:bg-gray-400 py-4 px-4 cursor-pointer">
           Profile
         </li>
@@ -27,7 +26,7 @@ export default function HoverInfo({featureAnalysis}) {
         <li className="bg-gray-200 hover:bg-gray-400 py-4 px-4 cursor-pointer">
           Logout
         </li>
-      </ul>
+      </ul> */}
       
     </div>
   );

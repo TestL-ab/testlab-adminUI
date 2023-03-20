@@ -5,7 +5,6 @@ import HoverInfo from './HoverInfo';
 
 const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
-  console.log(featureAnalysis);
   let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
     return sum + currFeature.distinct_user_events_total
   }, 0)
@@ -31,7 +30,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
 
   return (
     <>
-      <HoverInfo featureAnalysis={featureAnalysis}/>
+      {/* <HoverInfo featureAnalysis={featureAnalysis}/> */}
       {/* <div>
         <button class="text-gray-500 opacity-0 hover:opacity-100">Info</button>
       </div> */}
