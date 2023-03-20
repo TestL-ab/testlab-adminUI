@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import visualizerUtils from '../../utils/visualizerUtils';
 import HoverInfo from './HoverInfo';
+import { BeakerIcon } from '@heroicons/react/24/outline';
 
 const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
@@ -46,26 +47,27 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Events" stackId="a" fill={visualizerUtils.themeColors[0]}>
+        <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]} fillOpacity={1} >
           {processedAnalysis.map((obj, idx) => {
             return (
               // <>
-                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" /> 
-                <Cell key={`cell-${idx}`}  />
-              // </>
-            )
-          })}
-        </Bar>
-        <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]}>
-          {processedAnalysis.map((obj, idx) => {
-            return (
-              // <>
-                <Cell key={`distinct-${idx}`} />
+                <Cell key={`distinct-${idx}`} stroke={visualizerUtils.themeColors[0]} strokeWidth={2}/>
                 // {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
               // </>
             )
           })}
         </Bar>
+        <Bar dataKey="Total Events" stackId="a" fill={visualizerUtils.themeColors[0]}>
+          {processedAnalysis.map((obj, idx) => {
+            return (
+              // <>
+                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" /> 
+                <Cell key={`cell-${idx}`}  stroke={visualizerUtils.themeColors[0]} strokeWidth={2}/>
+              // </>
+            )
+          })}
+        </Bar>
+        
       </BarChart>
     </>
   );
