@@ -65,7 +65,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                     onClick={handleClick}
                   >
                     <div className="flex items-center">
-                      <ArrowLeftCircleIcon className="h-6 w-6" aria-hidden="true" /> Return to Experiment Details
+                      <ArrowLeftCircleIcon className="h-6 w-6 mr-2" aria-hidden="true" /> Return to Experiment Details
                     </div>
                   </button>
                 </dl>
