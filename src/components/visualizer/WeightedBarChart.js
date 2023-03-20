@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import visualizerUtils from '../../utils/visualizerUtils';
+import HoverInfo from './HoverInfo';
 
 const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
@@ -18,8 +19,8 @@ const WeightedBarChart = ({ featureAnalysis }) => {
     return {
       value: name,
       isControl: feature.is_control,
-      'Total Clicks': weightedTotal-weightedDistinct,
-      'Distinct Clicks': weightedDistinct,
+      'Total Events': weightedTotal-weightedDistinct,
+      'Distinct Events': weightedDistinct,
       percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
   })
@@ -30,6 +31,10 @@ const WeightedBarChart = ({ featureAnalysis }) => {
 
   return (
     <>
+      <HoverInfo featureAnalysis={featureAnalysis}/>
+      {/* <div>
+        <button class="text-gray-500 opacity-0 hover:opacity-100">Info</button>
+      </div> */}
       <BarChart className='weighted-barchart'
         width={500}
         height={300}
@@ -46,7 +51,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Clicks" stackId="a" fill={visualizerUtils.themeColors[0]}>
+        <Bar dataKey="Total Events" stackId="a" fill={visualizerUtils.themeColors[0]}>
           {processedAnalysis.map(((obj, idx) => {
             return (
               <>
@@ -56,7 +61,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
             )
           }))}
         </Bar>
-        <Bar dataKey="Distinct Clicks" stackId="a" fill={visualizerUtils.themeColors[1]}>
+        <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
               <>

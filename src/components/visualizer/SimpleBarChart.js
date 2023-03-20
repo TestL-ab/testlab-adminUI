@@ -16,8 +16,8 @@ const SimpleBarChart = ({ featureAnalysis }) => {
     return {
       value: name,
       isControl: feature.is_control,
-      'Total Clicks': feature.event_total-feature.distinct_user_events_total,
-      'Distinct Clicks': feature.distinct_user_events_total,
+      'Total Events': feature.event_total-feature.distinct_user_events_total,
+      'Distinct Events': feature.distinct_user_events_total,
       percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
   })
@@ -44,7 +44,8 @@ const SimpleBarChart = ({ featureAnalysis }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Total Clicks" fill={visualizerUtils.themeColors[0]} stackId="a">
+
+        <Bar dataKey="Total Events"  fill={visualizerUtils.themeColors[0]} stackId="a">
           {processedAnalysis.map(((obj, idx) => {
             return (
               <>
@@ -54,7 +55,7 @@ const SimpleBarChart = ({ featureAnalysis }) => {
             )
           }))}
         </Bar>
-        <Bar dataKey="Distinct Clicks" stackId="a" fill={visualizerUtils.themeColors[1]}>
+        <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
               <>
