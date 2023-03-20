@@ -52,6 +52,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                   </div>
                   <div className='border-b border-gray-200 px-4 py-5 mb-4 sm:px-6'>
                     <h1>Timeline of Event Data</h1>
+                    <p className='text-gray-500 text-sm font-style: italic'>All event data displayed by date</p>
                     <div className="grid justify-center pt-4">
 
                     <DailyLineChart eventData={eventData} featureAnalysis={featureAnalysis} />
@@ -65,8 +66,9 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                     className="rounded-full bg-testLabBlue py-1 px-2.5 text-xs font-semibold text-white shadow-sm hover:bg-testLabBeige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-testLabBlue"
                     onClick={handleClick}
                   >
-                    <div className="flex items-center">
-                      <ArrowLeftCircleIcon className="h-6 w-6 mr-2" aria-hidden="true" /> Return to Experiment Details
+                    <div className="flex items-center text-sm">
+                      <ArrowLeftCircleIcon className="h-6 w-6 mr-2" aria-hidden="true" /> 
+                      Return to Experiment Details
                     </div>
                   </button>
                 </dl>
