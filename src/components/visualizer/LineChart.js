@@ -15,10 +15,10 @@ const DailyLineChart = ({ eventData , featureAnalysis}) => {
     <LineChart width={700} height={300} data={parsedData} className='linechart'
       margin={{ top: 10, right: 30, left: 20, bottom: 5 }}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date"/>
+      <XAxis dataKey="date" />
       <YAxis label={{value: 'Events', angle: -90, position:'left'}}/>
       <Tooltip />
-      <Legend />
+      <Legend verticalAlign="top" height={36}/>
       {Object.values(variantNameMap).map((varName,idx) => {
         return <Line key={`line-${idx}`} type="monotone" dataKey={varName} stroke={visualizerUtils.themeColors[idx]} strokeWidth={2}/>
       })}
