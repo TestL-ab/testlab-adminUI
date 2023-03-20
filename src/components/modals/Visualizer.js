@@ -37,7 +37,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                         <HoverInfo featureAnalysis={featureAnalysis} />
                       </h1>
                       <p className='text-gray-500 text-sm font-style: italic'>Total events correct for percentage of users in each variant</p>
-                      <div className="grid justify-center">
+                      <div className="grid justify-center pt-4">
                         <WeightedBarChart featureAnalysis={featureAnalysis} />
                       </div>
                     </div>
@@ -45,14 +45,14 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                     <h1>Raw Event Data</h1>
                     <p className='text-gray-500 text-sm font-style: italic'>Total of all event data, split based on distinct users</p>
-                    <div className="grid justify-center">
+                    <div className="grid justify-center pt-4">
 
                     <SimpleBarChart featureAnalysis={featureAnalysis} />
                     </div>
                   </div>
-                  <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
+                  <div className='border-b border-gray-200 px-4 py-5 mb-4 sm:px-6'>
                     <h1>Timeline of Event Data</h1>
-                    <div className="grid justify-center">
+                    <div className="grid justify-center pt-4">
 
                     <DailyLineChart eventData={eventData} featureAnalysis={featureAnalysis} />
                     </div>
