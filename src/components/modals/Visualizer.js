@@ -36,7 +36,6 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                 <p className="mt-1 max-w-2xl text-sm text-gray-500">{experiment.description}</p>
               </div>
               <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-                {/* //how to force the graphs to be centered?  */}
                 <div className='container mx-auto '>
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                     <div >
@@ -45,8 +44,6 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                         <HoverInfo featureAnalysis={featureAnalysis} />
                       </h1>
                       <p className='text-gray-500 text-sm font-style: italic'>Total events correct for percentage of users in each variant</p>
-                      {/* legend should have the weight of each variant */}
-
                       <WeightedBarChart featureAnalysis={featureAnalysis} />
                     </div>
                   </div>
