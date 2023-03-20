@@ -73,7 +73,7 @@ const UserPercentageMenu = ({
     <div className="pt-5 w-40">
       <Combobox as="div" value={percentageObj} onChange={setPercentageObj}>
         {type === 3 && endDate
-          ? <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">For this date range, {maxAvailable}% of users are available. Select the percentage of users to include in this experiment.</Combobox.Label>
+          ? <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">For this date range, {Math.floor(maxAvailable)}% of users are available. Select the percentage of users to include in this experiment.</Combobox.Label>
           : <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">Select the percentage of users to include in this feature:</Combobox.Label>}
         <div className="relative mt-2">
           <Combobox.Input
