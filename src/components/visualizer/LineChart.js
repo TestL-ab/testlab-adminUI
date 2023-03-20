@@ -13,7 +13,7 @@ const DailyLineChart = ({ eventData , featureAnalysis}) => {
   } 
   return (
     <LineChart width={730} height={250} data={parsedData} className='linechart'
-      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date"/>
       <YAxis label={{value: 'clicks', angle: -90, position:'left'}}/>

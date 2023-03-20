@@ -39,7 +39,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         height={300}
         data={processedAnalysis}
         margin={{
-          top: 5,
+          top: 20,
           right: 30,
           left: 20,
           bottom: 5,
