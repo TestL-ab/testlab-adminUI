@@ -47,22 +47,22 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         <Tooltip />
         <Legend />
         <Bar dataKey="Total Events" stackId="a" fill={visualizerUtils.themeColors[0]}>
-          {processedAnalysis.map(((obj, idx) => {
+          {processedAnalysis.map((obj, idx) => {
             return (
-              <>
-                <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
+              // <>
+                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" /> 
                 <Cell key={`cell-${idx}`}  />
-              </>
+              // </>
             )
-          }))}
+          })}
         </Bar>
         <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
-              <>
+              // <>
                 <Cell key={`distinct-${idx}`} />
-                {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
-              </>
+                // {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
+              // </>
             )
           })}
         </Bar>
