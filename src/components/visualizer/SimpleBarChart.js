@@ -30,7 +30,7 @@ const SimpleBarChart = ({ featureAnalysis }) => {
     <>
       <BarChart className='simple-barchart'
         width={500}
-        height={300}
+        height={400}
         data={processedAnalysis}
         margin={{
           top: 20,

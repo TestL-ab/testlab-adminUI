@@ -36,7 +36,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
       </div> */}
       <BarChart className='weighted-barchart'
         width={500}
-        height={300}
+        height={400}
         data={processedAnalysis}
         margin={{
           top: 20,
