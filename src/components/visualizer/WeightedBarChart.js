@@ -3,6 +3,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 import visualizerUtils from '../../utils/visualizerUtils';
 import HoverInfo from './HoverInfo';
 import { BeakerIcon } from '@heroicons/react/24/outline';
+import CustomBarPattern from './CustomBarPattern';
 
 const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
@@ -29,30 +30,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
     return (<h1 className='text-red-400'>Not enough event data to display comparison</h1>)
   }
   
-  const CandyBar = (props) => {
-    const {    
-      x: oX,
-      y: oY,
-      width: oWidth,
-      height: oHeight,
-      value,
-      fill
-    } = props;
-    
-    let x = oX;
-    let y = oHeight < 0 ? oY + oHeight : oY;
-    let width = oWidth;
-    let height = Math.abs(oHeight);
-  
-    return (
-     <rect fill={fill}
-         mask='url(#mask-stripe)'
-            x={x}
-            y={y}
-            width={width}
-            height={height} />
-      );
-  };
+
 
   return (
     <>
@@ -68,7 +46,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         }}
       >
         <pattern id="pattern-stripe" 
-         width="8" height="8" 
+         width="6" height="6" 
          patternUnits="userSpaceOnUse"
          patternTransform="rotate(45)">
          <rect width="4" height="8" transform="translate(0,0)" fill="white"></rect>
@@ -81,7 +59,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         <XAxis dataKey='value' xAxisId={1} hide/>
         <YAxis />
         <Tooltip />
-        <Legend />
+        <Legend iconType="rect"/>
         <Bar dataKey="Total Events" fill={visualizerUtils.themeColors[0]} xAxisId={1} barSize={75} fillOpacity={1} >
           {processedAnalysis.map((obj, idx) => {
             return (
@@ -92,7 +70,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
             )
           })}
         </Bar>
-        <Bar dataKey="Distinct Events"  fill={visualizerUtils.themeColors[1]} xAxisId={0} barSize={75} fillOpacity={0.5} shape={<CandyBar/>}>
+        <Bar dataKey="Distinct Events"  fill={visualizerUtils.themeColors[1]} xAxisId={0} barSize={75} fillOpacity={0.5} shape={<CustomBarPattern/>}>
           {processedAnalysis.map((obj, idx) => {
             return (
               // <>
