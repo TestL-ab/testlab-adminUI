@@ -3,11 +3,8 @@ import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, Label } 
 
 
 const DailyLineChart = ({ eventData , featureAnalysis}) => {
-  //first filter the data by variant. ??
-  //then map the filtered data so that it is by DAY or HOUR, sum together the events at that slot? 
   let variantNameMap = visualizerUtils.createVariantNameMap(featureAnalysis);
   let parsedData = visualizerUtils.parseByDay(eventData, variantNameMap);
-  console.log("final parsed data: ", parsedData);
   if (!eventData || eventData.length === 0) {
     return (<h1 className='text-red-400'>Not enough event data to display history</h1>)
   } 

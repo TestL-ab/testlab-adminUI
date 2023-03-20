@@ -4,7 +4,6 @@ import visualizerUtils from '../../utils/visualizerUtils';
 
 const SimpleBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
-  console.log(featureAnalysis);
   let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
     return sum + currFeature.event_total
   }, 0)
