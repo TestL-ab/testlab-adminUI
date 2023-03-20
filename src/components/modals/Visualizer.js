@@ -41,7 +41,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                   <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                     <div >
                       <h1 className="flex items-center">
-                        Weighted Event Data &nbsp;&nbsp;&nbsp; 
+                        Weighted Event Data
                         <HoverInfo featureAnalysis={featureAnalysis} />
                       </h1>
                       <p className='text-gray-500 text-sm font-style: italic'>Total events correct for percentage of users in each variant</p>
