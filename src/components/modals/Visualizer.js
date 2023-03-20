@@ -29,6 +29,18 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
             </div>
             <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
               <div className='container  '>
+              <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
+                  <div>
+                    <h1 className="flex items-center">
+                      Raw Event Data
+                      <HoverInfo featureAnalysis={featureAnalysis} />
+                    </h1>
+                  </div>
+                  <p className='text-gray-500 text-sm font-style: italic'>Total of all event data, split based on distinct users</p>
+                  <div className="grid justify-center pt-4">
+                    <SimpleBarChart featureAnalysis={featureAnalysis} />
+                  </div>
+                </div>
                 <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
                   <div>
                     <h1 className="flex items-center">
@@ -41,18 +53,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                     </div>
                   </div>
                 </div>
-                <div className='border-b border-gray-200 px-4 py-5 sm:px-6'>
-                  <div>
-                    <h1 className="flex items-center">
-                      Raw Event Data
-                      <HoverInfo featureAnalysis={featureAnalysis} />
-                    </h1>
-                  </div>
-                  <p className='text-gray-500 text-sm font-style: italic'>Total of all event data, split based on distinct users</p>
-                  <div className="grid justify-center pt-4">
-                    <SimpleBarChart featureAnalysis={featureAnalysis} />
-                  </div>
-                </div>
+
                 <div className='border-b border-gray-200 px-4 py-5 mb-4 sm:px-6'>
                   <div>
                   <h1 className="flex items-center">
