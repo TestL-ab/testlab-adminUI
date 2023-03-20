@@ -4,7 +4,6 @@ import visualizerUtils from '../../utils/visualizerUtils';
 
 const SimpleBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
-  console.log(featureAnalysis);
   let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
     return sum + currFeature.event_total
   }, 0)
@@ -30,10 +29,10 @@ const SimpleBarChart = ({ featureAnalysis }) => {
     <>
       <BarChart className='simple-barchart'
         width={500}
-        height={300}
+        height={400}
         data={processedAnalysis}
         margin={{
-          top: 5,
+          top: 10,
           right: 30,
           left: 20,
           bottom: 5,
@@ -48,20 +47,20 @@ const SimpleBarChart = ({ featureAnalysis }) => {
         <Bar dataKey="Total Events"  fill={visualizerUtils.themeColors[0]} stackId="a">
           {processedAnalysis.map(((obj, idx) => {
             return (
-              <>
-                <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
+              // <>
+                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
                 <Cell key={`cell-${idx}`} />
-              </>
+              // {/* </> */}
             )
           }))}
         </Bar>
         <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
-              <>
+              // <>
                 <Cell key={`distinct-${idx}`} />
-                {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
-              </>
+                // {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
+              // {/* </> */}
             )
           })}
         </Bar>

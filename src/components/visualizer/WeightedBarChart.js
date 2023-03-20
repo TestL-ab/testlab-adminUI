@@ -5,7 +5,6 @@ import HoverInfo from './HoverInfo';
 
 const WeightedBarChart = ({ featureAnalysis }) => {
   const noEventsRecorded = featureAnalysis.filter(feature => feature.event_total === 0).length === featureAnalysis.length;
-  console.log(featureAnalysis);
   let totalClicks = featureAnalysis.reduce((sum, currFeature) => {
     return sum + currFeature.distinct_user_events_total
   }, 0)
@@ -31,16 +30,12 @@ const WeightedBarChart = ({ featureAnalysis }) => {
 
   return (
     <>
-      <HoverInfo featureAnalysis={featureAnalysis}/>
-      {/* <div>
-        <button class="text-gray-500 opacity-0 hover:opacity-100">Info</button>
-      </div> */}
       <BarChart className='weighted-barchart'
         width={500}
-        height={300}
+        height={400}
         data={processedAnalysis}
         margin={{
-          top: 5,
+          top: 10,
           right: 30,
           left: 20,
           bottom: 5,
@@ -52,22 +47,22 @@ const WeightedBarChart = ({ featureAnalysis }) => {
         <Tooltip />
         <Legend />
         <Bar dataKey="Total Events" stackId="a" fill={visualizerUtils.themeColors[0]}>
-          {processedAnalysis.map(((obj, idx) => {
+          {processedAnalysis.map((obj, idx) => {
             return (
-              <>
-                <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" />
+              // <>
+                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" /> 
                 <Cell key={`cell-${idx}`}  />
-              </>
+              // </>
             )
-          }))}
+          })}
         </Bar>
         <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]}>
           {processedAnalysis.map((obj, idx) => {
             return (
-              <>
+              // <>
                 <Cell key={`distinct-${idx}`} />
-                {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
-              </>
+                // {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
+              // </>
             )
           })}
         </Bar>
