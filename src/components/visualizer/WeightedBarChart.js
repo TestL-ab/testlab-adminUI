@@ -19,7 +19,7 @@ const WeightedBarChart = ({ featureAnalysis }) => {
     return {
       value: name,
       isControl: feature.is_control,
-      'Total Events': weightedTotal-weightedDistinct,
+      'Total Events': weightedTotal,
       'Distinct Events': weightedDistinct,
       percent: `${(feature.event_total / totalClicks * 100).toFixed(1)}%`
     }
@@ -28,6 +28,31 @@ const WeightedBarChart = ({ featureAnalysis }) => {
   if (featureAnalysis.length === 0 || noEventsRecorded) {
     return (<h1 className='text-red-400'>Not enough event data to display comparison</h1>)
   }
+  
+  const CandyBar = (props) => {
+    const {    
+      x: oX,
+      y: oY,
+      width: oWidth,
+      height: oHeight,
+      value,
+      fill
+    } = props;
+    
+    let x = oX;
+    let y = oHeight < 0 ? oY + oHeight : oY;
+    let width = oWidth;
+    let height = Math.abs(oHeight);
+  
+    return (
+     <rect fill={fill}
+         mask='url(#mask-stripe)'
+            x={x}
+            y={y}
+            width={width}
+            height={height} />
+      );
+  };
 
   return (
     <>
@@ -42,31 +67,42 @@ const WeightedBarChart = ({ featureAnalysis }) => {
           bottom: 5,
         }}
       >
+        <pattern id="pattern-stripe" 
+         width="8" height="8" 
+         patternUnits="userSpaceOnUse"
+         patternTransform="rotate(45)">
+         <rect width="4" height="8" transform="translate(0,0)" fill="white"></rect>
+        </pattern>
+        <mask id="mask-stripe">
+        <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-stripe)" />
+        </mask>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey='value' />
+        <XAxis dataKey='value' xAxisId={0}/>
+        <XAxis dataKey='value' xAxisId={1} hide/>
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Distinct Events" stackId="a" fill={visualizerUtils.themeColors[1]} fillOpacity={1} >
+        <Bar dataKey="Total Events" fill={visualizerUtils.themeColors[0]} xAxisId={1} barSize={75} fillOpacity={1} >
           {processedAnalysis.map((obj, idx) => {
             return (
               // <>
-                <Cell key={`distinct-${idx}`} stroke={visualizerUtils.themeColors[0]} strokeWidth={2}/>
+                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" /> 
+                <Cell key={`cell-${idx}`} />
+              // </>
+            )
+          })}
+        </Bar>
+        <Bar dataKey="Distinct Events"  fill={visualizerUtils.themeColors[1]} xAxisId={0} barSize={75} fillOpacity={0.5} shape={<CandyBar/>}>
+          {processedAnalysis.map((obj, idx) => {
+            return (
+              // <>
+                <Cell key={`distinct-${idx}`} />
                 // {/* <LabelList key={`cell-${idx}-label`} dataKey='percent' */}
               // </>
             )
           })}
         </Bar>
-        <Bar dataKey="Total Events" stackId="a" fill={visualizerUtils.themeColors[0]}>
-          {processedAnalysis.map((obj, idx) => {
-            return (
-              // <>
-                // <LabelList key={`cell-${idx}-label`} dataKey='percent' position="top" /> 
-                <Cell key={`cell-${idx}`}  stroke={visualizerUtils.themeColors[0]} strokeWidth={2}/>
-              // </>
-            )
-          })}
-        </Bar>
+
         
       </BarChart>
     </>
