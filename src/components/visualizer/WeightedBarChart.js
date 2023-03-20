@@ -31,8 +31,8 @@ const WeightedBarChart = ({ featureAnalysis }) => {
   return (
     <>
       <BarChart className='weighted-barchart'
-        width={500}
-        height={400}
+        width={650}
+        height={350}
         data={processedAnalysis}
         margin={{
           top: 10,
