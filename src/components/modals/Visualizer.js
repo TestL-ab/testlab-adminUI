@@ -15,14 +15,13 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
   const stringForWeightedVariants = visualizerService.weightsToString(featureAnalysis);
 
   return (
-    <div>
+    <>
       {error
         ? <div className="error">
           <p>An error occurred: {error}</p> {/* not sure how we want to handle errors but this works for now */}
         </div>
         :
         <>
-          <div className="sm:col-span-8 lg:col-span-7 px-4 py-4 ">
             <div className="overflow-hidden bg-white shadow sm:rounded-lg ">
               <div className="px-4 py-5 sm:px-6 ">
                 <h1 className="text-xl font-semibold leading-6 text-gray-900">{experiment.name}</h1>
@@ -74,8 +73,7 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
                 </dl>
               </div>
             </div>
-          </div>
         </>}
-    </div>
+    </>
   )
 }
