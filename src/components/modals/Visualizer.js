@@ -25,9 +25,9 @@ export default function Visualizer({ experiment, handleClick, featureAnalysis, e
           <div className="overflow-hidden bg-white shadow sm:rounded-lg ">
             <div className="px-4 py-5 sm:px-6 ">
               <h1 className="text-2xl font-semibold leading-6 text-gray-900">{experiment.name}</h1>
-              <p className="mt-1 pt-2 leading-relaxed italic tracking-tight max-w-2xl text-descr text-gray-500">Experiment Description: {experiment.description}</p>
+              <p className="mt-1 pt-2 leading-relaxed italic tracking-tight max-w-2xl text-sm text-gray-500">Experiment Description: {experiment.description}</p>
               {/* <p>&nbsp;</p> */}
-              <p className="pt-2 mt-1 max-w-2xl text-xs text-testLabDarkBlue"><a href="https://testl-ab.github.io/docs/admin-ui" className="font-bold text-testLabDarkBlue hover:underline hover:text-testLabBlue ">Read the docs </a>for more information and options for interpreting this data</p>
+              <p className="pt-2 mt-1 max-w-2xl text-descr text-testLabDarkBlue"><a href="https://testl-ab.github.io/docs/admin-ui" className="font-bold text-testLabDarkBlue hover:underline hover:text-testLabBlue ">Read the docs </a>for more information and options for interpreting this data</p>
             </div>
             <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
               <div className='container  '>
