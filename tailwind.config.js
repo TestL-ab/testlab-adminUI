@@ -17,6 +17,9 @@ theme: {
       testLabBlueGrey: "#eff2f4",
       testLabDarkBlue: "#0f3654" // title text for all pages
     },
+    fontSize: {
+      descr: '0.8rem'
+    }
 },
   plugins: [
     require('@tailwindcss/forms'),
