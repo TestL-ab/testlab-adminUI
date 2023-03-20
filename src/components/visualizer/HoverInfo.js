@@ -15,10 +15,11 @@ export default function HoverInfo({ featureAnalysis }) {
       </span>
 
       <span className="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-xs text-gray-100 rounded-md absolute opacity-0 mx-auto px-4">
+        <ul className="rounded-md absolute hidden bg-gray-800 px-1 py-1 group-hover:block w-64 ">
+        <p className="underline underline-offset-1">Percent of users exposed to each variant: </p>
 
-        <ul className="rounded-md absolute hidden bg-gray-800 px-1 py-1 group-hover:block w-56 ">
           {featureAnalysis.map((variant, idx) => {
-            return (<li key={`var-${idx}`}>{variant.value}: {variant.weight * 100}% </li>)
+            return (<li key={`var-${idx}`}>&nbsp;&nbsp;{variant.value} : {variant.weight * 100}%</li>)
           })}
         </ul>
       </span>
