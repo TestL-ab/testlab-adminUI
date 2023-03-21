@@ -35,15 +35,14 @@ const formatDate = (dateString) => {
 
 const sortDateArr = (arr) => {
   arr.sort(function (a, b) {
-    var nameA = a.date.toUpperCase(); // ignore upper and lowercase
-    var nameB = b.date.toUpperCase(); // ignore upper and lowercase
-    if (nameA < nameB) {
+    var dateA = a.date;
+    var dateB = b.date;
+    if (dateA < dateB) {
       return -1;
     }
-    if (nameA > nameB) {
+    if (dateA > dateB) {
       return 1;
     }
-    // names must be equal
     return 0;
   });
   return arr;
