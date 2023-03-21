@@ -8,7 +8,7 @@ const parseByDay = (eventData, variantNameMap) => {
       sortedDataObj[formattedDate] = {};
       sortedDataObj[formattedDate][variantName] = 1;
     } else {
-      sortedDataObj[formattedDate][variantName] = sortedDataObj[formattedDate][variantName] + 1 || 1 ;
+      sortedDataObj[formattedDate][variantName] = sortedDataObj[formattedDate][variantName] + 1 || 1;
     }
   })
   let finalParsedArr = [];
@@ -24,6 +24,22 @@ const parseByDay = (eventData, variantNameMap) => {
 
 };
 
+const sortDateArr = (arr) => {
+  arr.sort(function (a, b) {
+    var nameA = a.date.toUpperCase(); // ignore upper and lowercase
+    var nameB = b.date.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    // names must be equal
+    return 0;
+  });
+  return arr;
+}
+
 const createVariantNameMap = (featureAnalysis) => {
   let variantNameMap = {};
   featureAnalysis.forEach(variant => {
@@ -34,13 +50,13 @@ const createVariantNameMap = (featureAnalysis) => {
 }
 
 const themeColors = [
-    "#0f3654", 
-    "#8CC3DF", 
-    "#2A2493", 
-    "#FF00C8", 
-    "#19D038",
-    "#D2772B"
-  
+  "#0f3654",
+  "#8CC3DF",
+  "#2A2493",
+  "#FF00C8",
+  "#19D038",
+  "#D2772B"
+
 
 ];
 
