@@ -4,6 +4,9 @@ import experimentService from './services/experimentService';
 import experimentUtils from './utils/experimentUtils';
 import SideNav from './components/SideNav';
 
+import makeData from './services/populateEvents'
+
+
 const App = () => {
   const [experiments, setExperiments] = useState([]);
   const [experimentChange, setExperimentChange] = useState(false);
@@ -16,6 +19,7 @@ const App = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    makeData();
     experimentService
       .getAllExperiments()
       .then(response => {
