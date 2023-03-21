@@ -294,7 +294,10 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
     <>
       {/* <FormSuccessNotification formSuccess={formSuccess} setFormSuccess={setFormSuccess} message={successMessage} /> */}
 
-      <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+      <div className="max-w-7xl sm:px-6 lg:px-8 overflow-auto">
+            <div className="border-b border-gray-200 rounded-lg bg-testLabBackground px-4 py-5 sm:px-6 overflow-auto">
+              <div className="md:flex md:items-center md:justify-between">
+                <div className="min-w-0 flex-1">
         <h2 className="text-base font-bold leading-6 text-gray-900">Create Variants for {experimentName}</h2>
         <p className="mt-1 text-sm text-gray-500">
           Create up to five variants. Each variant value must be distinct, an the sum of user percentages must
@@ -359,6 +362,9 @@ const Variants = ({ experimentObj, setExperimentObj, setShowVariants, setExperim
             lastVariant={lastVariant}
           />
         </form>
+      </div>
+      </div>
+      </div>
       </div>
     </>
   );
