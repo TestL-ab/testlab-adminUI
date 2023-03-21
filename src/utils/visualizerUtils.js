@@ -2,7 +2,7 @@ const parseByDay = (eventData, variantNameMap) => {
   let sortedDataObj = {};
 
   eventData.forEach(event => {
-    let formattedDate = event.time_stamp.slice(0, 10);
+    let formattedDate = formatDate(event.time_stamp);
     let variantName = variantNameMap[event.variant_id];
     if (!sortedDataObj[formattedDate]) {
       sortedDataObj[formattedDate] = {};
@@ -22,6 +22,16 @@ const parseByDay = (eventData, variantNameMap) => {
   }
   return sortDateArr(finalParsedArr)
 };
+
+const formatDate = (dateString) => {
+  let arr = dateString.split('-');
+  arr = arr.map((num, idx) => {
+    let int = parseInt(num);
+    return String(int);
+  })
+  let finalStr = arr.slice(1).join('/');
+  return finalStr
+}
 
 const sortDateArr = (arr) => {
   arr.sort(function (a, b) {
