@@ -17,7 +17,7 @@ const DailyLineChart = ({ eventData , featureAnalysis}) => {
       <Tooltip />
       <Legend verticalAlign="top" height={36}/>
       {Object.values(variantNameMap).map((varName,idx) => {
-        return <Line key={`line-${idx}`} type="monotone" dataKey={varName} stroke={visualizerUtils.themeColors[idx]} strokeWidth={2}/>
+        return <Line connectNulls key={`line-${idx}`} type="monotone" dataKey={varName} stroke={visualizerUtils.themeColors[idx]} strokeWidth={2}/>
       })}
     </LineChart>)
 }
