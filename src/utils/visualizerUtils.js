@@ -20,8 +20,7 @@ const parseByDay = (eventData, variantNameMap) => {
     }
     finalParsedArr.push(dataPoint);
   }
-  return finalParsedArr;
-
+  return sortDateArr(finalParsedArr)
 };
 
 const sortDateArr = (arr) => {
