@@ -46,7 +46,6 @@ const sortDateArr = (arr) => {
     // names must be equal
     return 0;
   });
-  console.log("all the sorted array", arr);
   return arr;
 }
 
