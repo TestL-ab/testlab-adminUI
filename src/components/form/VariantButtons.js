@@ -56,7 +56,7 @@ const VariantButtons = ({
             className="rounded-md bg-testLabBlue py-2 px-3 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-testLabBlue hover:bg-testLabBeige hover:text-white hover:ring-testLabBeige mr-3"
             onClick={handleChangeToRollOut}
           >
-            Change to Roll Out
+            Change to Rollout
           </button>
           <button
             type="button"
