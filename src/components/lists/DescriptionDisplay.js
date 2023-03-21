@@ -83,7 +83,7 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
     <>
 
       <ExperimentDetailsModal id={id} featuresArr={featuresArr} open={open} setOpen={setOpen} modalPage={modalPage} dispatchModalPage={dispatchModalPage} futureExperiment={futureExperiment} />
-      <Disclosure as="div" className="pt-6">
+      <Disclosure as="div" >
         {({ open }) => (
           <>
             <dt>
