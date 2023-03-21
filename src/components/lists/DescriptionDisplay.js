@@ -98,10 +98,12 @@ const DescriptionDisplay = ({ name, description, rowLength, type, id, featuresAr
                 </span>
               </Disclosure.Button>
             </dt>
-            <Disclosure.Panel as="dt" className="mt-2 pr-12">
-              {processedDescription.map((row, idx) => {
-                return <p key={idx} className="text-base leading-7 text-sm text-gray-600">{row}</p>
-              })}
+            <Disclosure.Panel as="dt" className="mt-2 pr-12 ">
+              <div className="pb-1.5">
+                {processedDescription.map((row, idx) => {
+                  return <p key={idx} className="leading-7 text-sm text-gray-600">{row}</p>
+                })}
+              </div>
               {isExperiment &&
                 <button
                   type="button"
