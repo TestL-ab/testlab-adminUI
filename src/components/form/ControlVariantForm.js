@@ -1,4 +1,4 @@
-const ControlVariantForm = ({ variantObj, handleChangedValue, handleChangedWeight, error, upcomingExperiment }) => {
+const ControlVariantForm = ({ variantObj, handleChangedValue, handleChangedWeight, error, currentExperiment }) => {
   return (
     <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
       <div className="sm:col-span-3">
@@ -19,7 +19,7 @@ const ControlVariantForm = ({ variantObj, handleChangedValue, handleChangedWeigh
           />
         </div>
         <br />
-        {upcomingExperiment &&
+        {!currentExperiment &&
           <div className="sm:col-span-3">
             <label htmlFor="weight-1" className="block text-sm font-medium leading-6 text-gray-900">
               Control User Percentage
@@ -39,7 +39,7 @@ const ControlVariantForm = ({ variantObj, handleChangedValue, handleChangedWeigh
             </div>
           </div>
         }
-        {!upcomingExperiment &&
+        {currentExperiment &&
           <div className="sm:col-span-3">
             <label className="block text-sm font-medium leading-6 text-gray-900">
               Control Variant Weight
