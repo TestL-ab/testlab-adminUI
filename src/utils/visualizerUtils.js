@@ -7,8 +7,10 @@ const parseByDay = (eventData, variantNameMap) => {
     if (!sortedDataObj[formattedDate]) {
       sortedDataObj[formattedDate] = {};
       sortedDataObj[formattedDate][variantName] = 1;
+      sortedDataObj[formattedDate].timeStamp = event.time_stamp;
     } else {
       sortedDataObj[formattedDate][variantName] = sortedDataObj[formattedDate][variantName] + 1 || 1;
+      sortedDataObj[formattedDate].timeStamp = event.time_stamp;
     }
   })
   let finalParsedArr = [];
@@ -34,9 +36,10 @@ const formatDate = (dateString) => {
 }
 
 const sortDateArr = (arr) => {
+  console.log(arr);
   arr.sort(function (a, b) {
-    var dateA = a.date;
-    var dateB = b.date;
+    var dateA = new Date(a.timeStamp);
+    var dateB = new Date(b.timeStamp);
     if (dateA < dateB) {
       return -1;
     }
