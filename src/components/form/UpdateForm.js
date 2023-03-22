@@ -31,12 +31,9 @@ const UpdateForm = ({
   const [formSuccess, setFormSuccess] = useState(false);
   const [nameTaken, setNameTaken] = useState(false);
   const type = featureObj.type_id;
-  // const startDate = new Date(featureObj.startDate);
+  const [startDate, setStartDate] = useState(new Date(featureObj.startDate));
 
   const successMessage = `${featureObj.name} successfully updated!`;
-
-  const startingDate = new Date(featureObj.startDate);
-  const [startDate, setStartDate] = useState(startingDate);
   const isUpcomingFeature = formUtils.isUpcomingFeature(featureObj);
 
   const handleUpdate = async (event) => {
@@ -62,8 +59,6 @@ const UpdateForm = ({
       const response = await experimentService.updateFeature(featureObj.id, updatedFeatureObj);
       const updatedFeatures = processedFeatures.map(featObj => featObj.id === response.id ? response : featObj);
       setProcessedFeatures(updatedFeatures);
-    //  setShowUpdateModal(false);
-
       setFormSuccess(true);
       setExperimentChange(true);
     } catch (error) {
@@ -101,7 +96,7 @@ const UpdateForm = ({
                 </h2>
               </div>
             </div>
-            { !isUpcomingFeature &&
+            {!isUpcomingFeature &&
               <p className="mt-2 max-w-4xl text-sm text-gray-500">
                 Note: feature type and start date may not be changed.
               </p>
@@ -132,38 +127,38 @@ const UpdateForm = ({
                           description={description}
                           setDescription={setDescription}
                         />
-{ !isUpcomingFeature &&
-                        <DateSelector
-                          startDate={startDate}
-                          isUpdate={true}
-                          updateId={featureObj.id}
-                          endDate={endDate}
-                          setEndDate={setEndDate}
-                          currentDate={currentDate}
-                          type={type}
-                          scheduledFeatures={scheduledFeatures}
-                          currentExperiments={currentExperiments}
-                          maxAvailable={maxAvailable}
-                          setMaxAvailable={setMaxAvailable}
-                        />
-}
+                        {!isUpcomingFeature &&
+                          <DateSelector
+                            startDate={startDate}
+                            isUpdate={true}
+                            updateId={featureObj.id}
+                            endDate={endDate}
+                            setEndDate={setEndDate}
+                            currentDate={currentDate}
+                            type={type}
+                            scheduledFeatures={scheduledFeatures}
+                            currentExperiments={currentExperiments}
+                            maxAvailable={maxAvailable}
+                            setMaxAvailable={setMaxAvailable}
+                          />
+                        }
 
-{
-  isUpcomingFeature &&
-  <DateSelector
-  startDate={startDate}
-  setStartDate={setStartDate}
-  updateId={featureObj.id}
-  endDate={endDate}
-  setEndDate={setEndDate}
-  currentDate={currentDate}
-  type={type}
-  scheduledFeatures={scheduledFeatures}
-  currentExperiments={currentExperiments}
-  maxAvailable={maxAvailable}
-  setMaxAvailable={setMaxAvailable}
-/>
-}
+                        {
+                          isUpcomingFeature &&
+                          <DateSelector
+                            startDate={startDate}
+                            setStartDate={setStartDate}
+                            updateId={featureObj.id}
+                            endDate={endDate}
+                            setEndDate={setEndDate}
+                            currentDate={currentDate}
+                            type={type}
+                            scheduledFeatures={scheduledFeatures}
+                            currentExperiments={currentExperiments}
+                            maxAvailable={maxAvailable}
+                            setMaxAvailable={setMaxAvailable}
+                          />
+                        }
                         <UserPercentageMenu
                           percentageObj={percentageObj}
                           setPercentageObj={setPercentageObj}
