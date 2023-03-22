@@ -37,6 +37,7 @@ const UpdateVariants = ({
   const experimentId = experimentObj.id;
   const successMessage = `Variants for ${experimentName} updated successfully!`;
   const upcomingExperiment = formUtils.isUpcomingFeature(experimentObj);
+  const currentExperiment = !upcomingExperiment;
 
   useEffect(() => {
     const variantObjArr = experimentObj.variant_arr.map(obj => { return { ...obj, weight: obj.weight * 100 } })
@@ -289,7 +290,7 @@ const UpdateVariants = ({
             handleChangedValue={handleChangedValue}
             handleChangedWeight={handleChangedWeight}
             error={error1}
-            upcomingExperiment={upcomingExperiment}
+            currentExperiment={currentExperiment}
           />
           <VariantForm
             num="2"
@@ -300,7 +301,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
-            upcomingExperiment={upcomingExperiment}
+            currentExperiment={currentExperiment}
           />
           <VariantForm
             num="3"
@@ -312,7 +313,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
-            upcomingExperiment={upcomingExperiment}
+            currentExperiment={currentExperiment}
           />
           <VariantForm
             num="4"
@@ -324,7 +325,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
-            upcomingExperiment={upcomingExperiment}
+            currentExperiment={currentExperiment}
           />
           <VariantForm
             num="5"
@@ -336,7 +337,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
-            upcomingExperiment={upcomingExperiment}
+            currentExperiment={currentExperiment}
           />
           {upcomingExperiment &&
             <UpdateAddRemoveVariantButtons

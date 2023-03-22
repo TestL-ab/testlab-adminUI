@@ -5,7 +5,7 @@ const VariantForm = ({
   handleChangedWeight,
   error,
   hidden,
-  upcomingExperiment,
+  currentExperiment
 }) => {
 
   return (
@@ -29,7 +29,7 @@ const VariantForm = ({
               />
             </div>
             <br />
-            {upcomingExperiment &&
+            {!currentExperiment &&
               <div className="sm:col-span-3">
                 <label htmlFor={`weight-${num}`} className="block text-sm font-medium leading-6 text-gray-900">
                   Variant {num} User Percentage
@@ -50,7 +50,7 @@ const VariantForm = ({
                 </div>
               </div>
             }
-            {!upcomingExperiment &&
+            {currentExperiment &&
             <div className="sm:col-span-3">
                 <label className="block text-sm font-medium leading-6 text-gray-900">
                   Variant {num} Weight
