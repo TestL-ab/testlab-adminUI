@@ -4,7 +4,8 @@ import ControlVariantForm from './ControlVariantForm';
 import experimentService from '../../services/experimentService';
 import FormSuccessNotification from './FormSuccessNotification';
 import formUtils from '../../utils/formUtils';
-import UpdateVariantButtons from './UpdateVariantButtons';
+import UpdateAddRemoveVariantButtons from './UpdateAddRemoveVariantButtons';
+import UpdateVariantButton from './UpdateVariantButton';
 
 const UpdateVariants = ({
   experimentObj,
@@ -30,12 +31,12 @@ const UpdateVariants = ({
   const [hidden4, setHidden4] = useState(true);
   const [hidden5, setHidden5] = useState(true);
   const [lastVariant, setLastVariant] = useState(2);
-
   const [formSuccess, setFormSuccess] = useState(false);
 
   const experimentName = experimentObj.name;
   const experimentId = experimentObj.id;
   const successMessage = `Variants for ${experimentName} updated successfully!`;
+  const upcomingExperiment = formUtils.isUpcomingFeature(experimentObj);
 
   useEffect(() => {
     const variantObjArr = experimentObj.variant_arr.map(obj => { return { ...obj, weight: obj.weight * 100 } })
@@ -266,6 +267,7 @@ const UpdateVariants = ({
     }
   };
 
+
   return (
     <>
       <FormSuccessNotification
@@ -331,13 +333,17 @@ const UpdateVariants = ({
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
           />
-          <UpdateVariantButtons
-            handleRemoveVariant={handleRemoveVariant}
-            handleAddVariant={handleAddVariant}
-            lastVariant={lastVariant}
-            showVariants={showVariants}
-            setShowVariants={setShowVariants}
+          {upcomingExperiment &&
+            <UpdateAddRemoveVariantButtons
+              handleRemoveVariant={handleRemoveVariant}
+              handleAddVariant={handleAddVariant}
+              lastVariant={lastVariant}
+            />
+            }
+          <UpdateVariantButton
             type={experimentObj.type_id}
+            showVariants={showVariants}
+            setShowVarians={setShowVariants}
           />
         </form>
       </div>

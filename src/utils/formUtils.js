@@ -25,6 +25,12 @@ const processExperiments = (scheduledFeatures, currentExperiments)=> {
   });
 }
 
+const isUpcomingFeature = (featureObj) => {
+  const currentDate = new Date();
+  const startDate = new Date(featureObj.start_date);
+  return currentDate < startDate;
+};
+
 const populateSpaceUsedObject = (dateArr, experiments) => {
   let obj = {}
   dateArr.forEach((date) => {
@@ -129,7 +135,8 @@ const formUtils = {
   validVariantWeights,
   distinctVariantValues,
   processVariantData,
-  processDateForUpdate
+  processDateForUpdate,
+  isUpcomingFeature
 };
 
 export default formUtils;
