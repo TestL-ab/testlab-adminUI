@@ -30,7 +30,7 @@ const UpdateVariants = ({
   const [hidden3, setHidden3] = useState(true);
   const [hidden4, setHidden4] = useState(true);
   const [hidden5, setHidden5] = useState(true);
-  const [lastVariant, setLastVariant] = useState(2);
+  const [lastVariant, setLastVariant] = useState(experimentObj.variant_arr.length);
   const [formSuccess, setFormSuccess] = useState(false);
 
   const experimentName = experimentObj.name;
@@ -289,6 +289,7 @@ const UpdateVariants = ({
             handleChangedValue={handleChangedValue}
             handleChangedWeight={handleChangedWeight}
             error={error1}
+            upcomingExperiment={upcomingExperiment}
           />
           <VariantForm
             num="2"
@@ -299,6 +300,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
+            upcomingExperiment={upcomingExperiment}
           />
           <VariantForm
             num="3"
@@ -310,6 +312,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
+            upcomingExperiment={upcomingExperiment}
           />
           <VariantForm
             num="4"
@@ -321,6 +324,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
+            upcomingExperiment={upcomingExperiment}
           />
           <VariantForm
             num="5"
@@ -332,6 +336,7 @@ const UpdateVariants = ({
             handleAddVariant={handleAddVariant}
             handleRemoveVariant={handleRemoveVariant}
             lastVariant={lastVariant}
+            upcomingExperiment={upcomingExperiment}
           />
           {upcomingExperiment &&
             <UpdateAddRemoveVariantButtons
