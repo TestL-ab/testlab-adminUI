@@ -17,9 +17,10 @@ const App = () => {
   const [pastExperiments, setPastExperiments] = useState([]);
   const [existingNames, setExitstingNames] = useState([])
   const [error, setError] = useState(null);
+  makeData();
 
   useEffect(() => {
-    makeData();
+    // makeData();
     experimentService
       .getAllExperiments()
       .then(response => {

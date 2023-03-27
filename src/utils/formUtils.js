@@ -38,6 +38,7 @@ const populateSpaceUsedObject = (dateArr, experiments) => {
     if (!obj[dateName]) obj[dateName] = 0;
     experiments.forEach((exp) => {
       if (date >= exp.startDate && date <= exp.endDate) {
+        console.log(exp.userPercentage, exp.id)
         obj[dateName] += exp.userPercentage;
       }
     });
@@ -45,8 +46,10 @@ const populateSpaceUsedObject = (dateArr, experiments) => {
   return obj;
 };
 
-const calculateSpaceAvailable = (dateArray, existingExperiments) => {
+const calculateSpaceAvailable = (dateArray, existingExperiments, editId) => {
+  if (editId) existingExperiments = existingExperiments.filter(exp => exp.id !== editId);
   const spaceUsed = populateSpaceUsedObject(dateArray, existingExperiments);
+
   let maxUsed = 0;
   for (const key in spaceUsed) {
     if (spaceUsed[key] > maxUsed) {

@@ -148,6 +148,7 @@ const UpdateForm = ({
                           <DateSelector
                             startDate={startDate}
                             setStartDate={setStartDate}
+                            isUpdate={true}
                             updateId={featureObj.id}
                             endDate={endDate}
                             setEndDate={setEndDate}
@@ -162,7 +163,8 @@ const UpdateForm = ({
                         <UserPercentageMenu
                           percentageObj={percentageObj}
                           setPercentageObj={setPercentageObj}
-                          query={query} setQuery={setQuery}
+                          query={query}
+                          setQuery={setQuery}
                           type={type}
                           maxAvailable={maxAvailable}
                           endDate={endDate}

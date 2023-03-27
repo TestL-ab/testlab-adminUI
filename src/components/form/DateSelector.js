@@ -16,6 +16,7 @@ const DateSelector = ({
   isUpdate,
   updateId
 }) => {
+  console.log('isupdate',isUpdate, updateId);
 
   const tomorrow = formUtils.getNextDayDateSelector(currentDate);
   const processedCurrentDate = formUtils.processDayDateSelector(currentDate);
@@ -25,13 +26,10 @@ const DateSelector = ({
   useEffect(() => {
     if (startDate && endDate) {
       let existingExperiments = formUtils.processExperiments(scheduledFeatures, currentExperiments);
-      console.log(existingExperiments.length)
       if (isUpdate) {
         existingExperiments = existingExperiments.filter((obj) => {
-          console.log(obj, updateId)
            return obj.id !== updateId
         });
-        console.log("after", existingExperiments.length)
       }
       const dateArray = formUtils.getDateRange(startDate, endDate);
       const available = formUtils.calculateSpaceAvailable(dateArray, existingExperiments);
