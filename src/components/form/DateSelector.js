@@ -14,7 +14,8 @@ const DateSelector = ({
   currentExperiments,
   setMaxAvailable,
   isUpdate,
-  updateId
+  updateId,
+  isCurrent
 }) => {
   console.log('isupdate',isUpdate, updateId);
 
@@ -66,7 +67,7 @@ const DateSelector = ({
       <label htmlFor="start_date" className="block text-sm font-medium leading-6 text-gray-900">
         Start Date
       </label>
-      {isUpdate
+      {isCurrent
         ? <p>{updateStartDate}</p>
         : <DatePicker onChange={handleChangeStart} value={startDate} minDate={currentDate} maxDate={endDate} required={true} />}
 

@@ -35,6 +35,7 @@ const UpdateForm = ({
 
   const successMessage = `${featureObj.name} successfully updated!`;
   const isUpcomingFeature = formUtils.isUpcomingFeature(featureObj);
+  console.log(isUpcomingFeature);
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -140,6 +141,7 @@ const UpdateForm = ({
                             currentExperiments={currentExperiments}
                             maxAvailable={maxAvailable}
                             setMaxAvailable={setMaxAvailable}
+                            isCurrent={!isUpcomingFeature}
                           />
                         }
 
